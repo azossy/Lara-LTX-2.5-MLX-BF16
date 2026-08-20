@@ -1,0 +1,569 @@
+{
+  "component": "transformer_input",
+  "rules": [
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "audio.adaln_single.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "audio.adaln_single.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "audio.adaln_single.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "audio.adaln_single.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        18432
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.linear.bias",
+      "target_key": "audio.adaln_single.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        18432,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_adaln_single.linear.weight",
+      "target_key": "audio.adaln_single.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_patchify_proj.bias",
+      "target_key": "audio.patchify_proj.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        128
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_patchify_proj.weight",
+      "target_key": "audio.patchify_proj.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "audio.prompt_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "audio.prompt_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "audio.prompt_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "audio.prompt_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.linear.bias",
+      "target_key": "audio.prompt_adaln_single.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_prompt_adaln_single.linear.weight",
+      "target_key": "audio.prompt_adaln_single.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "audio_cross_gate.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "audio_cross_gate.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "audio_cross_gate.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "audio_cross_gate.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.linear.bias",
+      "target_key": "audio_cross_gate.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_v2a_gate_adaln_single.linear.weight",
+      "target_key": "audio_cross_gate.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "audio_cross_scale_shift.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "audio_cross_scale_shift.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "audio_cross_scale_shift.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "audio_cross_scale_shift.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        8192
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.linear.bias",
+      "target_key": "audio_cross_scale_shift.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        8192,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_audio_scale_shift_adaln_single.linear.weight",
+      "target_key": "audio_cross_scale_shift.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "video.adaln_single.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "video.adaln_single.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "video.adaln_single.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "video.adaln_single.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        36864
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.linear.bias",
+      "target_key": "video.adaln_single.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        36864,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.adaln_single.linear.weight",
+      "target_key": "video.adaln_single.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.keyframes_abs_pos_embedding",
+      "target_key": "video.keyframes_abs_pos_embedding",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.patchify_proj.bias",
+      "target_key": "video.patchify_proj.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        128
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.patchify_proj.weight",
+      "target_key": "video.patchify_proj.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "video.prompt_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "video.prompt_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "video.prompt_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "video.prompt_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        8192
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.linear.bias",
+      "target_key": "video.prompt_adaln_single.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        8192,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.prompt_adaln_single.linear.weight",
+      "target_key": "video.prompt_adaln_single.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "video_cross_gate.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "video_cross_gate.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "video_cross_gate.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "video_cross_gate.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.linear.bias",
+      "target_key": "video_cross_gate.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_a2v_gate_adaln_single.linear.weight",
+      "target_key": "video_cross_gate.linear.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.emb.timestep_embedder.linear_1.bias",
+      "target_key": "video_cross_scale_shift.emb.timestep_embedder.linear_1.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        256
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.emb.timestep_embedder.linear_1.weight",
+      "target_key": "video_cross_scale_shift.emb.timestep_embedder.linear_1.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.emb.timestep_embedder.linear_2.bias",
+      "target_key": "video_cross_scale_shift.emb.timestep_embedder.linear_2.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.emb.timestep_embedder.linear_2.weight",
+      "target_key": "video_cross_scale_shift.emb.timestep_embedder.linear_2.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        16384
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.linear.bias",
+      "target_key": "video_cross_scale_shift.linear.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        16384,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.av_ca_video_scale_shift_adaln_single.linear.weight",
+      "target_key": "video_cross_scale_shift.linear.weight",
+      "transform": "identity"
+    }
+  ],
+  "schema_version": 2,
+  "shards": [
+    {
+      "file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "tensor_count": 53
+    }
+  ]
+}

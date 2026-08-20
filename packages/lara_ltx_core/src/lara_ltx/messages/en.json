@@ -35,6 +35,7 @@
   "LARA-MODEL-031": "Audio VAE core entry {key} is missing or incompatible with the reviewed BF16 layout. Use the pinned official Audio VAE checkpoint; vocoder and BWE tensors use a separate loader.",
   "LARA-MODEL-032": "Audio vocoder/BWE entry {key} is missing or incompatible with the reviewed BF16 waveform layout. Use the pinned official Audio VAE/vocoder checkpoint.",
   "LARA-MODEL-033": "Transformer output entry {key} is missing or incompatible with the reviewed video/audio projection layout. Use the pinned 22B BF16 transformer checkpoint.",
+  "LARA-MODEL-034": "Transformer input entry {key} is missing or incompatible with the reviewed video/audio conditioning layout. Use the pinned 22B BF16 transformer checkpoint.",
   "LARA-RUNTIME-001": "BF16 memory capacity was exceeded. Reduce dimensions or use a supported larger-memory machine; automatic quantization was not applied.",
   "LARA-RUNTIME-002": "CUDA is unavailable. Start a GPU instance and retry.",
   "LARA-RUNTIME-003": "Metal is unavailable. Run this probe on a supported Apple Silicon Mac with the pinned MLX environment.",

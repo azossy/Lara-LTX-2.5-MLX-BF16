@@ -1,0 +1,67 @@
+{
+  "checkpoint": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+  "component": "transformer_input",
+  "mapped_tensor_count": 53,
+  "mapping": "transformer_input_mapping.json",
+  "output_count": 26,
+  "output_shapes": {
+    "audio_cross_gate": [
+      1,
+      1,
+      2048
+    ],
+    "audio_cross_scale_shift": [
+      1,
+      2,
+      8192
+    ],
+    "audio_hidden": [
+      1,
+      2,
+      2048
+    ],
+    "audio_prompt_timestep": [
+      1,
+      1,
+      4096
+    ],
+    "audio_timestep": [
+      1,
+      2,
+      18432
+    ],
+    "video_cross_gate": [
+      1,
+      1,
+      4096
+    ],
+    "video_cross_scale_shift": [
+      1,
+      2,
+      16384
+    ],
+    "video_hidden": [
+      1,
+      2,
+      4096
+    ],
+    "video_prompt_timestep": [
+      1,
+      1,
+      8192
+    ],
+    "video_timestep": [
+      1,
+      2,
+      36864
+    ]
+  },
+  "passed": true,
+  "requires_finite_output": true,
+  "schema_version": 1,
+  "weight_load_memory": {
+    "active_after_bytes": 853352456,
+    "active_before_bytes": 844,
+    "peak_bytes": 853353292
+  }
+}

@@ -110,14 +110,18 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       on the target Apple Silicon environment.
 - [x] Complete video/audio output modulation, exact six-key checkpoint mapping
       and target-Mac CUDA-versus-MLX BF16 comparison for both streams.
-- [ ] Complete video transformer blocks with cross-AdaLN and image conditioning.
+- [x] Complete video transformer blocks with cross-AdaLN. Image-conditioned
+      latent construction is a pipeline conditioning concern, not a separate
+      transformer-block path, and remains deferred until canonical HQ T2V with
+      synchronized audio passes as required by the release gate.
 - [x] Implement and CUDA-BF16-parity-test the non-cross-AdaLN audio block and
       simultaneous bidirectional audio/video cross-attention.
-- [ ] Complete patchification, timestep embeddings and conditioning inputs:
-      the base video/audio modality preprocessor now implements the official
-      patchified-token projection, 1000x timestep AdaLN, prompt sigma AdaLN,
-      keyframe marker, mask conversion and RoPE preparation; AV cross-modality
-      timestep assembly and official input-weight mapping remain.
+- [x] Complete patchification, timestep embeddings and conditioning inputs:
+      the video/audio preprocessor implements patchified-token projection,
+      1000x timestep AdaLN, prompt sigma AdaLN, keyframe marker, masks, main
+      and cross RoPE, bidirectional AV scale/shift and gate assembly. Its exact
+      53-key official BF16 mapping strict-loads and executes on Metal with a
+      measured 853,353,292-byte peak.
 - [x] Execute the prepared target-Mac comparison for the checkpoint-backed CUDA
       BF16 AV block boundary and its exact 84-key mapping.
 - [x] Provide a target-Mac runner that loads the official mapped block-0 weights

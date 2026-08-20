@@ -40,6 +40,7 @@
 | LARA-MODEL-031 | `LARA-MODEL-031` | Audio VAE core entry is missing or incompatible with the reviewed BF16 layout | Use the pinned Audio VAE checkpoint; load vocoder/BWE separately | `lara_ltx.models.audio_vae` |
 | LARA-MODEL-032 | `LARA-MODEL-032` | Audio vocoder/BWE entry is missing or incompatible with the reviewed BF16 waveform layout | Use the pinned Audio VAE/vocoder checkpoint | `lara_ltx.models.vocoder` |
 | LARA-MODEL-033 | `LARA-MODEL-033` | Transformer output entry is missing or incompatible with the reviewed video/audio projection layout | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.transformer_output` |
+| LARA-MODEL-034 | `LARA-MODEL-034` | Transformer input entry is missing or incompatible with the reviewed video/audio conditioning layout | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.transformer_input` |
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |

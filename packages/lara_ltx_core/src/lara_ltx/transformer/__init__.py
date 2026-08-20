@@ -3,7 +3,14 @@
 from .adaln import ada_zero, adaln_embedding_coefficient, get_ada_values, post_self_attention
 from .attention import Attention, RMSNorm, scaled_dot_product_attention
 from .blocks import AVTransformerBlock, TransformerStream, VideoTransformerBlock, VideoTransformerConfig
-from .input import AdaLayerNormSingle, PreparedTransformerInput, TransformerInputConfig, TransformerInputPreprocessor
+from .input import (
+    AdaLayerNormSingle,
+    AVTransformerInputPreprocessor,
+    PreparedTransformerInput,
+    TransformerInputConfig,
+    TransformerInputPreprocessor,
+    TransformerModalityInput,
+)
 from .layers import FeedForward, GELUApprox, gelu_approx, rms_norm
 from .output import AVTransformerOutput, TransformerOutputConfig, TransformerOutputHead
 from .rope import LTXRopeType, apply_rotary_emb, precompute_freqs_cis
@@ -11,6 +18,7 @@ from .timestep import PixArtAlphaCombinedTimestepSizeEmbeddings, TimestepEmbeddi
 
 __all__ = [
     "AVTransformerBlock",
+    "AVTransformerInputPreprocessor",
     "AVTransformerOutput",
     "AdaLayerNormSingle",
     "Attention",
@@ -23,6 +31,7 @@ __all__ = [
     "TimestepEmbedding",
     "TransformerInputConfig",
     "TransformerInputPreprocessor",
+    "TransformerModalityInput",
     "TransformerOutputConfig",
     "TransformerOutputHead",
     "TransformerStream",

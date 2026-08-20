@@ -3,7 +3,7 @@
 This document is an execution view of the controlling scope directive and
 `docs/PORTING_PLAN.md`. It does not relax any release or parity gate.
 
-## Current active gate: P2 MLX conditioning and transformer assembly
+## Current active gate: P3 end-to-end MLX pipeline assembly
 
 | Order | Work | Completion evidence | State |
 |---|---|---|---|
@@ -29,7 +29,7 @@ datacenter GPU and `nvidia-cutlass-dsl` dependency gate have been verified.
 |---|---|---|---|
 | P1 | Inspect all real BF16 shards; create reviewed mapping manifests for transformer, Gemma/projection, audio VAE, upscaler, duration head and distilled LoRA | Every source key is accounted for exactly once, with validated shape/dtype/layout transforms | Header-derived templates for all seven components; Diffusion VAE decoder, DurationHead, all 48 transformer blocks, Gemma V2's four LTX feature projections, the complete 72-tensor x2 latent spatial upscaler, the 102-tensor Audio VAE core, and the 1,227-tensor waveform vocoder/BWE plus STFT bases have reviewed mappings. Gemma U8 tokenizer/config assets remain on their own loader path |
 | P1 | Implement bounded component-level MLX loading and LoRA application | No duplicate full-model residency; BF16 values and shapes verified | Complete on target M5 Max: block-0, Gemma projection and output-head loads pass frozen CUDA-versus-MLX BF16 criteria at peaks of 773,563,888, 2,312,122,440 and 1,622,608 bytes; stage-local LoRA peaks at 1,050,624 bytes |
-| P2 | Complete checkpoint-backed transformer conditioning, patchification and remaining modulation paths | Real mapped block CUDA-versus-MLX tensor report | The exact mapped block-0, Gemma feature projection and video/audio output-head reports now pass on Metal. Base modality projection, timestep/prompt AdaLN, keyframe marker, masks and RoPE preparation are implemented; complete AV cross-timestep assembly, official input mapping and optional image conditioning next |
+| P2 | Complete checkpoint-backed transformer conditioning, patchification and remaining modulation paths | Real mapped block CUDA-versus-MLX tensor report plus strict official input-weight execution | Complete: mapped block-0, Gemma projection and both output heads pass the frozen Metal criteria. The exact 53-key input component now strict-loads the official BF16 checkpoint and executes projection, timestep/prompt AdaLN, keyframe marker, masks, main/cross RoPE and bidirectional AV modulation on Metal at an 853,353,292-byte measured peak |
 | P3 | Port Gemma conditioning, scheduler, CFG/STG/res_2s, spatial upscaler, audio VAE/vocoder and single in-process media pipeline | Fixed prompt produces a playable MLX MP4 with audio | P2 plus all component mappings; spatial-upscaler, Audio VAE core, and waveform vocoder/BWE parameter contracts are fixed. CUDA now preserves the Audio VAE → primary vocoder → BWE boundaries; their MLX runtimes remain |
 | P4/P5 | Run deterministic tensor/stage reports and multi-prompt audiovisual quality corpus | Evidence-based tolerances, documented differences and acceptance report | P3 end-to-end path |
 | P6 | Measure and optimize on the target Apple Silicon hardware | Peak memory, latency and Metal utilization reports | Correct P3/P4 path |

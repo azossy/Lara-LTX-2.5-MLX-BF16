@@ -39,6 +39,12 @@ from .transformer_block import (
     validate_transformer_block_mapping,
     write_transformer_block_mapping,
 )
+from .transformer_input import (
+    build_transformer_input_mapping,
+    transformer_input_target_shapes,
+    validate_transformer_input_mapping,
+    write_transformer_input_mapping,
+)
 from .transformer_output import (
     build_transformer_output_mapping,
     transformer_output_target_dtypes,
@@ -69,6 +75,7 @@ __all__ = [
     "build_mapping_template",
     "build_spatial_upscaler_mapping",
     "build_transformer_block_mapping",
+    "build_transformer_input_mapping",
     "build_transformer_output_mapping",
     "build_vocoder_mapping",
     "gemma_feature_target_shapes",
@@ -80,6 +87,7 @@ __all__ = [
     "spatial_upscaler_target_shapes",
     "transformer_block_target_dtypes",
     "transformer_block_target_shapes",
+    "transformer_input_target_shapes",
     "transformer_output_target_dtypes",
     "transformer_output_target_shapes",
     "validate_audio_vae_mapping",
@@ -88,6 +96,7 @@ __all__ = [
     "validate_mapping",
     "validate_spatial_upscaler_mapping",
     "validate_transformer_block_mapping",
+    "validate_transformer_input_mapping",
     "validate_transformer_output_mapping",
     "validate_vocoder_mapping",
     "vocoder_target_shapes",
@@ -99,6 +108,7 @@ __all__ = [
     "write_mapping_template",
     "write_spatial_upscaler_mapping",
     "write_transformer_block_mapping",
+    "write_transformer_input_mapping",
     "write_transformer_output_mapping",
     "write_vocoder_mapping",
 ]

@@ -77,6 +77,21 @@ projection tensors and compares the final BF16 heads with their CUDA capture.
 
 Both streams must pass the same frozen checkpoint-backed BF16 criteria.
 
+## P2 transformer-input loading and execution gate
+
+This gate strict-loads all 53 official input-projection and conditioning
+tensors and executes a bounded simultaneous video/audio preparation on Metal.
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_transformer_input.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --mapping golden/manifests/transformer_input_mapping.json \
+  --report "$LARA_REPORT_DIR/transformer_input.json"
+```
+
+The checked-in target-Mac report loads 53 BF16 tensors, produces all 26
+required finite outputs and records an 853,353,292-byte peak.
+
 ## P1 stage-local LoRA gate
 
 The fixed CUDA LoRA artifact contains one official base/A/B tensor set, so this
@@ -96,9 +111,10 @@ absolute error, stage 2 has `3.814697265625e-06`, and peak fusion memory is
 
 ## Evidence handling
 
-- Preserve the checkpoint-block, Gemma-feature, transformer-output and LoRA JSON reports with the
+- Preserve the checkpoint-block, Gemma-feature, transformer-input, transformer-output and LoRA JSON reports with the
   commit and MLX environment record.
 - On a failure, retain the JSON report and re-run only after checking the
   mapping manifest, checkpoint hash, and Python/MLX versions.
-- Do not publish a release or claim end-to-end parity merely because these component reports pass
-  on the target Mac and the remaining P2 image-conditioning gate is complete.
+- Do not publish a release or claim end-to-end parity merely because these
+  component reports pass on the target Mac. Optional image conditioning remains
+  gated behind the canonical HQ T2V plus synchronized-audio pipeline.
