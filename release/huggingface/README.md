@@ -54,14 +54,20 @@ configuration, known limitations and verified parity evidence.
 
 This is an engineering preview, not a final CUDA-quality-parity claim. Exact
 CUDA inputs verify the checkpoint-metadata-driven transformer input path and
-final transformer/output-head component boundaries. Cross-backend BF16
-differences still accumulate through the complete stochastic trajectory, so
-the frozen final-latent gate remains open and is documented without weakening
-its thresholds. Two MLX quality-corpus cases have paired CUDA diagnostics; the
+final transformer/output-head component boundaries. The v6 CUDA trace contains
+408 named Attention boundaries across all six modules and three guidance
+passes; payload deduplication stores 118 unique tensors plus 290 aliases. All
+176 MLX exact-input sub-operation comparisons pass the frozen component gate.
+
+CUDA-aligned FP32 Q/K RMSNorm and RoPE accumulation reduce the full stochastic
+replay's final video-latent NRMSE from `0.3555` to `0.1725`; audio is `0.1184`
+versus the prior `0.1095`. Cross-backend BF16 differences therefore still
+accumulate and the frozen final-latent gate remains open without weakening its
+thresholds. Two MLX quality-corpus cases have paired CUDA diagnostics; the
 512x512/33-frame case reached OOM after about 70 minutes on the M5 Max 128 GB
-target and is not supported in this preview. See the matching GitHub release
-notes and quality reports. Resource-policy failures use the localized
-`LARA-RUNTIME-010` code and do not silently quantize or select a fallback.
+target and is not supported in this preview. Resource-policy failures use the
+localized `LARA-RUNTIME-010` code and do not silently quantize or select a
+fallback.
 
 ## License
 
