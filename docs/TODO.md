@@ -161,6 +161,10 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       and stage-2 execution peak at 38,511,394,752 bytes. Rebuilding only the
       LoRA-targeted weights from the base checkpoint switches `0.25` to `0.5`
       in place at a 38,234,978,314-byte peak without a second model state.
+- [x] Fuse the remaining 28 non-block LoRA pairs into the official input
+      preprocessor (26) and video/audio output projections (2). Both `0.25`
+      and `0.5` stage strengths produce finite `[1, 2, 128]` modality outputs
+      at a measured 1,724,801,034-byte isolated component peak.
 - [x] Port the complete 72-weight spatial latent upscaler, VAE statistic
       denormalization/renormalization and source-order pixel shuffle. All three
       CUDA boundaries pass; the normalized output has NRMSE `0.01272` and

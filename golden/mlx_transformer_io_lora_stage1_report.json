@@ -1,0 +1,21 @@
+{
+  "component": "transformer_io_lora",
+  "fused_input_pairs": 26,
+  "fused_output_pairs": 2,
+  "lora_strength": 0.25,
+  "output_shapes": {
+    "audio": [
+      1,
+      2,
+      128
+    ],
+    "video": [
+      1,
+      2,
+      128
+    ]
+  },
+  "passed": true,
+  "peak_bytes": 1724801034,
+  "schema_version": 1
+}

@@ -24,11 +24,27 @@ from lara_ltx.models.transformer_block import (
     build_transformer_block_mappings,
     transformer_block_target_shapes,
 )
+from lara_ltx.models.transformer_input import (
+    transformer_input_target_shapes,
+    validate_transformer_input_mapping,
+)
+from lara_ltx.models.transformer_output import (
+    transformer_output_target_shapes,
+    validate_transformer_output_mapping,
+)
 
 from .blocks import AVTransformerBlock, TransformerStream, VideoTransformerConfig
+from .input import AVTransformerInputPreprocessor, TransformerInputConfig
+from .output import AVTransformerOutput, TransformerOutputConfig
 
 VIDEO_HEAD_DIMENSION = VIDEO_DIMENSION // VIDEO_HEAD_COUNT
 AUDIO_HEAD_DIMENSION = AUDIO_DIMENSION // AUDIO_HEAD_COUNT
+PRODUCTION_INPUT_CHANNELS = 128
+PRODUCTION_OUTPUT_CHANNELS = 128
+VIDEO_POSITION_MAXIMUMS = (20, 2_048, 2_048)
+AUDIO_POSITION_MAXIMUMS = (20,)
+ADALN_COEFFICIENT = 9
+PROMPT_ADALN_COEFFICIENT = 2
 
 
 @dataclass(frozen=True)
@@ -70,6 +86,131 @@ def production_transformer_block() -> AVTransformerBlock:
             ff_bias=True,
         ),
     )
+
+
+def production_transformer_input() -> AVTransformerInputPreprocessor:
+    def config(hidden_dimension: int, max_positions: tuple[int, ...], *, keyframes: bool) -> TransformerInputConfig:
+        return TransformerInputConfig(
+            input_channels=PRODUCTION_INPUT_CHANNELS,
+            hidden_dimension=hidden_dimension,
+            adaln_coefficient=ADALN_COEFFICIENT,
+            prompt_adaln_coefficient=PROMPT_ADALN_COEFFICIENT,
+            attention_heads=VIDEO_HEAD_COUNT,
+            max_positions=max_positions,
+            use_keyframes_absolute_embedding=keyframes,
+        )
+
+    return AVTransformerInputPreprocessor(
+        video=config(VIDEO_DIMENSION, VIDEO_POSITION_MAXIMUMS, keyframes=True),
+        audio=config(AUDIO_DIMENSION, AUDIO_POSITION_MAXIMUMS, keyframes=False),
+        cross_attention_dimension=AUDIO_DIMENSION,
+    )
+
+
+def production_transformer_output() -> AVTransformerOutput:
+    return AVTransformerOutput(
+        video=TransformerOutputConfig(VIDEO_DIMENSION, PRODUCTION_OUTPUT_CHANNELS),
+        audio=TransformerOutputConfig(AUDIO_DIMENSION, PRODUCTION_OUTPUT_CHANNELS),
+    )
+
+
+def _load_and_fuse_component(
+    module: object,
+    *,
+    checkpoint: Path,
+    rules: tuple[dict[str, object], ...],
+    target_shapes: dict[str, tuple[int, ...]],
+    lora_checkpoint: Path | None,
+    lora_pairs: tuple[LoraPair, ...],
+    lora_strength: float,
+) -> int:
+    for weight_batch in iter_component_weight_batches(
+        (checkpoint,),
+        rules,
+        expected_target_shapes=target_shapes,
+    ):
+        module.load_weights(weight_batch)
+        mx.eval(*[value for _, value in weight_batch])
+    weight_batch = ()
+    if lora_checkpoint is None or lora_strength == 0:
+        return 0
+    source_to_target = {str(rule["source_key"]): str(rule["target_key"]) for rule in rules}
+    relevant = tuple(pair for pair in lora_pairs if pair.target_key in source_to_target)
+    parameters = dict(tree_flatten(module.parameters()))
+    for pair in relevant:
+        runtime_key = source_to_target[pair.target_key]
+        base = parameters.get(runtime_key)
+        if base is None or tuple(base.shape) != pair.base_shape:
+            raise LaraError("LARA-MODEL-026", details={"key": pair.target_key})
+        loaded = load_safetensors_shard(lora_checkpoint, required_names=(pair.a_key, pair.b_key))
+        fused = fuse_lora_weight(
+            base,
+            loaded.tensors[pair.a_key],
+            loaded.tensors[pair.b_key],
+            lora_strength,
+        )
+        mx.eval(fused)
+        module.load_weights(((runtime_key, fused),), strict=False)
+    return len(relevant)
+
+
+def load_production_transformer_input(
+    *,
+    checkpoint: Path,
+    mapping: dict[str, object],
+    lora_checkpoint: Path | None = None,
+    lora_strength: float = 0.0,
+    lora_pairs: tuple[LoraPair, ...] | None = None,
+) -> tuple[AVTransformerInputPreprocessor, int]:
+    _validate_component_lora_request(lora_checkpoint, lora_strength)
+    rules = validate_transformer_input_mapping(mapping)
+    pairs = lora_pairs or (
+        build_lora_pairs(lora_checkpoint, checkpoint) if lora_checkpoint is not None and lora_strength > 0 else ()
+    )
+    module = production_transformer_input()
+    count = _load_and_fuse_component(
+        module,
+        checkpoint=checkpoint,
+        rules=rules,
+        target_shapes=transformer_input_target_shapes(),
+        lora_checkpoint=lora_checkpoint,
+        lora_pairs=pairs,
+        lora_strength=lora_strength,
+    )
+    return module, count
+
+
+def load_production_transformer_output(
+    *,
+    checkpoint: Path,
+    mapping: dict[str, object],
+    lora_checkpoint: Path | None = None,
+    lora_strength: float = 0.0,
+    lora_pairs: tuple[LoraPair, ...] | None = None,
+) -> tuple[AVTransformerOutput, int]:
+    _validate_component_lora_request(lora_checkpoint, lora_strength)
+    rules = validate_transformer_output_mapping(mapping)
+    pairs = lora_pairs or (
+        build_lora_pairs(lora_checkpoint, checkpoint) if lora_checkpoint is not None and lora_strength > 0 else ()
+    )
+    module = production_transformer_output()
+    count = _load_and_fuse_component(
+        module,
+        checkpoint=checkpoint,
+        rules=rules,
+        target_shapes=transformer_output_target_shapes(),
+        lora_checkpoint=lora_checkpoint,
+        lora_pairs=pairs,
+        lora_strength=lora_strength,
+    )
+    return module, count
+
+
+def _validate_component_lora_request(lora_checkpoint: Path | None, strength: float) -> None:
+    if not math.isfinite(strength) or strength < 0:
+        raise LaraError("LARA-MODEL-027", details={"value": strength})
+    if strength > 0 and lora_checkpoint is None:
+        raise LaraError("LARA-MODEL-026", details={"key": "missing_lora_checkpoint"})
 
 
 def run_transformer_block_sequence(

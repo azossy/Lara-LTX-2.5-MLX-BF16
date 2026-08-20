@@ -176,6 +176,15 @@ weights one block at a time, switching strength from `0.25` to `0.5` at a
 38,234,978,314-byte peak without a duplicate transformer state. Evidence is in
 `golden/mlx_resident_transformer_two_stage_report.json`.
 
+The 28 LoRA pairs outside the block stack are also covered. The production
+input/output loaders use the reviewed mapping source keys to fuse 26 timestep,
+patch and AV-cross input weights plus both modality output projections. Stage
+strengths `0.25` and `0.5` each produce finite `[1, 2, 128]` outputs at a
+1,724,801,034-byte isolated peak. Reports are
+`golden/mlx_transformer_io_lora_stage1_report.json` and
+`golden/mlx_transformer_io_lora_stage2_report.json`; together with the 1,632
+block-local pairs, all 1,660 official adapter pairs now have an execution path.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.

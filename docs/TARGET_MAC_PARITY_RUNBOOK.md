@@ -129,6 +129,21 @@ For the production one-load path, run both stages in one process:
 The resident report must contain 48 blocks, finite outputs for both strengths,
 no second transformer state, and a measured peak within the target Mac budget.
 
+Validate the remaining input/output LoRA pairs for each stage:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_transformer_io_lora.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --input-mapping golden/manifests/transformer_input_mapping.json \
+  --output-mapping golden/manifests/transformer_output_mapping.json \
+  --lora-strength 0.25 \
+  --report "$LARA_REPORT_DIR/transformer_io_lora_stage1.json"
+```
+
+Repeat with strength `0.5`. Each report must fuse 26 input and two output pairs
+and produce finite video/audio outputs.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE
