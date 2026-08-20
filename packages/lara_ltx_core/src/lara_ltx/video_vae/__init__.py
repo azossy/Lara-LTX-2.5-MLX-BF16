@@ -29,6 +29,12 @@ from .sampling import (
     SpaceToDepthDownsample,
     SpaceToDepthDownsampleConfig,
 )
+from .spatial_upscaler import (
+    LatentSpatialUpscaler,
+    LatentSpatialUpscalerConfig,
+    SpatialVideoUpscaler,
+    load_spatial_video_upscaler,
+)
 
 __all__ = [
     "AdaLNZero",
@@ -45,6 +51,8 @@ __all__ = [
     "DeterministicStageConfig",
     "DiffusionVideoDecoder",
     "DiffusionVideoDecoderConfig",
+    "LatentSpatialUpscaler",
+    "LatentSpatialUpscalerConfig",
     "LinearPixelShuffleUpsample",
     "LinearPixelShuffleUpsampleConfig",
     "NABlock",
@@ -57,11 +65,13 @@ __all__ = [
     "ResnetBlock3DConfig",
     "SpaceToDepthDownsample",
     "SpaceToDepthDownsampleConfig",
+    "SpatialVideoUpscaler",
     "Stage4TilingConfig",
     "Stage5TilingConfig",
     "SwiGLU",
     "UNetMidBlock3D",
     "UNetMidBlock3DConfig",
+    "load_spatial_video_upscaler",
     "neighborhood_attention_3d",
     "patchify",
     "unpatchify",

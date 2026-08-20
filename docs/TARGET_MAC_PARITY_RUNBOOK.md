@@ -94,6 +94,25 @@ The scheduler must match the captured HQ stage-1 sigmas within `2e-7`, the
 combined CFG/STG/AV-isolation arithmetic must be exact, and the res_2s
 coefficients must remain finite.
 
+## P3 spatial latent-upscaler gate
+
+This command strict-loads all 72 official upscaler tensors and both VAE
+channel-statistic tensors, then compares the denormalized input, unnormalized
+x2 output and re-normalized x2 output with the AutoDL CUDA BF16 capture.
+
+```sh
+.venv/bin/python tools/parity/compare_mlx_spatial_upscaler.py \
+  --upscaler-checkpoint "$LARA_MODEL_ROOT/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors" \
+  --video-vae-checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --mapping golden/manifests/spatial_upscaler_mapping.json \
+  --cuda-reference golden/cuda_spatial_upscaler_reference.npz \
+  --report "$LARA_REPORT_DIR/spatial_upscaler.json"
+```
+
+Every boundary must be finite, have normalized RMSE at most `2e-2`, and have
+cosine similarity at least `0.9999`. The checked-in target-Mac report passes
+with 74 loaded tensors and a 995,736,328-byte weight-load peak.
+
 ## P2 transformer output-head gate
 
 This command loads the six reviewed video/audio output modulation and
@@ -144,8 +163,8 @@ absolute error, stage 2 has `3.814697265625e-06`, and peak fusion memory is
 ## Evidence handling
 
 - Preserve the checkpoint-block, Gemma-feature, full Gemma-text, sampling,
-  transformer-input, transformer-output and LoRA JSON reports with the commit
-  and MLX environment record.
+  spatial-upscaler, transformer-input, transformer-output and LoRA JSON reports
+  with the commit and MLX environment record.
 - On a failure, retain the JSON report and re-run only after checking the
   mapping manifest, checkpoint hash, and Python/MLX versions.
 - Do not publish a release or claim end-to-end parity merely because these

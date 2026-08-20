@@ -78,3 +78,4 @@
 | LARA-TENSOR-020 | `LARA-TENSOR-020` | Transformer output hidden state or embedded timestep has an invalid shape | Use matching rank-3 tensors with the configured hidden width | `lara_ltx.transformer.output` |
 | LARA-TENSOR-021 | `LARA-TENSOR-021` | Transformer conditioning layout, sigma or keyframe mask is invalid | Recreate patchified latents, per-token timesteps, position bounds, projected context and masks | `lara_ltx.transformer.input` |
 | LARA-TENSOR-022 | `LARA-TENSOR-022` | Gemma prompt, token layout or left-padding mask is invalid | Provide non-empty prompts and matching rank-2 IDs with contiguous left padding | `lara_ltx.models.gemma_assets`, `lara_ltx.text_encoder.gemma4` |
+| LARA-TENSOR-023 | `LARA-TENSOR-023` | Spatial-upscaler configuration or NCTHW latent layout is invalid | Use the reviewed x2 configuration and a rank-5 128-channel latent | `lara_ltx.video_vae.spatial_upscaler` |

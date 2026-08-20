@@ -150,7 +150,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       block perturbation masks and full two-evaluation res_2s/SDE loop. The
       15-step schedule matches the P0 CUDA HQ artifact within `1.2e-7` and the
       deterministic Metal contract suite passes.
-- [ ] Port spatial latent upscaling and two-stage refinement.
+- [x] Port the complete 72-weight spatial latent upscaler, VAE statistic
+      denormalization/renormalization and source-order pixel shuffle. All three
+      CUDA boundaries pass; the normalized output has NRMSE `0.01272` and
+      cosine similarity `0.999919` at a 995,736,328-byte load peak.
+- [ ] Wire the validated upscaler into stage-2 transformer refinement.
 - [ ] Complete diffusion video VAE: non-attention Conv decoder subset and
       CUDA-BF16 assembly parity, per-frame attention, and timestep-conditioned
       ResNet/mid-block parity are complete. Production Diffusion VAE shared

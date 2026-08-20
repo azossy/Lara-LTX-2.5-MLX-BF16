@@ -86,9 +86,7 @@ def _modality(hidden_dimension: int, axis_count: int, sigma: float) -> Transform
             (SMOKE_BATCH_SIZE, SMOKE_TOKEN_COUNT, SMOKE_TOKEN_COUNT),
             dtype=mx.float32,
         ),
-        keyframes_mask=(
-            mx.array([[[1], [0]]], dtype=mx.int32) if axis_count == len(VIDEO_POSITION_MAXIMUMS) else None
-        ),
+        keyframes_mask=(mx.array([[[1], [0]]], dtype=mx.int32) if axis_count == len(VIDEO_POSITION_MAXIMUMS) else None),
     )
 
 

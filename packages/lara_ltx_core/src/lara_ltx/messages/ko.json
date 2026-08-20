@@ -72,5 +72,6 @@
   "LARA-TENSOR-019": "Gemma feature 입력이 올바르지 않습니다(hidden={hidden_shape}, mask={mask_shape}). [batch, tokens, 3840, 49] hidden state와 일치하는 rank-2 mask를 사용하세요.",
   "LARA-TENSOR-020": "Transformer 출력 입력이 올바르지 않습니다(hidden={hidden_shape}, timestep={timestep_shape}). 설정된 hidden 폭과 일치하는 rank-3 텐서를 사용하세요.",
   "LARA-TENSOR-021": "Transformer conditioning 입력이 올바르지 않습니다({reason}). patchify된 latent token, token별 timestep, position 범위, projection된 context와 일치하는 mask를 제공하세요.",
-  "LARA-TENSOR-022": "Gemma token 입력이 올바르지 않습니다({reason}). 비어 있지 않은 prompt 배치와 일치하는 rank-2 token ID 및 연속된 왼쪽 padding mask를 제공하세요."
+  "LARA-TENSOR-022": "Gemma token 입력이 올바르지 않습니다({reason}). 비어 있지 않은 prompt 배치와 일치하는 rank-2 token ID 및 연속된 왼쪽 padding mask를 제공하세요.",
+  "LARA-TENSOR-023": "잠재 spatial upscaler 입력 또는 설정이 올바르지 않습니다({shape}). 128채널 NCTHW 5차원 잠재와 검토된 x2 설정을 사용하세요."
 }

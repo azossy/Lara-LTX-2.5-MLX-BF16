@@ -20,9 +20,7 @@ def _packed_config() -> dict[str, object]:
             "num_kv_shared_layers": 0,
             "use_double_wide_mlp": False,
             "attention_k_eq_v": True,
-            "layer_types": [
-                "full_attention" if (index + 1) % 6 == 0 else "sliding_attention" for index in range(48)
-            ],
+            "layer_types": ["full_attention" if (index + 1) % 6 == 0 else "sliding_attention" for index in range(48)],
         },
     }
 

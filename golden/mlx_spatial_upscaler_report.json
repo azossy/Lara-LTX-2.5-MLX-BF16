@@ -1,0 +1,90 @@
+{
+  "acceptance_criteria": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999,
+    "requires_finite_output": true
+  },
+  "boundaries": {
+    "unnormalized_input_latent": {
+      "candidate_checksum": "c2ba2acedc90a7a3baeb080876935b577901b5556a67b7181c0e70f7463280d4",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 1.0000000000000002,
+      "finite_count": 15360,
+      "inf_count": 0,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "mean_abs_error": 0.0,
+      "name": "unnormalized_input_latent",
+      "nan_count": 0,
+      "normalized_rmse": 0.0,
+      "reference_checksum": "c2ba2acedc90a7a3baeb080876935b577901b5556a67b7181c0e70f7463280d4",
+      "reference_dtype": "float32",
+      "reference_rms": 0.3016581458450431,
+      "rmse": 0.0,
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ]
+    },
+    "upscaled_normalized_latent": {
+      "candidate_checksum": "99be211fe70382b30d12abf92354329b6d3e2f50cdd782bd85b3a49f529aa6c5",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999190856070977,
+      "finite_count": 61440,
+      "inf_count": 0,
+      "max_abs_error": 0.140625,
+      "max_relative_error": 1.8899960565066773e+36,
+      "mean_abs_error": 0.011948845155226687,
+      "name": "upscaled_normalized_latent",
+      "nan_count": 0,
+      "normalized_rmse": 0.012721504529242202,
+      "reference_checksum": "28239352fa08122bc5e1a62ea508e959000aadd6c38d9cd477f46229a5d8d402",
+      "reference_dtype": "float32",
+      "reference_rms": 1.3616598473755557,
+      "rmse": 0.017322361915675377,
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ]
+    },
+    "upscaled_unnormalized_latent": {
+      "candidate_checksum": "5fef027d41db459c9efafac6d771e3f0db5bc9948dc0feaabeee29831d1dac92",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999769195083773,
+      "finite_count": 61440,
+      "inf_count": 0,
+      "max_abs_error": 0.015625,
+      "max_relative_error": 2.6999943664381104e+35,
+      "mean_abs_error": 0.0015314416552428157,
+      "name": "upscaled_unnormalized_latent",
+      "nan_count": 0,
+      "normalized_rmse": 0.006794373457120589,
+      "reference_checksum": "7973496d7c609e2e694aa0ebd10c29f14134c39ff492373d4fa971ef55a297cf",
+      "reference_dtype": "float32",
+      "reference_rms": 0.3146147562329168,
+      "rmse": 0.0021376101489673943,
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ]
+    }
+  },
+  "component": "latent_spatial_upscaler_x2",
+  "loaded_tensor_count": 74,
+  "passed": true,
+  "schema_version": 1,
+  "weight_load_memory": {
+    "active_after_bytes": 995736320,
+    "active_before_bytes": 0,
+    "peak_bytes": 995736328
+  }
+}

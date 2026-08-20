@@ -114,6 +114,19 @@ loop includes midpoint evaluation, optional anchor refinement, independent SDE
 noise streams, clean-latent masking and terminal denoising. Synthetic loop
 tests pass on Metal; denoiser-integrated stage parity remains a P4 task.
 
+## Spatial latent upscaler
+
+Artifact: `golden/mlx_spatial_upscaler_report.json`
+
+The production MLX module strict-loads all 72 official BF16 upscaler weights
+plus the two VAE channel-statistic tensors. It reproduces the source Conv3d,
+float32-accumulating GroupNorm and SiLU, framewise Conv2d and source-order x2
+pixel shuffle without converting the checkpoint. The CUDA-captured
+denormalized input is bit-exact. The unnormalized x2 output reaches NRMSE
+`0.006794` and cosine `0.999977`; the re-normalized output reaches NRMSE
+`0.012722` and cosine `0.999919`. All three frozen criteria pass with a measured
+995,736,328-byte component-load peak.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.
@@ -128,6 +141,7 @@ tests pass on Metal; denoiser-integrated stage parity remains a P4 task.
   peak must be re-measured with mapped checkpoint weights and stage-specific
   LoRA handling.
 - The remaining high-risk technical paths are the full 48-block/high-token
-  orchestration, scheduler/guidance integration, DiffVAE tile performance, and
-  audio decode/synchronization. Full Gemma 4 conditioning is now executable;
-  its CUDA-versus-MLX hidden-state report remains evidence work.
+  orchestration, two-stage component lifecycle, DiffVAE tile performance, and
+  audio decode/synchronization. Full Gemma 4 conditioning and spatial x2
+  upscaling are now executable; Gemma's CUDA-versus-MLX hidden-state report
+  remains evidence work.
