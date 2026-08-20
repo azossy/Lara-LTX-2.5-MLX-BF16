@@ -11,12 +11,14 @@ from typing import Any
 
 from lara_ltx.errors import LaraError
 from lara_ltx.media import MediaEncodingConfig
+from lara_ltx.runtime.memory import GenerationResourcePolicy, stage_video_tokens
 from lara_ltx.sampling import MultiModalGuiderParams
 
 PROFILE_RESOURCE_PACKAGE = "lara_ltx.resources"
 DEFAULT_PROFILE_NAME = "hq.toml"
 DISTRIBUTION_MANIFEST_FILENAME = "lara_ltx_model.toml"
 DISTRIBUTION_MANIFEST_SCHEMA_VERSION = 1
+PIPELINE_PROFILE_SCHEMA_VERSION = 2
 
 
 def _required(value: dict[str, Any], key: str) -> Any:
@@ -31,6 +33,19 @@ def _section(value: dict[str, Any], key: str) -> dict[str, Any]:
     if not isinstance(section, dict):
         raise LaraError("LARA-PIPELINE-001", details={"reason": f"invalid_{key}"})
     return section
+
+
+def _positive_int(value: dict[str, Any], key: str) -> int:
+    raw = _required(value, key)
+    if isinstance(raw, bool):
+        raise LaraError("LARA-PIPELINE-001", details={"reason": f"invalid_{key}"})
+    try:
+        parsed = int(raw)
+    except (TypeError, ValueError) as error:
+        raise LaraError("LARA-PIPELINE-001", details={"reason": f"invalid_{key}"}) from error
+    if parsed <= 0:
+        raise LaraError("LARA-PIPELINE-001", details={"reason": f"invalid_{key}"})
+    return parsed
 
 
 def _guidance(value: dict[str, Any]) -> MultiModalGuiderParams:
@@ -188,6 +203,7 @@ class PipelineProfile:
     decode: DecodeProfile
     media: MediaEncodingConfig
     download: DownloadProfile
+    resource_policy: GenerationResourcePolicy
 
 
 @dataclass(frozen=True)
@@ -236,7 +252,7 @@ def load_pipeline_profile(path: Path | None = None) -> PipelineProfile:
     except (OSError, tomllib.TOMLDecodeError) as error:
         raise LaraError("LARA-PIPELINE-001", details={"reason": "unreadable_profile"}) from error
     profile = _section(raw, "profile")
-    if _required(profile, "schema_version") != 1:
+    if _required(profile, "schema_version") != PIPELINE_PROFILE_SCHEMA_VERSION:
         raise LaraError("LARA-PIPELINE-001", details={"reason": "unsupported_profile_schema"})
     model = _section(raw, "model")
     generation = _section(raw, "generation")
@@ -245,6 +261,7 @@ def load_pipeline_profile(path: Path | None = None) -> PipelineProfile:
     decode = _section(raw, "decode")
     media = _section(raw, "media")
     download = _section(raw, "download")
+    resource_policy = _section(raw, "resource_policy")
     model_keys = ("transformer", "text_encoder", "video_vae", "audio_vae", "spatial_upscaler", "distilled_lora")
     generation_profile = GenerationProfile(
         negative_prompt=str(_required(generation, "negative_prompt")),
@@ -281,6 +298,28 @@ def load_pipeline_profile(path: Path | None = None) -> PipelineProfile:
         audio_guidance=_guidance(_section(generation, "audio_guidance")),
     )
     generation_profile.validate()
+    enforce = _required(resource_policy, "enforce")
+    if not isinstance(enforce, bool):
+        raise LaraError("LARA-PIPELINE-001", details={"reason": "invalid_resource_policy_enforce"})
+    parsed_resource_policy = GenerationResourcePolicy(
+        enforce=enforce,
+        minimum_unified_memory_bytes=_positive_int(resource_policy, "minimum_unified_memory_bytes"),
+        maximum_stage_two_video_tokens=_positive_int(resource_policy, "maximum_stage_two_video_tokens"),
+        video_time_scale=_positive_int(resource_policy, "video_time_scale"),
+        stage_two_spatial_scale=_positive_int(resource_policy, "stage_two_spatial_scale"),
+        recommended_height=_positive_int(resource_policy, "recommended_height"),
+        recommended_width=_positive_int(resource_policy, "recommended_width"),
+        recommended_num_frames=_positive_int(resource_policy, "recommended_num_frames"),
+    )
+    recommended_tokens = stage_video_tokens(
+        frames=parsed_resource_policy.recommended_num_frames,
+        height=parsed_resource_policy.recommended_height,
+        width=parsed_resource_policy.recommended_width,
+        time_scale=parsed_resource_policy.video_time_scale,
+        spatial_scale=parsed_resource_policy.stage_two_spatial_scale,
+    )
+    if recommended_tokens > parsed_resource_policy.maximum_stage_two_video_tokens:
+        raise LaraError("LARA-PIPELINE-001", details={"reason": "recommended_grid_exceeds_resource_policy"})
     return PipelineProfile(
         name=str(_required(profile, "name")),
         model=ModelProfile(
@@ -309,4 +348,5 @@ def load_pipeline_profile(path: Path | None = None) -> PipelineProfile:
             cache_environment_variable=str(_required(download, "cache_environment_variable")),
             token_environment_variable=str(_required(download, "token_environment_variable")),
         ),
+        resource_policy=parsed_resource_policy,
     )

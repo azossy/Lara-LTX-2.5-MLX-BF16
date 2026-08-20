@@ -17,7 +17,7 @@ tags:
 Native MLX/Metal BF16 runtime for local LTX-2.5 video and synchronized-audio
 generation on Apple Silicon. No CUDA or server process is required on Mac.
 
-Release `0.0.1` matches the GitHub source tag `v0.0.1`.
+Release `0.0.2` matches the GitHub source tag `v0.0.2`.
 
 > This repository is a release descriptor. The exact official gated BF16 files
 > remain in `Lightricks/LTX-2.5`; accepting upstream access is required. The
@@ -26,8 +26,10 @@ Release `0.0.1` matches the GitHub source tag `v0.0.1`.
 
 ## Quick Start
 
-Requirements: Apple Silicon, macOS, Python 3.12, `ffmpeg`, sufficient unified
-memory, and accepted access to the gated upstream model.
+Requirements: Apple Silicon, macOS, Python 3.12, `ffmpeg`, 128 GB unified
+memory, and accepted access to the gated upstream model. The packaged profile
+defaults to the measured 512x320/17-frame workload and rejects unverified
+memory or Stage-2 token grids before checkpoint download or loading.
 
 ```bash
 git clone https://github.com/azossy/Lara-LTX-2.5-MLX-BF16.git
@@ -58,7 +60,8 @@ the frozen final-latent gate remains open and is documented without weakening
 its thresholds. Two MLX quality-corpus cases have paired CUDA diagnostics; the
 512x512/33-frame case reached OOM after about 70 minutes on the M5 Max 128 GB
 target and is not supported in this preview. See the matching GitHub release
-notes and quality reports.
+notes and quality reports. Resource-policy failures use the localized
+`LARA-RUNTIME-010` code and do not silently quantize or select a fallback.
 
 ## License
 

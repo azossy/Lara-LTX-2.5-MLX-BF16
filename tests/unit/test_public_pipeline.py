@@ -6,7 +6,7 @@ import mlx.core as mx
 import pytest
 from lara_ltx.errors import LaraError
 from lara_ltx.pipeline import TwoStageContexts, load_pipeline_profile
-from lara_ltx.pipeline.api import _build_request
+from lara_ltx.pipeline.api import LTXPipeline, _build_request
 from lara_ltx.pipeline.configuration import load_distribution_source
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -27,9 +27,12 @@ def test_packaged_hq_profile_resolves_verified_local_pack() -> None:
 
     paths = profile.model.resolve(MODEL_ROOT)
 
-    assert profile.generation.height == 1088
-    assert profile.generation.width == 1920
+    assert profile.generation.height == 320
+    assert profile.generation.width == 512
+    assert profile.generation.num_frames == 17
     assert profile.generation.num_inference_steps == 15
+    assert profile.resource_policy.enforce is True
+    assert profile.resource_policy.maximum_stage_two_video_tokens == 640
     assert paths.transformer.name.endswith("transformer-bf16.safetensors")
     assert len(profile.model.allow_patterns) == 6
 
@@ -61,6 +64,27 @@ def test_public_generation_rejects_unsupported_grid(field: str, value: int) -> N
 
     with pytest.raises(LaraError, match="LARA-PIPELINE-003"):
         profile.with_overrides(**{field: value})
+
+
+def test_public_pipeline_rejects_oom_grid_before_checkpoint_access() -> None:
+    pipeline = LTXPipeline.__new__(LTXPipeline)
+    pipeline.profile = load_pipeline_profile()
+
+    with pytest.raises(LaraError) as raised:
+        pipeline(prompt="A fox in a forest", height=512, width=512, num_frames=33)
+
+    assert raised.value.code == "LARA-RUNTIME-010"
+    assert raised.value.details["requested_tokens"] == 1_280
+
+
+def test_from_pretrained_rejects_unverified_memory_before_model_download(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("lara_ltx.pipeline.api.physical_memory_bytes", lambda: 64 * 1024**3)
+
+    with pytest.raises(LaraError) as raised:
+        LTXPipeline.from_pretrained("missing/repository", local_files_only=True)
+
+    assert raised.value.code == "LARA-RUNTIME-010"
+    assert raised.value.details["reason"] == "insufficient_unified_memory"
 
 
 def test_release_descriptor_pins_official_gated_source() -> None:

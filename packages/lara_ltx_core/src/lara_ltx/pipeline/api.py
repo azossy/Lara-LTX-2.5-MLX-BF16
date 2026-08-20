@@ -33,6 +33,7 @@ from lara_ltx.models import (
     validate_gemma_feature_mapping,
     validate_gemma_text_mapping,
 )
+from lara_ltx.runtime.memory import physical_memory_bytes, validate_generation_resources
 from lara_ltx.sampling import (
     AudioLatentLayout,
     GaussianNoiser,
@@ -228,6 +229,13 @@ class LTXPipeline:
         """Resolve a local directory or an authenticated Hugging Face snapshot."""
 
         profile = load_pipeline_profile(profile_path)
+        validate_generation_resources(
+            height=profile.resource_policy.recommended_height,
+            width=profile.resource_policy.recommended_width,
+            num_frames=profile.resource_policy.recommended_num_frames,
+            policy=profile.resource_policy,
+            detected_unified_memory_bytes=physical_memory_bytes(),
+        )
         candidate = Path(model).expanduser()
         cache_value = cache_dir or os.getenv(profile.download.cache_environment_variable)
         token_value = token or os.getenv(profile.download.token_environment_variable)
@@ -376,6 +384,13 @@ class LTXPipeline:
             frame_rate=frame_rate,
             num_inference_steps=num_inference_steps,
             negative_prompt=negative_prompt,
+        )
+        validate_generation_resources(
+            height=generation.height,
+            width=generation.width,
+            num_frames=generation.num_frames,
+            policy=self.profile.resource_policy,
+            detected_unified_memory_bytes=physical_memory_bytes(),
         )
         contexts = _load_text_contexts(
             self.checkpoints.text_encoder,

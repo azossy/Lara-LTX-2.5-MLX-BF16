@@ -15,7 +15,9 @@ The initial workflow is deliberately small:
 
 Import `examples/text_to_video_api.json` through ComfyUI's API workflow path,
 or connect the same three nodes in the UI. Adjust the model ID to a local model
-directory and enable `local_files_only` when running offline.
+directory and enable `local_files_only` when running offline. The adapter and
+example default to the measured 512x320/17-frame grid; larger values remain
+editable but are subject to the core profile's preflight policy.
 
 Set `LARA_LOCALE=ko` before starting ComfyUI for Korean node names and errors.
 The save node confines generated MP4 files to ComfyUI's configured output
