@@ -86,4 +86,25 @@
   "LARA-TENSOR-028": "Transformer block {block_index}에 활성화된 video/audio stream이 없습니다. Denoising 전에 올바른 modality를 하나 이상 활성화하세요.",
   "LARA-TENSOR-029": "통합 transformer denoiser 입력이 올바르지 않습니다({reason}). 활성 modality, 고정 conditioning, patchify된 latent, token mask, 유한 sigma와 설정된 block 수를 확인하세요.",
   "LARA-TENSOR-030": "Diffusion latent 레이아웃 또는 stage 전환이 올바르지 않습니다({reason}). Video/audio latent 크기, patch 크기, 시간 메타데이터, noise scale과 x2 stage 크기를 확인하세요."
+  ,"LARA-PIPELINE-001": "로컬 파이프라인 퍼로필이 올바르지 않습니다({reason}). 배포된 TOML 퍼로필을 복원하거나 선택한 퍼로필을 수정하세요.",
+  "LARA-PIPELINE-002": "모델 snapshot 또는 필수 BF16 파일 {path}을(를) 사용할 수 없습니다. 로컬 디렉터리 또는 Hugging Face 접근을 확인한 뒤 다시 시도하세요.",
+  "LARA-PIPELINE-003": "생성 요청이 올바르지 않습니다({reason}). 프롬프트, 64의 배수 크기, 8*k+1 프레임, 2단계 이상의 HQ step을 지정하세요."
+  ,"LARA-CLI-001": "CLI 요청이 올바르지 않습니다({reason}). 명령과 옵션을 확인한 뒤 다시 시도하세요.",
+  "cli.description": "MLX/Metal로 LTX-2.5 BF16 영상을 로컬에서 생성합니다.",
+  "cli.generate.help": "동기화된 영상과 오디오로 MP4 하나룰 생성합니다.",
+  "cli.model.help": "로컬 모델 디렉터리 또는 Hugging Face 저장소 ID.",
+  "cli.prompt.help": "긍정 텍스트 프롬프트.",
+  "cli.negative_prompt.help": "선택할 수 있는 부정 프롬프트.",
+  "cli.seed.help": "결과를 재현할 seed.",
+  "cli.height.help": "64의 배수인 출력 노피.",
+  "cli.width.help": "64의 배수인 출력 너비.",
+  "cli.num_frames.help": "8*k+1 격자의 출력 프레임 수.",
+  "cli.frame_rate.help": "초당 출력 프레임 수.",
+  "cli.steps.help": "1단계 HQ 추론 단계(2 이상).",
+  "cli.profile.help": "선택할 수 있는 파이프라인 TOML 퍼로필.",
+  "cli.cache_dir.help": "선택할 수 있는 Hugging Face 캐시 디렉터리.",
+  "cli.local_only.help": "이미 다운로드된 모델 파일만 사용합니다.",
+  "cli.output.help": "출력 .mp4 경로.",
+  "cli.generate.saved": "생성한 미디어를 {path}에 저장했습니다.",
+  "cli.interrupted": "생성이 중단되었습니다. 미완료 출력물은 게시되되이지 않았습니다."
 }

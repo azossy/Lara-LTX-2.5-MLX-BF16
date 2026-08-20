@@ -91,3 +91,7 @@
 | LARA-TENSOR-028 | `LARA-TENSOR-028` | A transformer block received no active modality | Enable a valid video and/or audio stream before denoising | `lara_ltx.transformer.runtime` |
 | LARA-TENSOR-029 | `LARA-TENSOR-029` | Integrated transformer denoiser input or block count is invalid | Verify modality conditioning, patchified latents, token masks, finite sigma, and configured block count | `lara_ltx.transformer.denoiser` |
 | LARA-TENSOR-030 | `LARA-TENSOR-030` | Diffusion latent layout, Gaussian noising, or HQ stage transition is invalid | Verify latent dimensions, patch/timing configuration, noise scale, and x2 stage shape | `lara_ltx.sampling.latent` |
+| LARA-PIPELINE-001 | `LARA-PIPELINE-001` | Packaged or selected pipeline TOML profile is invalid | Restore the packaged profile or correct every required typed setting | `lara_ltx.pipeline.configuration` |
+| LARA-PIPELINE-002 | `LARA-PIPELINE-002` | Model snapshot resolution/download failed or a required BF16 file is absent | Verify the local model root or Hugging Face gate/token/revision | `lara_ltx.pipeline.api` |
+| LARA-PIPELINE-003 | `LARA-PIPELINE-003` | Prompt or generation grid is unsupported | Provide a prompt, 64-aligned dimensions, an `8*k+1` frame count and at least two HQ steps | `lara_ltx.pipeline.api` |
+| LARA-CLI-001 | `LARA-CLI-001` | CLI command dispatch is unsupported | Use the documented `generate` command and options | `lara_ltx.cli` |

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "component": "installed_cli_determinism",
+  "configuration": {
+    "frame_rate": 24.0,
+    "height": 320,
+    "model": "models/LTX-2.5",
+    "num_frames": 17,
+    "prompt": "A cinematic ocean wave at sunrise.",
+    "seed": 25081900,
+    "stage_one_steps": 2,
+    "stage_two_steps": 3,
+    "width": 512
+  },
+  "first_run": {
+    "interface": "python_api",
+    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
+    "total_seconds": 66.0664016250521
+  },
+  "second_run": {
+    "interface": "installed_cli",
+    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
+    "maximum_resident_set_bytes": 27770994688,
+    "os_peak_memory_footprint_bytes": 44891198696,
+    "total_seconds": 56.31
+  },
+  "ffprobe": {
+    "audio_channels": 2,
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "duration_seconds": 0.708333,
+    "frame_rate": "24/1",
+    "video_codec": "h264",
+    "video_frames": 17
+  },
+  "byte_identical": true,
+  "passed": true
+}

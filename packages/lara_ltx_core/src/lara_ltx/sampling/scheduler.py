@@ -34,6 +34,7 @@ class LTX2Scheduler:
             not isinstance(steps, int)
             or isinstance(steps, bool)
             or steps <= 0
+            or (stretch and steps < 2)
             or not isinstance(token_count, int)
             or isinstance(token_count, bool)
             or token_count <= 0

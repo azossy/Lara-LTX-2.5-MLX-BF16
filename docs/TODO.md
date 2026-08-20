@@ -224,8 +224,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       generation lifecycle. The runtime materializes only final latents,
       releases transformer ownership, clears the lifecycle cache boundary and
       only then constructs Video VAE/Audio VAE/vocoder decoding.
-- [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
-- [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
+- [x] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
+      The public API generates finite `[1,3,17,320,512]` video and
+      `[1,2,33120]` audio, then saves a verified H.264/AAC artifact in 66.1
+      seconds at a 40,749,188,406-byte peak.
+- [x] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.
 
 ## P4 — Tensor and stage parity
@@ -252,14 +255,16 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P7 — Python API
 
-- [ ] Stabilize `LTXPipeline.from_pretrained` and generation arguments.
-- [ ] Provide an in-process media result with `save()`.
-- [ ] Verify no PyTorch, CUDA, daemon or network server is required on Mac.
+- [x] Stabilize `LTXPipeline.from_pretrained` and generation arguments.
+- [x] Provide an in-process media result with `save()`.
+- [x] Verify no PyTorch, CUDA, daemon or network server is required on Mac.
 
 ## P8 — CLI
 
-- [ ] Implement `lara-ltx generate` strictly as a Python API wrapper.
-- [ ] Verify clean installation, helpful localized failures and video output.
+- [x] Implement `lara-ltx generate` strictly as a Python API wrapper.
+- [x] Verify clean installation, helpful localized failures and video output.
+      The installed entry point produces a valid MP4 and its fixed-seed output
+      is byte-identical to the Python API artifact.
 
 ## P9 — Optional ComfyUI adapter
 

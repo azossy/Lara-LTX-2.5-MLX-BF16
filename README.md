@@ -17,11 +17,17 @@ Full precision. No quantization. Original quality first.
 
 ## Development status
 
-P0 CUDA golden-reference work, P1 bounded BF16 checkpoint loading and P2 core
-inference are complete. P3 now runs the real 48-block two-stage latent pipeline
-on MLX, including guidance, in-place stage LoRA transition and checkpoint x2
-upscaling. Diffusion video decode integration and synchronized media muxing
-remain, so no playable MLX model output or end-to-end parity is claimed yet.
+The direct Python pipeline now runs the complete prompt-to-MP4 lifecycle with
+the official seven-file BF16 pack: packed Gemma 4 conditioning, 48 resident AV
+transformer blocks, HQ two-stage res_2s sampling, x2 latent refinement,
+Diffusion Video VAE, Audio VAE/vocoder/BWE and H.264/AAC muxing. The fixed
+320x512/17-frame public-API smoke passes on M5 Max with a measured
+40,749,188,406-byte MLX peak and 66.1-second total runtime.
+
+This is an engineering preview, not yet a final CUDA-quality-parity release.
+The multi-prompt quality corpus, blind review and canonical 1920x1088/121-frame
+performance gate remain open; published quality claims stay limited to the
+checked-in component and boundary evidence.
 
 This is not a serving-engine project. The deliverable is one direct Python MLX
 pipeline, followed only after core parity by a thin CLI and optional thin
@@ -30,9 +36,16 @@ PyTorch/MPS ComfyUI port are explicitly out of scope.
 
 ## Quick Start
 
-The commands below define the target release experience. They are not yet a
-working release contract while P3–P6 parity work is in progress. The P0 CUDA
-fixed-seed reference, boundary trace and media validation are complete.
+Requirements: Apple Silicon, macOS, Python 3.12, enough unified memory for the
+BF16 workload, `ffmpeg`, and accepted access to `Lightricks/LTX-2.5` on Hugging
+Face. The primary tested machine is M5 Max 128 GB.
+
+```bash
+git clone https://github.com/LaraAI/Lara-LTX-2.5-MLX-BF16.git
+cd Lara-LTX-2.5-MLX-BF16
+uv sync
+export HF_TOKEN="your_read_token"
+```
 
 ### Python
 
@@ -44,6 +57,12 @@ video = pipe(prompt="A cinematic aerial shot of Seoul at night.", seed=42)
 video.save("output.mp4")
 ```
 
+For the already downloaded official pack, pass its directory instead:
+
+```python
+pipe = LTXPipeline.from_pretrained("/path/to/LTX-2.5")
+```
+
 ### CLI
 
 ```bash
@@ -52,6 +71,11 @@ lara-ltx generate \
   --prompt "A cinematic aerial shot of Seoul at night" \
   --output output.mp4
 ```
+
+Generation dimensions, seed, frame rate, frame count, steps, cache directory
+and a custom TOML profile are optional CLI overrides. Run `lara-ltx generate
+--help` for the complete interface. Dimensions must be divisible by 64 and the
+frame count must follow `8*k+1`.
 
 ### ComfyUI
 
@@ -68,13 +92,17 @@ testing.
 
 ## Benchmarks
 
-Peak memory, model-load time, generation time and Metal utilization are pending
-P6 measurement. No estimated performance figures are claimed.
+| Workload | Steps | Result | MLX peak | Total time |
+|---|---:|---|---:|---:|
+| Public API smoke, 320x512, 17 frames, synchronized audio | Stage 1: 2; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,188,406 B | 66.1 s |
+
+Artifact: `golden/mlx_public_pipeline_smoke_report.json`. This reduced workload
+validates the lifecycle and is not an estimate for the canonical HQ workload.
 
 ## CUDA vs MLX quality comparison
 
-Checkpoint-backed component and two-stage latent results are recorded; complete
-decoded-output quality results remain pending P3, P4 and P5.
+Checkpoint-backed component, two-stage latent, decode and public MP4 results are
+recorded. Multi-prompt perceptual comparison and blind review remain pending P5.
 Plausible-looking output alone will not be reported as parity.
 
 ## Canonical references

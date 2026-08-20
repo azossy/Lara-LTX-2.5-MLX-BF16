@@ -18,7 +18,7 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
       and vocoder execute with MLX/Metal.
 - [ ] End-to-end local video and synchronized-audio generation succeeds.
 - [ ] Unsupported operations fail explicitly instead of silently degrading.
-- [ ] Deterministic-seed behavior is documented and tested.
+- [x] Deterministic-seed behavior is documented and tested.
 - [ ] Canonical HQ text-to-video and synchronized audio pass before optional
       image conditioning is exposed.
 - [ ] Normal generation does not depend on per-layer disk swapping.
@@ -49,8 +49,8 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
 
 ## Official user interfaces
 
-- [ ] Python `from_pretrained`, generation and `save()` work without a server.
-- [ ] The CLI produces the same result through the same pipeline.
+- [x] Python `from_pretrained`, generation and `save()` work without a server.
+- [x] The CLI produces the same result through the same pipeline.
 - [ ] ComfyUI is documented as optional, not a core dependency.
 - [ ] Thin ComfyUI loader, text-to-video and decode/output workflows pass.
 - [ ] Image-to-video is exposed only if the core conditioning path passes parity.

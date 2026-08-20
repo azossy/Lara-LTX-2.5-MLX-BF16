@@ -13,8 +13,13 @@ dependencies = [
   "mlx-lm==0.31.3; sys_platform == 'darwin' and platform_machine == 'arm64'",
   "numpy>=2,<3",
   "safetensors>=0.6,<1",
+  "tokenizers>=0.22,<1",
+  "transformers>=5.15,<6",
   "mlx==0.32.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
 ]
+
+[project.scripts]
+lara-ltx = "lara_ltx.cli:main"
 
 [project.optional-dependencies]
 dev = [

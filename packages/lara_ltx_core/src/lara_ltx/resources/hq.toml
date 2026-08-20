@@ -1,0 +1,80 @@
+[profile]
+schema_version = 1
+name = "ltx-2.5-hq-bf16"
+
+[model]
+repository_id = "Lightricks/LTX-2.5"
+revision = "6c7e5e573ac1667efc83407806fe9b0b93730e60"
+transformer = "diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors"
+text_encoder = "text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors"
+video_vae = "vae/ltx-2.5-video-vae-bf16.safetensors"
+audio_vae = "vae/ltx-2.5-audio-vae-bf16.safetensors"
+spatial_upscaler = "latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors"
+distilled_lora = "loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors"
+
+[generation]
+negative_prompt = "worst quality, inconsistent motion, blurry, jittery, distorted"
+seed = 10
+height = 1088
+width = 1920
+num_frames = 121
+frame_rate = 24.0
+text_max_length = 1024
+num_inference_steps = 15
+block_count = 48
+video_latent_channels = 128
+audio_latent_channels = 8
+audio_mel_bins = 16
+audio_model_sample_rate = 16000
+audio_hop_length = 160
+audio_latent_downsample_factor = 4
+stage_one_lora_strength = 0.25
+stage_two_lora_strength = 0.5
+stage_two_sigmas = [0.909375, 0.725, 0.421875, 0.0]
+
+[generation.scheduler]
+max_shift = 2.05
+base_shift = 0.95
+stretch = true
+terminal = 0.1
+
+[generation.sampler]
+eta = 0.5
+bongmath = false
+bongmath_max_iterations = 0
+substep_seed_offset = 10000
+
+[generation.video_guidance]
+cfg_scale = 3.0
+stg_scale = 0.0
+stg_blocks = []
+rescale_scale = 0.45
+modality_scale = 3.0
+skip_step = 0
+
+[generation.audio_guidance]
+cfg_scale = 7.0
+stg_scale = 0.0
+stg_blocks = []
+rescale_scale = 1.0
+modality_scale = 3.0
+skip_step = 0
+
+[decode]
+video_noise_seed_offset = 0
+video_timesteps = [1.0]
+video_activation_budget_bytes = 8589934592
+
+[media]
+audio_sample_rate = 48000
+video_codec = "libx264"
+audio_codec = "aac"
+pixel_format = "yuv420p"
+audio_bitrate = "192k"
+crf = 18
+timeout_seconds = 300
+ffmpeg_binary = "ffmpeg"
+
+[download]
+cache_environment_variable = "HF_HOME"
+token_environment_variable = "HF_TOKEN"

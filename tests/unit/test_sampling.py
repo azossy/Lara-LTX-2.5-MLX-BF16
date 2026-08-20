@@ -3,6 +3,7 @@ from pathlib import Path
 import mlx.core as mx
 import numpy as np
 import pytest
+from lara_ltx.errors import LaraError
 from lara_ltx.sampling import (
     BatchedPerturbationConfig,
     LTX2Scheduler,
@@ -30,6 +31,11 @@ def test_ltx2_scheduler_matches_cuda_hq_stage_1_schedule() -> None:
     actual = LTX2Scheduler().execute(steps=15, token_count=120)
 
     np.testing.assert_allclose(np.asarray(actual), expected, atol=2e-7, rtol=0.0)
+
+
+def test_ltx2_scheduler_rejects_one_step_stretched_schedule() -> None:
+    with pytest.raises(LaraError, match="LARA-SAMPLING-001"):
+        LTX2Scheduler().execute(steps=1)
 
 
 def test_multimodal_guider_combines_cfg_stg_and_isolation() -> None:

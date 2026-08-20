@@ -1,0 +1,39 @@
+{
+  "component": "public_prompt_to_mp4_pipeline",
+  "configuration": {
+    "frame_rate": 24.0,
+    "height": 320,
+    "model": "models/LTX-2.5",
+    "negative_prompt": null,
+    "num_frames": 17,
+    "prompt": "A cinematic ocean wave at sunrise.",
+    "seed": 25081900,
+    "steps": 2,
+    "width": 512
+  },
+  "outputs": {
+    "audio_shape": [
+      1,
+      2,
+      33120
+    ],
+    "media_path": "/Users/chally/Desktop/MyProject/LTX2.5 \u110b\u1167\u11bc\u1109\u1161\u11bc\u110c\u1166\u110c\u1161\u11a8/golden/mlx_public_pipeline_smoke.mp4",
+    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
+    "media_size_bytes": 70985,
+    "video_shape": [
+      1,
+      3,
+      17,
+      320,
+      512
+    ]
+  },
+  "passed": true,
+  "peak_bytes": 40749188406,
+  "schema_version": 1,
+  "timing_seconds": {
+    "generate": 65.8090005419217,
+    "resolve": 0.00043183285742998123,
+    "total": 66.0664016250521
+  }
+}

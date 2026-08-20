@@ -239,3 +239,23 @@ bit-exact. Peak memory is 1,733,445,048 bytes.
   Gemma 4 conditioning, high-token two-stage transformer lifecycle, spatial x2
   upscaling and local media output are executable; Gemma's CUDA-versus-MLX
   hidden-state report remains evidence work.
+
+## Public prompt-to-MP4 lifecycle
+
+Artifact: `golden/mlx_public_pipeline_smoke_report.json`
+
+The stable public `LTXPipeline.from_pretrained()` path now derives latent
+layouts from user dimensions, runs packed Gemma positive/negative conditioning,
+loads all 48 resident BF16 transformer blocks, performs configured Stage 1 and
+the official three-step Stage 2 refinement, releases sampling state, decodes
+video and synchronized audio sequentially, and atomically saves MP4. The fixed
+320x512/17-frame, Stage-1-two-step smoke returns 17 finite RGB frames and 33,120
+stereo samples. ffprobe verifies H.264 at 24 fps and AAC at 48 kHz; total time
+is 66.1 seconds and MLX peak memory is 40,749,188,406 bytes. This proves the
+user lifecycle, not canonical-resolution latency or multi-prompt quality parity.
+
+The installed `lara-ltx generate` entry point repeated the same request in
+56.31 seconds with a 44,891,198,696-byte macOS peak memory footprint. Its final
+MP4 SHA-256 is byte-identical to the Python API result, providing a complete
+fixed-seed determinism check across both public interfaces. Evidence is in
+`golden/mlx_cli_determinism_report.json`.

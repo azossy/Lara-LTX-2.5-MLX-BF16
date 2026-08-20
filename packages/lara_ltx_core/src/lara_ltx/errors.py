@@ -20,13 +20,20 @@ def _catalog(locale: str) -> dict[str, str]:
         return json.load(handle)
 
 
+def localize(key: str, *, details: dict[str, Any] | None = None, locale: str | None = None) -> str:
+    """Render a UI message through the same extensible locale catalogs as errors."""
+
+    selected_locale = locale or os.getenv(LOCALE_ENVIRONMENT_VARIABLE, DEFAULT_LOCALE)
+    message = _catalog(selected_locale).get(key, _catalog(DEFAULT_LOCALE).get(key, key))
+    return message.format(**(details or {}))
+
+
 class LaraError(RuntimeError):
     """Error carrying a stable code and localized recovery guidance."""
 
     def __init__(self, code: str, *, details: dict[str, Any] | None = None, locale: str | None = None) -> None:
         selected_locale = locale or os.getenv(LOCALE_ENVIRONMENT_VARIABLE, DEFAULT_LOCALE)
-        message = _catalog(selected_locale).get(code, _catalog(DEFAULT_LOCALE)["LARA-GENERAL-001"])
         self.code = code
         self.details = details or {}
-        rendered = message.format(**self.details)
+        rendered = localize(code, details=self.details, locale=selected_locale)
         super().__init__(f"[{code}] {rendered}")
