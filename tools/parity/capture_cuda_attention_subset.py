@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay exact block-0 inputs on a compact official CUDA checkpoint subset."""
+"""Replay one block's exact inputs on a compact official CUDA checkpoint subset."""
 
 from __future__ import annotations
 
@@ -12,7 +12,12 @@ from typing import Any
 
 import numpy as np
 import torch
-from cuda_attention_internals import AttentionInternalsRecorder, TensorCapture
+from cuda_attention_internals import (
+    AttentionInternalsRecorder,
+    TensorCapture,
+    deduplicate_capture,
+    write_artifact_shards,
+)
 from ltx_core.guidance.perturbations import (
     BatchedPerturbationConfig,
     Perturbation,
@@ -307,59 +312,6 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _deduplicate_capture(capture: TensorCapture) -> tuple[dict[str, np.ndarray], dict[str, str]]:
-    unique: dict[str, np.ndarray] = {}
-    aliases: dict[str, str] = {}
-    canonical_by_identity: dict[tuple[str, tuple[int, ...], str], str] = {}
-    for name, array in capture.arrays.items():
-        metadata = capture.metadata[name]
-        identity = (str(metadata["sha256"]), tuple(array.shape), str(array.dtype))
-        canonical = canonical_by_identity.get(identity)
-        if canonical is None:
-            canonical_by_identity[identity] = name
-            unique[name] = array
-        else:
-            aliases[name] = canonical
-    return unique, aliases
-
-
-def _artifact_shards(
-    path: Path,
-    arrays: dict[str, np.ndarray],
-    *,
-    maximum_bytes: int,
-) -> list[Path]:
-    if maximum_bytes <= 0:
-        raise ValueError("invalid_maximum_artifact_shard_bytes")
-    groups: list[dict[str, np.ndarray]] = []
-    current: dict[str, np.ndarray] = {}
-    current_bytes = 0
-    for name, array in arrays.items():
-        if array.nbytes > maximum_bytes:
-            raise ValueError(f"attention_tensor_exceeds_shard_limit:{name}")
-        if current and current_bytes + array.nbytes > maximum_bytes:
-            groups.append(current)
-            current = {}
-            current_bytes = 0
-        current[name] = array
-        current_bytes += array.nbytes
-    if current:
-        groups.append(current)
-    shards: list[Path] = []
-    for index, group in enumerate(groups):
-        shard = path.with_name(f"{path.stem}.part-{index:02d}{path.suffix}")
-        temporary = shard.with_suffix(f"{shard.suffix}.tmp")
-        with temporary.open("wb") as handle:
-            np.savez_compressed(handle, **group)
-        temporary.replace(shard)
-        shards.append(shard)
-    retained = set(shards)
-    for stale_shard in path.parent.glob(f"{path.stem}.part-*{path.suffix}"):
-        if stale_shard not in retained:
-            stale_shard.unlink()
-    return shards
-
-
 def _fail(code: str, cause: str, action: str) -> int:
     print(json.dumps({"ok": False, "error_code": code, "cause": cause, "action": action}))
     return 2
@@ -475,8 +427,8 @@ def main() -> int:
         )
     passed = all(comparison["passed"] for comparison in comparisons)
     arguments.artifact.parent.mkdir(parents=True, exist_ok=True)
-    unique_arrays, aliases = _deduplicate_capture(capture)
-    artifact_shards = _artifact_shards(
+    unique_arrays, aliases = deduplicate_capture(capture)
+    artifact_shards = write_artifact_shards(
         arguments.artifact,
         unique_arrays,
         maximum_bytes=maximum_artifact_shard_bytes,

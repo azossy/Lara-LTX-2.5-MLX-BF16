@@ -1,0 +1,83 @@
+{
+  "backend_identity_disclosed": false,
+  "component": "blind_audiovisual_review_kit",
+  "corpus": {
+    "name": "lara-ltx-bf16-quality-v1",
+    "sha256": "320bb55f485d98ce9e4d1de975207c02401353fde72b63fe492c3875cdfdfbe5"
+  },
+  "instructions": "\ud30c\uc77c \uba54\ud0c0\ub370\uc774\ud130\ub098 \ube44\uacf5\uac1c \uc815\ub2f5\ud45c\ub97c \ubcf4\uc9c0 \ub9d0\uace0 \ud6c4\ubcf4 A\uc640 B\ub97c \ud3c9\uac00\ud558\uc138\uc694. \ub2e4\uc74c \ud56d\ubaa9\uc73c\ub85c \ub118\uc5b4\uac00\uae30 \uc804\uc5d0 \uc124\uc815\ub41c \ubaa8\ub4e0 \ud3c9\uac00 \ud56d\ubaa9\uacfc \uad00\ucc30 \uadfc\uac70\ub97c \uae30\ub85d\ud558\uc138\uc694.",
+  "items": [
+    {
+      "candidates": {
+        "A": "media/item_01_A.mp4",
+        "B": "media/item_01_B.mp4"
+      },
+      "item_id": "item_01",
+      "prompt": "A cinematic aerial view of Seoul at night, slow forward camera movement, realistic city lights, distant traffic and natural urban ambience.",
+      "review_focus": [
+        "fine_detail",
+        "temporal_motion"
+      ]
+    },
+    {
+      "candidates": {
+        "A": "media/item_02_A.mp4",
+        "B": "media/item_02_B.mp4"
+      },
+      "item_id": "item_02",
+      "prompt": "Portrait close-up of a barista in a quiet cafe looking at the camera and saying, Welcome in, while steam rises naturally from a cup, realistic skin and synchronized speech.",
+      "review_focus": [
+        "audio_sync",
+        "human_motion"
+      ]
+    },
+    {
+      "candidates": {
+        "A": "media/item_03_A.mp4",
+        "B": "media/item_03_B.mp4"
+      },
+      "item_id": "item_03",
+      "prompt": "A red fox runs across a sunlit forest clearing as the camera tracks sideways, detailed fur, physically plausible legs, moving leaves and natural woodland sound.",
+      "review_focus": [
+        "fine_detail",
+        "temporal_motion"
+      ]
+    },
+    {
+      "candidates": {
+        "A": "media/item_04_A.mp4",
+        "B": "media/item_04_B.mp4"
+      },
+      "item_id": "item_04",
+      "prompt": "Wide documentary shot of ocean waves rolling onto black volcanic sand at sunrise, stable horizon, realistic foam dynamics, soft wind and synchronized surf audio.",
+      "review_focus": [
+        "audio_sync",
+        "temporal_motion"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "submission_schema": {
+    "allowed_choices": [
+      "A",
+      "B",
+      "tie",
+      "unrateable"
+    ],
+    "rating_dimensions": [
+      "prompt_adherence",
+      "fine_detail",
+      "temporal_consistency",
+      "motion_quality",
+      "audio_quality",
+      "audio_sync",
+      "overall_preference"
+    ],
+    "required_fields": [
+      "reviewer_id",
+      "item_id",
+      "ratings",
+      "notes"
+    ]
+  }
+}

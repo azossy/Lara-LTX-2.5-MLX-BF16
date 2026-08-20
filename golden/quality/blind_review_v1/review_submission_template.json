@@ -1,0 +1,59 @@
+{
+  "component": "blind_audiovisual_review_submission",
+  "reviewer_id": "",
+  "reviews": [
+    {
+      "item_id": "item_01",
+      "notes": "",
+      "ratings": {
+        "audio_quality": "",
+        "audio_sync": "",
+        "fine_detail": "",
+        "motion_quality": "",
+        "overall_preference": "",
+        "prompt_adherence": "",
+        "temporal_consistency": ""
+      }
+    },
+    {
+      "item_id": "item_02",
+      "notes": "",
+      "ratings": {
+        "audio_quality": "",
+        "audio_sync": "",
+        "fine_detail": "",
+        "motion_quality": "",
+        "overall_preference": "",
+        "prompt_adherence": "",
+        "temporal_consistency": ""
+      }
+    },
+    {
+      "item_id": "item_03",
+      "notes": "",
+      "ratings": {
+        "audio_quality": "",
+        "audio_sync": "",
+        "fine_detail": "",
+        "motion_quality": "",
+        "overall_preference": "",
+        "prompt_adherence": "",
+        "temporal_consistency": ""
+      }
+    },
+    {
+      "item_id": "item_04",
+      "notes": "",
+      "ratings": {
+        "audio_quality": "",
+        "audio_sync": "",
+        "fine_detail": "",
+        "motion_quality": "",
+        "overall_preference": "",
+        "prompt_adherence": "",
+        "temporal_consistency": ""
+      }
+    }
+  ],
+  "schema_version": 1
+}

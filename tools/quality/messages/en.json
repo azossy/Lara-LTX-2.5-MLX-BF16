@@ -2,5 +2,8 @@
   "invalid_corpus": "The quality corpus is invalid ({reason}). Restore the versioned corpus manifest and retry.",
   "generation_failed": "The MLX quality case {case_id} failed. Verify the model pack, available memory and output directory, then retry.",
   "completed": "Completed {count} MLX quality cases. Report: {report}",
-  "comparison_failed": "Quality-corpus comparison failed ({case_id}). Verify every CUDA/MLX media pair, FFmpeg/FFprobe and the report directory, then retry."
+  "comparison_failed": "Quality-corpus comparison failed ({case_id}). Verify every CUDA/MLX media pair, FFmpeg/FFprobe and the report directory, then retry.",
+  "blind_review_instructions": "Review candidate A and B without inspecting file metadata or the private key. Rate every configured dimension, then record concise observable notes before moving to the next item.",
+  "blind_review_failed": "Blind-review kit creation failed. Verify the configuration, corpus and both complete media directories, then retry.",
+  "blind_review_completed": "Created a backend-anonymized blind-review kit with {count} items: {output}"
 }

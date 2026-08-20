@@ -63,8 +63,9 @@ class FakeChild:
         return value
 
 
-class FakeAttention:
+class FakeAttention(FakeChild):
     def __init__(self) -> None:
+        super().__init__()
         for name in ("to_q", "to_k", "to_v", "q_norm", "k_norm", "to_gate_logits"):
             setattr(self, name, FakeChild())
         self.to_out = [FakeChild()]
@@ -72,6 +73,22 @@ class FakeAttention:
         self.attention_function = lambda *_args, **_kwargs: FakeTensor(7.0)
         self.masked_attention_function = lambda *_args, **_kwargs: FakeTensor(8.0)
         self.gated_attention_function = lambda *_args, **_kwargs: FakeTensor(9.0)
+
+
+class FakeBlock(FakeChild):
+    def __init__(self) -> None:
+        super().__init__()
+        for name in (
+            "attn1",
+            "attn2",
+            "audio_attn1",
+            "audio_attn2",
+            "audio_to_video_attn",
+            "video_to_audio_attn",
+        ):
+            setattr(self, name, FakeAttention())
+        self.ff = FakeChild()
+        self.audio_ff = FakeChild()
 
 
 def _install_stub(monkeypatch: Any, name: str, **attributes: Any) -> None:
@@ -169,3 +186,66 @@ def test_attention_internals_recorder_tracks_passes_and_restores_callables(monke
     assert all(not getattr(attention, name).forward_hooks for name in recorder._CHILD_BOUNDARIES)
     assert not attention.to_out[0].forward_hooks
     assert not attention.to_out[0].pre_hooks
+
+
+def test_deep_recorder_captures_every_selected_block(monkeypatch: Any) -> None:
+    tool = _tool(monkeypatch)
+    capture = tool.TensorCapture()
+    blocks = [FakeBlock() for _ in range(40)]
+    transformer = types.SimpleNamespace(
+        velocity_model=types.SimpleNamespace(transformer_blocks=blocks),
+    )
+    recorder = tool.DeepTransformerRecorder(capture, "stage_1", (31, 39))
+    recorder.install(transformer)
+
+    assert len(recorder._attention_recorders) == 12
+    for block_index in (31, 39):
+        block = blocks[block_index]
+        block.attn1.emit(FakeTensor(float(block_index)))
+        video = types.SimpleNamespace(
+            x=FakeTensor(float(block_index)),
+            context=None,
+            timesteps=None,
+            embedded_timestep=None,
+            prompt_timestep=None,
+            cross_scale_shift_timestep=None,
+            cross_gate_timestep=None,
+            context_mask=None,
+            self_attention_mask=None,
+            self_attn_perturbation_mask=None,
+            cross_attn_perturbation_mask=None,
+            positional_embeddings=None,
+            cross_positional_embeddings=None,
+            enabled=True,
+            self_attn_all_perturbed=False,
+            cross_attn_skip_all=False,
+        )
+        audio = types.SimpleNamespace(**video.__dict__)
+        for hook in block.forward_hooks:
+            hook(block, (video, audio), {}, (video, audio))
+
+    for block_index in (31, 39):
+        prefix = f"stage_1_deep_block_{block_index:02d}_pass_00"
+        assert f"{prefix}_internal_attn1_input" in capture.arrays
+        assert f"{prefix}_video_input_x" in capture.arrays
+        assert f"{prefix}_audio_input_x" in capture.arrays
+        assert f"{prefix}_video_output" in capture.arrays
+        assert f"{prefix}_audio_output" in capture.arrays
+
+    recorder.remove()
+    assert all(not block.forward_hooks for block in blocks)
+
+
+def test_capture_deduplication_and_bounded_shards(monkeypatch: Any, tmp_path: Path) -> None:
+    tool = _tool(monkeypatch)
+    capture = tool.TensorCapture()
+    capture.add("first", FakeTensor(1.0))
+    capture.add("first_alias", FakeTensor(1.0))
+    capture.add("second", FakeTensor(2.0))
+
+    unique, aliases = tool.deduplicate_capture(capture)
+    shards = tool.write_artifact_shards(tmp_path / "capture.npz", unique, maximum_bytes=4)
+
+    assert aliases == {"first_alias": "first"}
+    assert [path.name for path in shards] == ["capture.part-00.npz", "capture.part-01.npz"]
+    assert all(path.is_file() for path in shards)

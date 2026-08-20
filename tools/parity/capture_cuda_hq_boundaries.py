@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from collections.abc import Callable, Iterator, Sequence
 from datetime import UTC, datetime
@@ -12,7 +13,13 @@ from typing import Any
 
 import numpy as np
 import torch
-from cuda_attention_internals import AttentionInternalsRecorder, TensorCapture, sha256_bytes
+from cuda_attention_internals import (
+    AttentionInternalsRecorder,
+    TensorCapture,
+    deduplicate_capture,
+    sha256_bytes,
+    write_artifact_shards,
+)
 from ltx_core.components.guiders import MultiModalGuiderParams
 from ltx_core.model.video_vae import AUTO_TILING, get_video_chunks_number
 from ltx_pipelines.ti2vid_two_stages_hq import TI2VidTwoStagesHQPipeline
@@ -24,10 +31,19 @@ from ltx_pipelines.utils.samplers import _get_new_noise
 ARTIFACT_SCHEMA_VERSION = 6
 HASH_BLOCK_BYTES = 1024 * 1024
 MAX_RECORDED_NOISER_CALLS_PER_STAGE = 2
+FILE_HASH_BUFFER_BYTES = 8 * 1024 * 1024
 
 
 class DiagnosticCaptureCompleteError(RuntimeError):
     """Stop the pipeline after the requested diagnostic boundary is durable."""
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(FILE_HASH_BUFFER_BYTES), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 class CallRecorder:
@@ -67,7 +83,7 @@ class NoiserRecorder:
 
 
 class DeepTransformerRecorder:
-    """Capture selected block outputs from the first real transformer call."""
+    """Capture selected block inputs, outputs and internals from one transformer call."""
 
     def __init__(self, capture: TensorCapture, stage_name: str, block_indices: tuple[int, ...]) -> None:
         self._capture = capture
@@ -76,7 +92,7 @@ class DeepTransformerRecorder:
         self._handles: list[Any] = []
         self._attention_recorders: list[AttentionInternalsRecorder] = []
         self._block_call_counts = {index: 0 for index in block_indices}
-        self._internal_call_counts: dict[str, int] = {}
+        self._internal_call_counts: dict[tuple[int, str], int] = {}
 
     def _record_argument(self, prefix: str, argument: Any) -> None:
         if argument is None:
@@ -113,54 +129,56 @@ class DeepTransformerRecorder:
         block_count = len(blocks)
         if any(index < 0 or index >= block_count for index in self._block_indices):
             raise RuntimeError(f"Deep capture block index is outside [0, {block_count})")
-        first_index = min(self._block_indices)
-
-        first_block = blocks[first_index]
-        for module_name in (
-            "attn1",
-            "attn2",
-            "ff",
-            "audio_attn1",
-            "audio_attn2",
-            "audio_ff",
-            "audio_to_video_attn",
-            "video_to_audio_attn",
-        ):
-            module = getattr(first_block, module_name, None)
-            if module is None:
-                continue
-            self._internal_call_counts[module_name] = 0
-
-            def internal_hook(
-                _module: Any,
-                args: tuple[Any, ...],
-                kwargs: dict[str, Any],
-                output: Any,
-                *,
-                current_name: str = module_name,
-            ) -> None:
-                pass_index = self._internal_call_counts[current_name]
-                self._internal_call_counts[current_name] += 1
-                prefix = (
-                    f"{self._stage_name}_deep_block_{first_index:02d}_pass_{pass_index:02d}_internal_{current_name}"
-                )
-                primary_input = args[0] if args else kwargs.get("x")
-                self._capture.add(f"{prefix}_input", primary_input)
-                self._capture.add(f"{prefix}_output", output if isinstance(output, torch.Tensor) else None)
-
-            self._handles.append(module.register_forward_hook(internal_hook, with_kwargs=True))
-            if hasattr(module, "attention_function"):
-                recorder = AttentionInternalsRecorder(
-                    self._capture,
-                    self._stage_name,
-                    first_index,
-                    module_name,
-                    module,
-                )
-                recorder.install()
-                self._attention_recorders.append(recorder)
-
         for block_index in self._block_indices:
+            block = blocks[block_index]
+            for module_name in (
+                "attn1",
+                "attn2",
+                "ff",
+                "audio_attn1",
+                "audio_attn2",
+                "audio_ff",
+                "audio_to_video_attn",
+                "video_to_audio_attn",
+            ):
+                module = getattr(block, module_name, None)
+                if module is None:
+                    continue
+                counter_key = (block_index, module_name)
+                self._internal_call_counts[counter_key] = 0
+
+                def internal_hook(
+                    _module: Any,
+                    args: tuple[Any, ...],
+                    kwargs: dict[str, Any],
+                    output: Any,
+                    *,
+                    current_index: int = block_index,
+                    current_name: str = module_name,
+                    current_counter_key: tuple[int, str] = counter_key,
+                ) -> None:
+                    pass_index = self._internal_call_counts[current_counter_key]
+                    self._internal_call_counts[current_counter_key] += 1
+                    prefix = (
+                        f"{self._stage_name}_deep_block_{current_index:02d}_pass_{pass_index:02d}"
+                        f"_internal_{current_name}"
+                    )
+                    primary_input = args[0] if args else kwargs.get("x")
+                    self._capture.add(f"{prefix}_input", primary_input)
+                    self._capture.add(f"{prefix}_output", output if isinstance(output, torch.Tensor) else None)
+
+                self._handles.append(module.register_forward_hook(internal_hook, with_kwargs=True))
+                if hasattr(module, "attention_function"):
+                    recorder = AttentionInternalsRecorder(
+                        self._capture,
+                        self._stage_name,
+                        block_index,
+                        module_name,
+                        module,
+                    )
+                    recorder.install()
+                    self._attention_recorders.append(recorder)
+
             prefix = f"{self._stage_name}_deep_block_{block_index:02d}"
 
             def hook(
@@ -177,9 +195,8 @@ class DeepTransformerRecorder:
                 pass_prefix = f"{current_prefix}_pass_{pass_index:02d}"
                 video_input = kwargs.get("video", args[0] if args else None)
                 audio_input = kwargs.get("audio", args[1] if len(args) > 1 else None)
-                if current_index == first_index:
-                    self._record_argument(f"{pass_prefix}_video_input", video_input)
-                    self._record_argument(f"{pass_prefix}_audio_input", audio_input)
+                self._record_argument(f"{pass_prefix}_video_input", video_input)
+                self._record_argument(f"{pass_prefix}_audio_input", audio_input)
                 video_output, audio_output = output
                 self._capture.add(
                     f"{pass_prefix}_video_output",
@@ -430,6 +447,7 @@ def _parse_arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--trace-report", type=Path, required=True)
     parser.add_argument("--deep-block-indices", nargs="*", type=int, default=[])
     parser.add_argument("--diagnostic-first-call-only", action="store_true")
+    parser.add_argument("--maximum-artifact-shard-bytes", type=int)
     return parser.parse_args(argv)
 
 
@@ -524,11 +542,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             color_space=hdr,
         )
     arguments.artifact.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(arguments.artifact, **capture.arrays)
+    aliases: dict[str, str] = {}
+    artifact_shards: list[Path] = []
+    if arguments.maximum_artifact_shard_bytes is None:
+        np.savez_compressed(arguments.artifact, **capture.arrays)
+    else:
+        unique_arrays, aliases = deduplicate_capture(capture)
+        artifact_shards = write_artifact_shards(
+            arguments.artifact,
+            unique_arrays,
+            maximum_bytes=arguments.maximum_artifact_shard_bytes,
+        )
+    artifact_files = artifact_shards or [arguments.artifact]
     report = {
         "schema_version": ARTIFACT_SCHEMA_VERSION,
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "artifact": str(arguments.artifact),
+        "artifact_shards": [str(path) for path in artifact_shards],
+        "artifact_files": [
+            {
+                "file": str(path),
+                "size_bytes": path.stat().st_size,
+                "sha256": _sha256_file(path),
+            }
+            for path in artifact_files
+        ],
+        "tensor_aliases": aliases,
         "tensor_boundaries": capture.metadata,
         "output_path": str(arguments.output_path),
         "capture_mode": "diagnostic_first_call" if diagnostic_complete else "complete_pipeline",

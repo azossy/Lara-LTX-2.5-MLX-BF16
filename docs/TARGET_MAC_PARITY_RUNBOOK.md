@@ -284,10 +284,24 @@ reconstructed from the report rather than duplicating tensor payloads:
 ```
 
 The checked-in result covers 176 projection, Q/K RMSNorm, RoPE, fused-SDPA,
-gate and output-projection comparisons. FP32 is used only for the captured
-CUDA-compatible Q/K RMSNorm and RoPE arithmetic before restoring BF16; AdaLN
-keeps its original BF16 calculation. Do not generalize the precision change to
-all normalization paths or weaken the frozen `0.02`/`0.9999` gate.
+gate and output-projection comparisons. The shared RMSNorm primitive evaluates
+its reduction in FP32 and restores the input dtype, matching the captured CUDA
+AdaLN and Q/K normalization boundaries. RoPE also uses FP32 arithmetic before
+restoring BF16. The modulation table is cast to the timestep dtype before its
+addition. Do not generalize FP32 to attention sigmoid/gating: the rejected
+full-trajectory experiment is recorded in
+`golden/experiments/fp32_attention_gate_rejection.json`.
+
+The next exact-input diagnostic targets the first frozen failure at block 31
+and the later error spike at block 39. On the official CUDA environment, the
+capture tool accepts both block indices in one first-denoiser-call run, records
+inputs and all attention internals for each block, deduplicates repeated tensor
+payloads, and writes size-bounded shards when
+`--maximum-artifact-shard-bytes` is supplied. Preserve the generated report;
+it contains a SHA-256 and size for every shard. Compare the transferred shards
+twice with `attention_internal_block31_parity_config.json` and
+`attention_internal_block39_parity_config.json`. Do not test another production
+precision change until these two reports identify an operation-level cause.
 
 ## P3 spatial latent-upscaler gate
 

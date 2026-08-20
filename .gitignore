@@ -10,6 +10,7 @@ build/
 outputs/
 golden/tensors/
 golden/videos/
+golden/quality/private/
 # Full diagnostic captures remain local; the versioned replay reducers emit
 # self-contained artifacts below GitHub's per-file size limit.
 golden/cuda_hq_boundary_trace_v3.npz

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "assignment_seed_environment_variable": "LARA_BLIND_REVIEW_SEED",
+  "candidate_labels": ["A", "B"],
+  "rating_dimensions": [
+    "prompt_adherence",
+    "fine_detail",
+    "temporal_consistency",
+    "motion_quality",
+    "audio_quality",
+    "audio_sync",
+    "overall_preference"
+  ],
+  "allowed_choices": ["A", "B", "tie", "unrateable"]
+}

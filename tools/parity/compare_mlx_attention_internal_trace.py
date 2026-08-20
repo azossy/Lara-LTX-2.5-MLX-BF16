@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare exact-input MLX attention sub-operations with a CUDA v6 trace."""
+"""Compare one block's exact-input MLX attention sub-operations with CUDA."""
 
 from __future__ import annotations
 
@@ -269,8 +269,11 @@ def main() -> int:
         lora_checkpoint=arguments.lora_checkpoint,
         lora_strength=lora_strength,
     )
-    loaded = dict(provider)
-    block = loaded.get(block_index)
+    block = None
+    for current_index, current_block in provider:
+        if current_index == block_index:
+            block = current_block
+            break
     if block is None:
         raise LaraError("LARA-RUNTIME-008", details={"reason": f"missing_attention_block:{block_index}"})
 
@@ -340,7 +343,8 @@ def main() -> int:
     first_failure = next((comparison for comparison in comparisons if not comparison["passed"]), None)
     report = {
         "schema_version": 1,
-        "component": "block0_exact_input_attention_suboperations",
+        "component": "single_block_exact_input_attention_suboperations",
+        "block_index": block_index,
         "lora_strength": lora_strength,
         "acceptance": acceptance,
         "comparison_count": len(comparisons),

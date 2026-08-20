@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment": "fp32_attention_sigmoid_and_gate",
+  "adopted": false,
+  "baseline": {
+    "two_stage_final_video_normalized_rmse": 0.1915675,
+    "two_stage_final_audio_normalized_rmse": 0.1109598
+  },
+  "candidate": {
+    "change": "Evaluate attention sigmoid and gating multiplication in FP32, then restore BF16.",
+    "block_0": {
+      "improved_comparison_count": 12,
+      "unchanged_or_worse_comparison_count": 6,
+      "baseline_mean_normalized_rmse": 0.004205,
+      "candidate_mean_normalized_rmse": 0.004044
+    },
+    "deep_48_block": {
+      "improved_comparison_count": 34,
+      "worsened_comparison_count": 8,
+      "baseline_mean_normalized_rmse": 0.00823,
+      "candidate_mean_normalized_rmse": 0.00945,
+      "block_31_remained_first_failure": true,
+      "block_39_video_baseline_normalized_rmse": 0.05503,
+      "block_39_video_candidate_normalized_rmse": 0.0483
+    },
+    "two_stage": {
+      "final_video_normalized_rmse": 0.7320345,
+      "final_audio_normalized_rmse": 0.2236173
+    }
+  },
+  "decision": "Rejected and reverted because local boundary improvements did not survive the full stochastic trajectory.",
+  "next_diagnostic": "Capture exact CUDA attention sub-operations for first-failing block 31 and spike block 39 before testing another production precision change."
+}
