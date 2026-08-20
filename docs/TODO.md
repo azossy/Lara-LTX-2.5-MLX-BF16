@@ -170,8 +170,12 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       All 56 decoder weights plus two normalization statistics load from the
       official shard; the CUDA spectrogram boundary passes with NRMSE
       `0.003531` and cosine `0.999994` at a 63,839,212-byte load peak.
-- [ ] Port the primary vocoder, BWE generator, waveform reconstruction and
-      synchronization.
+- [x] Port the 1,227-tensor primary vocoder, causal checkpoint-backed mel STFT,
+      BWE residual generator and 16-to-48 kHz sinc reconstruction. The complete
+      Metal waveform path passes the CUDA reference with NRMSE `0.004552` and
+      cosine similarity `0.999993` at a 1,753,922,396-byte peak.
+- [ ] Wire decoded 48 kHz stereo waveforms into the end-to-end media mux and
+      validate synchronization against the fixed CUDA clip.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.

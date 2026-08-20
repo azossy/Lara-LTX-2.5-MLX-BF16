@@ -80,3 +80,6 @@
 | LARA-TENSOR-022 | `LARA-TENSOR-022` | Gemma prompt, token layout or left-padding mask is invalid | Provide non-empty prompts and matching rank-2 IDs with contiguous left padding | `lara_ltx.models.gemma_assets`, `lara_ltx.text_encoder.gemma4` |
 | LARA-TENSOR-023 | `LARA-TENSOR-023` | Spatial-upscaler configuration or NCTHW latent layout is invalid | Use the reviewed x2 configuration and a rank-5 128-channel latent | `lara_ltx.video_vae.spatial_upscaler` |
 | LARA-TENSOR-024 | `LARA-TENSOR-024` | Audio VAE decoder configuration or rank-4 latent layout is invalid | Use the pinned causal decoder configuration and an 8-channel latent | `lara_ltx.audio_vae.decoder` |
+| LARA-TENSOR-025 | `LARA-TENSOR-025` | Vocoder mel input is not rank-4 stereo with 64 mel bins | Supply `[batch, 2, frames, 64]` | `lara_ltx.audio_vae.vocoder` |
+| LARA-TENSOR-026 | `LARA-TENSOR-026` | BWE input is not a rank-3 stereo waveform | Supply `[batch, 2, samples]` | `lara_ltx.audio_vae.vocoder` |
+| LARA-TENSOR-027 | `LARA-TENSOR-027` | BWE residual and sinc-resampled skip lengths differ | Restore pinned sample rates, hop length and checkpoint config | `lara_ltx.audio_vae.vocoder` |

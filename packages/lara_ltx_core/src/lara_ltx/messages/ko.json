@@ -74,5 +74,8 @@
   "LARA-TENSOR-021": "Transformer conditioning 입력이 올바르지 않습니다({reason}). patchify된 latent token, token별 timestep, position 범위, projection된 context와 일치하는 mask를 제공하세요.",
   "LARA-TENSOR-022": "Gemma token 입력이 올바르지 않습니다({reason}). 비어 있지 않은 prompt 배치와 일치하는 rank-2 token ID 및 연속된 왼쪽 padding mask를 제공하세요.",
   "LARA-TENSOR-023": "잠재 spatial upscaler 입력 또는 설정이 올바르지 않습니다({shape}). 128채널 NCTHW 5차원 잠재와 검토된 x2 설정을 사용하세요.",
-  "LARA-TENSOR-024": "Audio VAE decoder 입력 또는 설정이 올바르지 않습니다({shape}). 8채널 rank-4 잠재와 고정된 causal decoder 설정을 사용하세요."
+  "LARA-TENSOR-024": "Audio VAE decoder 입력 또는 설정이 올바르지 않습니다({shape}). 8채널 rank-4 잠재와 고정된 causal decoder 설정을 사용하세요.",
+  "LARA-TENSOR-025": "Audio vocoder mel 입력이 올바르지 않습니다({shape}). [batch, 2, frames, 64] 형태의 rank-4 스테레오 텐서를 제공하세요.",
+  "LARA-TENSOR-026": "BWE 파형 입력이 올바르지 않습니다({shape}). [batch, 2, samples] 형태의 rank-3 스테레오 파형을 제공하세요.",
+  "LARA-TENSOR-027": "BWE residual 형태 {residual_shape}이(가) resample된 skip 형태 {skip_shape}과 다릅니다. 고정된 sample rate, hop length와 체크포인트 설정을 확인하세요."
 }

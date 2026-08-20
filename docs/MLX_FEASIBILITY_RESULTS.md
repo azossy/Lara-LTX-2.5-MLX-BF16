@@ -139,6 +139,18 @@ CUDA `(1, 8, 18, 16)` latent produces a finite `(1, 2, 69, 64)` spectrogram
 with NRMSE `0.003531`, cosine `0.999994`, and a 63,839,212-byte weight-load
 peak.
 
+## Waveform vocoder and bandwidth extension
+
+Artifact: `golden/mlx_vocoder_bwe_report.json`
+
+The native MLX waveform path strict-validates and loads all 1,227 official BF16
+generator and STFT tensors. Both BigVGAN-v2 generators reproduce the
+anti-aliased SnakeBeta activation in FP32, while the checkpoint-backed causal
+STFT feeds the BWE residual generator and a deterministic Hann-sinc path
+upsamples the 16 kHz skip signal to 48 kHz. The fixed CUDA spectrogram produces
+a finite stereo waveform with NRMSE `0.004552`, cosine `0.999993`, and a
+1,753,922,396-byte execution peak.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.
@@ -154,6 +166,6 @@ peak.
   LoRA handling.
 - The remaining high-risk technical paths are the full 48-block/high-token
   orchestration, two-stage component lifecycle, DiffVAE tile performance, and
-  audio decode/synchronization. Full Gemma 4 conditioning and spatial x2
-  upscaling are now executable; Gemma's CUDA-versus-MLX hidden-state report
-  remains evidence work.
+  audiovisual mux synchronization. Full Gemma 4 conditioning, spatial x2
+  upscaling and 48 kHz waveform reconstruction are now executable; Gemma's
+  CUDA-versus-MLX hidden-state report remains evidence work.

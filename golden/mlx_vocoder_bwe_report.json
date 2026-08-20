@@ -1,0 +1,36 @@
+{
+  "acceptance_criteria": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999,
+    "requires_finite_output": true
+  },
+  "component": "audio_vocoder_with_bwe",
+  "memory": {
+    "active_after_load_bytes": 258811012,
+    "peak_bytes": 1753922396
+  },
+  "passed": true,
+  "schema_version": 1,
+  "waveform": {
+    "candidate_checksum": "307cfd260511dffcc513a30509ff1ff1b48c5f999a3310cc772358cfa86b7572",
+    "candidate_dtype": "float32",
+    "cosine_similarity": 0.9999930620958204,
+    "finite_count": 66240,
+    "inf_count": 0,
+    "max_abs_error": 0.0011948198080062866,
+    "max_relative_error": 27.66988516212406,
+    "mean_abs_error": 0.000123517826563157,
+    "name": "vocoder_bwe_waveform",
+    "nan_count": 0,
+    "normalized_rmse": 0.004551971124328865,
+    "reference_checksum": "f8b35b3ab1f174d4fc42899e525db50f9c14d58c8a9a73517fd74b5273d20b16",
+    "reference_dtype": "float32",
+    "reference_rms": 0.036950377004180496,
+    "rmse": 0.00016819704915609494,
+    "shape": [
+      1,
+      2,
+      33120
+    ]
+  }
+}
