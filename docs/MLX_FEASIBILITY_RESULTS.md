@@ -101,6 +101,19 @@ and `(1, 1024, 2048)` audio conditioning with a measured 26,126,823,208-byte
 weight-load peak. This is a checkpoint-backed Metal execution result; full
 CUDA-versus-MLX text-core tensor parity remains a P4 evidence task.
 
+## Scheduler, guidance and res_2s
+
+Artifact: `golden/mlx_sampling_report.json`
+
+The MLX scheduler reproduces all 16 stage-1 sigma entries in the P0 CUDA HQ
+boundary artifact with a maximum absolute error of `1.1920928955078125e-07`.
+Guidance plans one combined transformer batch containing only the required
+conditioned, unconditioned, STG-perturbed and AV-isolated passes, then attaches
+per-block keep masks to the existing MLX transformer streams. The full res_2s
+loop includes midpoint evaluation, optional anchor refinement, independent SDE
+noise streams, clean-latent masking and terminal denoising. Synthetic loop
+tests pass on Metal; denoiser-integrated stage parity remains a P4 task.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.

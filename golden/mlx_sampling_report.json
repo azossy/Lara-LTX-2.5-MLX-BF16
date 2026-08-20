@@ -1,0 +1,19 @@
+{
+  "acceptance_criteria": {
+    "max_guidance_absolute_error": 0.0,
+    "max_sigma_absolute_error": 2e-07,
+    "requires_finite_res2s_coefficients": true
+  },
+  "component": "sampling",
+  "cuda_reference": "cuda_hq_boundary_trace_v2.npz",
+  "max_guidance_absolute_error": 0.0,
+  "max_sigma_absolute_error": 1.1920928955078125e-07,
+  "passed": true,
+  "res2s_coefficients_h_0_25": [
+    0.4700123896616182,
+    -0.036828190570575625,
+    0.9216250582849561
+  ],
+  "schema_version": 1,
+  "stage_1_sigma_count": 16
+}

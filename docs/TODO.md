@@ -146,7 +146,10 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       projections without constructing LM logits. All 666 text weights plus
       four feature weights strict-map from the official shard; the full
       1,024-token Metal execution passes with a 26,126,823,208-byte load peak.
-- [ ] Port scheduler, CFG/STG and res_2s sampling.
+- [x] Port the token-shifted scheduler, batched CFG/STG/AV-isolation guidance,
+      block perturbation masks and full two-evaluation res_2s/SDE loop. The
+      15-step schedule matches the P0 CUDA HQ artifact within `1.2e-7` and the
+      deterministic Metal contract suite passes.
 - [ ] Port spatial latent upscaling and two-stage refinement.
 - [ ] Complete diffusion video VAE: non-attention Conv decoder subset and
       CUDA-BF16 assembly parity, per-frame attention, and timestep-conditioned

@@ -82,6 +82,18 @@ The checked-in report produces 49 hidden states and finite video/audio
 features at a 26,126,823,208-byte load peak. This gate proves native execution,
 not cross-backend numerical parity; that comparison remains in P4.
 
+## P3 scheduler and guidance gate
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_sampling.py \
+  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --report "$LARA_REPORT_DIR/sampling.json"
+```
+
+The scheduler must match the captured HQ stage-1 sigmas within `2e-7`, the
+combined CFG/STG/AV-isolation arithmetic must be exact, and the res_2s
+coefficients must remain finite.
+
 ## P2 transformer output-head gate
 
 This command loads the six reviewed video/audio output modulation and
@@ -131,7 +143,7 @@ absolute error, stage 2 has `3.814697265625e-06`, and peak fusion memory is
 
 ## Evidence handling
 
-- Preserve the checkpoint-block, Gemma-feature, full Gemma-text,
+- Preserve the checkpoint-block, Gemma-feature, full Gemma-text, sampling,
   transformer-input, transformer-output and LoRA JSON reports with the commit
   and MLX environment record.
 - On a failure, retain the JSON report and re-run only after checking the
