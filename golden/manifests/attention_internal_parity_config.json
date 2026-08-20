@@ -5,6 +5,8 @@
   "block_index": 0,
   "lora_strength": 0.25,
   "passes": [0, 1, 2],
+  "maximum_artifact_shard_bytes": 80000000,
+  "diagnose_fp32_variants": true,
   "modules": [
     "attn1",
     "attn2",

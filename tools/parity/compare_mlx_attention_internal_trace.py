@@ -29,7 +29,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--transformer-checkpoint", required=True, type=Path)
     parser.add_argument("--lora-checkpoint", required=True, type=Path)
-    parser.add_argument("--cuda-reference", required=True, type=Path)
+    parser.add_argument("--cuda-reference", required=True, action="append", type=Path)
     parser.add_argument("--cuda-report", required=True, type=Path)
     parser.add_argument("--config", required=True, type=Path)
     parser.add_argument("--report", required=True, type=Path)
@@ -153,6 +153,63 @@ def _output_projection_candidate(module: Any, reference: dict[str, np.ndarray], 
     return module.to_out[0](_tensor(reference, input_key))
 
 
+def _linear_fp32(layer: Any, value: mx.array) -> mx.array:
+    result = mx.matmul(value.astype(mx.float32), mx.swapaxes(layer.weight.astype(mx.float32), -1, -2))
+    bias = getattr(layer, "bias", None)
+    if bias is not None:
+        result = result + bias.astype(mx.float32)
+    return result.astype(mx.bfloat16)
+
+
+def _fp32_variant(
+    module: Any,
+    operation: str,
+    reference: dict[str, np.ndarray],
+    prefix: str,
+) -> mx.array | None:
+    if operation in CHILD_OPERATIONS:
+        attribute = CHILD_OPERATIONS[operation]
+        child = getattr(module, attribute, None)
+        input_key = f"{prefix}_{operation}_input"
+        if child is None or input_key not in reference:
+            return None
+        value = _tensor(reference, input_key)
+        if operation in {"query_normalized", "key_normalized"}:
+            value_fp32 = value.astype(mx.float32)
+            normalized = value_fp32 * mx.rsqrt(mx.mean(mx.square(value_fp32), axis=-1, keepdims=True) + child.eps)
+            return (normalized * child.weight.astype(mx.float32)).astype(mx.bfloat16)
+        return _linear_fp32(child, value)
+    if operation in {"query_ready", "key_ready"}:
+        boundary = "query" if operation == "query_ready" else "key"
+        normalized_key = f"{prefix}_{boundary}_normalized"
+        cos_key = f"{prefix}_{boundary}_rope_cos"
+        sin_key = f"{prefix}_{boundary}_rope_sin"
+        if normalized_key not in reference or cos_key not in reference or sin_key not in reference:
+            return None
+        return apply_rotary_emb(
+            _tensor(reference, normalized_key, dtype=mx.float32),
+            (_tensor(reference, cos_key, dtype=mx.float32), _tensor(reference, sin_key, dtype=mx.float32)),
+            module.rope_type,
+        ).astype(mx.bfloat16)
+    if operation == "gated_output":
+        logits_key = f"{prefix}_gate_logits"
+        input_key = f"{prefix}_gated_attention_input"
+        if logits_key not in reference or input_key not in reference:
+            return None
+        attention = _tensor(reference, input_key, dtype=mx.float32)
+        logits = _tensor(reference, logits_key, dtype=mx.float32)
+        batch, tokens = attention.shape[:2]
+        gates = 2.0 * mx.sigmoid(logits)
+        gated = attention.reshape(batch, tokens, module.heads, module.dim_head) * mx.expand_dims(gates, -1)
+        return gated.reshape(batch, tokens, module.heads * module.dim_head).astype(mx.bfloat16)
+    if operation == "output_projection":
+        input_key = f"{prefix}_output_projection_input"
+        if input_key not in reference:
+            return None
+        return _linear_fp32(module.to_out[0], _tensor(reference, input_key))
+    return None
+
+
 def _candidate_operations(
     module: Any,
     reference: dict[str, np.ndarray],
@@ -187,11 +244,24 @@ def main() -> int:
     passes = _required(config, "passes", list)
     module_names = _required(config, "modules", list)
     lora_strength = float(_required(config, "lora_strength", (int, float)))
+    diagnose_fp32_variants = bool(config.get("diagnose_fp32_variants", False))
+    reference: dict[str, np.ndarray] = {}
     try:
-        with np.load(arguments.cuda_reference) as archive:
-            reference = {name: archive[name] for name in archive.files}
+        for path in arguments.cuda_reference:
+            with np.load(path) as archive:
+                overlap = reference.keys() & archive.files
+                if overlap:
+                    raise ValueError(f"duplicate_attention_tensor:{sorted(overlap)[0]}")
+                reference.update({name: archive[name] for name in archive.files})
     except (OSError, ValueError) as error:
         raise LaraError("LARA-RUNTIME-008", details={"reason": "unreadable_attention_reference"}) from error
+    aliases = cuda_report.get("tensor_aliases", {})
+    if not isinstance(aliases, dict):
+        raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_attention_aliases"})
+    for alias, canonical in aliases.items():
+        if not isinstance(alias, str) or not isinstance(canonical, str) or canonical not in reference:
+            raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_attention_alias"})
+        reference[alias] = reference[canonical]
 
     provider = CheckpointTransformerBlocks(
         checkpoint=arguments.transformer_checkpoint,
@@ -205,6 +275,7 @@ def main() -> int:
         raise LaraError("LARA-RUNTIME-008", details={"reason": f"missing_attention_block:{block_index}"})
 
     comparisons: list[dict[str, Any]] = []
+    precision_diagnostics: list[dict[str, Any]] = []
     for pass_index in passes:
         if not isinstance(pass_index, int) or isinstance(pass_index, bool):
             raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_attention_pass_index"})
@@ -234,6 +305,24 @@ def main() -> int:
                         "metrics": metrics.to_dict(),
                     }
                 )
+                if diagnose_fp32_variants:
+                    diagnostic_candidate = _fp32_variant(module, operation, reference, prefix)
+                    if diagnostic_candidate is not None:
+                        mx.eval(diagnostic_candidate)
+                        diagnostic_metrics = compare_tensors(
+                            output_key,
+                            reference[output_key].astype(np.float32),
+                            np.asarray(diagnostic_candidate.astype(mx.float32)),
+                        )
+                        precision_diagnostics.append(
+                            {
+                                "pass_index": pass_index,
+                                "module": module_name,
+                                "operation": operation,
+                                "baseline_normalized_rmse": metrics.normalized_rmse,
+                                "fp32_variant_metrics": diagnostic_metrics.to_dict(),
+                            }
+                        )
 
     if not comparisons:
         raise LaraError("LARA-RUNTIME-008", details={"reason": "empty_attention_comparisons"})
@@ -256,6 +345,7 @@ def main() -> int:
         "acceptance": acceptance,
         "comparison_count": len(comparisons),
         "comparisons": comparisons,
+        "precision_diagnostics": precision_diagnostics,
         "first_failure": first_failure,
         "passed": first_failure is None,
     }

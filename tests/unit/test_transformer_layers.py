@@ -18,6 +18,21 @@ def test_rms_norm_matches_reference_equation() -> None:
     np.testing.assert_allclose(np.asarray(result), expected, rtol=1e-6, atol=1e-6)
 
 
+def test_rms_norm_uses_float32_calculation_and_restores_bfloat16() -> None:
+    values = mx.array([[[0.03125, -9.75, 0.5, 4.125]]], dtype=mx.bfloat16)
+    weights = mx.array([0.75, 1.25, 0.875, 1.5], dtype=mx.bfloat16)
+
+    result = rms_norm(values, weights, calculation_dtype=mx.float32)
+    values_fp32 = values.astype(mx.float32)
+    weights_fp32 = weights.astype(mx.float32)
+    expected = values_fp32 * mx.rsqrt(mx.mean(mx.square(values_fp32), axis=-1, keepdims=True) + 1e-6)
+    expected = (expected * weights_fp32).astype(mx.bfloat16)
+    mx.eval(result, expected)
+
+    assert result.dtype == mx.bfloat16
+    np.testing.assert_array_equal(np.asarray(result.astype(mx.float32)), np.asarray(expected.astype(mx.float32)))
+
+
 def test_tanh_gelu_matches_pytorch_formula() -> None:
     values = np.linspace(-3.0, 3.0, 25, dtype=np.float32)
 

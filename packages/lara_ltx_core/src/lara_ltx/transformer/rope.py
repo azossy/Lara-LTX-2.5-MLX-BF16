@@ -13,6 +13,7 @@ DEFAULT_ROPE_THETA = 10_000.0
 DEFAULT_MAX_POSITION_COUNTS = (20, 2_048, 2_048)
 DEFAULT_ATTENTION_HEADS = 32
 ROTARY_PAIR_SIZE = 2
+ROTARY_CALCULATION_DTYPE = mx.float32
 
 
 class LTXRopeType(Enum):
@@ -34,6 +35,10 @@ def apply_split_rotary_emb(input_tensor: mx.array, cos_freqs: mx.array, sin_freq
     """Apply the split-half RoPE layout used by LTX-2.5."""
 
     _validate_frequency_shapes(cos_freqs, sin_freqs)
+    output_dtype = input_tensor.dtype
+    input_tensor = input_tensor.astype(ROTARY_CALCULATION_DTYPE)
+    cos_freqs = cos_freqs.astype(ROTARY_CALCULATION_DTYPE)
+    sin_freqs = sin_freqs.astype(ROTARY_CALCULATION_DTYPE)
     needs_reshape = input_tensor.ndim != 4 and cos_freqs.ndim == 4
     if needs_reshape:
         batch, tokens = input_tensor.shape[:2]
@@ -58,19 +63,23 @@ def apply_split_rotary_emb(input_tensor: mx.array, cos_freqs: mx.array, sin_freq
 
     if needs_reshape:
         output = mx.swapaxes(output, 1, 2).reshape(batch, tokens, -1)
-    return output
+    return output.astype(output_dtype)
 
 
 def apply_interleaved_rotary_emb(input_tensor: mx.array, cos_freqs: mx.array, sin_freqs: mx.array) -> mx.array:
     """Apply the legacy adjacent-pair RoPE layout."""
 
     _validate_frequency_shapes(cos_freqs, sin_freqs)
+    output_dtype = input_tensor.dtype
+    input_tensor = input_tensor.astype(ROTARY_CALCULATION_DTYPE)
+    cos_freqs = cos_freqs.astype(ROTARY_CALCULATION_DTYPE)
+    sin_freqs = sin_freqs.astype(ROTARY_CALCULATION_DTYPE)
     feature_size = input_tensor.shape[-1]
     if feature_size % ROTARY_PAIR_SIZE:
         raise LaraError("LARA-TENSOR-003", details={"size": feature_size})
     pairs = input_tensor.reshape(*input_tensor.shape[:-1], -1, ROTARY_PAIR_SIZE)
     rotated = mx.stack((-pairs[..., 1], pairs[..., 0]), axis=-1).reshape(input_tensor.shape)
-    return input_tensor * cos_freqs + rotated * sin_freqs
+    return (input_tensor * cos_freqs + rotated * sin_freqs).astype(output_dtype)
 
 
 def apply_rotary_emb(

@@ -82,6 +82,7 @@ def _install_stub(monkeypatch: Any, name: str, **attributes: Any) -> None:
 
 
 def _tool(monkeypatch: Any) -> Any:
+    monkeypatch.syspath_prepend(str(TOOL_PATH.parent))
     torch = types.ModuleType("torch")
     torch.Tensor = FakeTensor
     torch.Generator = object

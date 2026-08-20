@@ -1,0 +1,4535 @@
+{
+  "artifact": {
+    "alias_count": 290,
+    "base_file": "cuda_hq_attention_internal_v6.npz",
+    "shards": [
+      {
+        "file": "cuda_hq_attention_internal_v6.part-00.npz",
+        "sha256": "0df3544ca6daf3462bc328784a39f54f44ec6cbf0cdffce2fa2dc2475ee4b9bb",
+        "size_bytes": 37589966
+      },
+      {
+        "file": "cuda_hq_attention_internal_v6.part-01.npz",
+        "sha256": "56ea6a767fcba999457e725e3379b34bdf36f929b5c4c5846ccb26d70081a0db",
+        "size_bytes": 36038048
+      },
+      {
+        "file": "cuda_hq_attention_internal_v6.part-02.npz",
+        "sha256": "39a30709e06522ad4479a6b76fc862a8700188bbf7ad09063c093252905df3b3",
+        "size_bytes": 34500323
+      },
+      {
+        "file": "cuda_hq_attention_internal_v6.part-03.npz",
+        "sha256": "b2d0b2d29ca18521c1c8773092a7ce39c5f0b2b9842e81d5590173634a259f3e",
+        "size_bytes": 24240948
+      }
+    ],
+    "unique_tensor_count": 118
+  },
+  "block_index": 0,
+  "captured_at_utc": "2026-08-20T14:40:42.668598+00:00",
+  "component": "compact_checkpoint_exact_input_attention_capture",
+  "input_reference": {
+    "file": "cuda_hq_deep_transformer_replay_v4.npz",
+    "sha256": "fd07de5572e1a18fb5191f4c2767a3a1fb3f16701e2a7ec791693bf1b1c56a3f"
+  },
+  "lora_strength": 0.25,
+  "lora_subset": {
+    "file": "lora-block0.safetensors",
+    "sha256": "3bc42aba96ec5d0fc3da5154b82f3faba27cb232171ede5896942ae454b8894b"
+  },
+  "passed": true,
+  "schema_version": 6,
+  "source_replay_comparisons": [
+    {
+      "metrics": {
+        "cosine_similarity": 1.0,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "passed": true
+    },
+    {
+      "metrics": {
+        "cosine_similarity": 0.9999999999999998,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "passed": true
+    },
+    {
+      "metrics": {
+        "cosine_similarity": 1.0000000000000002,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "passed": true
+    },
+    {
+      "metrics": {
+        "cosine_similarity": 0.9999999999999998,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "passed": true
+    },
+    {
+      "metrics": {
+        "cosine_similarity": 1.0,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "passed": true
+    },
+    {
+      "metrics": {
+        "cosine_similarity": 1.0,
+        "inf_count": 0,
+        "max_abs_error": 0.0,
+        "nan_count": 0,
+        "normalized_rmse": 0.0
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "passed": true
+    }
+  ],
+  "tensor_aliases": {
+    "stage_1_deep_block_00_pass_00_internal_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_00_internal_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_attn1_key_ready",
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn1_query_ready",
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection",
+    "stage_1_deep_block_00_pass_00_internal_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn2_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn2_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_ready": "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_00_internal_attn2_output_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_key": "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_value": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_ready",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_ready",
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_value_projection",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_output",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_x": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_projection",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_projection_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_value_projection_input",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_cos",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_sin",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_output_projection_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_output",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_projection",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_key": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_ready",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_query": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_ready",
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_value": "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_gate_logits": "stage_1_deep_block_00_pass_00_internal_attn1_gate_logits",
+    "stage_1_deep_block_00_pass_01_internal_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_output": "stage_1_deep_block_00_pass_00_internal_attn1_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_normalized": "stage_1_deep_block_00_pass_00_internal_attn1_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_projection": "stage_1_deep_block_00_pass_00_internal_attn1_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_ready": "stage_1_deep_block_00_pass_00_internal_attn1_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_attn1_output_projection": "stage_1_deep_block_00_pass_00_internal_attn1_output_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_normalized": "stage_1_deep_block_00_pass_00_internal_attn1_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_projection": "stage_1_deep_block_00_pass_00_internal_attn1_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_ready": "stage_1_deep_block_00_pass_00_internal_attn1_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_attn1_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_output": "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn1_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_value_projection": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn1_value_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn2_gate_logits": "stage_1_deep_block_00_pass_00_internal_attn2_gate_logits",
+    "stage_1_deep_block_00_pass_01_internal_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn2_gated_attention_input": "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_normalized_input": "stage_1_deep_block_00_pass_01_internal_attn2_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_projection_input": "stage_1_deep_block_00_pass_01_internal_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_ready": "stage_1_deep_block_00_pass_01_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn2_output_projection_input": "stage_1_deep_block_00_pass_01_internal_attn2_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_normalized": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_projection": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_key": "stage_1_deep_block_00_pass_01_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_value": "stage_1_deep_block_00_pass_01_internal_attn2_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gate_logits": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gate_logits",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_output": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_output_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_output_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_output": "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_value_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_value_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gate_logits": "stage_1_deep_block_00_pass_00_internal_audio_attn2_gate_logits",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_attention_input": "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_normalized_input": "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_projection_input": "stage_1_deep_block_00_pass_01_internal_audio_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_ready": "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_output_projection_input": "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_key": "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_value": "stage_1_deep_block_00_pass_01_internal_audio_attn2_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gate_logits_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_attention_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_x": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_normalized_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_projection_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_output_projection_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_normalized_input": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_key": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_query": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_value": "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_value_projection",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gate_logits_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_attention_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_output",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_x": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_normalized_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_projection",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_projection_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_value_projection_input",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_output_projection_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_output",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_normalized_input": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_projection",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_key": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_ready",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_query": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_ready",
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_value": "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_gate_logits": "stage_1_deep_block_00_pass_00_internal_attn1_gate_logits",
+    "stage_1_deep_block_00_pass_02_internal_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_output": "stage_1_deep_block_00_pass_00_internal_attn1_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_normalized": "stage_1_deep_block_00_pass_00_internal_attn1_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_projection": "stage_1_deep_block_00_pass_00_internal_attn1_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_ready": "stage_1_deep_block_00_pass_00_internal_attn1_key_ready",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_02_internal_attn1_output_projection": "stage_1_deep_block_00_pass_00_internal_attn1_output_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_normalized": "stage_1_deep_block_00_pass_00_internal_attn1_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn1_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_projection": "stage_1_deep_block_00_pass_00_internal_attn1_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_ready": "stage_1_deep_block_00_pass_00_internal_attn1_query_ready",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_attn1_key_ready",
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_output": "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn1_query_ready",
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_value_projection": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn1_value_projection_input": "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn2_gate_logits": "stage_1_deep_block_00_pass_00_internal_attn2_gate_logits",
+    "stage_1_deep_block_00_pass_02_internal_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_output": "stage_1_deep_block_00_pass_00_internal_attn2_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_normalized": "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn2_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_projection": "stage_1_deep_block_00_pass_00_internal_attn2_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_ready": "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_output_projection": "stage_1_deep_block_00_pass_00_internal_attn2_output_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_output_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_normalized": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_projection": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_key": "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_output": "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_value": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_value_projection": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_attn2_value_projection_input": "stage_1_deep_block_00_pass_00_internal_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gate_logits": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gate_logits",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_output": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_output_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_output_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_rope_cos": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_rope_sin": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_output": "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_value_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_value_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gate_logits": "stage_1_deep_block_00_pass_00_internal_audio_attn2_gate_logits",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gate_logits_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_attention_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_output": "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_x": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_output_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn2_output_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_output_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_normalized": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_normalized_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_ready": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_key": "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_output": "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_output",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_query": "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_value": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_value_projection": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection",
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_value_projection_input": "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection_input"
+  },
+  "tensor_boundaries": {
+    "stage_1_deep_block_00_pass_00_internal_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6e7a4a27bac34c9ea2458e8413cbbdb0fa59f2820f76eb51789e7117eebbabc5",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b6264c14cb7a8c181381b16bbc1e70cd650d92a20f073048a0320acd524dd474",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4ee3989222a5065030df1c6789afb99d6abbe78f64b8d65428d02f92f8a2b687",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f25cba2abd492602b819a6726ce9703fb641be987ba18e24ef903379728485fb",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "05410b9a11b80acb37b4a146b36704a109efc5b97449c5d40c0ec68456ab84eb",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "92281a245324c272443ea3f42d1a36ce7ef2a85e47921654953c0b466ddabff9",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "38618d34141a9374f4afd5939626ae187d0d511f1386f92a5168f6cba96797cf",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "38618d34141a9374f4afd5939626ae187d0d511f1386f92a5168f6cba96797cf",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a59988b9d5115e6ea24daf7563d1444eed885ec05875c644bed45bbe5553ca59",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3a73f6119cb58c36101ae30a81301bc341af468323bd6fb38ab1332c8a848067",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "92281a245324c272443ea3f42d1a36ce7ef2a85e47921654953c0b466ddabff9",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "05410b9a11b80acb37b4a146b36704a109efc5b97449c5d40c0ec68456ab84eb",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2332267a95e48f527e5acb37843da0425549bd31f961dfa32112afc5c75294c7",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2332267a95e48f527e5acb37843da0425549bd31f961dfa32112afc5c75294c7",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a59988b9d5115e6ea24daf7563d1444eed885ec05875c644bed45bbe5553ca59",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f066ddb4ada75191449551298de3b76b943327ea01b9981673c2c6ec841f30f3",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0499142bae7f0b382734d6ec9c29a2707d730f737725f180168eecb443186f85",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f5b36ce1dbc15d89aaaee168bc508e8e432d2d2cbf30f71dddb1ba93884f5116",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "060b3b63d32e7c3def355589605ea29b785a66fa05ec7464f017a455fd61b4e1",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "de8a006fce33f3e4acda81f51076be2c2f97384ac87a6ae0a249db1327ef20e0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1e129a7f3099fae443ad9cb9b4073f96b2c3b34560b97005c2d920c016fa2527",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a459e1f07e13c0e8ea47c46a721973f981f4a35583a69cc836eadba882107207",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a459e1f07e13c0e8ea47c46a721973f981f4a35583a69cc836eadba882107207",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c370eeaced0115575601f75417a2ee6fe288f6eef119d6b06aac43a8b48f7488",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fd1abf30f32c8e996be7094c0d32ae7e326becc6dfaf366c885bc20f0358e3f0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1e129a7f3099fae443ad9cb9b4073f96b2c3b34560b97005c2d920c016fa2527",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "de8a006fce33f3e4acda81f51076be2c2f97384ac87a6ae0a249db1327ef20e0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9014aed264a003b0e13b412639629e915e7ce6a457053080a237b228db9dc6e4",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9014aed264a003b0e13b412639629e915e7ce6a457053080a237b228db9dc6e4",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c370eeaced0115575601f75417a2ee6fe288f6eef119d6b06aac43a8b48f7488",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6334bcb96a28fd5c4deb35542ff6228bc7668ae06dd0642421d39ccb8e7a6300",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "89aaa43ad0432a0c3f4e4f73eded95bcff3a7f342529df1a2840acb40afc1b71",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1f22fa9b59e9ff992f25130c68f35bc420f43548d02442fa3e234aa52c4a8d13",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "804a0c20e48ab1063c0bb84e817322885f069eb8b2bbf86ff78fbca3d046b421",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "89aaa43ad0432a0c3f4e4f73eded95bcff3a7f342529df1a2840acb40afc1b71",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c58bad6f7fad1414c2d35efaef4db36f8d3c2e36e96a17b10a6cb3c43a542346",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "53188758005f9edeeb25d9ef8c2c015fccb396f145db35dedaba6b83679127b5",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "53188758005f9edeeb25d9ef8c2c015fccb396f145db35dedaba6b83679127b5",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a8db3fdf493f971d0ea084700974dade4f5338690768930a258b0eb89276dff0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "01222ddde2f8481825df593158f1fb2feedf2bd5f314d4296b72fc1308ea5aca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d9118612a02296b9f79b1bba726ea203dd5c57cb37d2821e92608ae1f3757174",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "804a0c20e48ab1063c0bb84e817322885f069eb8b2bbf86ff78fbca3d046b421",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4e1537a4064589bf5a00d96acd02eb88414638a520f6e19f43b86765c7e83d00",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "850fa216d5377c7829dd7c90455d717e54b7ba4a633bbf5c1fa345b1cfe5116b",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "850fa216d5377c7829dd7c90455d717e54b7ba4a633bbf5c1fa345b1cfe5116b",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "89aaa43ad0432a0c3f4e4f73eded95bcff3a7f342529df1a2840acb40afc1b71",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "11787c5a040d84c1f3dd24d9167bced7d34e015a8f3ceadbad6f95b1359f80ce",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0ce5c8ba014ccc1fc7061036d79356217afdb8a50843ec0f44c6aa135adc563d",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed2964e5c4aae0e2da19736e69c455b8dc6f9f2997a55623a527354e328873b6",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "01222ddde2f8481825df593158f1fb2feedf2bd5f314d4296b72fc1308ea5aca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1f22fa9b59e9ff992f25130c68f35bc420f43548d02442fa3e234aa52c4a8d13",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "11787c5a040d84c1f3dd24d9167bced7d34e015a8f3ceadbad6f95b1359f80ce",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6566c01d44b9633458817e93859cbae2d7e1495b3b1d3f624568d24363f4e3a4",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6566c01d44b9633458817e93859cbae2d7e1495b3b1d3f624568d24363f4e3a4",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_audio_to_video_attn_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a8db3fdf493f971d0ea084700974dade4f5338690768930a258b0eb89276dff0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "baffc024d9f7c8ca64f274bb088dc7d4fd22dbab15e4e0b4e44990c21e8f23ac",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "684fc8dab9d1d8aadda2b1c0f1be2e803431a06d8590b6e262c0103a0c5efecf",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ad17acd3c357473793bbc5eb75be3f97a6c114980711496d3603a4c2a41ceb5b",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b42c30ca9a69b9ef8f2065e667aa64dca036ba8356294cd77ae6db0a42f3aea",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "684fc8dab9d1d8aadda2b1c0f1be2e803431a06d8590b6e262c0103a0c5efecf",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "21a04be37113a9ebf586e22c8a7eb2b3f4f61c1c7cf598c9b17bf44deccf15ee",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6554abfbf6614b41005a84a1cbcb3dfa32b17772a5f1f3463af13e11008ca4c2",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6554abfbf6614b41005a84a1cbcb3dfa32b17772a5f1f3463af13e11008ca4c2",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eb38125fed8729d8b070814f03a426f7c7ab9293b8f4ad35cbe4171921e8b3ec",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "43feeced4e2a9e8c3a2cf4930a8509512b63d1742de48a10cc9cfa82d812b2af",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0ce5c8ba014ccc1fc7061036d79356217afdb8a50843ec0f44c6aa135adc563d",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed2964e5c4aae0e2da19736e69c455b8dc6f9f2997a55623a527354e328873b6",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "5d5544269e3efb05026855b8a7958e82eb85208d0016b50fcfd644280d6d5ce2",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b42c30ca9a69b9ef8f2065e667aa64dca036ba8356294cd77ae6db0a42f3aea",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3904f1955db9bc69b6eb2d8cb25a6e01e48ce218aaae80ad7f7ac8397d299e0f",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "280d1329efd428c7ae28c8a3605006b0efc6ca8309e6c447ff08772c97a0585a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "280d1329efd428c7ae28c8a3605006b0efc6ca8309e6c447ff08772c97a0585a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "684fc8dab9d1d8aadda2b1c0f1be2e803431a06d8590b6e262c0103a0c5efecf",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6ecf21e6b81ae5aa2790b178538f110c7f6b6cac126bfae4fc419e4c9b49bb8d",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "43feeced4e2a9e8c3a2cf4930a8509512b63d1742de48a10cc9cfa82d812b2af",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ad17acd3c357473793bbc5eb75be3f97a6c114980711496d3603a4c2a41ceb5b",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6ecf21e6b81ae5aa2790b178538f110c7f6b6cac126bfae4fc419e4c9b49bb8d",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cdd177ead282d6d877c9921af94e084cc030f24ca76d9d1e9afa5a0224f5b698",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cdd177ead282d6d877c9921af94e084cc030f24ca76d9d1e9afa5a0224f5b698",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_00_internal_video_to_audio_attn_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eb38125fed8729d8b070814f03a426f7c7ab9293b8f4ad35cbe4171921e8b3ec",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6e7a4a27bac34c9ea2458e8413cbbdb0fa59f2820f76eb51789e7117eebbabc5",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b6264c14cb7a8c181381b16bbc1e70cd650d92a20f073048a0320acd524dd474",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4ee3989222a5065030df1c6789afb99d6abbe78f64b8d65428d02f92f8a2b687",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f25cba2abd492602b819a6726ce9703fb641be987ba18e24ef903379728485fb",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6e02273e496eed157015965806aa4894dd94119008e979a67838c62501e0d47c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "723ae3921f73f0a84d774a1e6c1c83dce57f8ad7c68942be8520142b5dfd5fa4",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c3977e156a93208263c633608ec176a11e871fdec222698e1fac8855386c9548",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "95f5e491d8d296f410c68df535c8e14c920f9abab78b5a343ffc7cbf6d9a8b10",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "95f5e491d8d296f410c68df535c8e14c920f9abab78b5a343ffc7cbf6d9a8b10",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "efbd2b4cb36dcafb19d41116dc193f9be41549d337f2777a0b16e4fba2cd4fa4",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c3977e156a93208263c633608ec176a11e871fdec222698e1fac8855386c9548",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1491a2b73af357da4ea6c820232359ca33a08daad8bb7024ab0e64f8f769d3f1",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "723ae3921f73f0a84d774a1e6c1c83dce57f8ad7c68942be8520142b5dfd5fa4",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c3977e156a93208263c633608ec176a11e871fdec222698e1fac8855386c9548",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6e02273e496eed157015965806aa4894dd94119008e979a67838c62501e0d47c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "94bd6a0a2e0a73ad193dc5c1bf34b791d05748c83e00b635f62a870bbeadc0e1",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "94bd6a0a2e0a73ad193dc5c1bf34b791d05748c83e00b635f62a870bbeadc0e1",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "efbd2b4cb36dcafb19d41116dc193f9be41549d337f2777a0b16e4fba2cd4fa4",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f066ddb4ada75191449551298de3b76b943327ea01b9981673c2c6ec841f30f3",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0499142bae7f0b382734d6ec9c29a2707d730f737725f180168eecb443186f85",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f5b36ce1dbc15d89aaaee168bc508e8e432d2d2cbf30f71dddb1ba93884f5116",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "060b3b63d32e7c3def355589605ea29b785a66fa05ec7464f017a455fd61b4e1",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c4b4bbd5bb0f8c2c16efe11f8d2ac9276395b2230c78cd3d9af2d4491ea7cdaa",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2733bae10f352cbdcb3e24fbde54c8e45c174ae52ff129ce133728a730f76c46",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2632ff89e5e3f88f22bac47fb826fb73f7e0dd9fa3aea60d2cdd78d3d923e594",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "36226d6026428c867c05f886b6e8d1ea7c424a361c92e0d8120a603ae13fc443",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "36226d6026428c867c05f886b6e8d1ea7c424a361c92e0d8120a603ae13fc443",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "10b5f8878b4ed4c4698f0f6f10ef457adcb3e4267e0e61135698a0e61ac9d93f",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2632ff89e5e3f88f22bac47fb826fb73f7e0dd9fa3aea60d2cdd78d3d923e594",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "385a534c27451c1b4b34768bcdb8773dca67e1274fe338ec10350d354a424948",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2733bae10f352cbdcb3e24fbde54c8e45c174ae52ff129ce133728a730f76c46",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2632ff89e5e3f88f22bac47fb826fb73f7e0dd9fa3aea60d2cdd78d3d923e594",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c4b4bbd5bb0f8c2c16efe11f8d2ac9276395b2230c78cd3d9af2d4491ea7cdaa",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "729bc2f09e9c2387428dbf35981eb7a78dab5a08c18a388e4ab63bbb2a4fe5a8",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "729bc2f09e9c2387428dbf35981eb7a78dab5a08c18a388e4ab63bbb2a4fe5a8",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "10b5f8878b4ed4c4698f0f6f10ef457adcb3e4267e0e61135698a0e61ac9d93f",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0f15005f5c722b81f513e5d6eeaf059fd475c9211f9af5cc57c5035cafbb2611",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "531709f90f7fa71d444457cd693cf9e18b6e555bcebc78beb9750ea3d3c7860f",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b7ce9322c34bc2455b7dfd00affacfe4433e676cf40ae73f9d239fff8bb75630",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "60171f1e82520d96f2357fc7d1472fe5044ae7123ec5982c76d7fb669f73ad7e",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "531709f90f7fa71d444457cd693cf9e18b6e555bcebc78beb9750ea3d3c7860f",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6af59d14b2660ef80d6e89bc6b23f40b5f16a3ad2439d4dd898412e40876898d",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4df21c05f4ecc0ef7f463d3d1374f57c88087ee4ab5e3af6f03e2a72156f694f",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4df21c05f4ecc0ef7f463d3d1374f57c88087ee4ab5e3af6f03e2a72156f694f",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3a5d10f5afc41f12445cf2e6f7ab06ff34e22470d4a88d5df57136595314bbef",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3e6cd11ef1666fdfc44bf6d1bedb2609b8353493d98f08fb6eac155339d80546",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "41dd26f38783a08f4ad96bddda21e07d8f720090a845fa9c4575fbc4d2d01d93",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "60171f1e82520d96f2357fc7d1472fe5044ae7123ec5982c76d7fb669f73ad7e",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "06d18ea276acecb62afa6bc4903d91ccc2eae347523594f2d36388a50e9969cb",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "13c738f7f689d54f4195ca68a6ab07465f514b4a0134b9987813acad05eec2af",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "13c738f7f689d54f4195ca68a6ab07465f514b4a0134b9987813acad05eec2af",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "531709f90f7fa71d444457cd693cf9e18b6e555bcebc78beb9750ea3d3c7860f",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7e0859a57dc7bf82a63cca21b3f56432b7721a2e4f2473176b8838dbf7286ba8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0ce5c8ba014ccc1fc7061036d79356217afdb8a50843ec0f44c6aa135adc563d",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed2964e5c4aae0e2da19736e69c455b8dc6f9f2997a55623a527354e328873b6",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3e6cd11ef1666fdfc44bf6d1bedb2609b8353493d98f08fb6eac155339d80546",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b7ce9322c34bc2455b7dfd00affacfe4433e676cf40ae73f9d239fff8bb75630",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7e0859a57dc7bf82a63cca21b3f56432b7721a2e4f2473176b8838dbf7286ba8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a1a0b12aeb27acb2f3530b941c871b26ac22c24c9c00f6d06645a2daaabe549a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a1a0b12aeb27acb2f3530b941c871b26ac22c24c9c00f6d06645a2daaabe549a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_audio_to_video_attn_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3a5d10f5afc41f12445cf2e6f7ab06ff34e22470d4a88d5df57136595314bbef",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "363ac82a33ef38d0154d43422f0690eb282a17a05711a15c6656a103646ae516",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ff9ace5a978a0e40395d4523235d0ba5e948af99a3c7817a756b0510818817c7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "83312cf836ede79fe1eaf703749a4d1d86266170bca17b63f0c37cb6dd075056",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "08ef1ca1251fa35a1ccc0fa70d55020869b6ac1282bd8201c33526ddb216c777",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ff9ace5a978a0e40395d4523235d0ba5e948af99a3c7817a756b0510818817c7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e7994f525d94cd013307884d8bf1926c03631bc7c601fd88051c177318911cb2",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4ad3f9da1a976b2500e08d96208b64c6fc6a3cdd8788b0d8e8382cf75ace2613",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4ad3f9da1a976b2500e08d96208b64c6fc6a3cdd8788b0d8e8382cf75ace2613",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1085a0d30bf285990c87611ed0ef28cc9769455c3367f2ae2cbfb9099fc92327",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "78c9f1e349f949db10206081999477bc39e2fc53296e084b4f6148513aa979b8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0ce5c8ba014ccc1fc7061036d79356217afdb8a50843ec0f44c6aa135adc563d",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed2964e5c4aae0e2da19736e69c455b8dc6f9f2997a55623a527354e328873b6",
+      "shape": [
+        1,
+        32,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "50080b4eb29582a696100098c412f7291ee226c33a912dcf6d8be8cd448410c1",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "08ef1ca1251fa35a1ccc0fa70d55020869b6ac1282bd8201c33526ddb216c777",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eddf3f1805de9b74bdc8b08cbc6a45d7be95a81913adef78d168084a391b5a56",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "54a99bdf04b0a2804dbf9521d5309c5423567a5c755d80c28002b0ab1bde75db",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "54a99bdf04b0a2804dbf9521d5309c5423567a5c755d80c28002b0ab1bde75db",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ff9ace5a978a0e40395d4523235d0ba5e948af99a3c7817a756b0510818817c7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "394af9243ed7e33f7cebbc1d1cf526ae88d49774a902a134384667297610eafa",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "78c9f1e349f949db10206081999477bc39e2fc53296e084b4f6148513aa979b8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "83312cf836ede79fe1eaf703749a4d1d86266170bca17b63f0c37cb6dd075056",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "394af9243ed7e33f7cebbc1d1cf526ae88d49774a902a134384667297610eafa",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cef0bceece2a20088ad7b08d2d33b5455b4342222436d41d303344bf6fa60ba8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cef0bceece2a20088ad7b08d2d33b5455b4342222436d41d303344bf6fa60ba8",
+      "shape": [
+        1,
+        120,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_01_internal_video_to_audio_attn_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1085a0d30bf285990c87611ed0ef28cc9769455c3367f2ae2cbfb9099fc92327",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6e7a4a27bac34c9ea2458e8413cbbdb0fa59f2820f76eb51789e7117eebbabc5",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b6264c14cb7a8c181381b16bbc1e70cd650d92a20f073048a0320acd524dd474",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ae95f3261b83449f24336784b856f954a77c8b9397dc576275087f88195e44f2",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "66449e9edc8c607fc7909456b4308c5be94e7dfc0d3578f16e012efcdcac8f85",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4ee3989222a5065030df1c6789afb99d6abbe78f64b8d65428d02f92f8a2b687",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "843f93ff2ba6dd29482c043702edeca8376e8d89712421696054081a72fb244c",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc945ed566a9240c182c45ce03637539efa566441c882dded0be8f5951e99bc8",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "22c5f6e6f070b16a39a2b3cef574c3ef14a684db33adf658c1b4d867567b851e",
+      "shape": [
+        1,
+        32,
+        120,
+        64
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b1ab45adf81e21babeb915d7c641eca6141fc8345790e3b25e71eaa3f30721b",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fc2fd413b2ca575112962aa4ea8d26403ee228e43c5b074587c95ba95aa788c3",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3c98c48dbe07770524e8435ca7226d270ce0b39fcdbffda915ff7d98f7e1a186",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc4233a78e3bf95d5ec90ab1eb8b1b101a2fda351f63efdead9d4199590fba53",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90ae6b527b5cffcd30e10d838eb64b44d41d3d83395b07fb538a920697aaa208",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f25cba2abd492602b819a6726ce9703fb641be987ba18e24ef903379728485fb",
+      "shape": [
+        1,
+        120,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "05410b9a11b80acb37b4a146b36704a109efc5b97449c5d40c0ec68456ab84eb",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "92281a245324c272443ea3f42d1a36ce7ef2a85e47921654953c0b466ddabff9",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "38618d34141a9374f4afd5939626ae187d0d511f1386f92a5168f6cba96797cf",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "38618d34141a9374f4afd5939626ae187d0d511f1386f92a5168f6cba96797cf",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a59988b9d5115e6ea24daf7563d1444eed885ec05875c644bed45bbe5553ca59",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3a73f6119cb58c36101ae30a81301bc341af468323bd6fb38ab1332c8a848067",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "92281a245324c272443ea3f42d1a36ce7ef2a85e47921654953c0b466ddabff9",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "267f4b4b226bff849d40092d07f27834cc2571de47f044a64d63588ebb4b1425",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a08d80ff192d2bc8afa857403f7a0ccaac20f19d5fe4aaf73507a96aa8a786cd",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "930b48e3cc0769523ec146fca3bfa3e00be71b7f3228db29cb17ea690e7f2aee",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "05410b9a11b80acb37b4a146b36704a109efc5b97449c5d40c0ec68456ab84eb",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07c5ab8b6d9b6493859146795578953f428be83ddac602a3a97c16af5d53ceca",
+      "shape": [
+        1,
+        120,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2332267a95e48f527e5acb37843da0425549bd31f961dfa32112afc5c75294c7",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2332267a95e48f527e5acb37843da0425549bd31f961dfa32112afc5c75294c7",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a59988b9d5115e6ea24daf7563d1444eed885ec05875c644bed45bbe5553ca59",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f066ddb4ada75191449551298de3b76b943327ea01b9981673c2c6ec841f30f3",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0499142bae7f0b382734d6ec9c29a2707d730f737725f180168eecb443186f85",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbc62530f44da79dc272c14578dfc9c9c07661584404cba0efc1196a6ea460ae",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_key_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b1bd158adebc7e19f44cfe4222ff524055ca0562a4bf8303b4edcf5923168272",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f5b36ce1dbc15d89aaaee168bc508e8e432d2d2cbf30f71dddb1ba93884f5116",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7b1d7d8a5e9a7468ef45380abb0b0c582ee093ddd2b216c92576de1a5f413ba6",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_rope_cos": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "450ddb633aa88ca8825d66b1f532067abc171e3fc24e727e35cb8252b33fedf4",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_query_rope_sin": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1b758821d4a10919ff30a39d16f1455ec700817526f1aa50a8af3b80a5aa3c6d",
+      "shape": [
+        1,
+        32,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "daf7bcf6155a4b3e8902f787a3b5623cfe12ad606c4a2eef4021af2d0a6c7c58",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f79533aa6ffb9a68d584477763d35434b06e583aeee42fe805c2eddcb712b5ca",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f8af8ddb1777dab57dd411c792798bf83467d52851b4b3c595eb93e22ef5e476",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c776bebbc08ed1176059547a4245814fa5060af1dce83bc80969f657d083db3a",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn1_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cddaee215fa4d7dc3a0b0cd2b98011072b0a1dda0afed2a2096e31387835aae7",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gate_logits": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "060b3b63d32e7c3def355589605ea29b785a66fa05ec7464f017a455fd61b4e1",
+      "shape": [
+        1,
+        18,
+        32
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gate_logits_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_attention_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "de8a006fce33f3e4acda81f51076be2c2f97384ac87a6ae0a249db1327ef20e0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1e129a7f3099fae443ad9cb9b4073f96b2c3b34560b97005c2d920c016fa2527",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_gated_x": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a459e1f07e13c0e8ea47c46a721973f981f4a35583a69cc836eadba882107207",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a459e1f07e13c0e8ea47c46a721973f981f4a35583a69cc836eadba882107207",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c370eeaced0115575601f75417a2ee6fe288f6eef119d6b06aac43a8b48f7488",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_key_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_output_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fd1abf30f32c8e996be7094c0d32ae7e326becc6dfaf366c885bc20f0358e3f0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_output_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1e129a7f3099fae443ad9cb9b4073f96b2c3b34560b97005c2d920c016fa2527",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_normalized": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_normalized_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52bafb6b3d76f1506f24fa67bee8dd07d07d533441637785f573be02a27de282",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e53f630517336cc6536857b29911b8e234ab5a75d8279584a15e33f7e47ccc84",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_query_ready": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_key": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "399a85c90a7a8e79fbf190d9a8a3673c142179c2e7f947934efc3f33c38dc38d",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "de8a006fce33f3e4acda81f51076be2c2f97384ac87a6ae0a249db1327ef20e0",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_query": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "eeb2d8532267d7221f4acf7cb48c0b4fca321244104db68e7741c485c3f382ab",
+      "shape": [
+        1,
+        18,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_sdpa_value": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9014aed264a003b0e13b412639629e915e7ce6a457053080a237b228db9dc6e4",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_value_projection": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9014aed264a003b0e13b412639629e915e7ce6a457053080a237b228db9dc6e4",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_deep_block_00_pass_02_internal_audio_attn2_value_projection_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c370eeaced0115575601f75417a2ee6fe288f6eef119d6b06aac43a8b48f7488",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    }
+  },
+  "transformer_subset": {
+    "file": "transformer-block0.safetensors",
+    "sha256": "36876888131ea517e793436c3934f65b898c2880f12939362e083e7577345824"
+  }
+}

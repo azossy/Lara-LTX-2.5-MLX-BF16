@@ -45,3 +45,17 @@ def test_gated_candidate_replays_exact_cuda_logits() -> None:
     assert candidate is not None
     mx.eval(candidate)
     np.testing.assert_array_equal(np.asarray(candidate.astype(mx.float32)), np.ones((1, 1, 4), dtype=np.float32))
+
+
+def test_fp32_linear_variant_rounds_once_to_bfloat16() -> None:
+    tool = _tool()
+
+    class Layer:
+        weight = mx.array([[1.0, 2.0], [3.0, 4.0]], dtype=mx.bfloat16)
+        bias = mx.array([0.5, -0.5], dtype=mx.bfloat16)
+
+    value = mx.array([[[2.0, 3.0]]], dtype=mx.bfloat16)
+    candidate = tool._linear_fp32(Layer(), value)
+
+    mx.eval(candidate)
+    np.testing.assert_array_equal(np.asarray(candidate.astype(mx.float32)), np.asarray([[[8.5, 17.5]]]))

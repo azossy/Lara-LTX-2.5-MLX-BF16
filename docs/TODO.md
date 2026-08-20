@@ -244,6 +244,10 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       seven selected transformer blocks across all three guidance passes, and
       block-0 internal module boundaries on CUDA. Transfer every artifact and
       verify its SHA-256 on the target Mac.
+- [x] Capture 408 named block-0 Attention sub-operation tensors from a compact,
+      hash-verified official checkpoint subset. The four deduplicated v6 shards
+      contain 118 unique tensors plus 290 aliases, reproduce all six source
+      block outputs exactly, and pass all 176 MLX exact-input comparisons.
 - [x] Replay all 15+3 steps on MLX with the exact captured SDE tensors. The
       replay exposed and fixed the incorrect AV cross-timestep multiplier by
       sourcing both 1000x architecture multipliers from checkpoint metadata.
@@ -252,10 +256,14 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       makes all 31+7 sampler inputs pass, with worst NRMSE `1.14e-5`.
 - [ ] Close the frozen final-latent gate. Exact input preprocessing now passes
       every field, the sampler-only replay passes, and exact-input final
-      block/output heads remain within component tolerance. The corrected full
-      replay improves final video NRMSE from `0.6856` to `0.3555` and audio from
-      `0.8152` to `0.1095`, but the strict gate remains a documented failing
-      diagnostic rather than a parity claim.
+      block/output heads remain within component tolerance. CUDA-aligned FP32
+      Q/K RMSNorm and RoPE accumulation reduce final video NRMSE from `0.3555`
+      to `0.1725`; final audio is `0.1184` versus the prior `0.1095`. Both are
+      large improvements over the original `0.6856`/`0.8152` replay, but the
+      strict gate remains a documented failing diagnostic rather than a parity
+      claim. The remaining earliest measurable differences are BF16 projection,
+      gating and fused-SDPA backend rounding, not checkpoint mapping or sampler
+      control flow.
 
 ## P5 — BF16 quality parity
 

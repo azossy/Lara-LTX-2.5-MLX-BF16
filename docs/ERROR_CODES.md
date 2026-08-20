@@ -7,8 +7,8 @@
 | LARA-CONFIG-002 | `LARA-CONFIG-002` | Required setting absent | Restore the key from reference config | `lara_ltx.config` |
 | LARA-CONFIG-003 | `LARA-CONFIG-003` | Setting has an invalid range or type | Restore a documented positive/ranged value | `lara_ltx.config` |
 | LARA-UPSTREAM-001 | `LARA-UPSTREAM-001` | Source HEAD differs from pinned commit | Fetch and checkout the pinned commit | Upstream freeze tooling |
-| LARA-MODEL-001 | `LARA-MODEL-001` | Required checkpoint unavailable | Accept model terms, authenticate and download | Model loader/downloader |
-| LARA-MODEL-002 | `LARA-MODEL-002` | Size, dtype or checksum mismatch | Replace only the affected file | Manifest verifier |
+| LARA-MODEL-001 | `LARA-MODEL-001` | Required checkpoint unavailable or authenticated byte-range transfer failed | Accept model terms, authenticate, verify transport and retry the resumable transfer | Model loader/downloader, `tools/models/download_safetensors_subset.py` |
+| LARA-MODEL-002 | `LARA-MODEL-002` | Size, dtype, checksum, header or selected range is invalid | Replace only the affected file/header cache and retry | Manifest verifier, `tools/models/download_safetensors_subset.py` |
 | LARA-MODEL-003 | `LARA-MODEL-003` | Invalid or unreadable safetensors header | Replace the affected checkpoint | `lara_ltx.models.checkpoint` |
 | LARA-MODEL-004 | `LARA-MODEL-004` | Unsupported checkpoint dtype | Use the official BF16 checkpoint | `lara_ltx.models.checkpoint` |
 | LARA-MODEL-005 | `LARA-MODEL-005` | Tensor shape/dtype byte count mismatch | Replace the corrupted checkpoint | `lara_ltx.models.checkpoint` |
@@ -61,7 +61,7 @@
 | LARA-RUNTIME-005 | `LARA-RUNTIME-005` | Official CUDA golden-pipeline inputs, grid or output are invalid, or the reference run failed | Inspect the captured log, verify the pinned BF16 pack and supported dimensions, then retry | `tools/parity/run_cuda_hq_golden.py` |
 | LARA-RUNTIME-006 | `LARA-RUNTIME-006` | CUDA reference media is missing, invalid, or lacks video/audio streams | Inspect the pipeline log, regenerate the artifact and validate it again | `tools/parity/validate_cuda_media.py` |
 | LARA-RUNTIME-007 | `LARA-RUNTIME-007` | The pinned native MLX-LM text runtime is not installed | Install locked dependencies on supported Apple Silicon | `lara_ltx.text_encoder.gemma4` |
-| LARA-RUNTIME-008 | `LARA-RUNTIME-008` | Two-stage sampler configuration, transition, or output is invalid | Verify sigma schedules, LoRA strengths, resident blocks, layouts, contexts, and outputs | `lara_ltx.pipeline.two_stage` |
+| LARA-RUNTIME-008 | `LARA-RUNTIME-008` | Two-stage sampler, CUDA capture, parity trace configuration, transition, or output is invalid | Verify sigma schedules, LoRA strengths, resident blocks, layouts, contexts, capture shards and outputs | `lara_ltx.pipeline.two_stage`, `tools/parity` |
 | LARA-RUNTIME-009 | `LARA-RUNTIME-009` | Sequential video/audio decode configuration, latent input or output is invalid | Verify decoder schedule, seed, memory budget, checkpoint loaders, latent shapes and finite outputs | `lara_ltx.pipeline.decode` |
 | LARA-RUNTIME-010 | `LARA-RUNTIME-010` | Requested grid exceeds the profile's measured Stage-2 token envelope, unified-memory capacity is insufficient, or capacity detection is unavailable | Retry with the recommended measured grid or select a separately reviewed custom profile; no automatic quantization is applied | `lara_ltx.pipeline.api` resource preflight |
 | LARA-SAMPLING-001 | `LARA-SAMPLING-001` | Scheduler steps, token count, shifts or terminal are invalid | Use the documented positive and finite schedule values | `lara_ltx.sampling.scheduler` |

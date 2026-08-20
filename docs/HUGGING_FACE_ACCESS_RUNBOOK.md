@@ -62,6 +62,28 @@ that endpoint only with all of the following controls:
    compute SHA-256 before accepting the component. The mirror is a transport
    route, not a source of authority.
 
+## Fast source and diagnostic-artifact transfers
+
+On AutoDL, apply `source /etc/network_turbo` only in the shell that performs
+GitHub or Hugging Face work. A normal Git clone/fetch then uses the accelerated
+route without writing a persistent Git proxy. Do not add global `http.proxy`
+or `https.proxy` settings: they survive the shell and have caused later GitHub
+connections to fail after the provider route changed.
+
+When a CUDA diagnostic needs only one transformer block, do not download the
+complete 80 GB pack. `tools/models/download_safetensors_subset.py` accepts the
+official endpoint, repository, pinned revision, path and one or more key
+prefixes as arguments; it downloads resumable byte ranges into the data disk,
+builds a compact loadable safetensors file and removes its token-bearing
+mode-600 curl configuration only after success. The compact payload must still
+be verified against the corresponding tensors in the full official checkpoint
+before it is accepted as evidence.
+
+For pulling already-published diagnostic shards back to the Mac, set
+`HF_HUB_DISABLE_XET=1` only if the Hugging Face Xet client stalls without byte
+progress. The ordinary HTTP fallback completed the v6 artifact transfer and
+all report-recorded SHA-256 values were then verified locally.
+
 ## Safety rules
 
 - Never accept model terms, create tokens, or place tokens in source code,

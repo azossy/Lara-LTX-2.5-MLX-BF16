@@ -266,6 +266,29 @@ The full raw v4 capture is a local diagnostic input to
 configuration and output SHA-256 values so the 57 MB replay artifact remains
 traceable to the 119 MB raw capture.
 
+For the first Attention divergence, replay the deduplicated v6 sub-operation
+trace. Repeat `--cuda-reference` once per report-listed shard; aliases are
+reconstructed from the report rather than duplicating tensor payloads:
+
+```sh
+.venv/bin/python tools/parity/compare_mlx_attention_internal_trace.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --cuda-reference golden/cuda_hq_attention_internal_v6.part-00.npz \
+  --cuda-reference golden/cuda_hq_attention_internal_v6.part-01.npz \
+  --cuda-reference golden/cuda_hq_attention_internal_v6.part-02.npz \
+  --cuda-reference golden/cuda_hq_attention_internal_v6.part-03.npz \
+  --cuda-report golden/cuda_hq_attention_internal_v6.json \
+  --config golden/manifests/attention_internal_parity_config.json \
+  --report "$LARA_REPORT_DIR/attention_internal_v6.json"
+```
+
+The checked-in result covers 176 projection, Q/K RMSNorm, RoPE, fused-SDPA,
+gate and output-projection comparisons. FP32 is used only for the captured
+CUDA-compatible Q/K RMSNorm and RoPE arithmetic before restoring BF16; AdaLN
+keeps its original BF16 calculation. Do not generalize the precision change to
+all normalization paths or weaken the frozen `0.02`/`0.9999` gate.
+
 ## P3 spatial latent-upscaler gate
 
 Before a full video decode, strict-load the complete reviewed Diffusion Video

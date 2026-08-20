@@ -88,6 +88,18 @@ video/audio final modulation and projection heads with normalized RMSE below
 bounded-load gate without loading full checkpoints into NumPy or creating a
 second full transformer copy.
 
+The v6 block-0 Attention trace captures 408 named CUDA boundaries across all
+six video/audio/self/text/cross modules and three guidance passes. Payload
+deduplication stores 118 unique tensors in four report-hashed shards and
+reconstructs 290 aliases. Direct compact-checkpoint replay is bit-exact with
+all six full-pipeline block outputs. On MLX, all 176 exact-input operations pass
+the frozen component gate. Computing learned Q/K RMSNorm and RoPE arithmetic in
+FP32 before restoring BF16 reduces normalized Q/K RMSNorm error to at most
+`1.66e-5` and RoPE-ready error to at most `2.04e-3`. The full stochastic replay
+then improves final video NRMSE from `0.3555` to `0.1725`; audio is `0.1184`
+versus `0.1095` before RoPE widening. This remains diagnosis, not final-latent
+acceptance.
+
 The same archive also contains a small, stable-scale BF16 video-only upstream
 transformer block (self-attention, text cross-attention and AdaLN-gated FFN),
 including every block weight, input and output. Its MLX counterpart passes the
