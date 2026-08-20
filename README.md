@@ -18,11 +18,12 @@ Full precision. No quantization. Original quality first.
 ## Development status
 
 The direct Python pipeline now runs the complete prompt-to-MP4 lifecycle with
-the official seven-file BF16 pack: packed Gemma 4 conditioning, 48 resident AV
+the official seven-file BF16 pack: packed Gemma 4 plus the official eight-layer
+video/audio prompt connectors, 48 resident AV
 transformer blocks, HQ two-stage res_2s sampling, x2 latent refinement,
 Diffusion Video VAE, Audio VAE/vocoder/BWE and H.264/AAC muxing. The fixed
 320x512/17-frame public-API smoke passes on M5 Max with a measured
-40,749,188,406-byte MLX peak and 66.1-second total runtime.
+40,749,191,990-byte MLX peak and 73.4-second total runtime.
 
 This is an engineering preview, not yet a final CUDA-quality-parity release.
 The multi-prompt quality corpus, blind review and canonical 1920x1088/121-frame
@@ -79,10 +80,11 @@ frame count must follow `8*k+1`.
 
 ### ComfyUI
 
-The release will provide a separate thin `ComfyUI-LaraLTX` adapter that invokes
-the exact same Python pipeline. It will not contain another model
-implementation. Installation and workflow JSON will be added only after P9 is
-verified.
+The separate thin adapter is available under `integrations/ComfyUI-LaraLTX`.
+Install `lara-ltx` in ComfyUI's Python environment, copy that directory into
+`ComfyUI/custom_nodes`, and restart ComfyUI. Its loader, text-to-video and save
+nodes invoke the exact same Python pipeline; the tested API workflow is under
+the adapter's `examples` directory.
 
 ## Supported Mac hardware
 
@@ -94,16 +96,19 @@ testing.
 
 | Workload | Steps | Result | MLX peak | Total time |
 |---|---:|---|---:|---:|
-| Public API smoke, 320x512, 17 frames, synchronized audio | Stage 1: 2; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,188,406 B | 66.1 s |
+| Public API smoke, 320x512, 17 frames, synchronized audio | Stage 1: 2; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,191,990 B | 73.4 s |
+| Same-process repeat (second run), same grid | Stage 1: 2; Stage 2: 3 | Byte-identical MP4; 0 B released-memory growth | 40,749,188,278 B | 69.1 s |
 
-Artifact: `golden/mlx_public_pipeline_smoke_report.json`. This reduced workload
-validates the lifecycle and is not an estimate for the canonical HQ workload.
+Artifacts: `golden/mlx_public_pipeline_smoke_report.json` and
+`golden/mlx_repeated_pipeline_report.json`. These reduced workloads validate
+the lifecycle and are not estimates for the canonical HQ workload.
 
 ## CUDA vs MLX quality comparison
 
-Checkpoint-backed component, two-stage latent, decode and public MP4 results are
-recorded. Multi-prompt perceptual comparison and blind review remain pending P5.
-Plausible-looking output alone will not be reported as parity.
+Checkpoint-backed component, prompt-connector, decode and public MP4 results
+are recorded. Exact stochastic full-trajectory replay needs one expanded CUDA
+trace; multi-prompt perceptual comparison and blind review remain pending P5.
+Plausible-looking output alone is not reported as parity.
 
 ## Canonical references
 

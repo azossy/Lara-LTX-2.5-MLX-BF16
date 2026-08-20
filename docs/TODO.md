@@ -225,11 +225,12 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       releases transformer ownership, clears the lifecycle cache boundary and
       only then constructs Video VAE/Audio VAE/vocoder decoding.
 - [x] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
-      The public API generates finite `[1,3,17,320,512]` video and
-      `[1,2,33120]` audio, then saves a verified H.264/AAC artifact in 66.1
-      seconds at a 40,749,188,406-byte peak.
-- [x] Pass HQ text-to-video plus synchronized audio before enabling optional
-      image conditioning through that same pipeline.
+      The corrected public API includes the official eight-layer prompt
+      connectors, generates finite `[1,3,17,320,512]` video and
+      `[1,2,33120]` audio, then saves a verified H.264/AAC artifact in 73.4
+      seconds at a 40,749,191,990-byte peak.
+- [ ] Close stochastic HQ trajectory and P5 quality gates before enabling
+      optional image conditioning through that same pipeline.
 
 ## P4 — Tensor and stage parity
 
@@ -239,6 +240,8 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Add first-divergent-layer bisect tooling.
 - [x] Freeze evidence-based tolerances and deterministic inputs in versioned
       manifests; the bisect runtime never infers a tolerance from its inputs.
+- [ ] Capture the official per-step Res2S SDE noise and denoiser boundaries on
+      CUDA, replay all 15+3 steps on MLX, and pass the frozen final-latent gate.
 
 ## P5 — BF16 quality parity
 
@@ -248,12 +251,14 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P6 — Apple Silicon optimization
 
-- [ ] Measure M5 Max 128 GB peak unified memory and repeated-run growth.
+- [x] Measure M5 Max 128 GB reduced-smoke peak unified memory and repeated-run
+      growth. Two same-process runs peak near 40.75 GB, produce byte-identical
+      MP4 files, and return to 18 active bytes/0 cache bytes with zero growth.
 - [ ] Measure load time, generation time and Metal utilization.
 - [ ] Apply safe MLX evaluation, lifetime, fused-op and compile optimizations.
 - [ ] Add custom Metal kernels only for measured unresolved bottlenecks.
 - [ ] Record per-stage active/cache/peak MLX memory and stage elapsed time.
-- [ ] Verify cache clearing occurs only at lifecycle boundaries, not in hot
+- [x] Verify cache clearing occurs only at lifecycle boundaries, not in hot
       transformer loops.
 
 ## P7 — Python API
@@ -271,11 +276,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P9 — Optional ComfyUI adapter
 
-- [ ] Create the separate thin `ComfyUI-LaraLTX` package.
-- [ ] Add loader, text-to-video and decode/output nodes.
+- [x] Create the separate thin `ComfyUI-LaraLTX` package.
+- [x] Add loader, text-to-video and decode/output nodes.
 - [ ] Add image-to-video only after core image-conditioning parity.
-- [ ] Supply tested example workflows.
-- [ ] Verify the plugin contains no model, VAE, scheduler, mapping or Metal copy.
+- [x] Supply a tested API workflow linking all three nodes.
+- [x] Verify the plugin contains no model, VAE, scheduler, mapping or Metal copy.
 
 ## P10 — GitHub and Hugging Face release
 

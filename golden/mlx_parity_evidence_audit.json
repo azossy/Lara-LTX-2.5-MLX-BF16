@@ -1,7 +1,7 @@
 {
   "component": "major_parity_evidence_audit",
   "component_count": 18,
-  "passed": true,
+  "passed": false,
   "results": [
     {
       "name": "gemma_feature_projection",
@@ -89,7 +89,7 @@
     },
     {
       "name": "two_stage_sampling",
-      "passed": true,
+      "passed": false,
       "report": "golden/mlx_two_stage_sampling_smoke_report.json",
       "schema_version": 1
     },

@@ -18,8 +18,8 @@
       33120
     ],
     "media_path": "/Users/chally/Desktop/MyProject/LTX2.5 \u110b\u1167\u11bc\u1109\u1161\u11bc\u110c\u1166\u110c\u1161\u11a8/golden/mlx_public_pipeline_smoke.mp4",
-    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
-    "media_size_bytes": 70985,
+    "media_sha256": "a83c36a4c112dee52f09fec9ccf0b0497f69b2cded8a0362f034642f8c9f625c",
+    "media_size_bytes": 77347,
     "video_shape": [
       1,
       3,
@@ -29,11 +29,11 @@
     ]
   },
   "passed": true,
-  "peak_bytes": 40749188406,
+  "peak_bytes": 40749191990,
   "schema_version": 1,
   "timing_seconds": {
-    "generate": 65.8090005419217,
-    "resolve": 0.00043183285742998123,
-    "total": 66.0664016250521
+    "generate": 73.14544108416885,
+    "resolve": 0.0006477502174675465,
+    "total": 73.36901137512177
   }
 }

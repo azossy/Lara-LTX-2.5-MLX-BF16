@@ -1,0 +1,84 @@
+{
+  "component": "repeated_public_pipeline",
+  "configuration": {
+    "frame_rate": 24.0,
+    "height": 320,
+    "maximum_released_memory_growth_bytes": 67108864,
+    "model": "models/LTX-2.5",
+    "num_frames": 17,
+    "prompt": "A calm ocean at sunrise, gentle waves, slow cinematic camera movement.",
+    "require_identical_media": true,
+    "runs": 2,
+    "schema_version": 1,
+    "seed": 25081900,
+    "steps": 2,
+    "width": 512
+  },
+  "identical_media": true,
+  "passed": true,
+  "released_memory_growth_bytes": {
+    "active_bytes": 0,
+    "cache_bytes": 0
+  },
+  "runs": [
+    {
+      "audio_shape": [
+        1,
+        2,
+        33120
+      ],
+      "elapsed_seconds": 91.03142854198813,
+      "evaluated_memory": {
+        "active_bytes": 33701906,
+        "cache_bytes": 25210868,
+        "peak_bytes": 40749175606
+      },
+      "finite": true,
+      "output": "/Users/chally/Desktop/MyProject/LTX2.5 \u110b\u1167\u11bc\u1109\u1161\u11bc\u110c\u1166\u110c\u1161\u11a8/golden/repeated_pipeline_runs/run_01.mp4",
+      "output_sha256": "47f193ac58fade123e4e9c7da34803bba07ad804f6cf5886b3f6445467919455",
+      "released_memory": {
+        "active_bytes": 18,
+        "cache_bytes": 0,
+        "peak_bytes": 40749175606
+      },
+      "run": 1,
+      "video_shape": [
+        1,
+        3,
+        17,
+        320,
+        512
+      ]
+    },
+    {
+      "audio_shape": [
+        1,
+        2,
+        33120
+      ],
+      "elapsed_seconds": 69.10653604194522,
+      "evaluated_memory": {
+        "active_bytes": 33701906,
+        "cache_bytes": 25210868,
+        "peak_bytes": 40749188278
+      },
+      "finite": true,
+      "output": "/Users/chally/Desktop/MyProject/LTX2.5 \u110b\u1167\u11bc\u1109\u1161\u11bc\u110c\u1166\u110c\u1161\u11a8/golden/repeated_pipeline_runs/run_02.mp4",
+      "output_sha256": "47f193ac58fade123e4e9c7da34803bba07ad804f6cf5886b3f6445467919455",
+      "released_memory": {
+        "active_bytes": 18,
+        "cache_bytes": 0,
+        "peak_bytes": 40749188278
+      },
+      "run": 2,
+      "video_shape": [
+        1,
+        3,
+        17,
+        320,
+        512
+      ]
+    }
+  ],
+  "schema_version": 1
+}

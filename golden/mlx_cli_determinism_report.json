@@ -14,15 +14,15 @@
   },
   "first_run": {
     "interface": "python_api",
-    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
-    "total_seconds": 66.0664016250521
+    "media_sha256": "a83c36a4c112dee52f09fec9ccf0b0497f69b2cded8a0362f034642f8c9f625c",
+    "total_seconds": 73.36901137512177
   },
   "second_run": {
     "interface": "installed_cli",
-    "media_sha256": "b558d848a42848602b4e7eb9565f1f62eb866d8e6eb075910ef70f1c931b2b00",
-    "maximum_resident_set_bytes": 27770994688,
-    "os_peak_memory_footprint_bytes": 44891198696,
-    "total_seconds": 56.31
+    "media_sha256": "a83c36a4c112dee52f09fec9ccf0b0497f69b2cded8a0362f034642f8c9f625c",
+    "maximum_resident_set_bytes": 27770929152,
+    "os_peak_memory_footprint_bytes": 44893803632,
+    "total_seconds": 62.86
   },
   "ffprobe": {
     "audio_channels": 2,

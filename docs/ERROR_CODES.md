@@ -50,6 +50,7 @@
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
 | LARA-PARITY-005 | `LARA-PARITY-005` | Decoded media comparison, stream layout, or frozen quality thresholds are invalid | Verify both MP4 files, FFmpeg/FFprobe paths, stream layouts and the quality profile | `tools/parity/compare_media_quality.py` |
+| LARA-PERF-001 | `LARA-PERF-001` | Repeated-generation configuration, run count, memory-growth limit, model, or output path is invalid | Restore the versioned performance profile and verify the local model/output paths | `tools/performance/measure_repeated_pipeline.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |
 | LARA-RUNTIME-002 | `LARA-RUNTIME-002` | CUDA is unavailable | Start a GPU instance and retry | Golden generator |
 | LARA-RUNTIME-003 | `LARA-RUNTIME-003` | Metal is unavailable | Use a supported Apple Silicon Mac and pinned MLX environment | Metal feasibility probes |

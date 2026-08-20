@@ -218,12 +218,13 @@ smoke manifest:
 ```
 
 This gate must retain exactly 48 blocks, switch the configured LoRA strength in
-place, consume all four captured noiser boundaries, produce finite Stage-2
-video and preserved Stage-1 audio, and avoid a second transformer state. The
-checked-in one-interval lifecycle report peaks at 40,749,297,240 bytes. The
-sigma indices, sampler seeds/behavior, guidance values, strengths, reference
-keys and block count all live in the reviewed JSON manifest rather than source
-code.
+place, consume all four initial noiser boundaries plus every captured Res2S
+substep/step SDE tensor, compare final Stage-2 video and preserved Stage-1 audio
+against CUDA, and avoid a second transformer state. The expanded schema-2 CUDA
+trace is produced by `capture_cuda_hq_boundaries.py`; its one required recapture
+is still pending. Sigma indices, sampler behavior, guidance values, strengths,
+reference keys, tolerances and block count all live in the reviewed JSON
+manifest rather than source code.
 
 ## P3 spatial latent-upscaler gate
 

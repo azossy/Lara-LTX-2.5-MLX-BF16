@@ -110,5 +110,6 @@
   "LARA-PARITY-004": "The ordered parity bisect request is invalid ({reason}). Verify both NPZ archives, boundary order and frozen tolerance profile.",
   "LARA-PARITY-005": "The decoded media quality comparison is invalid ({reason}). Verify both media files, decoder binaries, stream layouts, and frozen quality thresholds.",
   "LARA-MODEL-038": "Prompt connector entry or configuration {key} is missing or incompatible. Use the pinned official 22B BF16 transformer checkpoint.",
-  "LARA-TENSOR-031": "The prompt connector input is invalid ({reason}). Verify projected prompt features, token masks, sequence length, and connector dimensions."
+  "LARA-TENSOR-031": "The prompt connector input is invalid ({reason}). Verify projected prompt features, token masks, sequence length, and connector dimensions.",
+  "LARA-PERF-001": "The repeated-generation performance request is invalid ({reason}). Verify the versioned configuration, run count, memory-growth limit, model path, and output directory."
 }
