@@ -220,13 +220,19 @@ bit-exact. Peak memory is 1,733,445,048 bytes.
   building one giant lazy graph remains unnecessary risk.
 - The small-token checkpoint smoke uses the real 42 GB transformer weights,
   text and AV cross-attention, AdaLN, all guidance passes and stage-specific
-  LoRA handling. Its 39.30 GB peak validates model residency, but its timing is
-  not a maximum-token generation benchmark.
+  LoRA handling. Its 39.30 GB peak validates model residency.
+- The complete latent sampling smoke extends that evidence through real
+  `[1,120,128]`/`[1,18,128]` Stage-1 inputs, 48 resident blocks, canonical HQ
+  CFG/AV guidance, checkpoint x2 upscaling, the in-place `0.25` to `0.5` LoRA
+  transition and `[1,480,128]` Stage-2 refinement. It returns finite final
+  video and preserved Stage-1 audio at a 40,749,297,240-byte peak. Its
+  one-interval schedules are a lifecycle smoke, not a full-duration latency or
+  CUDA end-to-end numerical-parity claim.
 - With component-level residency, the measured guided transformer path has
   substantial headroom under the 115.45 GB budget. Full production token
   shapes still require an end-to-end peak and latency measurement.
-- The remaining high-risk technical paths are the full 48-block/high-token
-  orchestration, two-stage component lifecycle, DiffVAE tile performance, and
-  audiovisual mux synchronization. Full Gemma 4 conditioning, spatial x2
-  upscaling and 48 kHz waveform reconstruction are now executable; Gemma's
+- The remaining high-risk technical paths are the full-schedule latency run,
+  DiffVAE tile performance and audiovisual mux synchronization. Full Gemma 4
+  conditioning, high-token two-stage transformer lifecycle, spatial x2
+  upscaling and 48 kHz waveform reconstruction are executable; Gemma's
   CUDA-versus-MLX hidden-state report remains evidence work.

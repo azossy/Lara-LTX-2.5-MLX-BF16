@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "block_count": 48,
+  "frame_rate": 24.0,
+  "stage_one_lora_strength": 0.25,
+  "stage_two_lora_strength": 0.5,
+  "stage_one_schedule_indices": [0, -1],
+  "stage_two_schedule_indices": [0, -1],
+  "reference_keys": {
+    "video_positive": "prompt_video_positive",
+    "video_negative": "prompt_video_negative",
+    "audio_positive": "prompt_audio_positive",
+    "audio_negative": "prompt_audio_negative",
+    "stage_one_video_input": "stage_1_noiser_input_0",
+    "stage_one_video_output": "stage_1_noiser_output_0",
+    "stage_one_audio_input": "stage_1_noiser_input_1",
+    "stage_one_audio_output": "stage_1_noiser_output_1",
+    "stage_one_video_layout": "stage_1_video_latent",
+    "stage_one_audio_layout": "stage_1_audio_latent",
+    "stage_one_sigmas": "stage_1_sigmas",
+    "stage_two_video_input": "stage_2_noiser_input_0",
+    "stage_two_video_output": "stage_2_noiser_output_0",
+    "stage_two_audio_input": "stage_2_noiser_input_1",
+    "stage_two_audio_output": "stage_2_noiser_output_1",
+    "stage_two_video_layout": "stage_2_video_latent",
+    "stage_two_sigmas": "stage_2_sigmas"
+  },
+  "stage_one_sampler": {
+    "eta": 0.5,
+    "bongmath": false,
+    "bongmath_max_iterations": 0,
+    "noise_seed": 25081900,
+    "noise_seed_substep": 25091900
+  },
+  "stage_two_sampler": {
+    "eta": 0.5,
+    "bongmath": false,
+    "bongmath_max_iterations": 0,
+    "noise_seed": 25081900,
+    "noise_seed_substep": 25091900
+  },
+  "video_guidance": {
+    "cfg_scale": 3.0,
+    "stg_scale": 0.0,
+    "stg_blocks": [],
+    "rescale_scale": 0.45,
+    "modality_scale": 3.0,
+    "skip_step": 0
+  },
+  "audio_guidance": {
+    "cfg_scale": 7.0,
+    "stg_scale": 0.0,
+    "stg_blocks": [],
+    "rescale_scale": 1.0,
+    "modality_scale": 3.0,
+    "skip_step": 0
+  }
+}

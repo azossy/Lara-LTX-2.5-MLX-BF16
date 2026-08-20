@@ -45,6 +45,7 @@
   "LARA-RUNTIME-005": "The official CUDA golden pipeline could not validate its inputs, temporal grid, or output. Inspect the captured log, verify the pinned BF16 model pack and supported dimensions, then retry.",
   "LARA-RUNTIME-006": "The CUDA reference media artifact is missing, invalid, or lacks the required video and audio streams. Inspect the pipeline log and regenerate the artifact.",
   "LARA-RUNTIME-007": "The native MLX-LM text runtime is unavailable. Install the locked project dependencies on a supported Apple Silicon Mac.",
+  "LARA-RUNTIME-008": "The two-stage sampling runtime is invalid ({reason}). Verify both sigma schedules, LoRA strengths, resident block count, latent layouts, contexts, and stage outputs.",
   "LARA-SAMPLING-001": "The LTX sigma schedule is invalid ({reason}). Use positive steps/token count, finite shifts and a terminal strictly between zero and one.",
   "LARA-SAMPLING-002": "The CFG/STG guidance request is invalid ({reason}). Check scales, pass predictions and transformer block indices.",
   "LARA-SAMPLING-003": "The res_2s sampling request is invalid ({reason}). Check the decreasing sigma schedule, modalities, eta and sampler settings.",

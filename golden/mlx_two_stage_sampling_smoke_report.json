@@ -1,0 +1,96 @@
+{
+  "component": "checkpoint_two_stage_sampling_smoke",
+  "configuration": {
+    "audio_guidance": {
+      "cfg_scale": 7.0,
+      "modality_scale": 3.0,
+      "rescale_scale": 1.0,
+      "skip_step": 0,
+      "stg_blocks": [],
+      "stg_scale": 0.0
+    },
+    "block_count": 48,
+    "frame_rate": 24.0,
+    "reference_keys": {
+      "audio_negative": "prompt_audio_negative",
+      "audio_positive": "prompt_audio_positive",
+      "stage_one_audio_input": "stage_1_noiser_input_1",
+      "stage_one_audio_layout": "stage_1_audio_latent",
+      "stage_one_audio_output": "stage_1_noiser_output_1",
+      "stage_one_sigmas": "stage_1_sigmas",
+      "stage_one_video_input": "stage_1_noiser_input_0",
+      "stage_one_video_layout": "stage_1_video_latent",
+      "stage_one_video_output": "stage_1_noiser_output_0",
+      "stage_two_audio_input": "stage_2_noiser_input_1",
+      "stage_two_audio_output": "stage_2_noiser_output_1",
+      "stage_two_sigmas": "stage_2_sigmas",
+      "stage_two_video_input": "stage_2_noiser_input_0",
+      "stage_two_video_layout": "stage_2_video_latent",
+      "stage_two_video_output": "stage_2_noiser_output_0",
+      "video_negative": "prompt_video_negative",
+      "video_positive": "prompt_video_positive"
+    },
+    "schema_version": 1,
+    "stage_one_lora_strength": 0.25,
+    "stage_one_sampler": {
+      "bongmath": false,
+      "bongmath_max_iterations": 0,
+      "eta": 0.5,
+      "noise_seed": 25081900,
+      "noise_seed_substep": 25091900
+    },
+    "stage_one_schedule_indices": [
+      0,
+      -1
+    ],
+    "stage_two_lora_strength": 0.5,
+    "stage_two_sampler": {
+      "bongmath": false,
+      "bongmath_max_iterations": 0,
+      "eta": 0.5,
+      "noise_seed": 25081900,
+      "noise_seed_substep": 25091900
+    },
+    "stage_two_schedule_indices": [
+      0,
+      -1
+    ],
+    "video_guidance": {
+      "cfg_scale": 3.0,
+      "modality_scale": 3.0,
+      "rescale_scale": 0.45,
+      "skip_step": 0,
+      "stg_blocks": [],
+      "stg_scale": 0.0
+    }
+  },
+  "final_lora_strength": 0.5,
+  "outputs": {
+    "audio": {
+      "finite": true,
+      "sha256": "7703258e27babdfcccd56fa38d08db6eb795ed42cbcc91eddfd6a57a2a1e1fc7",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ]
+    },
+    "video": {
+      "finite": true,
+      "sha256": "ab9f430ba4113d6a1a195421d72283a637351df820b1985b3b7f5700a5920f03",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ]
+    }
+  },
+  "passed": true,
+  "peak_bytes": 40749297240,
+  "resident_block_count": 48,
+  "resident_bytes": 37131222552,
+  "schema_version": 1
+}

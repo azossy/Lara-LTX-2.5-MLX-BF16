@@ -200,6 +200,31 @@ reuse the `[1,18,128]` Stage-1 audio, execute the checkpoint-backed normalized
 x2 upscaler, and apply Stage-2 sigma noising in the official float32 lerp
 order. The checked-in peak is 1,733,445,048 bytes.
 
+Validate the complete checkpoint-backed sampling lifecycle with the reviewed
+smoke manifest:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_two_stage_sampling.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --upscaler-checkpoint "$LARA_MODEL_ROOT/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors" \
+  --video-vae-checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --input-mapping golden/manifests/transformer_input_mapping.json \
+  --output-mapping golden/manifests/transformer_output_mapping.json \
+  --upscaler-mapping golden/manifests/spatial_upscaler_mapping.json \
+  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --config golden/manifests/two_stage_sampling_smoke_config.json \
+  --report "$LARA_REPORT_DIR/two_stage_sampling_smoke.json"
+```
+
+This gate must retain exactly 48 blocks, switch the configured LoRA strength in
+place, consume all four captured noiser boundaries, produce finite Stage-2
+video and preserved Stage-1 audio, and avoid a second transformer state. The
+checked-in one-interval lifecycle report peaks at 40,749,297,240 bytes. The
+sigma indices, sampler seeds/behavior, guidance values, strengths, reference
+keys and block count all live in the reviewed JSON manifest rather than source
+code.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

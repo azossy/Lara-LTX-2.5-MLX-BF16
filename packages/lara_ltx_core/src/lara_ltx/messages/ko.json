@@ -45,6 +45,7 @@
   "LARA-RUNTIME-005": "공식 CUDA golden 파이프라인이 입력, 시간 그리드 또는 출력을 검증하지 못했습니다. 캡처된 로그를 확인하고 고정 BF16 모델 팩과 지원 해상도를 검증한 뒤 다시 시도하세요.",
   "LARA-RUNTIME-006": "CUDA 기준 미디어 아티팩트가 없거나 올바르지 않거나 필요한 영상·오디오 스트림을 포함하지 않습니다. 파이프라인 로그를 확인하고 아티팩트를 다시 생성하세요.",
   "LARA-RUNTIME-007": "네이티브 MLX-LM 텍스트 런타임을 사용할 수 없습니다. 지원되는 Apple Silicon Mac에 잠금된 프로젝트 의존성을 설치하세요.",
+  "LARA-RUNTIME-008": "2단계 sampling runtime이 올바르지 않습니다({reason}). 두 sigma schedule, LoRA 강도, 상주 block 수, latent layout, context와 stage 출력을 확인하세요.",
   "LARA-SAMPLING-001": "LTX sigma 일정이 올바르지 않습니다({reason}). 양수 step/token 수, 유한한 shift와 0과 1 사이의 terminal 값을 사용하세요.",
   "LARA-SAMPLING-002": "CFG/STG guidance 요청이 올바르지 않습니다({reason}). scale, pass prediction과 Transformer block 번호를 확인하세요.",
   "LARA-SAMPLING-003": "res_2s sampling 요청이 올바르지 않습니다({reason}). 감소하는 sigma 일정, modality, eta와 sampler 설정을 확인하세요.",

@@ -17,11 +17,11 @@ Full precision. No quantization. Original quality first.
 
 ## Development status
 
-P0 CUDA golden-reference work and P1 bounded BF16 checkpoint loading are
-complete. Real target-Mac reports now pass for the mapped AV block, Gemma LTX
-feature projections, transformer output heads and stage-local LoRA fusion. P2
-conditioning/patchification and P3 end-to-end integration remain; no playable
-MLX model output or end-to-end parity is claimed yet.
+P0 CUDA golden-reference work, P1 bounded BF16 checkpoint loading and P2 core
+inference are complete. P3 now runs the real 48-block two-stage latent pipeline
+on MLX, including guidance, in-place stage LoRA transition and checkpoint x2
+upscaling. Diffusion video decode integration and synchronized media muxing
+remain, so no playable MLX model output or end-to-end parity is claimed yet.
 
 This is not a serving-engine project. The deliverable is one direct Python MLX
 pipeline, followed only after core parity by a thin CLI and optional thin
@@ -31,7 +31,7 @@ PyTorch/MPS ComfyUI port are explicitly out of scope.
 ## Quick Start
 
 The commands below define the target release experience. They are not yet a
-working release contract while P1–P6 parity work is in progress. The P0 CUDA
+working release contract while P3–P6 parity work is in progress. The P0 CUDA
 fixed-seed reference, boundary trace and media validation are complete.
 
 ### Python
@@ -73,8 +73,8 @@ P6 measurement. No estimated performance figures are claimed.
 
 ## CUDA vs MLX quality comparison
 
-Checkpoint-backed component tensor results are recorded; complete conditioning,
-stage and output-quality results remain pending P2, P4 and P5.
+Checkpoint-backed component and two-stage latent results are recorded; complete
+decoded-output quality results remain pending P3, P4 and P5.
 Plausible-looking output alone will not be reported as parity.
 
 ## Canonical references

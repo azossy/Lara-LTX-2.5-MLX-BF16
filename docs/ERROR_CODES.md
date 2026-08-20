@@ -52,6 +52,7 @@
 | LARA-RUNTIME-005 | `LARA-RUNTIME-005` | Official CUDA golden-pipeline inputs, grid or output are invalid, or the reference run failed | Inspect the captured log, verify the pinned BF16 pack and supported dimensions, then retry | `tools/parity/run_cuda_hq_golden.py` |
 | LARA-RUNTIME-006 | `LARA-RUNTIME-006` | CUDA reference media is missing, invalid, or lacks video/audio streams | Inspect the pipeline log, regenerate the artifact and validate it again | `tools/parity/validate_cuda_media.py` |
 | LARA-RUNTIME-007 | `LARA-RUNTIME-007` | The pinned native MLX-LM text runtime is not installed | Install locked dependencies on supported Apple Silicon | `lara_ltx.text_encoder.gemma4` |
+| LARA-RUNTIME-008 | `LARA-RUNTIME-008` | Two-stage sampler configuration, transition, or output is invalid | Verify sigma schedules, LoRA strengths, resident blocks, layouts, contexts, and outputs | `lara_ltx.pipeline.two_stage` |
 | LARA-SAMPLING-001 | `LARA-SAMPLING-001` | Scheduler steps, token count, shifts or terminal are invalid | Use the documented positive and finite schedule values | `lara_ltx.sampling.scheduler` |
 | LARA-SAMPLING-002 | `LARA-SAMPLING-002` | CFG/STG scales, prediction passes or perturbation indices are invalid | Correct the guidance configuration and required passes | `lara_ltx.sampling.guidance`, `lara_ltx.sampling.perturbations` |
 | LARA-SAMPLING-003 | `LARA-SAMPLING-003` | res_2s schedule, modality, eta or SDE step is invalid | Supply a decreasing schedule and valid modality states/sampler settings | `lara_ltx.sampling.res2s` |

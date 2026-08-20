@@ -206,8 +206,13 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       reset, so configured guidance skipping and cached reuse are exact;
       the 48-block two-stage checkpoint smoke executes all four passes at a
       39,296,740,696-byte peak.
-- [ ] Complete the stage sampler/LoRA component residency transitions around
-      the validated Stage-1-to-2 latent handoff and decoding.
+- [x] Complete the stage sampler/LoRA component residency transitions around
+      the validated Stage-1-to-2 latent handoff. The checkpoint-backed runtime
+      runs guided Stage 1, normalized x2/noise transition, in-place LoRA
+      strength change and simple Stage 2 with 48 resident blocks. The fixed
+      smoke returns finite `[1,128,3,10,16]` video and preserved
+      `[1,8,18,16]` Stage-1 audio at a 40,749,297,240-byte peak. Decoder
+      residency and muxing remain in the following two open items.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.
