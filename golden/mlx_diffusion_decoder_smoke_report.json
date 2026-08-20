@@ -1,0 +1,59 @@
+{
+  "component": "diffusion_video_decoder_fixed_latent_smoke",
+  "configuration": {
+    "activation_budget_bytes": 8589934592,
+    "expected_frames_key": "decoded_video_chunk_0",
+    "latent_key": "video_decoder_input_latent",
+    "noise_seed": 25081900,
+    "schema_version": 1,
+    "timesteps": [
+      1.0
+    ]
+  },
+  "elapsed_seconds": 1.808093583676964,
+  "expected_output_shape": [
+    1,
+    3,
+    17,
+    320,
+    512
+  ],
+  "input_shape": [
+    1,
+    128,
+    3,
+    10,
+    16
+  ],
+  "output": {
+    "finite": true,
+    "maximum": 1.234375,
+    "mean": -0.7554166316986084,
+    "minimum": -1.2265625,
+    "sha256": "b26309ac7147b4cf8ecdf5e689d342b490edb8949e8bb1ef438bb0a24a2533b7",
+    "shape": [
+      1,
+      3,
+      17,
+      320,
+      512
+    ],
+    "standard_deviation": 0.34599676728248596
+  },
+  "passed": true,
+  "peak_bytes": 3168602284,
+  "schema_version": 1,
+  "tiling": {
+    "resident_stage3_bytes": 44564480,
+    "stage4": [
+      17,
+      40,
+      64
+    ],
+    "stage5": [
+      33,
+      80,
+      128
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "video_latent_key": "video_decoder_input_latent",
+  "audio_latent_key": "audio_decoder_input_latent",
+  "video_noise_seed": 25081900,
+  "video_timesteps": [1.0],
+  "video_activation_budget_bytes": 8589934592,
+  "frame_rate": 24.0,
+  "audio_sample_rate": 48000,
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "pixel_format": "yuv420p",
+  "audio_bitrate": "192k",
+  "crf": 18,
+  "timeout_seconds": 300,
+  "ffmpeg_binary": "ffmpeg",
+  "ffprobe_binary": "ffprobe"
+}

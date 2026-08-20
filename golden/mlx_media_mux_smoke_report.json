@@ -1,0 +1,56 @@
+{
+  "component": "local_media_mux_smoke",
+  "configuration": {
+    "audio_bitrate": "192k",
+    "audio_codec": "aac",
+    "audio_key": "decoded_audio",
+    "audio_sample_rate": 48000,
+    "crf": 18,
+    "ffmpeg_binary": "ffmpeg",
+    "ffprobe_binary": "ffprobe",
+    "frame_rate": 24.0,
+    "pixel_format": "yuv420p",
+    "schema_version": 1,
+    "timeout_seconds": 300,
+    "video_codec": "libx264",
+    "video_key": "decoded_video_chunk_0"
+  },
+  "ffprobe": {
+    "format": {
+      "duration": "0.708333",
+      "size": "83801"
+    },
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "avg_frame_rate": "24/1",
+        "codec_name": "h264",
+        "codec_type": "video",
+        "height": 320,
+        "nb_frames": "17",
+        "width": 512
+      },
+      {
+        "avg_frame_rate": "0/0",
+        "channels": 2,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "nb_frames": "34",
+        "sample_rate": "48000"
+      }
+    ]
+  },
+  "media": {
+    "duration_seconds": 0.708333,
+    "path": "/Users/chally/Desktop/MyProject/LTX2.5 \u110b\u1167\u11bc\u1109\u1161\u11bc\u110c\u1166\u110c\u1161\u11a8/golden/mlx_media_mux_smoke.mp4",
+    "sha256": "5429f94e15e8ed5ed6a152da7ce6043a9cb92ef8cf2a6f5f77668b568eef7f9a",
+    "size_bytes": 83801,
+    "stream_types": [
+      "audio",
+      "video"
+    ]
+  },
+  "passed": true,
+  "schema_version": 1
+}

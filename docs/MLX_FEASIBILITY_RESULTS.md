@@ -232,7 +232,10 @@ bit-exact. Peak memory is 1,733,445,048 bytes.
   substantial headroom under the 115.45 GB budget. Full production token
   shapes still require an end-to-end peak and latency measurement.
 - The remaining high-risk technical paths are the full-schedule latency run,
-  DiffVAE tile performance and audiovisual mux synchronization. Full Gemma 4
-  conditioning, high-token two-stage transformer lifecycle, spatial x2
-  upscaling and 48 kHz waveform reconstruction are executable; Gemma's
-  CUDA-versus-MLX hidden-state report remains evidence work.
+  adaptive maximum-resolution DiffVAE tiling and one prompt-to-MP4 lifecycle
+  runner. The fixed official decoder latent produces 17 finite 320x512 frames
+  at a 3.17 GB peak, and sequential Video VAE → Audio VAE → vocoder/BWE →
+  ffmpeg execution preserves all 17 frames with 48 kHz stereo audio. Full
+  Gemma 4 conditioning, high-token two-stage transformer lifecycle, spatial x2
+  upscaling and local media output are executable; Gemma's CUDA-versus-MLX
+  hidden-state report remains evidence work.

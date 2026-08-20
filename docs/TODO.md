@@ -179,7 +179,7 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       HQ trace; the checkpoint-backed video noiser input reaches NRMSE
       `0.01272`/cosine `0.999919`, its noised output reaches NRMSE `0.001681`/
       cosine `0.999999`, and both audio boundaries are bit-exact.
-- [ ] Complete diffusion video VAE: non-attention Conv decoder subset and
+- [x] Complete diffusion video VAE: non-attention Conv decoder subset and
       CUDA-BF16 assembly parity, per-frame attention, and timestep-conditioned
       ResNet/mid-block parity are complete. Production Diffusion VAE shared
       layers, deterministic NABlock/stage, and stage-5 combined block parity are
@@ -189,9 +189,10 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       trailing-frame ghosting, and exact output cropping are implemented. A
       conservative activation-budget selector now chooses both high-resolution
       tile sizes without quantization or weight swapping; live Metal free-memory
-      discovery remains pipeline integration work. The production loader now
+      discovery remains a P6 adaptive-memory enhancement. The production loader now
       strict-loads all 407 reviewed official decoder/statistic targets as BF16
-      at an 834,289,940-byte peak; a fixed-latent full-frame decode remains.
+      at an 834,289,940-byte peak. The fixed official latent decodes to finite
+      `[1,3,17,320,512]` frames in 1.81 seconds at a 3,168,602,284-byte peak.
 - [x] Port and checkpoint-back the causal pixel-normalized Audio VAE decoder.
       All 56 decoder weights plus two normalization statistics load from the
       official shard; the CUDA spectrogram boundary passes with NRMSE
@@ -200,8 +201,13 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       BWE residual generator and 16-to-48 kHz sinc reconstruction. The complete
       Metal waveform path passes the CUDA reference with NRMSE `0.004552` and
       cosine similarity `0.999993` at a 1,753,922,396-byte peak.
-- [ ] Wire decoded 48 kHz stereo waveforms into the end-to-end media mux and
-      validate synchronization against the fixed CUDA clip.
+- [x] Wire decoded 48 kHz stereo waveforms into the local media result and MP4
+      mux. The fixed decoded boundaries preserve all 17 video frames instead
+      of truncating to the slightly shorter audio stream; ffprobe verifies
+      H.264/AAC, 24 fps, 48 kHz stereo and 0.708333-second duration. The
+      checkpoint-sequential runtime then reproduces `[1,3,17,320,512]` MLX
+      frames plus `[1,2,33120]` MLX audio and saves a playable MP4 at a
+      3,168,606,884-byte peak.
 - [x] Connect conditioned/unconditioned CFG, per-block STG and AV-isolation
       passes around the resident denoiser in one batch. The res_2s sampler now
       supplies the official schedule index, including the midpoint index-0

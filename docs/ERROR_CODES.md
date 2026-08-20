@@ -44,6 +44,8 @@
 | LARA-MODEL-035 | `LARA-MODEL-035` | Packed Gemma 4 text configuration or one of its 666 text-core mappings is incompatible | Use the pinned official BF16 encoder and regenerate the reviewed text-core manifest | `lara_ltx.models.gemma_text` |
 | LARA-MODEL-036 | `LARA-MODEL-036` | A packed Gemma tokenizer or processor byte asset is missing, truncated or invalid | Restore the pinned encoder, verify its checksum and retry | `lara_ltx.models.gemma_assets` |
 | LARA-MODEL-037 | `LARA-MODEL-037` | Diffusion Video VAE decoder entry or manifest metadata is incompatible with the reviewed 407-target BF16 layout | Use the pinned Video VAE checkpoint and matching reviewed mapping | `lara_ltx.video_vae.diffusion_decoder` |
+| LARA-MEDIA-001 | `LARA-MEDIA-001` | Decoded video/audio shape, values, rate, encoding option or output path is invalid | Supply finite NCTHW RGB video, stereo audio, valid encoding settings and an MP4 path | `lara_ltx.media.result` |
+| LARA-MEDIA-002 | `LARA-MEDIA-002` | Local ffmpeg discovery, execution or encoding failed | Install/configure ffmpeg, verify output permissions and retry | `lara_ltx.media.result` |
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |
@@ -54,6 +56,7 @@
 | LARA-RUNTIME-006 | `LARA-RUNTIME-006` | CUDA reference media is missing, invalid, or lacks video/audio streams | Inspect the pipeline log, regenerate the artifact and validate it again | `tools/parity/validate_cuda_media.py` |
 | LARA-RUNTIME-007 | `LARA-RUNTIME-007` | The pinned native MLX-LM text runtime is not installed | Install locked dependencies on supported Apple Silicon | `lara_ltx.text_encoder.gemma4` |
 | LARA-RUNTIME-008 | `LARA-RUNTIME-008` | Two-stage sampler configuration, transition, or output is invalid | Verify sigma schedules, LoRA strengths, resident blocks, layouts, contexts, and outputs | `lara_ltx.pipeline.two_stage` |
+| LARA-RUNTIME-009 | `LARA-RUNTIME-009` | Sequential video/audio decode configuration, latent input or output is invalid | Verify decoder schedule, seed, memory budget, checkpoint loaders, latent shapes and finite outputs | `lara_ltx.pipeline.decode` |
 | LARA-SAMPLING-001 | `LARA-SAMPLING-001` | Scheduler steps, token count, shifts or terminal are invalid | Use the documented positive and finite schedule values | `lara_ltx.sampling.scheduler` |
 | LARA-SAMPLING-002 | `LARA-SAMPLING-002` | CFG/STG scales, prediction passes or perturbation indices are invalid | Correct the guidance configuration and required passes | `lara_ltx.sampling.guidance`, `lara_ltx.sampling.perturbations` |
 | LARA-SAMPLING-003 | `LARA-SAMPLING-003` | res_2s schedule, modality, eta or SDE step is invalid | Supply a decreasing schedule and valid modality states/sampler settings | `lara_ltx.sampling.res2s` |

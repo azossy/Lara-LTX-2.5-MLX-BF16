@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "video_key": "decoded_video_chunk_0",
+  "audio_key": "decoded_audio",
+  "frame_rate": 24.0,
+  "audio_sample_rate": 48000,
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "pixel_format": "yuv420p",
+  "audio_bitrate": "192k",
+  "crf": 18,
+  "timeout_seconds": 300,
+  "ffmpeg_binary": "ffmpeg",
+  "ffprobe_binary": "ffprobe"
+}

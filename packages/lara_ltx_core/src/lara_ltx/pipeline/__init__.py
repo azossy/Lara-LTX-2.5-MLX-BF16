@@ -1,5 +1,6 @@
 """In-process MLX generation pipeline orchestration."""
 
+from .decode import CheckpointDecodeRuntime, DecodeRuntimeConfig
 from .two_stage import (
     CheckpointStageModuleLoader,
     TwoStageContexts,
@@ -9,7 +10,9 @@ from .two_stage import (
 )
 
 __all__ = [
+    "CheckpointDecodeRuntime",
     "CheckpointStageModuleLoader",
+    "DecodeRuntimeConfig",
     "TwoStageContexts",
     "TwoStageLatentResult",
     "TwoStageSamplingConfig",

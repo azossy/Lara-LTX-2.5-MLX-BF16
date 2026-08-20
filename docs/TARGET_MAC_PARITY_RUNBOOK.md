@@ -242,6 +242,42 @@ the reviewed QKV split transforms and manifest metadata. The checked-in load
 peak is 834,289,940 bytes. This is a load gate; the fixed-latent frame decode
 is a separate P3 execution gate.
 
+Run the fixed-latent full-frame decoder gate:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_diffusion_decoder_smoke.py \
+  --checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --mapping golden/manifests/vae_bf16_decoder_mapping.json \
+  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --config golden/manifests/diffusion_decoder_smoke_config.json \
+  --report "$LARA_REPORT_DIR/diffusion_decoder_smoke.json"
+```
+
+The gate must return finite `[1,3,17,320,512]` pixels. The checked-in target
+Mac run takes 1.81 seconds and peaks at 3,168,602,284 bytes for this smoke
+shape. Noise seed, timestep schedule and activation budget are manifest data.
+
+Finally, run the sequential checkpoint decoder and local media-output gate:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_decode_pipeline.py \
+  --video-checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --audio-checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-audio-vae-bf16.safetensors" \
+  --video-mapping golden/manifests/vae_bf16_decoder_mapping.json \
+  --audio-mapping golden/manifests/audio_vae_mapping.json \
+  --vocoder-mapping golden/manifests/vocoder_mapping.json \
+  --reference golden/cuda_hq_boundary_trace_v2.npz \
+  --config golden/manifests/decode_pipeline_smoke_config.json \
+  --output "$LARA_REPORT_DIR/decode_pipeline_smoke.mp4" \
+  --report "$LARA_REPORT_DIR/decode_pipeline_smoke.json"
+```
+
+This gate must load and release the video decoder before Audio VAE and
+vocoder/BWE execution, then write an MP4 with all 17 video frames and 48 kHz
+stereo audio. The checked-in run peaks at 3,168,606,884 bytes. Encoding paths,
+codecs, CRF, bitrate, rates, timeout and decoder controls are configuration;
+no server or persistent intermediate file is used.
+
 This command strict-loads all 72 official upscaler tensors and both VAE
 channel-statistic tensors, then compares the denormalized input, unnormalized
 x2 output and re-normalized x2 output with the AutoDL CUDA BF16 capture.
