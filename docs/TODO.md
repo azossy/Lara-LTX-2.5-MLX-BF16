@@ -189,7 +189,9 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       trailing-frame ghosting, and exact output cropping are implemented. A
       conservative activation-budget selector now chooses both high-resolution
       tile sizes without quantization or weight swapping; live Metal free-memory
-      discovery remains pipeline integration work.
+      discovery remains pipeline integration work. The production loader now
+      strict-loads all 407 reviewed official decoder/statistic targets as BF16
+      at an 834,289,940-byte peak; a fixed-latent full-frame decode remains.
 - [x] Port and checkpoint-back the causal pixel-normalized Audio VAE decoder.
       All 56 decoder weights plus two normalization statistics load from the
       official shard; the CUDA spectrogram boundary passes with NRMSE

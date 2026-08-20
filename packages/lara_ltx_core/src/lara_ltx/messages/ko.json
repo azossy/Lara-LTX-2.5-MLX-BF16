@@ -38,6 +38,7 @@
   "LARA-MODEL-034": "Transformer 입력 항목 {key}이(가) 없거나 검토된 video/audio conditioning 레이아웃과 호환되지 않습니다. 고정된 22B BF16 transformer 체크포인트를 사용하세요.",
   "LARA-MODEL-035": "Gemma 4 텍스트 코어 설정 또는 매핑이 호환되지 않습니다({reason}). 고정된 공식 BF16 패키지 인코더를 사용해 검토 매니페스트를 다시 생성하세요.",
   "LARA-MODEL-036": "패키지 Gemma tokenizer 자산 {asset}이(가) 없거나 올바르지 않습니다. 고정된 공식 BF16 인코더를 복원하고 체크섬을 검증하세요.",
+  "LARA-MODEL-037": "Diffusion Video VAE decoder 항목 {key}이(가) 없거나 검토된 407-target BF16 레이아웃과 호환되지 않습니다. 고정된 공식 Video VAE 체크포인트와 매핑을 사용하세요.",
   "LARA-RUNTIME-001": "BF16 메모리 요구량을 초과했습니다. 해상도를 낮추거나 더 큰 메모리 장비를 사용하세요. 자동 양자화는 적용하지 않았습니다.",
   "LARA-RUNTIME-002": "CUDA를 사용할 수 없습니다. GPU 인스턴스를 시작한 뒤 다시 시도하세요.",
   "LARA-RUNTIME-003": "Metal을 사용할 수 없습니다. 고정된 MLX 환경이 설치된 지원 Apple Silicon Mac에서 이 프로브를 실행하세요.",

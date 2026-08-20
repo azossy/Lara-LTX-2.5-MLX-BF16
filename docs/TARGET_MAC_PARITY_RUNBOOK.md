@@ -227,6 +227,21 @@ code.
 
 ## P3 spatial latent-upscaler gate
 
+Before a full video decode, strict-load the complete reviewed Diffusion Video
+VAE decoder mapping:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_diffusion_decoder_load.py \
+  --checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --mapping golden/manifests/vae_bf16_decoder_mapping.json \
+  --report "$LARA_REPORT_DIR/diffusion_decoder_load.json"
+```
+
+The gate requires exact 407-target coverage, BF16 residency for every target,
+the reviewed QKV split transforms and manifest metadata. The checked-in load
+peak is 834,289,940 bytes. This is a load gate; the fixed-latent frame decode
+is a separate P3 execution gate.
+
 This command strict-loads all 72 official upscaler tensors and both VAE
 channel-statistic tensors, then compares the denormalized input, unnormalized
 x2 output and re-normalized x2 output with the AutoDL CUDA BF16 capture.

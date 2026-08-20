@@ -4,12 +4,17 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Final, Literal
 
 import mlx.core as mx
 import mlx.nn as nn
+from mlx.utils import tree_flatten
 
 from lara_ltx.errors import LaraError
+from lara_ltx.models.checkpoint import BF16_DTYPE
+from lara_ltx.models.loading import iter_component_weight_batches
+from lara_ltx.models.mapping import validate_mapping
 from lara_ltx.transformer.attention import RMSNorm
 from lara_ltx.transformer.timestep import PixArtAlphaCombinedTimestepSizeEmbeddings
 
@@ -39,6 +44,8 @@ BF16_BYTES: Final = 2
 DETERMINISTIC_WORKING_SET_FACTOR: Final = 16
 DIFFUSION_WORKING_SET_FACTOR: Final = 24
 TILED_STAGE_COUNT: Final = 2
+DIFFUSION_DECODER_COMPONENT: Final = "diffusion_video_decoder"
+DIFFUSION_DECODER_IGNORED_SOURCES: Final = ({"source_key": "decoder.type_emb", "reason": "upstream_load_artifact"},)
 
 
 def _bounded_halo_interval(
@@ -747,3 +754,33 @@ class DiffusionVideoDecoder(nn.Module):
 
     def __call__(self, latent: mx.array, initial_noise: mx.array) -> mx.array:
         return self.decode(latent, initial_noise)
+
+
+def load_diffusion_video_decoder(
+    *,
+    checkpoint: Path,
+    mapping: dict[str, object],
+    config: DiffusionVideoDecoderConfig | None = None,
+) -> DiffusionVideoDecoder:
+    """Strict-load all reviewed decoder/statistic targets from one official shard."""
+
+    decoder = DiffusionVideoDecoder(config)
+    target_shapes = {name: tuple(value.shape) for name, value in tree_flatten(decoder.parameters())}
+    ignored = mapping.get("ignored_sources")
+    if mapping.get("component") != DIFFUSION_DECODER_COMPONENT or ignored != list(DIFFUSION_DECODER_IGNORED_SOURCES):
+        raise LaraError("LARA-MODEL-037", details={"key": "decoder_manifest_metadata"})
+    rules = validate_mapping(mapping, expected_target_keys=target_shapes)
+    if any(rule.get("dtype") != BF16_DTYPE for rule in rules):
+        raise LaraError("LARA-MODEL-037", details={"key": "decoder_source_dtype"})
+    loaded_count = 0
+    for batch in iter_component_weight_batches(
+        (checkpoint,),
+        rules,
+        expected_target_shapes=target_shapes,
+    ):
+        decoder.load_weights(batch)
+        mx.eval(*[value for _, value in batch])
+        loaded_count += len(batch)
+    if loaded_count != len(target_shapes):
+        raise LaraError("LARA-MODEL-037", details={"key": "decoder_target_count"})
+    return decoder

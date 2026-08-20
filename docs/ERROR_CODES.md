@@ -43,6 +43,7 @@
 | LARA-MODEL-034 | `LARA-MODEL-034` | Transformer input entry is missing or incompatible with the reviewed video/audio conditioning layout | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.transformer_input` |
 | LARA-MODEL-035 | `LARA-MODEL-035` | Packed Gemma 4 text configuration or one of its 666 text-core mappings is incompatible | Use the pinned official BF16 encoder and regenerate the reviewed text-core manifest | `lara_ltx.models.gemma_text` |
 | LARA-MODEL-036 | `LARA-MODEL-036` | A packed Gemma tokenizer or processor byte asset is missing, truncated or invalid | Restore the pinned encoder, verify its checksum and retry | `lara_ltx.models.gemma_assets` |
+| LARA-MODEL-037 | `LARA-MODEL-037` | Diffusion Video VAE decoder entry or manifest metadata is incompatible with the reviewed 407-target BF16 layout | Use the pinned Video VAE checkpoint and matching reviewed mapping | `lara_ltx.video_vae.diffusion_decoder` |
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |

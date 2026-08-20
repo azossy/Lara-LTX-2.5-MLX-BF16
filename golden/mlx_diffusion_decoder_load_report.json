@@ -1,0 +1,15 @@
+{
+  "component": "diffusion_video_decoder_checkpoint_load",
+  "dtype_counts": {
+    "mlx.core.bfloat16": 407
+  },
+  "loaded_parameter_count": 407,
+  "mapped_target_count": 407,
+  "passed": true,
+  "schema_version": 1,
+  "weight_load_memory": {
+    "active_after_bytes": 834284712,
+    "active_before_bytes": 0,
+    "peak_bytes": 834289940
+  }
+}

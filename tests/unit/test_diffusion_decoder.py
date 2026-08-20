@@ -1,5 +1,8 @@
+from pathlib import Path
+
 import numpy as np
 import pytest
+from mlx.utils import tree_flatten
 
 mx = pytest.importorskip("mlx.core")
 
@@ -13,6 +16,7 @@ from lara_ltx.video_vae.diffusion_decoder import (
     MODEL_OUTPUT_X0,
     DiffusionVideoDecoder,
     DiffusionVideoDecoderConfig,
+    load_diffusion_video_decoder,
 )
 
 
@@ -102,3 +106,54 @@ def test_tiling_recommendation_rejects_budget_below_resident_context() -> None:
     decoder = DiffusionVideoDecoder(_tiny_config())
     with pytest.raises(LaraError, match="LARA-RUNTIME-001"):
         decoder.recommend_tiling((3, 16, 16), activation_budget_bytes=10_000)
+
+
+def _tiny_checkpoint_mapping(tmp_path: Path) -> tuple[Path, dict[str, object], DiffusionVideoDecoderConfig]:
+    config = _tiny_config()
+    template = DiffusionVideoDecoder(config)
+    weights = {
+        name: mx.full(value.shape, 0.25, dtype=mx.bfloat16) for name, value in tree_flatten(template.parameters())
+    }
+    checkpoint = tmp_path / "tiny-video-vae.safetensors"
+    mx.save_safetensors(str(checkpoint), weights)
+    rules = [
+        {
+            "source_file": checkpoint.name,
+            "source_key": name,
+            "target_key": name,
+            "transform": "identity",
+            "dtype": "BF16",
+            "shape": list(value.shape),
+        }
+        for name, value in sorted(weights.items())
+    ]
+    mapping: dict[str, object] = {
+        "schema_version": 2,
+        "component": "diffusion_video_decoder",
+        "ignored_sources": [{"source_key": "decoder.type_emb", "reason": "upstream_load_artifact"}],
+        "rules": rules,
+    }
+    return checkpoint, mapping, config
+
+
+def test_diffusion_decoder_loader_strict_loads_all_reviewed_targets(tmp_path: Path) -> None:
+    checkpoint, mapping, config = _tiny_checkpoint_mapping(tmp_path)
+
+    decoder = load_diffusion_video_decoder(checkpoint=checkpoint, mapping=mapping, config=config)
+
+    parameters = dict(tree_flatten(decoder.parameters()))
+    assert len(parameters) == len(mapping["rules"])
+    for value in parameters.values():
+        np.testing.assert_array_equal(
+            np.asarray(value.astype(mx.float32)), np.full(value.shape, 0.25, dtype=np.float32)
+        )
+
+
+def test_diffusion_decoder_loader_rejects_manifest_metadata(tmp_path: Path) -> None:
+    checkpoint, mapping, config = _tiny_checkpoint_mapping(tmp_path)
+    mapping["component"] = "wrong_component"
+
+    with pytest.raises(LaraError) as error:
+        load_diffusion_video_decoder(checkpoint=checkpoint, mapping=mapping, config=config)
+
+    assert error.value.code == "LARA-MODEL-037"

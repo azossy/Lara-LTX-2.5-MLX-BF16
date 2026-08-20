@@ -18,6 +18,7 @@ from .diffusion_decoder import (
     RecommendedDecoderTiling,
     Stage4TilingConfig,
     Stage5TilingConfig,
+    load_diffusion_video_decoder,
 )
 from .diffusion_layers import AdaLNZero, LinearPixelShuffleUpsample, LinearPixelShuffleUpsampleConfig, SwiGLU
 from .neighborhood_attention import neighborhood_attention_3d
@@ -71,6 +72,7 @@ __all__ = [
     "SwiGLU",
     "UNetMidBlock3D",
     "UNetMidBlock3DConfig",
+    "load_diffusion_video_decoder",
     "load_spatial_video_upscaler",
     "neighborhood_attention_3d",
     "patchify",
