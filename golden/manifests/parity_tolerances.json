@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "default": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999,
+    "max_absolute_error": null
+  },
+  "evidence": {
+    "source": "docs/PARITY_PLAN.md",
+    "policy": "Frozen from passing CUDA BF16 component boundaries; no tolerance is inferred at runtime."
+  },
+  "component_overrides": {
+    "audio_vae_decoder": {
+      "max_normalized_rmse": 0.0036,
+      "min_cosine_similarity": 0.99999,
+      "max_absolute_error": null
+    },
+    "vocoder_bwe": {
+      "max_normalized_rmse": 0.0046,
+      "min_cosine_similarity": 0.99999,
+      "max_absolute_error": null
+    },
+    "spatial_upscaler": {
+      "max_normalized_rmse": 0.0128,
+      "min_cosine_similarity": 0.9999,
+      "max_absolute_error": null
+    },
+    "cuda_vocoder_repeat": {
+      "max_normalized_rmse": 0.0,
+      "min_cosine_similarity": 1.0,
+      "max_absolute_error": 0.0009765625
+    }
+  }
+}

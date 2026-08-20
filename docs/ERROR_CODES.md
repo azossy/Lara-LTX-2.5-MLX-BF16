@@ -95,3 +95,4 @@
 | LARA-PIPELINE-002 | `LARA-PIPELINE-002` | Model snapshot resolution/download failed or a required BF16 file is absent | Verify the local model root or Hugging Face gate/token/revision | `lara_ltx.pipeline.api` |
 | LARA-PIPELINE-003 | `LARA-PIPELINE-003` | Prompt or generation grid is unsupported | Provide a prompt, 64-aligned dimensions, an `8*k+1` frame count and at least two HQ steps | `lara_ltx.pipeline.api` |
 | LARA-CLI-001 | `LARA-CLI-001` | CLI command dispatch is unsupported | Use the documented `generate` command and options | `lara_ltx.cli` |
+| LARA-PARITY-004 | `LARA-PARITY-004` | Ordered parity archives, boundary keys or frozen tolerances are invalid | Restore both NPZ archives and versioned manifests, then retry | `lara_ltx.parity.bisect` |

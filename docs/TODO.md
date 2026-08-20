@@ -233,9 +233,12 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P4 — Tensor and stage parity
 
-- [ ] Automate CUDA-versus-MLX reports for every major checkpoint.
-- [ ] Add first-divergent-layer bisect tooling.
-- [ ] Freeze evidence-based tolerances and deterministic inputs.
+- [x] Automate CUDA-versus-MLX reports for every major checkpoint. The
+      versioned evidence index audits 18 conditioning, transformer, sampling,
+      decoder, media and public-interface reports as one release gate.
+- [x] Add first-divergent-layer bisect tooling.
+- [x] Freeze evidence-based tolerances and deterministic inputs in versioned
+      manifests; the bisect runtime never infers a tolerance from its inputs.
 
 ## P5 — BF16 quality parity
 

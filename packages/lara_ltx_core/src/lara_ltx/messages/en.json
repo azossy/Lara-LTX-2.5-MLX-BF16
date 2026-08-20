@@ -106,5 +106,6 @@
   "cli.local_only.help": "Use only already downloaded model files.",
   "cli.output.help": "Destination .mp4 path.",
   "cli.generate.saved": "Saved generated media to {path}",
-  "cli.interrupted": "Generation was interrupted. No incomplete output was published."
+  "cli.interrupted": "Generation was interrupted. No incomplete output was published.",
+  "LARA-PARITY-004": "The ordered parity bisect request is invalid ({reason}). Verify both NPZ archives, boundary order and frozen tolerance profile."
 }

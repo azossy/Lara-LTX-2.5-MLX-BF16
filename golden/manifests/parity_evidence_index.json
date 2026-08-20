@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "components": [
+    {"name": "gemma_feature_projection", "report": "golden/mlx_gemma_feature_report.json"},
+    {"name": "gemma_text_conditioner", "report": "golden/mlx_gemma_text_full_report.json"},
+    {"name": "transformer_input", "report": "golden/mlx_transformer_input_report.json"},
+    {"name": "transformer_block_0", "report": "golden/mlx_checkpoint_block_0_report.json"},
+    {"name": "transformer_output", "report": "golden/mlx_transformer_output_report.json"},
+    {"name": "distilled_lora", "report": "golden/mlx_lora_fusion_report.json"},
+    {"name": "spatial_upscaler", "report": "golden/mlx_spatial_upscaler_report.json"},
+    {"name": "stage_transition", "report": "golden/mlx_stage_transition_report.json"},
+    {"name": "audio_vae", "report": "golden/mlx_audio_vae_decoder_report.json"},
+    {"name": "vocoder_bwe", "report": "golden/mlx_vocoder_bwe_report.json"},
+    {"name": "video_vae_strict_load", "report": "golden/mlx_diffusion_decoder_load_report.json"},
+    {"name": "video_vae_decode", "report": "golden/mlx_diffusion_decoder_smoke_report.json"},
+    {"name": "scheduler_sampler", "report": "golden/mlx_sampling_report.json"},
+    {"name": "guided_denoiser", "report": "golden/mlx_guided_denoiser_two_stage_report.json"},
+    {"name": "two_stage_sampling", "report": "golden/mlx_two_stage_sampling_smoke_report.json"},
+    {"name": "sequential_decode", "report": "golden/mlx_decode_pipeline_smoke_report.json"},
+    {"name": "public_prompt_to_mp4", "report": "golden/mlx_public_pipeline_smoke_report.json"},
+    {"name": "public_interface_determinism", "report": "golden/mlx_cli_determinism_report.json"}
+  ]
+}

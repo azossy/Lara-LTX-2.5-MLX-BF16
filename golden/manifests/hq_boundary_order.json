@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "ordered_keys": [
+    "prompt_video_positive",
+    "prompt_audio_positive",
+    "prompt_video_negative",
+    "prompt_audio_negative",
+    "stage_1_noiser_input_0",
+    "stage_1_noiser_output_0",
+    "stage_1_noiser_input_1",
+    "stage_1_noiser_output_1",
+    "stage_1_sigmas",
+    "stage_1_video_latent",
+    "stage_1_audio_latent",
+    "upsampler_input_video_latent",
+    "upscaled_video_latent",
+    "stage_2_noiser_input_0",
+    "stage_2_noiser_output_0",
+    "stage_2_noiser_input_1",
+    "stage_2_noiser_output_1",
+    "stage_2_sigmas",
+    "stage_2_video_latent",
+    "stage_2_audio_latent",
+    "video_decoder_input_latent",
+    "audio_decoder_input_latent",
+    "decoded_audio",
+    "decoded_video_chunk_0",
+    "decoded_video_frame_count"
+  ]
+}
