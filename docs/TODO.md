@@ -235,7 +235,7 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 ## P4 — Tensor and stage parity
 
 - [x] Automate CUDA-versus-MLX reports for every major checkpoint. The
-      versioned evidence index audits 18 conditioning, transformer, sampling,
+      versioned evidence index audits 19 conditioning, transformer, sampling,
       decoder, media and public-interface reports as one release gate.
 - [x] Add first-divergent-layer bisect tooling.
 - [x] Freeze evidence-based tolerances and deterministic inputs in versioned
@@ -247,11 +247,15 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Replay all 15+3 steps on MLX with the exact captured SDE tensors. The
       replay exposed and fixed the incorrect AV cross-timestep multiplier by
       sourcing both 1000x architecture multipliers from checkpoint metadata.
+      A denoiser-output-injected replay then exposed a disabled upstream
+      anchor refinement: restoring the official `bongmath=true`/100 iterations
+      makes all 31+7 sampler inputs pass, with worst NRMSE `1.14e-5`.
 - [ ] Close the frozen final-latent gate. Exact input preprocessing now passes
-      every field and the exact-input final block/output heads remain within
-      component tolerance, but CUDA/Metal BF16 error is amplified by guidance
-      and accumulates across the stochastic trajectory; the current full replay
-      report remains a documented failing diagnostic rather than a parity claim.
+      every field, the sampler-only replay passes, and exact-input final
+      block/output heads remain within component tolerance. The corrected full
+      replay improves final video NRMSE from `0.6856` to `0.3555` and audio from
+      `0.8152` to `0.1095`, but the strict gate remains a documented failing
+      diagnostic rather than a parity claim.
 
 ## P5 — BF16 quality parity
 

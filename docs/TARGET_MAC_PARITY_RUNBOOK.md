@@ -205,6 +205,20 @@ Validate the complete checkpoint-backed sampling lifecycle with the reviewed
 smoke manifest:
 
 ```sh
+.venv/bin/python tools/parity/replay_cuda_sampler_boundaries.py \
+  --cuda-reference golden/cuda_hq_boundary_trace_v3.npz \
+  --config golden/manifests/two_stage_sampling_smoke_config.json \
+  --report "$LARA_REPORT_DIR/sampler_only_replay.json"
+```
+
+This fast gate injects every captured CUDA denoiser output into the MLX
+sampler, isolating RK, anchor-refinement and SDE behavior from transformer
+arithmetic. It must cover 31 Stage-1 and 7 Stage-2 denoiser calls and pass the
+frozen criteria before the checkpoint-backed replay is interpreted.
+
+Then run the full resident-transformer lifecycle:
+
+```sh
 .venv/bin/python tools/parity/validate_mlx_two_stage_sampling.py \
   --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
   --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
@@ -213,7 +227,7 @@ smoke manifest:
   --input-mapping golden/manifests/transformer_input_mapping.json \
   --output-mapping golden/manifests/transformer_output_mapping.json \
   --upscaler-mapping golden/manifests/spatial_upscaler_mapping.json \
-  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --cuda-reference golden/cuda_hq_boundary_trace_v3.npz \
   --config golden/manifests/two_stage_sampling_smoke_config.json \
   --report "$LARA_REPORT_DIR/two_stage_sampling_smoke.json"
 ```
@@ -226,12 +240,12 @@ transformer state. Sigma indices, sampler behavior, guidance values, strengths,
 reference keys, tolerances and block count all live in the reviewed JSON
 manifest rather than source code.
 
-The checked-in replay report is intentionally retained when the command exits
-with status 1. After correcting the checkpoint metadata's
-`av_ca_timestep_scale_multiplier=1000`, the first-call inputs are exact and the
-first guided outputs reach cosine similarity above `0.997`; the frozen final
-latent gate still fails after cross-backend BF16 accumulation. Do not convert
-that diagnostic into a pass by weakening its frozen thresholds.
+The checked-in full replay report is intentionally retained when the command
+exits with status 1. Restoring the upstream HQ defaults
+`bongmath=true`/100 iterations makes the sampler-only replay pass and improves
+final video/audio NRMSE from `0.6856`/`0.8152` to `0.3555`/`0.1095`. The frozen
+final-latent gate still fails after cross-backend BF16 accumulation. Do not
+convert that diagnostic into a pass by weakening its thresholds.
 
 For the exact-input transformer and output-head bisect, use the reduced v4
 artifact. It contains every required input alias, seven selected block outputs,

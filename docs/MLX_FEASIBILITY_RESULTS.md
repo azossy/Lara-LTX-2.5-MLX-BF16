@@ -199,6 +199,16 @@ notifies this denoiser with the official schedule index: the first evaluation
 uses the outer index, while the midpoint's one-sigma schedule resets to index
 zero. Skipped modalities reuse their last denoised result.
 
+The sampler arithmetic now has its own denoiser-output-injected CUDA replay.
+That isolation exposed an incorrect port profile rather than a transformer
+failure: the official HQ loop leaves `bongmath=true` with 100 anchor-refinement
+iterations, while the old profile disabled it. Restoring those versioned
+settings and evaluating the small RK/SDE latent math in host float64 makes all
+31 Stage-1 and 7 Stage-2 sampler inputs pass; worst NRMSE is `1.14e-5`.
+The full resident replay improves final video/audio NRMSE from
+`0.6856`/`0.8152` to `0.3555`/`0.1095`, though the final-latent acceptance gate
+remains open.
+
 ## HQ Stage-1 to Stage-2 latent handoff
 
 Artifact: `golden/mlx_stage_transition_report.json`

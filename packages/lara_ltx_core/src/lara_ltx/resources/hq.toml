@@ -40,8 +40,8 @@ terminal = 0.1
 
 [generation.sampler]
 eta = 0.5
-bongmath = false
-bongmath_max_iterations = 0
+bongmath = true
+bongmath_max_iterations = 100
 substep_seed_offset = 10000
 
 [generation.video_guidance]
