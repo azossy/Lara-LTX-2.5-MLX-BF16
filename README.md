@@ -26,9 +26,16 @@ Diffusion Video VAE, Audio VAE/vocoder/BWE and H.264/AAC muxing. The fixed
 40,749,191,990-byte MLX peak and 73.4-second total runtime.
 
 This is an engineering preview, not yet a final CUDA-quality-parity release.
-The multi-prompt quality corpus, blind review and canonical 1920x1088/121-frame
-performance gate remain open; published quality claims stay limited to the
-checked-in component and boundary evidence.
+The four-case CUDA quality corpus and expanded stochastic trace are complete.
+Exact CUDA inputs prove the checkpoint-metadata-driven transformer input path,
+final transformer boundary and output heads at component tolerance, but the
+strict full-trajectory final-latent gate remains open because cross-backend
+BF16 differences accumulate through guidance and stochastic sampling. Two of
+the four MLX quality cases are complete and measured; the 512x512/33-frame case
+exceeded the 128 GB target Mac after about 70 minutes and was terminated by the
+operating system. Full corpus review, blind review and the canonical
+1920x1088/121-frame performance gate remain open; published quality claims stay
+limited to measured evidence.
 
 This is not a serving-engine project. The deliverable is one direct Python MLX
 pipeline, followed only after core parity by a thin CLI and optional thin
@@ -42,7 +49,7 @@ BF16 workload, `ffmpeg`, and accepted access to `Lightricks/LTX-2.5` on Hugging
 Face. The primary tested machine is M5 Max 128 GB.
 
 ```bash
-git clone https://github.com/LaraAI/Lara-LTX-2.5-MLX-BF16.git
+git clone https://github.com/azossy/Lara-LTX-2.5-MLX-BF16.git
 cd Lara-LTX-2.5-MLX-BF16
 uv sync
 export HF_TOKEN="your_read_token"
@@ -53,7 +60,7 @@ export HF_TOKEN="your_read_token"
 ```python
 from lara_ltx import LTXPipeline
 
-pipe = LTXPipeline.from_pretrained("LaraAI/Lara-LTX-2.5-MLX-BF16")
+pipe = LTXPipeline.from_pretrained("challychoi/Lara-LTX-2.5-MLX-BF16")
 video = pipe(prompt="A cinematic aerial shot of Seoul at night.", seed=42)
 video.save("output.mp4")
 ```
@@ -68,7 +75,7 @@ pipe = LTXPipeline.from_pretrained("/path/to/LTX-2.5")
 
 ```bash
 lara-ltx generate \
-  --model LaraAI/Lara-LTX-2.5-MLX-BF16 \
+  --model challychoi/Lara-LTX-2.5-MLX-BF16 \
   --prompt "A cinematic aerial shot of Seoul at night" \
   --output output.mp4
 ```
@@ -90,7 +97,9 @@ the adapter's `examples` directory.
 
 The primary acceptance target is M5 Max with 128 GB unified memory. Additional
 supported devices and minimum memory will be published only after measured P6
-testing.
+testing. The current engineering preview is validated at 320x512/17 frames;
+512x512/33 frames is not supported yet because that quality-corpus case caused
+heavy swap growth and OOM even on the 128 GB target.
 
 ## Benchmarks
 
@@ -108,9 +117,21 @@ the lifecycle and are not estimates for the canonical 1920x1088 workload.
 ## CUDA vs MLX quality comparison
 
 Checkpoint-backed component, prompt-connector, decode and public MP4 results
-are recorded. Exact stochastic full-trajectory replay needs one expanded CUDA
-trace; multi-prompt perceptual comparison and blind review remain pending P5.
-Plausible-looking output alone is not reported as parity.
+are recorded. The expanded CUDA trace has been replayed: the corrected exact
+input boundary passes, while the frozen final-latent threshold does not. The
+versioned four-case CUDA corpus is complete. Matching MLX generation and paired
+diagnostics are complete for Seoul 512x320/17 and barista 320x512/25. The
+barista temporal-motion mean was close to CUDA (`0.0213` versus `0.0225`), while
+the Seoul result had lower motion (`0.00657` versus `0.0306`) and higher audio
+RMS (`0.210` versus `0.0405`). The 512x512/33-frame case reached OOM after about
+70 minutes on M5 Max 128 GB, so full corpus and blind review remain P5 work.
+These paired diagnostics are not perceptual acceptance, and plausible-looking
+output alone is not reported as parity.
+
+Evidence: `golden/quality/mlx_generation.json`,
+`golden/quality/seoul_night_landscape_metrics.json`,
+`golden/quality/barista_dialogue_portrait_metrics.json` and
+`golden/quality/mlx_high_resolution_oom_observation.json`.
 
 ## Canonical references
 
@@ -121,6 +142,16 @@ Plausible-looking output alone is not reported as parity.
 
 LTX-2.5 was developed by Lightricks. Lara is an independent, unofficial Apple
 Silicon port and is not endorsed by or affiliated with Lightricks.
+
+## License and use restrictions
+
+This derivative runtime is distributed under the
+[LTX-2.x Community License Agreement](LICENSE.md), including Section 4 and
+Attachment A. The upstream acceptable-use policy is incorporated by reference.
+Commercial Entities, as defined by that agreement, must obtain the required
+paid license before commercial use. See [NOTICE.md](NOTICE.md) for attribution
+and a summary of modifications. These files are notices, not legal advice; the
+complete agreement controls.
 
 ## Development order
 

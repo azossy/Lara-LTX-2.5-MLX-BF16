@@ -1,0 +1,6 @@
+{
+  "invalid_corpus": "The quality corpus is invalid ({reason}). Restore the versioned corpus manifest and retry.",
+  "generation_failed": "The MLX quality case {case_id} failed. Verify the model pack, available memory and output directory, then retry.",
+  "completed": "Completed {count} MLX quality cases. Report: {report}",
+  "comparison_failed": "Quality-corpus comparison failed ({case_id}). Verify every CUDA/MLX media pair, FFmpeg/FFprobe and the report directory, then retry."
+}

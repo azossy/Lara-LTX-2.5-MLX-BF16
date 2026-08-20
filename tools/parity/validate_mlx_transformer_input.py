@@ -13,6 +13,7 @@ from lara_ltx.errors import LaraError
 from lara_ltx.models import (
     iter_component_weight_batches,
     transformer_input_target_shapes,
+    validate_transformer_input_architecture,
     validate_transformer_input_mapping,
 )
 from lara_ltx.transformer import (
@@ -44,7 +45,13 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _config(hidden_dimension: int, max_positions: tuple[int, ...], *, keyframes: bool) -> TransformerInputConfig:
+def _config(
+    hidden_dimension: int,
+    max_positions: tuple[int, ...],
+    *,
+    keyframes: bool,
+    timestep_scale_multiplier: float,
+) -> TransformerInputConfig:
     return TransformerInputConfig(
         input_channels=INPUT_CHANNELS,
         hidden_dimension=hidden_dimension,
@@ -52,6 +59,7 @@ def _config(hidden_dimension: int, max_positions: tuple[int, ...], *, keyframes:
         prompt_adaln_coefficient=PROMPT_ADALN_COEFFICIENT,
         attention_heads=ATTENTION_HEAD_COUNT,
         max_positions=max_positions,
+        timestep_scale_multiplier=timestep_scale_multiplier,
         use_keyframes_absolute_embedding=keyframes,
     )
 
@@ -116,10 +124,22 @@ def main() -> int:
     arguments = parse_arguments()
     mapping = json.loads(arguments.mapping.read_text(encoding="utf-8"))
     rules = validate_transformer_input_mapping(mapping)
+    architecture = validate_transformer_input_architecture(mapping)
     processor = AVTransformerInputPreprocessor(
-        video=_config(VIDEO_HIDDEN_DIMENSION, VIDEO_POSITION_MAXIMUMS, keyframes=True),
-        audio=_config(AUDIO_HIDDEN_DIMENSION, AUDIO_POSITION_MAXIMUMS, keyframes=False),
+        video=_config(
+            VIDEO_HIDDEN_DIMENSION,
+            VIDEO_POSITION_MAXIMUMS,
+            keyframes=True,
+            timestep_scale_multiplier=architecture.timestep_scale_multiplier,
+        ),
+        audio=_config(
+            AUDIO_HIDDEN_DIMENSION,
+            AUDIO_POSITION_MAXIMUMS,
+            keyframes=False,
+            timestep_scale_multiplier=architecture.timestep_scale_multiplier,
+        ),
         cross_attention_dimension=CROSS_ATTENTION_DIMENSION,
+        av_cross_timestep_scale_multiplier=architecture.av_cross_timestep_scale_multiplier,
     )
 
     active_memory_before_loading = int(mx.get_active_memory())
@@ -164,6 +184,10 @@ def main() -> int:
         "component": "transformer_input",
         "checkpoint": arguments.transformer_checkpoint.name,
         "mapping": arguments.mapping.name,
+        "architecture": {
+            "timestep_scale_multiplier": architecture.timestep_scale_multiplier,
+            "av_ca_timestep_scale_multiplier": architecture.av_cross_timestep_scale_multiplier,
+        },
         "mapped_tensor_count": len(rules),
         "output_count": len(outputs),
         "output_shapes": output_shapes,

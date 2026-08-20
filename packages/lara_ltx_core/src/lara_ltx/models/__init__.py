@@ -61,8 +61,10 @@ from .transformer_block import (
     write_transformer_block_mapping,
 )
 from .transformer_input import (
+    TransformerInputArchitecture,
     build_transformer_input_mapping,
     transformer_input_target_shapes,
+    validate_transformer_input_architecture,
     validate_transformer_input_mapping,
     write_transformer_input_mapping,
 )
@@ -88,6 +90,7 @@ __all__ = [
     "PromptConnectorConfig",
     "SafeTensorFile",
     "TensorDescriptor",
+    "TransformerInputArchitecture",
     "audio_vae_target_shapes",
     "build_audio_vae_mapping",
     "build_diffusion_vae_decoder_mapping",
@@ -131,6 +134,7 @@ __all__ = [
     "validate_prompt_connector_mapping",
     "validate_spatial_upscaler_mapping",
     "validate_transformer_block_mapping",
+    "validate_transformer_input_architecture",
     "validate_transformer_input_mapping",
     "validate_transformer_output_mapping",
     "validate_vocoder_mapping",

@@ -100,6 +100,43 @@ class CapturedSdeNoiseSequence:
             raise LaraError("LARA-RUNTIME-008", details={"reason": "captured_sde_noise_not_consumed"})
 
 
+class TrajectoryObserver:
+    """Compare available CUDA denoiser boundaries during the exact MLX replay."""
+
+    def __init__(self, reference: dict[str, np.ndarray]) -> None:
+        self.reference = reference
+        self.records: list[dict[str, object]] = []
+
+    def __call__(
+        self,
+        stage: str,
+        call_index: int,
+        sigma: float,
+        video_state: Res2sLatentState | None,
+        audio_state: Res2sLatentState | None,
+        video_output: mx.array | None,
+        audio_output: mx.array | None,
+    ) -> None:
+        record: dict[str, object] = {"stage": stage, "call_index": call_index, "sigma": sigma}
+        for modality, state, output in (
+            ("video", video_state, video_output),
+            ("audio", audio_state, audio_output),
+        ):
+            for boundary, candidate in (
+                ("input", state.latent if state is not None else None),
+                ("output", output),
+            ):
+                key = f"{stage}_denoiser_call_{call_index:02d}_{modality}_{boundary}"
+                if key in self.reference and candidate is not None:
+                    record[f"{modality}_{boundary}"] = compare_tensors(
+                        key,
+                        self.reference[key].astype(np.float32),
+                        np.asarray(candidate.astype(mx.float32)),
+                    ).to_dict()
+        if len(record) > 3:
+            self.records.append(record)
+
+
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--transformer-checkpoint", required=True, type=Path)
@@ -110,6 +147,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--output-mapping", required=True, type=Path)
     parser.add_argument("--upscaler-mapping", required=True, type=Path)
     parser.add_argument("--cuda-reference", required=True, type=Path)
+    parser.add_argument("--cuda-diagnostics", type=Path)
     parser.add_argument("--config", required=True, type=Path)
     parser.add_argument("--report", required=True, type=Path)
     return parser.parse_args()
@@ -210,6 +248,12 @@ def main() -> int:
         raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_reference_keys"})
     with np.load(arguments.cuda_reference) as archive:
         reference = {name: archive[name] for name in archive.files}
+    if arguments.cuda_diagnostics is not None:
+        with np.load(arguments.cuda_diagnostics) as archive:
+            overlap = set(reference).intersection(archive.files)
+            if overlap:
+                raise LaraError("LARA-RUNTIME-008", details={"reason": "duplicate_diagnostic_tensor"})
+            reference.update({name: archive[name] for name in archive.files})
     if not set(keys.values()).issubset(reference):
         raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_reference_tensor"})
 
@@ -229,6 +273,7 @@ def main() -> int:
         stage="stage_2",
         step_count=stage_two_sigmas.shape[0] - 1,
     )
+    trajectory_observer = TrajectoryObserver(reference)
     stage_one_scale = float(stage_one_sigmas[0].item())
     stage_two_scale = float(stage_two_sigmas[0].item())
     stage_one_video_layout = _video_layout(reference[keys["stage_one_video_layout"]], frame_rate)
@@ -294,6 +339,7 @@ def main() -> int:
         stage_one_sampler=_sampler(config, "stage_one_sampler", noise_fn=stage_one_sde_noise),
         stage_two_sampler=_sampler(config, "stage_two_sampler", noise_fn=stage_two_sde_noise),
         config=TwoStageSamplingConfig(stage_one_strength, stage_two_strength),
+        denoiser_observer=trajectory_observer,
     )
     mx.reset_peak_memory()
     result = runtime.run(
@@ -333,8 +379,7 @@ def main() -> int:
     maximum_nrmse = float(_required(acceptance, "maximum_normalized_rmse", (int, float)))
     minimum_cosine = float(_required(acceptance, "minimum_cosine_similarity", (int, float)))
     acceptance_checks = {
-        modality: metrics["normalized_rmse"] <= maximum_nrmse
-        and metrics["cosine_similarity"] >= minimum_cosine
+        modality: metrics["normalized_rmse"] <= maximum_nrmse and metrics["cosine_similarity"] >= minimum_cosine
         for modality, metrics in comparisons.items()
     }
     passed = all(bool(output["finite"]) for output in outputs.values()) and all(acceptance_checks.values())
@@ -348,6 +393,7 @@ def main() -> int:
         "final_lora_strength": blocks.lora_strength,
         "outputs": outputs,
         "comparisons": comparisons,
+        "denoiser_trajectory": trajectory_observer.records,
         "acceptance": {
             "thresholds": acceptance,
             "checks": acceptance_checks,

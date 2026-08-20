@@ -2,7 +2,7 @@
   "1": {
     "class_type": "LaraLTXModelLoader",
     "inputs": {
-      "model": "LaraAI/Lara-LTX-2.5-MLX-BF16",
+      "model": "challychoi/Lara-LTX-2.5-MLX-BF16",
       "local_files_only": false,
       "profile": "",
       "cache_dir": ""

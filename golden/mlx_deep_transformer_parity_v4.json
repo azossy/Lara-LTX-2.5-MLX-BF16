@@ -1,0 +1,1284 @@
+{
+  "acceptance": {
+    "maximum_normalized_rmse": 0.02,
+    "minimum_cosine_similarity": 0.9999
+  },
+  "block_count": 48,
+  "comparisons": [
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "7066f15e9f7bf33cfe2a93b997ffeba7796936d26cd3c76f134f5ce04f74875c",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999902197904733,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 2.0,
+        "max_relative_error": 1.329227995784916e+36,
+        "mean_abs_error": 0.00194644880539272,
+        "name": "stage_1_deep_block_00_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004779047566275152,
+        "reference_checksum": "a70e965aaf45178cf2cef9c5765e03aaabfc80bc5c7d69976a28c3b7f894978c",
+        "reference_dtype": "float32",
+        "reference_rms": 2.36625323252865,
+        "rmse": 0.011308436752106755,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "bc95c722f3ff904d5f82b42c24ecb2721138a94a8c6763de34e67e98564ab6b6",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999864591578863,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 3.0,
+        "max_relative_error": 1.0301516967333098e+37,
+        "mean_abs_error": 0.011814782188998329,
+        "name": "stage_1_deep_block_00_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0052056329507246925,
+        "reference_checksum": "54d5f43e319381f2615f840412a82ecc8a4215b5e99b18f53f962f50d9b8c64a",
+        "reference_dtype": "float32",
+        "reference_rms": 11.215548897028185,
+        "rmse": 0.05838403089883391,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "4454af96a6d26a1675c26f5398f861e8d69556aee97cbf14c9e937dcaccc28e2",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999910749418577,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 2.0,
+        "max_relative_error": 2.1599954931504883e+36,
+        "mean_abs_error": 0.0019394657632801683,
+        "name": "stage_1_deep_block_00_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004460531261723109,
+        "reference_checksum": "f86d376debae1f0fd80993b61d612cd0f7879ba8087dc9eb04eea9b6153f9de5",
+        "reference_dtype": "float32",
+        "reference_rms": 2.3639103739104774,
+        "rmse": 0.010544296122739247,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "60170dad0830324d161e1a2c3f86f45c61f7cc00cb08508eff557e337c85e08d",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999859623207029,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 2.658455991569832e+36,
+        "mean_abs_error": 0.011977040467576848,
+        "name": "stage_1_deep_block_00_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005312149822076912,
+        "reference_checksum": "6f7932293f121d5c7c80d318d17b205fefc2d07ac192f68f6e03d107fd03b79c",
+        "reference_dtype": "float32",
+        "reference_rms": 11.223203493998513,
+        "rmse": 0.05961933844377718,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "1254f3cf7845024d8f1e17c63dd20c4f54bb0c0ec4e83f1874b0d43c8524f0a4",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999916308916418,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 2.0,
+        "max_relative_error": 1.329227995784916e+36,
+        "mean_abs_error": 0.0019307933923604045,
+        "name": "stage_1_deep_block_00_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0044077892186070965,
+        "reference_checksum": "fac746eb30f4047916059eedc02856f19d1c8b6fc5a083f2f95721ac5f152b3d",
+        "reference_dtype": "float32",
+        "reference_rms": 2.3617702218975096,
+        "rmse": 0.010410185320907133,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 0,
+      "metrics": {
+        "candidate_checksum": "91e62fc06d5aca5023267ce2c9b2c4e1a2914f9eca32bdcd3adf489e0b2b5456",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999888402891822,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 3.0,
+        "max_relative_error": 2.658455991569832e+36,
+        "mean_abs_error": 0.01043042747510804,
+        "name": "stage_1_deep_block_00_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0047257108512465135,
+        "reference_checksum": "d0f179dc6591e625ce07a4672c5fd7d5812aa2ae85a79dd91cd0d4c04b81aa62",
+        "reference_dtype": "float32",
+        "reference_rms": 11.124235243139898,
+        "rmse": 0.05256991920032512,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "599cdbe080aaa7bd6606809f387d9bdc6388a9c47c293c9deba0caeb0f481607",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999866580642297,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 1.329227995784916e+36,
+        "mean_abs_error": 0.010991418629419058,
+        "name": "stage_1_deep_block_07_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005166348183580472,
+        "reference_checksum": "7e9bf59746c377b205efa3d295dfb0628faa784a550637598a71e6c954ced455",
+        "reference_dtype": "float32",
+        "reference_rms": 6.0334550730764684,
+        "rmse": 0.031170929657502996,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "eefcbcae2c984ee15db6da7980c459e83af69a3a419120c1af3adb8876ed8883",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999807533147034,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 5.0,
+        "max_relative_error": 2.824609491042946e+36,
+        "mean_abs_error": 0.03520305682387617,
+        "name": "stage_1_deep_block_07_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.006204667905675614,
+        "reference_checksum": "06efac0485c2335563e64ba23e45133dc36d4c0336dc66fac8bc2f314602fa31",
+        "reference_dtype": "float32",
+        "reference_rms": 15.380839407004295,
+        "rmse": 0.09543300063099029,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "c0d2ebbbb4d6ad7dd4ffb5ebb0f6d72aa5494479eb5c9a263adbc003cf27aff7",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999867916405346,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 3.6553769884085187e+36,
+        "mean_abs_error": 0.011507662327494473,
+        "name": "stage_1_deep_block_07_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005142629209486983,
+        "reference_checksum": "e8268633db7b118194c4bc7e219079f963c0e70ada6c4bf92f981285b75fa969",
+        "reference_dtype": "float32",
+        "reference_rms": 6.087804042702826,
+        "rmse": 0.031307318891636494,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "4814660bf6dbe9cbd17db14dca6629cf5a0bce14a02a7adb0571d25bdd012ed9",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999740025111635,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 9.0,
+        "max_relative_error": 5.316911983139664e+36,
+        "mean_abs_error": 0.03939193197422557,
+        "name": "stage_1_deep_block_07_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.007217974417465099,
+        "reference_checksum": "5c759eba15e3683838518ba27f5d832894133f2687359897bd92f702d2bae444",
+        "reference_dtype": "float32",
+        "reference_rms": 15.420470841064423,
+        "rmse": 0.11130456403606953,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "e9ecdb776f9e8a21b2b1ea3555901fd892545c35ca4d5376b0f73c55955b39c2",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999861053452926,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 3.0,
+        "max_relative_error": 1.9523036188090952e+36,
+        "mean_abs_error": 0.011335975459466378,
+        "name": "stage_1_deep_block_07_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005274086533636053,
+        "reference_checksum": "e6a7a77d3e074a91b0e414eae1ae90d56de45985916b326060d23e99146c1f1e",
+        "reference_dtype": "float32",
+        "reference_rms": 6.0215095288964475,
+        "rmse": 0.031757962318513924,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 7,
+      "metrics": {
+        "candidate_checksum": "eb82798afe8e5bc2c004eee3aa87f2c5fa4d64a50a68454607939df98212be6a",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999767919391741,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 2.658455991569832e+36,
+        "mean_abs_error": 0.038250374090340405,
+        "name": "stage_1_deep_block_07_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0068136399604876415,
+        "reference_checksum": "6e785e14e68ee3d8aa4cd9a67df335cc55d556bbd918f59e896b5218f1dda09c",
+        "reference_dtype": "float32",
+        "reference_rms": 15.403550858831567,
+        "rmse": 0.1049542496651385,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "cc4f25565a63fa3fa27b89a61d7afe33362ba5d3e0f8385578ce7c83ca166531",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999991213406695,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 3.6553769884085187e+36,
+        "mean_abs_error": 0.015767819694398593,
+        "name": "stage_1_deep_block_15_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004219663658928533,
+        "reference_checksum": "2d7b12d36e56ae668620b7d8c0318d030f3c6f22634407380c3a3b33a090e8f9",
+        "reference_dtype": "float32",
+        "reference_rms": 8.648847496502565,
+        "rmse": 0.036495227472606896,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "a252443e9b66610426713a66d4d0db5f043d19d21a433e2b40a95589711f7593",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999780578633304,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 1.0633823966279327e+37,
+        "mean_abs_error": 0.049978173441357084,
+        "name": "stage_1_deep_block_15_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0066308984738137075,
+        "reference_checksum": "9e78e51e0e0477da3cddaafa2127f67cf2f8b0ace551e3f7aa16134e5410e9e8",
+        "reference_dtype": "float32",
+        "reference_rms": 15.647589585021452,
+        "rmse": 0.103757577898182,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "a877c838631ebdb3a33d03e6f34a15a4f0dfed52185ad2a15e3c56c70b21bcab",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999900265240916,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 4.153837486827862e+36,
+        "mean_abs_error": 0.01640647051972337,
+        "name": "stage_1_deep_block_15_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004486886872733039,
+        "reference_checksum": "144a11d238ad82cef9864380c4375d9746d2f4fdf0bccf55902eb4d655552ec8",
+        "reference_dtype": "float32",
+        "reference_rms": 8.411026023397309,
+        "rmse": 0.03773932225059736,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "5a49685f4a467b12bb9eeef7f4eb7c6d8524bac35b1299020351ff9ec7d04a7f",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999974773625305,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 4.5,
+        "max_relative_error": 1.1963051962064243e+37,
+        "mean_abs_error": 0.05385021368662516,
+        "name": "stage_1_deep_block_15_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0071315709285479124,
+        "reference_checksum": "7c33a0184a2753df3c0f8ac70c760004c132f283a77746cf20853d0ea09e7836",
+        "reference_dtype": "float32",
+        "reference_rms": 15.895042866158636,
+        "rmse": 0.11335662561231982,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "8d95b7378a9b92896d7970132649099cfb36ff229bcc7fcab09cdf0ef3311141",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999903038112271,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 4.0,
+        "max_relative_error": 4.3199909863009766e+36,
+        "mean_abs_error": 0.015845590205087016,
+        "name": "stage_1_deep_block_15_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004425441748633484,
+        "reference_checksum": "7a9adb4f9993d8a913689446788191c295af6be015e4d5298c5eabce2230b822",
+        "reference_dtype": "float32",
+        "reference_rms": 8.571755672967527,
+        "rmse": 0.037933805414236396,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 15,
+      "metrics": {
+        "candidate_checksum": "a261dfb1dd98ecef844e95aec5f2af46952530777efd3057553e5afb3c7ca64f",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999733117910522,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 5.0,
+        "max_relative_error": 9.304595970494411e+36,
+        "mean_abs_error": 0.057581047217051186,
+        "name": "stage_1_deep_block_15_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.007393666598054672,
+        "reference_checksum": "9f86a428f4746b6a5fa1908e53789e8e7e3e427d6de6e0d257573f87f60cd5e5",
+        "reference_dtype": "float32",
+        "reference_rms": 15.957807819746273,
+        "rmse": 0.11798671065503367,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "132b76067bdba0037b5b952bf85740dd20f3ab21754251e05a50e033f1b54b15",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999403666718698,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 40.0,
+        "max_relative_error": 7.975367974709495e+36,
+        "mean_abs_error": 0.025916328529516856,
+        "name": "stage_1_deep_block_23_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.011088834762648887,
+        "reference_checksum": "788f8338a913e2af5a9b724a222ced6d9b48bc809cd560fabf1db3b06ba25940",
+        "reference_dtype": "float32",
+        "reference_rms": 9.032452197680621,
+        "rmse": 0.1001593699216052,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "0c4885abea7751e7773e7f7f3de74e136030ffddc07f8f140962ed44c232a970",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999787341006069,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 5.0,
+        "max_relative_error": 9.304595970494411e+36,
+        "mean_abs_error": 0.05614612499872843,
+        "name": "stage_1_deep_block_23_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.00652939933606202,
+        "reference_checksum": "9b4c46a9aa67a4d15512ab0a20bc8e52a4b5e66481c1eaae2d8b677b815562da",
+        "reference_dtype": "float32",
+        "reference_rms": 16.361851168168712,
+        "rmse": 0.10683306015418638,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "e249e444c86fb295d45c66b8cf0f52206a2cfdf0c259f8ead1f621823f8b6bb9",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999734969985444,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 16.0,
+        "max_relative_error": 1.2295358961010472e+37,
+        "mean_abs_error": 0.026264184104123463,
+        "name": "stage_1_deep_block_23_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.007289758373535534,
+        "reference_checksum": "082ae226188851d985663d3ed7c6159b7530cadd4713a0733253c3590c035069",
+        "reference_dtype": "float32",
+        "reference_rms": 8.631207608421995,
+        "rmse": 0.06291941793721785,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "9cc8507936f47cd40d00ceb012ab7ccd92f4ee8494ca37416e14fd38ce3ff655",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999705751695804,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.0633823966279327e+37,
+        "mean_abs_error": 0.06535991529623668,
+        "name": "stage_1_deep_block_23_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.007674205356369355,
+        "reference_checksum": "e24a7998aa93336276aa4ac6e7813a554a8e37a5f9c12a4144e197acd3250975",
+        "reference_dtype": "float32",
+        "reference_rms": 17.020203027323443,
+        "rmse": 0.13061653323877948,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "3a1b97de220b9bade5e3100546a524ef13bec48eff42ea6e8eed6def8c0f91ad",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999609243427398,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 32.0,
+        "max_relative_error": 7.975367974709495e+36,
+        "mean_abs_error": 0.025939139308563123,
+        "name": "stage_1_deep_block_23_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009566456665075256,
+        "reference_checksum": "158b5329fdbd29fa92574614cf3627cb9004f3c6f6af4ab855e3732526bad841",
+        "reference_dtype": "float32",
+        "reference_rms": 9.203125544212899,
+        "rmse": 0.08804130170195983,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 23,
+      "metrics": {
+        "candidate_checksum": "4ed53c5e123c5ff060002e2931d03deeb7d51c5b5a1e830349fb1981887bb454",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999663571701319,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.3292279957849159e+37,
+        "mean_abs_error": 0.0744303348991606,
+        "name": "stage_1_deep_block_23_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.008230349906275448,
+        "reference_checksum": "0afab86bdc7a71fd007fedf0b599be2fdfb83e001accd04a7946a65b8bedfbe3",
+        "reference_dtype": "float32",
+        "reference_rms": 16.67248368496819,
+        "rmse": 0.13722037453395688,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "5d2d431f9109e0e401b3bd82591be64efae888cd39e9420f4c594d4dd5769ba1",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9998668207397859,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 68.0,
+        "max_relative_error": 4.785220784825697e+37,
+        "mean_abs_error": 0.08523048144609978,
+        "name": "stage_1_deep_block_31_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.01631998785362243,
+        "reference_checksum": "f3bab3d0f05e3209ee758c02d8740ca5c7efc0fdaecbdfcb910abdd1365f976a",
+        "reference_dtype": "float32",
+        "reference_rms": 12.818071488879562,
+        "rmse": 0.20919077100537845,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": false
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "61a5f6bd3e2b28042b4e250acc11ba44504229afac7bb6f7031af685331f2e1f",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999634767681601,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.4621507953634075e+37,
+        "mean_abs_error": 0.07610973674390051,
+        "name": "stage_1_deep_block_31_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.00867147357394198,
+        "reference_checksum": "fbdc6726c4bd20aa76d2fca0db9a5da4114df0ca8f6cba17f94fa73570e21e0f",
+        "reference_dtype": "float32",
+        "reference_rms": 16.423657907584513,
+        "rmse": 0.14241731553308234,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "6ceea031bcfb7dd8a56999746a55e026a490cc3c6ebf3790ff5f02ca61930d48",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999838598642294,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 84.0,
+        "max_relative_error": 6.380294379767596e+37,
+        "mean_abs_error": 0.09845053079382828,
+        "name": "stage_1_deep_block_31_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.017966876200412044,
+        "reference_checksum": "37a95506b1d966bdb70f07a619551edfa375610d42db1e3737bfa7729285e1e2",
+        "reference_dtype": "float32",
+        "reference_rms": 11.503022910945118,
+        "rmse": 0.20667338857145431,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": false
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "e94804fb7c256f5ece317472f757f1aaf6b34335528ee009cf42d346f118de04",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999605416107635,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.1963051962064243e+37,
+        "mean_abs_error": 0.08619883159796397,
+        "name": "stage_1_deep_block_31_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.008893106260095297,
+        "reference_checksum": "efe9d5098ce1d01e4d0f5643214b7f6ef1f92e688a7c41af4afa6b7baf601482",
+        "reference_dtype": "float32",
+        "reference_rms": 17.305293713550324,
+        "rmse": 0.15389781585676218,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "5a40687480ea5e3ddedf1596079ccf7aa3f8d6a121b46242618ed1966942f204",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999874712736663,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 64.0,
+        "max_relative_error": 8.639981972601953e+37,
+        "mean_abs_error": 0.08580031921155751,
+        "name": "stage_1_deep_block_31_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.01589957989213921,
+        "reference_checksum": "d968daa364d0fbd4b4f9289e6037788af774e7cd9babf8befdc8bfa56e237b16",
+        "reference_dtype": "float32",
+        "reference_rms": 12.521780026036572,
+        "rmse": 0.19909104191576146,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": false
+    },
+    {
+      "block_index": 31,
+      "metrics": {
+        "candidate_checksum": "769f17ba7c5a21e1e4b15de32a2e9506806d7de67fa619a3575a74de04452f51",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999694873507068,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 6.0,
+        "max_relative_error": 7.975367974709495e+36,
+        "mean_abs_error": 0.06964531375302209,
+        "name": "stage_1_deep_block_31_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.007817151663154125,
+        "reference_checksum": "a79edb9252020a62eb102d67ff00b8ba98c2f15451b9024dbc1ab2bd737ed4d5",
+        "reference_dtype": "float32",
+        "reference_rms": 16.526968880469706,
+        "rmse": 0.12919382227086024,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "0e43359829bf2e0587a6f77c5455d4c55f0cb98995af0c5dedc5c7d5983d7b0f",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9987263736264361,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 672.0,
+        "max_relative_error": 5.582757582296647e+37,
+        "mean_abs_error": 0.0936246703689297,
+        "name": "stage_1_deep_block_39_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.05058330191443848,
+        "reference_checksum": "54b8776c2ef61e6a52742b6e6b1a67df36b50a5c9b9c5fa2ea2a84c7765cc556",
+        "reference_dtype": "float32",
+        "reference_rms": 20.001747284808463,
+        "rmse": 1.0117544217237666,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": false
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "6f2b06c2d1066676ad4c993c7cf682d99e2b36566be86c41a135f2ec3ab9dba3",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999657775005789,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.7279963945203906e+37,
+        "mean_abs_error": 0.08939461906750996,
+        "name": "stage_1_deep_block_39_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.008389692794850207,
+        "reference_checksum": "2523c6bcdacadc05820b2cdc4af92138aab7b4fe594fdba6f3497db6075f5983",
+        "reference_dtype": "float32",
+        "reference_rms": 21.394557848213495,
+        "rmse": 0.1794937678281627,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "ded7f4d0d0a0021ea8ae6328357fea74888a6e09b8dbca61c0d8e51151e93126",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999196667118474,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 96.0,
+        "max_relative_error": 6.779062778503071e+37,
+        "mean_abs_error": 0.12213048574825128,
+        "name": "stage_1_deep_block_39_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.012676843652912361,
+        "reference_checksum": "e7e9a5ece1a49bd5a0bf1f8f2f8d2e7551c79ca10e9022ef953acd179bd634c6",
+        "reference_dtype": "float32",
+        "reference_rms": 20.02491595764688,
+        "rmse": 0.2538527287577993,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "79789c4dd3d6d9cff652550a7b99f3dbc3b5ed2a630435f6e7d71854abfe5543",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999572081175779,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 10.0,
+        "max_relative_error": 1.927380593888128e+37,
+        "mean_abs_error": 0.10707731379403009,
+        "name": "stage_1_deep_block_39_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009332929392038105,
+        "reference_checksum": "0033e5ba543dd07472c24dfacb920e6cc6b2efd2aaddc454cd80aa5d4aec83d3",
+        "reference_dtype": "float32",
+        "reference_rms": 21.389464178964786,
+        "rmse": 0.19962635891580666,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "3526719ef1806d06866c19aeba572991ed51a937293c3412f45f618eb744b591",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9997330094284361,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 304.0,
+        "max_relative_error": 8.772904772180445e+37,
+        "mean_abs_error": 0.08642966163655122,
+        "name": "stage_1_deep_block_39_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.023479276599911194,
+        "reference_checksum": "80bf8b6da33f9e6fd7cb8e2f88d9eb5b3c1f6ad79ec40027a408e11066d9959b",
+        "reference_dtype": "float32",
+        "reference_rms": 19.52223962497843,
+        "rmse": 0.4583680640046151,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": false
+    },
+    {
+      "block_index": 39,
+      "metrics": {
+        "candidate_checksum": "38f19ab5019c83bf648ba64c6a3dbd1e69692da42f61d8a45a5152b891090723",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999736086356832,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 8.639981972601953e+36,
+        "mean_abs_error": 0.0653259718997611,
+        "name": "stage_1_deep_block_39_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0072810945424693525,
+        "reference_checksum": "ce85643a41a78e3d09db47d994c95d960c6c3942500daae300a4fa9502434839",
+        "reference_dtype": "float32",
+        "reference_rms": 21.241074247556814,
+        "rmse": 0.15465826978007222,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "d3faeab84cc017c1a9f7f2ceb68160bff0a002a66d7aac4988bac51f2c846a37",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999847187993863,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 32.0,
+        "max_relative_error": 7.809214475236381e+37,
+        "mean_abs_error": 0.15580641850829124,
+        "name": "stage_1_deep_block_47_pass_00_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005594452204353181,
+        "reference_checksum": "31e0af9b29ddbf3b15571d1dc670ad0761bb703e309e609e32091f03e71553e1",
+        "reference_dtype": "float32",
+        "reference_rms": 56.02480511821496,
+        "rmse": 0.31342809449205505,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "d67610dd02b208cf66ab511ab3273aec7cff49ae1a1bf31b8cc019dc647ed959",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999866181839708,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 16.0,
+        "max_relative_error": 1.595073594941899e+37,
+        "mean_abs_error": 0.11427398357126448,
+        "name": "stage_1_deep_block_47_pass_00_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005174361332537956,
+        "reference_checksum": "66b3029686d86f7521680aec3fc9440a431116e3cfba1c85338114a2329fe000",
+        "reference_dtype": "float32",
+        "reference_rms": 52.74777983397778,
+        "rmse": 0.27293607235016,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "a314f20daa1691511fe8376ddd6cd8585602ba70a7b60e6b689074837a332e02",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999965040583369,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 48.0,
+        "max_relative_error": 1.249474316037821e+38,
+        "mean_abs_error": 0.26380261753996215,
+        "name": "stage_1_deep_block_47_pass_01_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.008385989060072423,
+        "reference_checksum": "dde9f018a02be2d882432fb8118dbf6a6269de878ffe87e6df3e7a0707e4dd19",
+        "reference_dtype": "float32",
+        "reference_rms": 55.70935701603982,
+        "rmse": 0.4671780584801788,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "51f4e1a2d287b53efa69ca8db593bfefa21694b94e971b0d87f8eacfec89d5aa",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999896106117369,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 8.0,
+        "max_relative_error": 1.7279963945203906e+37,
+        "mean_abs_error": 0.12565972242090437,
+        "name": "stage_1_deep_block_47_pass_01_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004569031827401756,
+        "reference_checksum": "3adf2bb37e6bdc5dcfc2df4f6e1d043d4a0224a4517bdc89d47b841584b59f44",
+        "reference_dtype": "float32",
+        "reference_rms": 53.14142058428273,
+        "rmse": 0.2428048420029306,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "71e45dfa980e162641cc263f900f3bd107e7a4e34d8ca8d3dca253c0072c7bbe",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999856186390488,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 32.0,
+        "max_relative_error": 1.1431360763750277e+38,
+        "mean_abs_error": 0.1414321339999636,
+        "name": "stage_1_deep_block_47_pass_02_video_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.005384617390012543,
+        "reference_checksum": "418304b95bb633a3001ef83081f4fa1399fd34384abdab98706ba415598806f6",
+        "reference_dtype": "float32",
+        "reference_rms": 56.02256830723137,
+        "rmse": 0.30166009554028356,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "block_index": 47,
+      "metrics": {
+        "candidate_checksum": "82074ed68d1a40c5a17030861fc53be8bd781c90069fb0129b07e8b80f2f1565",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999897958407895,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 16.0,
+        "max_relative_error": 1.8609191940988822e+37,
+        "mean_abs_error": 0.09769748451395167,
+        "name": "stage_1_deep_block_47_pass_02_audio_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004537937799416889,
+        "reference_checksum": "75479be06497673f375ff84b098dbe821b4e7ca47bc46249b42be9faab7d8c9b",
+        "reference_dtype": "float32",
+        "reference_rms": 51.91185365630058,
+        "rmse": 0.23557276294472426,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    }
+  ],
+  "component": "full_transformer_deep_trace",
+  "cuda_trace_schema_version": 4,
+  "first_failure": {
+    "block_index": 31,
+    "metrics": {
+      "candidate_checksum": "5d2d431f9109e0e401b3bd82591be64efae888cd39e9420f4c594d4dd5769ba1",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9998668207397859,
+      "finite_count": 491520,
+      "inf_count": 0,
+      "max_abs_error": 68.0,
+      "max_relative_error": 4.785220784825697e+37,
+      "mean_abs_error": 0.08523048144609978,
+      "name": "stage_1_deep_block_31_pass_00_video_output",
+      "nan_count": 0,
+      "normalized_rmse": 0.01631998785362243,
+      "reference_checksum": "f3bab3d0f05e3209ee758c02d8740ca5c7efc0fdaecbdfcb910abdd1365f976a",
+      "reference_dtype": "float32",
+      "reference_rms": 12.818071488879562,
+      "rmse": 0.20919077100537845,
+      "shape": [
+        1,
+        120,
+        4096
+      ]
+    },
+    "modality": "video",
+    "pass_index": 0,
+    "pass_name": "conditional",
+    "passed": false
+  },
+  "guidance_passes": [
+    {
+      "index": 0,
+      "name": "conditional"
+    },
+    {
+      "index": 1,
+      "name": "unconditional"
+    },
+    {
+      "index": 2,
+      "name": "modality_isolated"
+    }
+  ],
+  "lora_strength": 0.25,
+  "passed": false,
+  "schema_version": 1,
+  "selected_block_indices": [
+    0,
+    7,
+    15,
+    23,
+    31,
+    39,
+    47
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "invalid_corpus": "품질 코퍼스가 올바르지 않습니다({reason}). 버전 관리된 코퍼스 manifest를 복원한 뒤 다시 시도하세요.",
+  "generation_failed": "MLX 품질 사례 {case_id} 실행에 실패했습니다. 모델 팩, 사용 가능한 메모리와 출력 폴더를 확인한 뒤 다시 시도하세요.",
+  "completed": "MLX 품질 사례 {count}개를 완료했습니다. 보고서: {report}",
+  "comparison_failed": "품질 코퍼스 비교에 실패했습니다({case_id}). 모든 CUDA/MLX 미디어 쌍, FFmpeg/FFprobe와 보고서 폴더를 확인한 뒤 다시 시도하세요."
+}

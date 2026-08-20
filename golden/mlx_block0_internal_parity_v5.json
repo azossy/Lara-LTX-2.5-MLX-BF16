@@ -1,0 +1,534 @@
+{
+  "acceptance": {
+    "maximum_normalized_rmse": 0.02,
+    "minimum_cosine_similarity": 0.9999
+  },
+  "comparisons": [
+    {
+      "metrics": {
+        "candidate_checksum": "f869a4fc3cec5d1ba6f8a9e61b064643631610ea385a5001ab2abe7bc83f2407",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999586892783192,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.375,
+        "max_relative_error": 16307.716981132075,
+        "mean_abs_error": 0.019309397538381744,
+        "name": "stage_1_deep_block_00_pass_00_internal_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009108857069380962,
+        "reference_checksum": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+        "reference_dtype": "float32",
+        "reference_rms": 2.954304987545607,
+        "rmse": 0.02691034187091224,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn1",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "c7c0ad5d987b06161ce1dca3ceb8798e213dee5f724fc2f5e0f1b149f047f9f7",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999903668478537,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.0078125,
+        "max_relative_error": 614.9207920792079,
+        "mean_abs_error": 0.00012498453726266233,
+        "name": "stage_1_deep_block_00_pass_00_internal_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004422091242548925,
+        "reference_checksum": "3a73f6119cb58c36101ae30a81301bc341af468323bd6fb38ab1332c8a848067",
+        "reference_dtype": "float32",
+        "reference_rms": 0.06719661000795026,
+        "rmse": 0.00029714954064513226,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn2",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "38700fae9bfe03ffa007de9544c21b16bcd2129837057498fee18b8509dbc917",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999999511743266,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.03125,
+        "max_relative_error": 28.50877192982456,
+        "mean_abs_error": 1.9157714905304602e-05,
+        "name": "stage_1_deep_block_00_pass_00_internal_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0003124970970932241,
+        "reference_checksum": "69dd97b056cd44c52c8e029986d07f6597a492ff1cb5fe558f610102ce513dee",
+        "reference_dtype": "float32",
+        "reference_rms": 1.0117409459014814,
+        "rmse": 0.00031616610860456566,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "ff",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "cf0e958fab99da42b1bc7615fee7755e174e01b901f28164e6f80330e698061d",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999937702098065,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.5,
+        "max_relative_error": 39.0,
+        "mean_abs_error": 0.009314594842079613,
+        "name": "stage_1_deep_block_00_pass_00_internal_audio_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0035824641103041387,
+        "reference_checksum": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+        "reference_dtype": "float32",
+        "reference_rms": 5.313061580619877,
+        "rmse": 0.019033852428406488,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn1",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "f30d0ad57e2cd2e64227648452d45edee9ded4bc6f83cd33e2eadfaffc9e793a",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999605404629196,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.15625,
+        "max_relative_error": 1.213699390682516e+35,
+        "mean_abs_error": 0.0004235800030680063,
+        "name": "stage_1_deep_block_00_pass_00_internal_audio_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009277541336694336,
+        "reference_checksum": "fd1abf30f32c8e996be7094c0d32ae7e326becc6dfaf366c885bc20f0358e3f0",
+        "reference_dtype": "float32",
+        "reference_rms": 0.17527214264382235,
+        "rmse": 0.0016260945485490478,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn2",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "901552f8c10c2a779d83463306e096e0ead437678b6ca100ebee37789f39aed1",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999968532707785,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.5,
+        "max_relative_error": 6.3930155070710065e+34,
+        "mean_abs_error": 0.004794380874955095,
+        "name": "stage_1_deep_block_00_pass_00_internal_audio_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0025091058423030964,
+        "reference_checksum": "71dbf36db1c5da44314a72ae90e13cf485cc375cf7dd864613c2987a969648bb",
+        "reference_dtype": "float32",
+        "reference_rms": 6.917548971073106,
+        "rmse": 0.017356862537737303,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_ff",
+      "pass_index": 0,
+      "pass_name": "conditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "f869a4fc3cec5d1ba6f8a9e61b064643631610ea385a5001ab2abe7bc83f2407",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999586892783192,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.375,
+        "max_relative_error": 16307.716981132075,
+        "mean_abs_error": 0.019309397538381744,
+        "name": "stage_1_deep_block_00_pass_01_internal_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009108857069380962,
+        "reference_checksum": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+        "reference_dtype": "float32",
+        "reference_rms": 2.954304987545607,
+        "rmse": 0.02691034187091224,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn1",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "5041b5187c7afa2f7f7188069f3c3409963a29a520837ae054e612b2dd633f09",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999879277035856,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.0078125,
+        "max_relative_error": 6943.0,
+        "mean_abs_error": 0.00015411985849074958,
+        "name": "stage_1_deep_block_00_pass_01_internal_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004975637013119234,
+        "reference_checksum": "1491a2b73af357da4ea6c820232359ca33a08daad8bb7024ab0e64f8f769d3f1",
+        "reference_dtype": "float32",
+        "reference_rms": 0.06788367267470223,
+        "rmse": 0.00033776451434671913,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn2",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "1cab952b5d2855c3565a9bfcd00210d12f117f154f9c93740fb3d15ebb48ac42",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999999590286355,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.015625,
+        "max_relative_error": 1.9861111111111112,
+        "mean_abs_error": 1.7002590978639395e-05,
+        "name": "stage_1_deep_block_00_pass_01_internal_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.00028626816493139813,
+        "reference_checksum": "d1824710c45cf6abe72cb289bf9b46199872753676a48dcb9b181d2c5814d2ec",
+        "reference_dtype": "float32",
+        "reference_rms": 1.0114912486808096,
+        "rmse": 0.00028955774360402386,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "ff",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "cf0e958fab99da42b1bc7615fee7755e174e01b901f28164e6f80330e698061d",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999937702098065,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.5,
+        "max_relative_error": 39.0,
+        "mean_abs_error": 0.009314594842079613,
+        "name": "stage_1_deep_block_00_pass_01_internal_audio_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0035824641103041387,
+        "reference_checksum": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+        "reference_dtype": "float32",
+        "reference_rms": 5.313061580619877,
+        "rmse": 0.019033852428406488,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn1",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "0568665f6ab204b47a1493039b9995e0f2e5521ce0bb455628b659500096628c",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999538771266577,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.1875,
+        "max_relative_error": 1.9600920640968974e+35,
+        "mean_abs_error": 0.00045815402215036255,
+        "name": "stage_1_deep_block_00_pass_01_internal_audio_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.011209587244917203,
+        "reference_checksum": "385a534c27451c1b4b34768bcdb8773dca67e1274fe338ec10350d354a424948",
+        "reference_dtype": "float32",
+        "reference_rms": 0.16948604426627903,
+        "rmse": 0.001899868599998754,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn2",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "950bcebdf9adcbd36f226314f299e86e3a684c6397fcc3ce24d961b3b0d50ccb",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999970642036895,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.25,
+        "max_relative_error": 5.062489437071457e+34,
+        "mean_abs_error": 0.004728297392527263,
+        "name": "stage_1_deep_block_00_pass_01_internal_audio_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0024232541808077057,
+        "reference_checksum": "9b0f8fc512e04fa57abc4b8a8ae904268c6c24364c1816f8b9b4deec8492a1fe",
+        "reference_dtype": "float32",
+        "reference_rms": 7.008836594021698,
+        "rmse": 0.01698419257906112,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_ff",
+      "pass_index": 1,
+      "pass_name": "unconditional",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "f869a4fc3cec5d1ba6f8a9e61b064643631610ea385a5001ab2abe7bc83f2407",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999586892783192,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.375,
+        "max_relative_error": 16307.716981132075,
+        "mean_abs_error": 0.019309397538381744,
+        "name": "stage_1_deep_block_00_pass_02_internal_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009108857069380962,
+        "reference_checksum": "0baaa6e73028ebe7f6a21943bf1c9086c79e904ee185c6501d2a2d2ce1419a54",
+        "reference_dtype": "float32",
+        "reference_rms": 2.954304987545607,
+        "rmse": 0.02691034187091224,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn1",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "c7c0ad5d987b06161ce1dca3ceb8798e213dee5f724fc2f5e0f1b149f047f9f7",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999903668478537,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.0078125,
+        "max_relative_error": 614.9207920792079,
+        "mean_abs_error": 0.00012498453726266233,
+        "name": "stage_1_deep_block_00_pass_02_internal_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.004422091242548925,
+        "reference_checksum": "3a73f6119cb58c36101ae30a81301bc341af468323bd6fb38ab1332c8a848067",
+        "reference_dtype": "float32",
+        "reference_rms": 0.06719661000795026,
+        "rmse": 0.00029714954064513226,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "attn2",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "99ae4d5c00a726a6828447cce5f889c35efae07f63aa8f387f0eaf8fba63ff31",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999999906355904,
+        "finite_count": 491520,
+        "inf_count": 0,
+        "max_abs_error": 0.0625,
+        "max_relative_error": 5.823529411764706,
+        "mean_abs_error": 3.7637773910622245e-05,
+        "name": "stage_1_deep_block_00_pass_02_internal_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.00043284190765321506,
+        "reference_checksum": "be7d4ccc32ebbbf5d6f5c8aeed2f0160b94e779079001f5a0c7a416b8dec44f1",
+        "reference_dtype": "float32",
+        "reference_rms": 1.0115539280425974,
+        "rmse": 0.0004378429319080609,
+        "shape": [
+          1,
+          120,
+          4096
+        ]
+      },
+      "modality": "video",
+      "module": "ff",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "cf0e958fab99da42b1bc7615fee7755e174e01b901f28164e6f80330e698061d",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999937702098065,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.5,
+        "max_relative_error": 39.0,
+        "mean_abs_error": 0.009314594842079613,
+        "name": "stage_1_deep_block_00_pass_02_internal_audio_attn1_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0035824641103041387,
+        "reference_checksum": "d57761ceba52e6acbecbc395e2e0cf90f4203fb86b285b4a464362223cc2924b",
+        "reference_dtype": "float32",
+        "reference_rms": 5.313061580619877,
+        "rmse": 0.019033852428406488,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn1",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "f30d0ad57e2cd2e64227648452d45edee9ded4bc6f83cd33e2eadfaffc9e793a",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.9999605404629196,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.15625,
+        "max_relative_error": 1.213699390682516e+35,
+        "mean_abs_error": 0.0004235800030680063,
+        "name": "stage_1_deep_block_00_pass_02_internal_audio_attn2_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.009277541336694336,
+        "reference_checksum": "fd1abf30f32c8e996be7094c0d32ae7e326becc6dfaf366c885bc20f0358e3f0",
+        "reference_dtype": "float32",
+        "reference_rms": 0.17527214264382235,
+        "rmse": 0.0016260945485490478,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_attn2",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    },
+    {
+      "metrics": {
+        "candidate_checksum": "1435e0129feb0a41c6aa017b456f4c4670995208411da5403750ee11934b5109",
+        "candidate_dtype": "float32",
+        "cosine_similarity": 0.999997108458044,
+        "finite_count": 36864,
+        "inf_count": 0,
+        "max_abs_error": 0.25,
+        "max_relative_error": 8.437482395119095e+34,
+        "mean_abs_error": 0.004469100630053112,
+        "name": "stage_1_deep_block_00_pass_02_internal_audio_ff_output",
+        "nan_count": 0,
+        "normalized_rmse": 0.0024058269943611644,
+        "reference_checksum": "4493e038fd121a9a0b739c543cef0ac85232c8346fecf07d8e119abbde70c0f3",
+        "reference_dtype": "float32",
+        "reference_rms": 6.723530671523813,
+        "rmse": 0.016175651586967234,
+        "shape": [
+          1,
+          18,
+          2048
+        ]
+      },
+      "modality": "audio",
+      "module": "audio_ff",
+      "pass_index": 2,
+      "pass_name": "modality_isolated",
+      "passed": true
+    }
+  ],
+  "component": "block0_exact_input_internal_modules",
+  "lora_strength": 0.25,
+  "passed": true,
+  "schema_version": 1
+}

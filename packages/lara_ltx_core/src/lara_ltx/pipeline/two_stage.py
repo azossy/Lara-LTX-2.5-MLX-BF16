@@ -38,6 +38,55 @@ StageModuleLoader = Callable[[float], tuple[AVTransformerInputPreprocessor, AVTr
 StageStrengthSetter = Callable[[float], None]
 InitialNoiser = Callable[[Res2sLatentState, float], Res2sLatentState]
 Upscaler = Callable[[mx.array], mx.array]
+DenoiserObserver = Callable[
+    [
+        str,
+        int,
+        float,
+        Res2sLatentState | None,
+        Res2sLatentState | None,
+        mx.array | None,
+        mx.array | None,
+    ],
+    None,
+]
+
+
+class _ObservedDenoiser:
+    """Transparent diagnostic wrapper that does not alter denoiser execution."""
+
+    def __init__(self, denoiser: object, stage: str, observer: DenoiserObserver) -> None:
+        self._denoiser = denoiser
+        self._stage = stage
+        self._observer = observer
+        self._call_index = 0
+
+    def set_step_index(self, step_index: int) -> None:
+        callback = getattr(self._denoiser, "set_step_index", None)
+        if callable(callback):
+            callback(step_index)
+
+    def __call__(
+        self,
+        video: Res2sLatentState | None,
+        audio: Res2sLatentState | None,
+        sigma: float,
+    ) -> tuple[mx.array | None, mx.array | None]:
+        callback = self._denoiser
+        if not callable(callback):
+            raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_observed_denoiser"})
+        video_output, audio_output = callback(video, audio, sigma)
+        self._observer(
+            self._stage,
+            self._call_index,
+            sigma,
+            video,
+            audio,
+            video_output,
+            audio_output,
+        )
+        self._call_index += 1
+        return video_output, audio_output
 
 
 @dataclass(frozen=True)
@@ -160,6 +209,7 @@ class TwoStageSamplingRuntime:
         stage_one_sampler: Res2sSampler,
         stage_two_sampler: Res2sSampler,
         config: TwoStageSamplingConfig,
+        denoiser_observer: DenoiserObserver | None = None,
     ) -> None:
         resident_blocks = tuple(blocks)
         if expected_block_count <= 0 or len(resident_blocks) != expected_block_count:
@@ -173,6 +223,7 @@ class TwoStageSamplingRuntime:
         self.stage_one_sampler = stage_one_sampler
         self.stage_two_sampler = stage_two_sampler
         self.config = config
+        self.denoiser_observer = denoiser_observer
 
     @staticmethod
     def _first_sigma(sigmas: mx.array, stage: str) -> float:
@@ -223,6 +274,12 @@ class TwoStageSamplingRuntime:
             video_guider=video_guider,
             audio_guider=audio_guider,
         )
+        if self.denoiser_observer is not None:
+            stage_one_denoiser = _ObservedDenoiser(
+                stage_one_denoiser,
+                "stage_1",
+                self.denoiser_observer,
+            )
         sampled_video, sampled_audio = self.stage_one_sampler.sample(
             stage_one_sigmas,
             initial_video.state,
@@ -262,6 +319,12 @@ class TwoStageSamplingRuntime:
                 contexts.audio_context_mask,
             ),
         )
+        if self.denoiser_observer is not None:
+            stage_two_denoiser = _ObservedDenoiser(
+                stage_two_denoiser,
+                "stage_2",
+                self.denoiser_observer,
+            )
         refined_video, _ = self.stage_two_sampler.sample(
             stage_two_sigmas,
             stage_two_video.state,

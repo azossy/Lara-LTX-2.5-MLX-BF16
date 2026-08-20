@@ -52,9 +52,10 @@ def main() -> int:
     arguments = parse_arguments()
     key_config = _json(arguments.keys)
     tolerance_config = _json(arguments.tolerances)
-    if key_config.get("schema_version") != SUPPORTED_SCHEMA_VERSION or tolerance_config.get(
-        "schema_version"
-    ) != SUPPORTED_SCHEMA_VERSION:
+    if (
+        key_config.get("schema_version") != SUPPORTED_SCHEMA_VERSION
+        or tolerance_config.get("schema_version") != SUPPORTED_SCHEMA_VERSION
+    ):
         raise LaraError("LARA-PARITY-004", details={"reason": "unsupported_schema"})
     ordered_keys = key_config.get("ordered_keys")
     if not isinstance(ordered_keys, list) or not all(isinstance(key, str) for key in ordered_keys):

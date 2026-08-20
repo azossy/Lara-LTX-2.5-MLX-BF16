@@ -1,8 +1,11 @@
+import pytest
+from lara_ltx.errors import LaraError
 from lara_ltx.models.transformer_input import (
     KEYFRAME_SOURCE,
     KEYFRAME_TARGET,
     SOURCE_MODULE_TO_TARGET,
     transformer_input_target_shapes,
+    validate_transformer_input_architecture,
     validate_transformer_input_mapping,
 )
 
@@ -33,11 +36,35 @@ def test_transformer_input_mapping_contract_has_exact_production_shapes() -> Non
     mapping = {
         "schema_version": 2,
         "component": "transformer_input",
+        "architecture": {
+            "timestep_scale_multiplier": 1000.0,
+            "av_ca_timestep_scale_multiplier": 1000.0,
+        },
         "shards": [{"file": "transformer.safetensors", "tensor_count": len(rules)}],
         "rules": rules,
     }
 
     assert len(validate_transformer_input_mapping(mapping)) == 53
+    architecture = validate_transformer_input_architecture(mapping)
+    assert architecture.timestep_scale_multiplier == 1000.0
+    assert architecture.av_cross_timestep_scale_multiplier == 1000.0
     assert shapes["video.patchify_proj.weight"] == (4096, 128)
     assert shapes["audio.adaln_single.linear.weight"] == (9 * 2048, 2048)
     assert shapes["video_cross_gate.linear.bias"] == (4096,)
+
+
+@pytest.mark.parametrize(
+    "architecture",
+    (
+        None,
+        {},
+        {"timestep_scale_multiplier": 1000.0},
+        {"timestep_scale_multiplier": 0.0, "av_ca_timestep_scale_multiplier": 1000.0},
+        {"timestep_scale_multiplier": 1000.0, "av_ca_timestep_scale_multiplier": float("nan")},
+    ),
+)
+def test_transformer_input_architecture_rejects_missing_or_invalid_values(
+    architecture: object,
+) -> None:
+    with pytest.raises(LaraError, match="LARA-MODEL-034"):
+        validate_transformer_input_architecture({"architecture": architecture})

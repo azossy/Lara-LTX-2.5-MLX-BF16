@@ -133,6 +133,28 @@ def _quality_metrics(reference: np.ndarray, candidate: np.ndarray, name: str) ->
     return metrics
 
 
+def _video_characteristics(frames: np.ndarray) -> dict[str, float]:
+    luma = np.mean(frames, axis=-1, dtype=np.float64)
+    temporal_motion = np.diff(frames, axis=0)
+    return {
+        "luma_mean": float(np.mean(luma)),
+        "luma_standard_deviation": float(np.std(luma)),
+        "horizontal_gradient_mean_abs": float(np.mean(np.abs(np.diff(frames, axis=2)))),
+        "vertical_gradient_mean_abs": float(np.mean(np.abs(np.diff(frames, axis=1)))),
+        "temporal_motion_mean_abs": (float(np.mean(np.abs(temporal_motion))) if temporal_motion.shape[0] else 0.0),
+    }
+
+
+def _audio_characteristics(audio: np.ndarray) -> dict[str, Any]:
+    return {
+        "rms": float(np.sqrt(np.mean(np.square(audio, dtype=np.float64)))),
+        "peak_abs": float(np.max(np.abs(audio))),
+        "channel_rms": [
+            float(np.sqrt(np.mean(np.square(audio[:, channel], dtype=np.float64)))) for channel in range(audio.shape[1])
+        ],
+    }
+
+
 def _threshold_result(report: dict[str, Any], path: Path | None) -> tuple[dict[str, Any] | None, bool | None]:
     if path is None:
         return None, None
@@ -199,6 +221,10 @@ def main() -> int:
                 np.diff(candidate_frames, axis=0),
                 "decoded_rgb_temporal_delta",
             ),
+            "characteristics": {
+                "reference": _video_characteristics(reference_frames),
+                "candidate": _video_characteristics(candidate_frames),
+            },
         },
         "audio": {
             "sample_count": sample_count,
@@ -211,6 +237,10 @@ def main() -> int:
                 sample_rate=audio_layout[0],
                 max_lag_ms=arguments.max_audio_lag_ms,
             ),
+            "characteristics": {
+                "reference": _audio_characteristics(reference_audio),
+                "candidate": _audio_characteristics(candidate_audio),
+            },
         },
     }
     threshold_result, passed = _threshold_result(report, arguments.thresholds)

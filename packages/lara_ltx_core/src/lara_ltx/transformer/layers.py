@@ -19,10 +19,13 @@ def rms_norm(x: mx.array, weight: mx.array | None = None, *, eps: float = DEFAUL
 
 
 def gelu_approx(x: mx.array) -> mx.array:
-    """Tanh GELU used by every LTX-2.5 feed-forward projection."""
+    """Tanh GELU with CUDA-compatible FP32 activation evaluation."""
 
+    output_dtype = x.dtype
+    x = x.astype(mx.float32)
     coefficient = math.sqrt(2.0 / math.pi)
-    return 0.5 * x * (1.0 + mx.tanh(coefficient * (x + GELU_TANH_COEFFICIENT * mx.power(x, 3))))
+    result = 0.5 * x * (1.0 + mx.tanh(coefficient * (x + GELU_TANH_COEFFICIENT * mx.power(x, 3))))
+    return result.astype(output_dtype)
 
 
 class GELUApprox(nn.Module):

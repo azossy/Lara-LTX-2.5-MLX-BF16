@@ -50,7 +50,15 @@ from lara_ltx.video_vae import (
     load_spatial_video_upscaler,
 )
 
-from .configuration import CheckpointPaths, GenerationProfile, PipelineProfile, load_pipeline_profile
+from .configuration import (
+    DISTRIBUTION_MANIFEST_FILENAME,
+    CheckpointPaths,
+    DistributionSource,
+    GenerationProfile,
+    PipelineProfile,
+    load_distribution_source,
+    load_pipeline_profile,
+)
 from .decode import CheckpointDecodeRuntime, DecodeRuntimeConfig
 from .generation import LocalGenerationRuntime
 from .two_stage import (
@@ -221,18 +229,52 @@ class LTXPipeline:
 
         profile = load_pipeline_profile(profile_path)
         candidate = Path(model).expanduser()
+        cache_value = cache_dir or os.getenv(profile.download.cache_environment_variable)
+        token_value = token or os.getenv(profile.download.token_environment_variable)
+        source: DistributionSource | None = None
         if candidate.is_dir():
-            root = candidate.resolve()
+            manifest_path = candidate / DISTRIBUTION_MANIFEST_FILENAME
+            if manifest_path.is_file():
+                source = load_distribution_source(manifest_path)
+            else:
+                root = candidate.resolve()
         else:
+            requested_repository = str(model)
+            if requested_repository != profile.model.repository_id:
+                try:
+                    from huggingface_hub import hf_hub_download
+                    from huggingface_hub.errors import EntryNotFoundError
+
+                    manifest_path = Path(
+                        hf_hub_download(
+                            repo_id=requested_repository,
+                            filename=DISTRIBUTION_MANIFEST_FILENAME,
+                            revision=revision,
+                            cache_dir=cache_value,
+                            token=token_value,
+                            local_files_only=local_files_only,
+                        )
+                    )
+                    source = load_distribution_source(manifest_path)
+                except EntryNotFoundError:
+                    source = None
+                except LaraError:
+                    raise
+                except Exception as error:
+                    raise LaraError("LARA-PIPELINE-002", details={"path": requested_repository}) from error
+            if source is None:
+                source = DistributionSource(
+                    repository_id=requested_repository,
+                    revision=revision or profile.model.revision,
+                )
+        if source is not None:
             try:
                 from huggingface_hub import snapshot_download
 
-                cache_value = cache_dir or os.getenv(profile.download.cache_environment_variable)
-                token_value = token or os.getenv(profile.download.token_environment_variable)
                 root = Path(
                     snapshot_download(
-                        repo_id=str(model),
-                        revision=revision or profile.model.revision,
+                        repo_id=source.repository_id,
+                        revision=source.revision,
                         cache_dir=cache_value,
                         token=token_value,
                         allow_patterns=profile.model.allow_patterns,
@@ -240,7 +282,7 @@ class LTXPipeline:
                     )
                 ).resolve()
             except Exception as error:
-                raise LaraError("LARA-PIPELINE-002", details={"path": str(model)}) from error
+                raise LaraError("LARA-PIPELINE-002", details={"path": source.repository_id}) from error
         return cls(checkpoints=profile.model.resolve(root), profile=profile, model_root=root)
 
     def _sampling_runtime(self, generation: GenerationProfile) -> TwoStageSamplingRuntime:

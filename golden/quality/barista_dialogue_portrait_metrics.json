@@ -1,0 +1,127 @@
+{
+  "acceptance": null,
+  "audio": {
+    "alignment": {
+      "aligned_cosine_similarity": -0.08765550551280847,
+      "lag_ms": 136.91666666666666,
+      "lag_samples": 6572
+    },
+    "channels": 2,
+    "characteristics": {
+      "candidate": {
+        "channel_rms": [
+          0.05425966026547448,
+          0.05425728516602481
+        ],
+        "peak_abs": 0.2576063275337219,
+        "rms": 0.05425847272874553
+      },
+      "reference": {
+        "channel_rms": [
+          0.03473001502509067,
+          0.0343671414590922
+        ],
+        "peak_abs": 0.24372108280658722,
+        "rms": 0.03454905465937003
+      }
+    },
+    "metrics": {
+      "candidate_checksum": "0651dadde7567c41a397a2fa36d7f1036f5274e553806db0c9fd40a9f45ad05b",
+      "candidate_dtype": "float32",
+      "cosine_similarity": -0.004968709741366711,
+      "finite_count": 98304,
+      "inf_count": 0,
+      "max_abs_error": 0.2681116461753845,
+      "max_relative_error": 101747.98726744305,
+      "mean_abs_error": 0.05013768985939676,
+      "name": "decoded_audio",
+      "nan_count": 0,
+      "normalized_rmse": 1.8660124329633057,
+      "psnr_db": 23.81298596702556,
+      "reference_checksum": "0af82485e8936898e0dfb2dc366f6983d9c6f683c653e5cf6b7da291951059c3",
+      "reference_dtype": "float32",
+      "reference_rms": 0.03454905465937003,
+      "rmse": 0.06446896554151331,
+      "shape": [
+        49152,
+        2
+      ]
+    },
+    "sample_count": 49152,
+    "sample_rate": 48000
+  },
+  "candidate": "golden/quality/mlx/barista_dialogue_portrait.mp4",
+  "component": "cuda_mlx_media_quality",
+  "passed": null,
+  "reference": "golden/quality/cuda/barista_dialogue_portrait.mp4",
+  "schema_version": 1,
+  "video": {
+    "characteristics": {
+      "candidate": {
+        "horizontal_gradient_mean_abs": 0.023280734196305275,
+        "luma_mean": 0.4485894789688124,
+        "luma_standard_deviation": 0.32379342445360587,
+        "temporal_motion_mean_abs": 0.021340444684028625,
+        "vertical_gradient_mean_abs": 0.02063165046274662
+      },
+      "reference": {
+        "horizontal_gradient_mean_abs": 0.01239975355565548,
+        "luma_mean": 0.6068635790376891,
+        "luma_standard_deviation": 0.2549269054239225,
+        "temporal_motion_mean_abs": 0.022539393976330757,
+        "vertical_gradient_mean_abs": 0.012246730737388134
+      }
+    },
+    "frame_count": 25,
+    "frame_metrics": {
+      "candidate_checksum": "59b49a20cee1e741d632c88fc793a9b43ad32358c619ac4c2b8d6913af98a7b6",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.74084319124511,
+      "finite_count": 12288000,
+      "inf_count": 0,
+      "max_abs_error": 1.0,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.3719565907011313,
+      "name": "decoded_rgb_frames",
+      "nan_count": 0,
+      "normalized_rmse": 0.6785374546694836,
+      "psnr_db": 6.87968571257535,
+      "reference_checksum": "eeb293f06ca9df1d5900f1a52e27dfd342344812f10e1a95399608734cfc2223",
+      "reference_dtype": "float32",
+      "reference_rms": 0.6674855817950979,
+      "rmse": 0.4529139676998251,
+      "shape": [
+        25,
+        512,
+        320,
+        3
+      ]
+    },
+    "height": 512,
+    "temporal_delta_metrics": {
+      "candidate_checksum": "0d34706f036d218be132e3399cb3cc734647f1c2255462c9c6dcb26f130e9593",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.002831008823625032,
+      "finite_count": 11796480,
+      "inf_count": 0,
+      "max_abs_error": 1.188235342502594,
+      "max_relative_error": 7.406145698604692e+37,
+      "mean_abs_error": 0.039069414190768925,
+      "name": "decoded_rgb_temporal_delta",
+      "nan_count": 0,
+      "normalized_rmse": 1.520456807464133,
+      "psnr_db": 21.834433295077694,
+      "reference_checksum": "3254c8a40ea81e410e4a28f9601707c033cd75b277b79dd4400a3ed50f2de447",
+      "reference_dtype": "float32",
+      "reference_rms": 0.05324811618131656,
+      "rmse": 0.0809614607325238,
+      "shape": [
+        24,
+        512,
+        320,
+        3
+      ]
+    },
+    "width": 320
+  }
+}

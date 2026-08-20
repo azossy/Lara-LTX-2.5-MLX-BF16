@@ -1,0 +1,50 @@
+{
+  "completed_case_count": 2,
+  "component": "mlx_quality_corpus_generation",
+  "corpus": {
+    "name": "lara-ltx-bf16-quality-v1",
+    "sha256": "320bb55f485d98ce9e4d1de975207c02401353fde72b63fe492c3875cdfdfbe5"
+  },
+  "model": "models/LTX-2.5",
+  "passed": false,
+  "requested_case_count": 2,
+  "results": [
+    {
+      "case_id": "seoul_night_landscape",
+      "elapsed_seconds": 9.541865438222885e-06,
+      "output": "golden/quality/mlx/seoul_night_landscape.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 320,
+        "num_frames": 17,
+        "num_inference_steps": 15,
+        "seed": 25081900,
+        "width": 512
+      },
+      "reused": true,
+      "sha256": "2a2c927878d9eb0ce8d7f1682f43d622686f5cdaf52d67624289eb013becf928",
+      "size_bytes": 75557
+    },
+    {
+      "case_id": "barista_dialogue_portrait",
+      "elapsed_seconds": 8.95792618393898e-06,
+      "output": "golden/quality/mlx/barista_dialogue_portrait.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 512,
+        "num_frames": 25,
+        "num_inference_steps": 15,
+        "seed": 25081901,
+        "width": 320
+      },
+      "reused": true,
+      "sha256": "53cf897a373fa533f4e73df317046102dd0f2e047f177efb36b62b283b37dd95",
+      "size_bytes": 120629
+    }
+  ],
+  "schema_version": 1,
+  "scope": "generation_only_not_quality_acceptance",
+  "status": "partial",
+  "total_case_count": 4,
+  "updated_at_utc": "2026-08-20T11:11:33.478190+00:00"
+}

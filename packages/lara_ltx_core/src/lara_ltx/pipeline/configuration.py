@@ -15,6 +15,8 @@ from lara_ltx.sampling import MultiModalGuiderParams
 
 PROFILE_RESOURCE_PACKAGE = "lara_ltx.resources"
 DEFAULT_PROFILE_NAME = "hq.toml"
+DISTRIBUTION_MANIFEST_FILENAME = "lara_ltx_model.toml"
+DISTRIBUTION_MANIFEST_SCHEMA_VERSION = 1
 
 
 def _required(value: dict[str, Any], key: str) -> Any:
@@ -186,6 +188,39 @@ class PipelineProfile:
     decode: DecodeProfile
     media: MediaEncodingConfig
     download: DownloadProfile
+
+
+@dataclass(frozen=True)
+class DistributionSource:
+    """Pinned checkpoint source declared by a lightweight release repository."""
+
+    repository_id: str
+    revision: str
+
+
+def load_distribution_source(path: Path) -> DistributionSource:
+    """Read and validate a release-repository indirection manifest."""
+
+    try:
+        with Path(path).expanduser().open("rb") as handle:
+            raw = tomllib.load(handle)
+        manifest = _section(raw, "manifest")
+        source = _section(raw, "source")
+        schema_version = int(_required(manifest, "schema_version"))
+        repository_id = str(_required(source, "repository_id")).strip()
+        revision = str(_required(source, "revision")).strip()
+    except LaraError as error:
+        raise LaraError("LARA-PIPELINE-004", details={"reason": "invalid_manifest_structure"}) from error
+    except (OSError, tomllib.TOMLDecodeError, TypeError, ValueError) as error:
+        raise LaraError("LARA-PIPELINE-004", details={"reason": "unreadable_manifest"}) from error
+    if (
+        schema_version != DISTRIBUTION_MANIFEST_SCHEMA_VERSION
+        or repository_id.count("/") != 1
+        or not all(repository_id.split("/"))
+        or not revision
+    ):
+        raise LaraError("LARA-PIPELINE-004", details={"reason": "invalid_manifest_values"})
+    return DistributionSource(repository_id=repository_id, revision=revision)
 
 
 def load_pipeline_profile(path: Path | None = None) -> PipelineProfile:

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "name": "lara-ltx-bf16-quality-v1",
+  "requirements": {
+    "minimum_case_count": 4,
+    "minimum_unique_seeds": 4,
+    "minimum_unique_resolutions": 4,
+    "minimum_unique_frame_counts": 3,
+    "required_review_focus": [
+      "audio_sync",
+      "fine_detail",
+      "human_motion",
+      "temporal_motion"
+    ]
+  },
+  "cases": [
+    {
+      "id": "seoul_night_landscape",
+      "prompt": "A cinematic aerial view of Seoul at night, slow forward camera movement, realistic city lights, distant traffic and natural urban ambience.",
+      "seed": 25081900,
+      "width": 512,
+      "height": 320,
+      "num_frames": 17,
+      "frame_rate": 24.0,
+      "num_inference_steps": 15,
+      "review_focus": ["fine_detail", "temporal_motion"]
+    },
+    {
+      "id": "barista_dialogue_portrait",
+      "prompt": "Portrait close-up of a barista in a quiet cafe looking at the camera and saying, Welcome in, while steam rises naturally from a cup, realistic skin and synchronized speech.",
+      "seed": 25081901,
+      "width": 320,
+      "height": 512,
+      "num_frames": 25,
+      "frame_rate": 24.0,
+      "num_inference_steps": 15,
+      "review_focus": ["audio_sync", "human_motion"]
+    },
+    {
+      "id": "fox_forest_square",
+      "prompt": "A red fox runs across a sunlit forest clearing as the camera tracks sideways, detailed fur, physically plausible legs, moving leaves and natural woodland sound.",
+      "seed": 25081902,
+      "width": 512,
+      "height": 512,
+      "num_frames": 33,
+      "frame_rate": 24.0,
+      "num_inference_steps": 15,
+      "review_focus": ["fine_detail", "temporal_motion"]
+    },
+    {
+      "id": "ocean_sunrise_wide",
+      "prompt": "Wide documentary shot of ocean waves rolling onto black volcanic sand at sunrise, stable horizon, realistic foam dynamics, soft wind and synchronized surf audio.",
+      "seed": 25081903,
+      "width": 640,
+      "height": 384,
+      "num_frames": 25,
+      "frame_rate": 24.0,
+      "num_inference_steps": 15,
+      "review_focus": ["audio_sync", "temporal_motion"]
+    }
+  ]
+}

@@ -64,12 +64,7 @@ class VideoLatentLayout:
 
     @property
     def token_count(self) -> int:
-        return (
-            self.frames
-            * self.height
-            * self.width
-            // (self.patch_size_t * self.patch_size_hw * self.patch_size_hw)
-        )
+        return self.frames * self.height * self.width // (self.patch_size_t * self.patch_size_hw * self.patch_size_hw)
 
     @property
     def token_channels(self) -> int:

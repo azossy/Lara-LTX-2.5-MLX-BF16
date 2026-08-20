@@ -1,0 +1,18 @@
+{
+  "component": "cuda_deep_trace_reducer",
+  "config": {
+    "file": "deep_transformer_parity_config.json",
+    "sha256": "19fcc921d0183d575a9004e4d004ae45d754c95f6e6247b54b51238971489cf2"
+  },
+  "output": {
+    "file": "cuda_hq_deep_transformer_replay_v4.npz",
+    "sha256": "fd07de5572e1a18fb5191f4c2767a3a1fb3f16701e2a7ec791693bf1b1c56a3f",
+    "size_bytes": 59815663,
+    "tensor_count": 79
+  },
+  "schema_version": 1,
+  "source": {
+    "file": "cuda_hq_deep_first_call_v4.npz",
+    "sha256": "6c8ab358e58969363edcbfc39964df50f29ad83ce8b828eec494dabb73642d43"
+  }
+}

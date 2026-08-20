@@ -88,9 +88,7 @@ def _conditioning(
         context_mask=mx.ones((1, context_token_count), dtype=mx.int32),
         attention_mask=mx.ones((1, token_count, token_count), dtype=mx.float32),
         keyframes_mask=(
-            mx.zeros((1, token_count, 1), dtype=mx.int32)
-            if axis_count == VIDEO_POSITION_AXIS_COUNT
-            else None
+            mx.zeros((1, token_count, 1), dtype=mx.int32) if axis_count == VIDEO_POSITION_AXIS_COUNT else None
         ),
     )
 
@@ -250,14 +248,8 @@ def main() -> int:
         del denoiser, input_processor, output_heads, video, audio
         mx.clear_cache()
 
-    finite = all(
-        bool(output["finite"])
-        for stage in stages
-        for output in stage["outputs"].values()
-    )
-    covered_lora_pairs = fused_block_pairs + int(stages[0]["fused_input_pairs"]) + int(
-        stages[0]["fused_output_pairs"]
-    )
+    finite = all(bool(output["finite"]) for stage in stages for output in stage["outputs"].values())
+    covered_lora_pairs = fused_block_pairs + int(stages[0]["fused_input_pairs"]) + int(stages[0]["fused_output_pairs"])
     all_lora_pairs_covered = covered_lora_pairs == len(lora_pairs)
     passed = (
         finite

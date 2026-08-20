@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "github_identity": true,
+    "hf_github_link": true,
+    "hf_upstream_id": true,
+    "hugging_face_identity": true,
+    "license_file": true,
+    "license_sha256": true,
+    "manifest_schema": true,
+    "manifest_source_repository": true,
+    "manifest_source_tag": true,
+    "manifest_version": true,
+    "notice_file": true,
+    "package_version": true,
+    "release_schema": true,
+    "root_github_link": true,
+    "root_hugging_face_id": true,
+    "upstream_identity": true,
+    "upstream_revision": true
+  },
+  "component": "release_bundle_validation",
+  "files": {
+    "LICENSE.md": "4e7dd26d9c9294e1e0549587505dcf4ba40c7c82c50850559f846f92245f6120",
+    "NOTICE.md": "7c069e443104b7a6d54258487e2208f580bbb2c2358b12aadc45ba03e0838575",
+    "README.md": "09050b3e3932c2a50faca0bde66ff5c552240eb955b82e5b2c3528d2ca15fa69",
+    "lara_ltx_model.toml": "097baee233a7af3b4e22a8dc192ae94c67eda83474dee74f067e829dfed4aa41",
+    "pyproject.toml": "1d86b2eec82f181607b308d5e123307d193a506d08ad90cce0c8e0d54a207302",
+    "release.toml": "171ca0e1672188c38f29f323cff2eb99a96c093f22893fb1c51a7488f7a44b0f"
+  },
+  "github_repository": "azossy/Lara-LTX-2.5-MLX-BF16",
+  "hugging_face_repository": "challychoi/Lara-LTX-2.5-MLX-BF16",
+  "passed": true,
+  "schema_version": 1,
+  "upstream": {
+    "repository": "Lightricks/LTX-2.5",
+    "revision": "6c7e5e573ac1667efc83407806fe9b0b93730e60"
+  },
+  "version": "0.0.1"
+}

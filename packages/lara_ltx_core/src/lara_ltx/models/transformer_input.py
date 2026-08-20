@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import math
+from dataclasses import dataclass
 from pathlib import Path
 
 from lara_ltx.errors import LaraError
@@ -15,6 +17,8 @@ AUDIO_HIDDEN_DIMENSION = 2_048
 INPUT_CHANNELS = 128
 TIMESTEP_PROJECTION_CHANNELS = 256
 SOURCE_PREFIX = "model.diffusion_model."
+CHECKPOINT_CONFIG_METADATA_KEY = "config"
+TRANSFORMER_CONFIG_KEY = "transformer"
 KEYFRAME_SOURCE = "keyframes_abs_pos_embedding"
 KEYFRAME_TARGET = "video.keyframes_abs_pos_embedding"
 SOURCE_MODULE_TO_TARGET = {
@@ -29,6 +33,44 @@ SOURCE_MODULE_TO_TARGET = {
     "av_ca_a2v_gate_adaln_single": "video_cross_gate",
     "av_ca_v2a_gate_adaln_single": "audio_cross_gate",
 }
+
+
+@dataclass(frozen=True)
+class TransformerInputArchitecture:
+    timestep_scale_multiplier: float
+    av_cross_timestep_scale_multiplier: float
+
+
+def _checkpoint_architecture(metadata: dict[str, str]) -> TransformerInputArchitecture:
+    raw = metadata.get(CHECKPOINT_CONFIG_METADATA_KEY)
+    try:
+        payload = json.loads(raw) if raw is not None else None
+    except json.JSONDecodeError as error:
+        raise LaraError("LARA-MODEL-034", details={"key": CHECKPOINT_CONFIG_METADATA_KEY}) from error
+    transformer = payload.get(TRANSFORMER_CONFIG_KEY) if isinstance(payload, dict) else None
+    if not isinstance(transformer, dict):
+        raise LaraError("LARA-MODEL-034", details={"key": TRANSFORMER_CONFIG_KEY})
+    return _validate_architecture_values(transformer)
+
+
+def _validate_architecture_values(value: dict[str, object]) -> TransformerInputArchitecture:
+    timestep = value.get("timestep_scale_multiplier")
+    av_cross = value.get("av_ca_timestep_scale_multiplier")
+    if (
+        not isinstance(timestep, (int, float))
+        or isinstance(timestep, bool)
+        or not isinstance(av_cross, (int, float))
+        or isinstance(av_cross, bool)
+        or not math.isfinite(float(timestep))
+        or not math.isfinite(float(av_cross))
+        or float(timestep) <= 0
+        or float(av_cross) <= 0
+    ):
+        raise LaraError("LARA-MODEL-034", details={"key": "transformer_input_architecture"})
+    return TransformerInputArchitecture(
+        timestep_scale_multiplier=float(timestep),
+        av_cross_timestep_scale_multiplier=float(av_cross),
+    )
 
 
 def _add_adaln_shapes(
@@ -82,6 +124,7 @@ def transformer_input_target_shapes() -> dict[str, tuple[int, ...]]:
 
 def build_transformer_input_mapping(checkpoint: Path) -> dict[str, object]:
     source = inspect_safetensors(checkpoint)
+    architecture = _checkpoint_architecture(source.metadata)
     rules: list[dict[str, object]] = []
     for descriptor in source.tensors:
         target_key: str | None = None
@@ -108,6 +151,10 @@ def build_transformer_input_mapping(checkpoint: Path) -> dict[str, object]:
     mapping: dict[str, object] = {
         "schema_version": MAPPING_SCHEMA_VERSION,
         "component": "transformer_input",
+        "architecture": {
+            "timestep_scale_multiplier": architecture.timestep_scale_multiplier,
+            "av_ca_timestep_scale_multiplier": architecture.av_cross_timestep_scale_multiplier,
+        },
         "shards": [{"file": checkpoint.name, "tensor_count": len(rules)}],
         "rules": sorted(rules, key=lambda rule: str(rule["target_key"])),
     }
@@ -129,6 +176,13 @@ def validate_transformer_input_mapping(mapping: dict[str, object]) -> tuple[dict
         ):
             raise LaraError("LARA-MODEL-034", details={"key": str(rule.get("source_key"))})
     return rules
+
+
+def validate_transformer_input_architecture(mapping: dict[str, object]) -> TransformerInputArchitecture:
+    value = mapping.get("architecture")
+    if not isinstance(value, dict):
+        raise LaraError("LARA-MODEL-034", details={"key": "transformer_input_architecture"})
+    return _validate_architecture_values(value)
 
 
 def write_transformer_input_mapping(output: Path, checkpoint: Path) -> None:

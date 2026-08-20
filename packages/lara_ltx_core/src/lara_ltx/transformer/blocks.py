@@ -118,8 +118,9 @@ class VideoTransformerBlock(nn.Module):
                 timesteps,
                 VIDEO_CROSS_ADALN_SLICE,
             )
-            prompt_modulation = self.prompt_scale_shift_table[None, None, :, :]
+            prompt_modulation = self.prompt_scale_shift_table.astype(context.dtype)[None, None, :, :]
             if prompt_timestep is not None:
+                prompt_modulation = prompt_modulation.astype(prompt_timestep.dtype)
                 batch_size = prompt_timestep.shape[0]
                 prompt_modulation = prompt_modulation + prompt_timestep.reshape(
                     batch_size,
@@ -299,8 +300,9 @@ class AVTransformerBlock(nn.Module):
                 stream.timesteps,
                 VIDEO_CROSS_ADALN_SLICE,
             )
-            prompt_modulation = prompt_scale_shift_table[None, None, :, :]
+            prompt_modulation = prompt_scale_shift_table.astype(stream.context.dtype)[None, None, :, :]
             if stream.prompt_timestep is not None:
+                prompt_modulation = prompt_modulation.astype(stream.prompt_timestep.dtype)
                 batch_size = stream.prompt_timestep.shape[0]
                 prompt_modulation = prompt_modulation + stream.prompt_timestep.reshape(
                     batch_size,

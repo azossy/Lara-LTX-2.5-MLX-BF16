@@ -1,0 +1,21 @@
+{
+  "case_count": 4,
+  "component": "quality_corpus_structure",
+  "corpus": {
+    "name": "lara-ltx-bf16-quality-v1",
+    "path": "golden/manifests/quality_corpus.json",
+    "sha256": "320bb55f485d98ce9e4d1de975207c02401353fde72b63fe492c3875cdfdfbe5"
+  },
+  "passed": true,
+  "review_focus": [
+    "audio_sync",
+    "fine_detail",
+    "human_motion",
+    "temporal_motion"
+  ],
+  "schema_version": 1,
+  "scope": "structure_only_not_quality_acceptance",
+  "unique_frame_counts": 3,
+  "unique_resolutions": 4,
+  "unique_seeds": 4
+}

@@ -131,9 +131,7 @@ class ResidentAVDenoiser:
     ) -> tuple[mx.array | None, mx.array | None]:
         if not math.isfinite(sigma) or sigma < 0:
             raise LaraError("LARA-TENSOR-029", details={"reason": "invalid_sigma"})
-        if (video is None) != (self.video_conditioning is None) or (audio is None) != (
-            self.audio_conditioning is None
-        ):
+        if (video is None) != (self.video_conditioning is None) or (audio is None) != (self.audio_conditioning is None):
             raise LaraError("LARA-TENSOR-029", details={"reason": "modality_conditioning_mismatch"})
         video_input = _bind_modality(video, self.video_conditioning, sigma) if video is not None else None
         audio_input = _bind_modality(audio, self.audio_conditioning, sigma) if audio is not None else None
@@ -179,14 +177,10 @@ class ResidentAVDenoiser:
             else None
         )
         video_denoised = (
-            video_denoised.astype(video.latent.dtype)
-            if video_denoised is not None and video is not None
-            else None
+            video_denoised.astype(video.latent.dtype) if video_denoised is not None and video is not None else None
         )
         audio_denoised = (
-            audio_denoised.astype(audio.latent.dtype)
-            if audio_denoised is not None and audio is not None
-            else None
+            audio_denoised.astype(audio.latent.dtype) if audio_denoised is not None and audio is not None else None
         )
         outputs = tuple(value for value in (video_denoised, audio_denoised) if value is not None)
         mx.eval(*outputs)
@@ -312,9 +306,7 @@ class GuidedResidentAVDenoiser:
         from lara_ltx.sampling.guidance import build_guidance_batch_plan, calculate_guided_output
         from lara_ltx.sampling.perturbations import BatchedPerturbationConfig
 
-        if (video is None) != (self.video_conditioning is None) or (audio is None) != (
-            self.audio_conditioning is None
-        ):
+        if (video is None) != (self.video_conditioning is None) or (audio is None) != (self.audio_conditioning is None):
             raise LaraError("LARA-SAMPLING-002", details={"reason": "guidance_modality_mismatch"})
         original_batch_size = self._original_batch_size(video, audio)
         video_skipped = video is not None and self.video_guider.should_skip_step(self.step_index)

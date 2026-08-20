@@ -7,6 +7,7 @@ import pytest
 from lara_ltx.errors import LaraError
 from lara_ltx.pipeline import TwoStageContexts, load_pipeline_profile
 from lara_ltx.pipeline.api import _build_request
+from lara_ltx.pipeline.configuration import load_distribution_source
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODEL_ROOT = PROJECT_ROOT / "models" / "LTX-2.5"
@@ -60,3 +61,30 @@ def test_public_generation_rejects_unsupported_grid(field: str, value: int) -> N
 
     with pytest.raises(LaraError, match="LARA-PIPELINE-003"):
         profile.with_overrides(**{field: value})
+
+
+def test_release_descriptor_pins_official_gated_source() -> None:
+    source = load_distribution_source(PROJECT_ROOT / "release" / "huggingface" / "lara_ltx_model.toml")
+
+    profile = load_pipeline_profile()
+    assert source.repository_id == profile.model.repository_id
+    assert source.revision == profile.model.revision
+
+
+def test_release_descriptor_rejects_unversioned_source(tmp_path: Path) -> None:
+    manifest = tmp_path / "lara_ltx_model.toml"
+    manifest.write_text(
+        "[manifest]\nschema_version = 2\n[source]\nrepository_id = 'Lightricks/LTX-2.5'\nrevision = 'bad'\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(LaraError, match="LARA-PIPELINE-004"):
+        load_distribution_source(manifest)
+
+
+def test_release_descriptor_rejects_missing_source_with_release_error(tmp_path: Path) -> None:
+    manifest = tmp_path / "lara_ltx_model.toml"
+    manifest.write_text("[manifest]\nschema_version = 1\n", encoding="utf-8")
+
+    with pytest.raises(LaraError, match="LARA-PIPELINE-004"):
+        load_distribution_source(manifest)

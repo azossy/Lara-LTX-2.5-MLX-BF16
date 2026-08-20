@@ -86,7 +86,8 @@ not cross-backend numerical parity; that comparison remains in P4.
 
 ```sh
 .venv/bin/python tools/parity/validate_mlx_sampling.py \
-  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --cuda-reference golden/cuda_hq_sampling_replay_v3.npz \
+  --cuda-diagnostics golden/cuda_hq_denoiser_first2_v3.npz \
   --report "$LARA_REPORT_DIR/sampling.json"
 ```
 
@@ -217,14 +218,39 @@ smoke manifest:
   --report "$LARA_REPORT_DIR/two_stage_sampling_smoke.json"
 ```
 
-This gate must retain exactly 48 blocks, switch the configured LoRA strength in
-place, consume all four initial noiser boundaries plus every captured Res2S
-substep/step SDE tensor, compare final Stage-2 video and preserved Stage-1 audio
-against CUDA, and avoid a second transformer state. The expanded schema-2 CUDA
-trace is produced by `capture_cuda_hq_boundaries.py`; its one required recapture
-is still pending. Sigma indices, sampler behavior, guidance values, strengths,
+This gate retains exactly 48 blocks, switches the configured LoRA strength in
+place, consumes all four initial noiser boundaries plus every captured Res2S
+substep/step SDE tensor, compares the first two available denoiser calls and the
+final Stage-2 video/preserved Stage-1 audio against CUDA, and avoids a second
+transformer state. Sigma indices, sampler behavior, guidance values, strengths,
 reference keys, tolerances and block count all live in the reviewed JSON
 manifest rather than source code.
+
+The checked-in replay report is intentionally retained when the command exits
+with status 1. After correcting the checkpoint metadata's
+`av_ca_timestep_scale_multiplier=1000`, the first-call inputs are exact and the
+first guided outputs reach cosine similarity above `0.997`; the frozen final
+latent gate still fails after cross-backend BF16 accumulation. Do not convert
+that diagnostic into a pass by weakening its frozen thresholds.
+
+For the exact-input transformer and output-head bisect, use the reduced v4
+artifact. It contains every required input alias, seven selected block outputs,
+all first-call guidance components and remains below GitHub's per-file limit:
+
+```sh
+.venv/bin/python tools/parity/compare_mlx_deep_transformer_trace.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --cuda-reference golden/cuda_hq_deep_transformer_replay_v4.npz \
+  --cuda-report golden/cuda_hq_deep_first_call_v4.json \
+  --config golden/manifests/deep_transformer_parity_config.json \
+  --report "$LARA_REPORT_DIR/deep_transformer_v4.json"
+```
+
+The full raw v4 capture is a local diagnostic input to
+`reduce_cuda_deep_trace.py`; it is not committed. The reducer records source,
+configuration and output SHA-256 values so the 57 MB replay artifact remains
+traceable to the 119 MB raw capture.
 
 ## P3 spatial latent-upscaler gate
 

@@ -21,9 +21,13 @@ from ltx_pipelines.utils.constants import LTX_2_3_HQ_PARAMS
 from ltx_pipelines.utils.media_io import encode_video, resolve_hdr_color_space, vae_dtype_for_hdr
 from ltx_pipelines.utils.samplers import _get_new_noise
 
-ARTIFACT_SCHEMA_VERSION = 2
+ARTIFACT_SCHEMA_VERSION = 5
 HASH_BLOCK_BYTES = 1024 * 1024
 MAX_RECORDED_NOISER_CALLS_PER_STAGE = 2
+
+
+class DiagnosticCaptureCompleteError(RuntimeError):
+    """Stop the pipeline after the requested diagnostic boundary is durable."""
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -45,6 +49,16 @@ class TensorCapture:
         self.metadata[name] = {
             "original_dtype": str(tensor.dtype),
             "shape": list(tensor.shape),
+            "stored_dtype": str(array.dtype),
+            "sha256": _sha256_bytes(array.tobytes()),
+        }
+
+    def add_scalar(self, name: str, value: bool | int | float) -> None:
+        array = np.asarray(value)
+        self.arrays[name] = array
+        self.metadata[name] = {
+            "original_dtype": type(value).__name__,
+            "shape": [],
             "stored_dtype": str(array.dtype),
             "sha256": _sha256_bytes(array.tobytes()),
         }
@@ -86,14 +100,145 @@ class NoiserRecorder:
         return result
 
 
+class DeepTransformerRecorder:
+    """Capture selected block outputs from the first real transformer call."""
+
+    def __init__(self, capture: TensorCapture, stage_name: str, block_indices: tuple[int, ...]) -> None:
+        self._capture = capture
+        self._stage_name = stage_name
+        self._block_indices = block_indices
+        self._handles: list[Any] = []
+        self._block_call_counts = {index: 0 for index in block_indices}
+        self._internal_call_counts: dict[str, int] = {}
+
+    def _record_argument(self, prefix: str, argument: Any) -> None:
+        if argument is None:
+            return
+        for field in (
+            "x",
+            "context",
+            "timesteps",
+            "embedded_timestep",
+            "prompt_timestep",
+            "cross_scale_shift_timestep",
+            "cross_gate_timestep",
+            "context_mask",
+            "self_attention_mask",
+            "self_attn_perturbation_mask",
+            "cross_attn_perturbation_mask",
+        ):
+            self._capture.add(f"{prefix}_{field}", getattr(argument, field, None))
+        for field in ("enabled", "self_attn_all_perturbed", "cross_attn_skip_all"):
+            value = getattr(argument, field, None)
+            if isinstance(value, (bool, int, float)):
+                self._capture.add_scalar(f"{prefix}_{field}", value)
+        for field in ("positional_embeddings", "cross_positional_embeddings"):
+            frequencies = getattr(argument, field, None)
+            if frequencies is not None:
+                self._capture.add(f"{prefix}_{field}_cos", frequencies[0])
+                self._capture.add(f"{prefix}_{field}_sin", frequencies[1])
+
+    def install(self, transformer: Any) -> None:
+        velocity_model = getattr(transformer, "velocity_model", None)
+        blocks = getattr(velocity_model, "transformer_blocks", None)
+        if blocks is None:
+            raise RuntimeError("Transformer does not expose velocity_model.transformer_blocks")
+        block_count = len(blocks)
+        if any(index < 0 or index >= block_count for index in self._block_indices):
+            raise RuntimeError(f"Deep capture block index is outside [0, {block_count})")
+        first_index = min(self._block_indices)
+
+        first_block = blocks[first_index]
+        for module_name in (
+            "attn1",
+            "attn2",
+            "ff",
+            "audio_attn1",
+            "audio_attn2",
+            "audio_ff",
+            "audio_to_video_attn",
+            "video_to_audio_attn",
+        ):
+            module = getattr(first_block, module_name, None)
+            if module is None:
+                continue
+            self._internal_call_counts[module_name] = 0
+
+            def internal_hook(
+                _module: Any,
+                args: tuple[Any, ...],
+                kwargs: dict[str, Any],
+                output: Any,
+                *,
+                current_name: str = module_name,
+            ) -> None:
+                pass_index = self._internal_call_counts[current_name]
+                self._internal_call_counts[current_name] += 1
+                prefix = (
+                    f"{self._stage_name}_deep_block_{first_index:02d}_pass_{pass_index:02d}_internal_{current_name}"
+                )
+                primary_input = args[0] if args else kwargs.get("x")
+                self._capture.add(f"{prefix}_input", primary_input)
+                self._capture.add(f"{prefix}_output", output if isinstance(output, torch.Tensor) else None)
+
+            self._handles.append(module.register_forward_hook(internal_hook, with_kwargs=True))
+
+        for block_index in self._block_indices:
+            prefix = f"{self._stage_name}_deep_block_{block_index:02d}"
+
+            def hook(
+                _module: Any,
+                args: tuple[Any, ...],
+                kwargs: dict[str, Any],
+                output: Any,
+                *,
+                current_index: int = block_index,
+                current_prefix: str = prefix,
+            ) -> None:
+                pass_index = self._block_call_counts[current_index]
+                self._block_call_counts[current_index] += 1
+                pass_prefix = f"{current_prefix}_pass_{pass_index:02d}"
+                video_input = kwargs.get("video", args[0] if args else None)
+                audio_input = kwargs.get("audio", args[1] if len(args) > 1 else None)
+                if current_index == first_index:
+                    self._record_argument(f"{pass_prefix}_video_input", video_input)
+                    self._record_argument(f"{pass_prefix}_audio_input", audio_input)
+                video_output, audio_output = output
+                self._capture.add(
+                    f"{pass_prefix}_video_output",
+                    video_output.x if video_output is not None else None,
+                )
+                self._capture.add(
+                    f"{pass_prefix}_audio_output",
+                    audio_output.x if audio_output is not None else None,
+                )
+
+            self._handles.append(blocks[block_index].register_forward_hook(hook, with_kwargs=True))
+
+    def remove(self) -> None:
+        for handle in self._handles:
+            handle.remove()
+        self._handles.clear()
+
+
 class DenoiserRecorder:
     """Capture every Res2S denoiser input and output without changing execution."""
 
-    def __init__(self, denoiser: Any, capture: TensorCapture, stage_name: str) -> None:
+    def __init__(
+        self,
+        denoiser: Any,
+        capture: TensorCapture,
+        stage_name: str,
+        *,
+        deep_block_indices: tuple[int, ...] = (),
+        stop_after_first_call: bool = False,
+    ) -> None:
         self._denoiser = denoiser
         self._capture = capture
         self._stage_name = stage_name
         self._call_count = 0
+        self._deep_block_indices = deep_block_indices
+        self._stop_after_first_call = stop_after_first_call
 
     def __call__(
         self,
@@ -109,13 +254,24 @@ class DenoiserRecorder:
         self._capture.add(f"{prefix}_sigma", sigmas[step_index])
         self._capture.add(f"{prefix}_video_input", video_state.latent if video_state is not None else None)
         self._capture.add(f"{prefix}_audio_input", audio_state.latent if audio_state is not None else None)
-        video_result, audio_result = self._denoiser(
-            transformer,
-            video_state,
-            audio_state,
-            sigmas,
-            step_index,
+        deep_recorder = (
+            DeepTransformerRecorder(self._capture, self._stage_name, self._deep_block_indices)
+            if call_index == 0 and self._deep_block_indices
+            else None
         )
+        if deep_recorder is not None:
+            deep_recorder.install(transformer)
+        try:
+            video_result, audio_result = self._denoiser(
+                transformer,
+                video_state,
+                audio_state,
+                sigmas,
+                step_index,
+            )
+        finally:
+            if deep_recorder is not None:
+                deep_recorder.remove()
         self._capture.add(
             f"{prefix}_video_output",
             video_result.denoised if video_result is not None else None,
@@ -124,6 +280,16 @@ class DenoiserRecorder:
             f"{prefix}_audio_output",
             audio_result.denoised if audio_result is not None else None,
         )
+        if call_index == 0:
+            for modality, result in (("video", video_result), ("audio", audio_result)):
+                if result is None:
+                    continue
+                for component in ("cond", "uncond", "ptb", "mod"):
+                    value = getattr(result, component, None)
+                    if isinstance(value, torch.Tensor):
+                        self._capture.add(f"{prefix}_{modality}_{component}", value)
+        if call_index == 0 and self._stop_after_first_call:
+            raise DiagnosticCaptureCompleteError
         return video_result, audio_result
 
 
@@ -162,10 +328,20 @@ class SdeNoiseRecorder:
 class SdeTraceLoop:
     """Delegate the official loop with deterministic SDE and denoiser recorders."""
 
-    def __init__(self, loop: Any, capture: TensorCapture, stage_name: str) -> None:
+    def __init__(
+        self,
+        loop: Any,
+        capture: TensorCapture,
+        stage_name: str,
+        *,
+        deep_block_indices: tuple[int, ...] = (),
+        stop_after_first_call: bool = False,
+    ) -> None:
         self._loop = loop
         self._capture = capture
         self._stage_name = stage_name
+        self._deep_block_indices = deep_block_indices
+        self._stop_after_first_call = stop_after_first_call
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         recorded_kwargs = dict(kwargs)
@@ -173,6 +349,8 @@ class SdeTraceLoop:
             kwargs["denoiser"],
             self._capture,
             self._stage_name,
+            deep_block_indices=self._deep_block_indices,
+            stop_after_first_call=self._stop_after_first_call,
         )
         recorded_kwargs["new_noise_fn"] = SdeNoiseRecorder(self._capture, self._stage_name)
         return self._loop(*args, **recorded_kwargs)
@@ -181,15 +359,31 @@ class SdeTraceLoop:
 class StageCallRecorder:
     """Delegate a diffusion stage while replacing its noiser with a recorder."""
 
-    def __init__(self, component: Any, capture: TensorCapture, stage_name: str) -> None:
+    def __init__(
+        self,
+        component: Any,
+        capture: TensorCapture,
+        stage_name: str,
+        *,
+        deep_block_indices: tuple[int, ...] = (),
+        stop_after_first_call: bool = False,
+    ) -> None:
         self._component = component
         self._capture = capture
         self._stage_name = stage_name
+        self._deep_block_indices = deep_block_indices
+        self._stop_after_first_call = stop_after_first_call
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         recorded_kwargs = dict(kwargs)
         recorded_kwargs["noiser"] = NoiserRecorder(kwargs["noiser"], self._capture, self._stage_name)
-        recorded_kwargs["loop"] = SdeTraceLoop(kwargs["loop"], self._capture, self._stage_name)
+        recorded_kwargs["loop"] = SdeTraceLoop(
+            kwargs["loop"],
+            self._capture,
+            self._stage_name,
+            deep_block_indices=self._deep_block_indices,
+            stop_after_first_call=self._stop_after_first_call,
+        )
         output = self._component(*args, **recorded_kwargs)
         _record_stage(self._capture, self._stage_name)(args, recorded_kwargs, output)
         return output
@@ -254,6 +448,8 @@ def _parse_arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = add_generated_keyframes_arg(hq_2_stage_arg_parser(params=LTX_2_3_HQ_PARAMS, supports_auto_duration=True))
     parser.add_argument("--artifact", type=Path, required=True)
     parser.add_argument("--trace-report", type=Path, required=True)
+    parser.add_argument("--deep-block-indices", nargs="*", type=int, default=[])
+    parser.add_argument("--diagnostic-first-call-only", action="store_true")
     return parser.parse_args(argv)
 
 
@@ -277,7 +473,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     pipeline.prompt_encoder = CallRecorder(
         pipeline.prompt_encoder, lambda args, kwargs, output: _record_context(capture, args, kwargs, output)
     )
-    pipeline.stage_1 = StageCallRecorder(pipeline.stage_1, capture, "stage_1")
+    deep_block_indices = tuple(sorted(set(arguments.deep_block_indices)))
+    pipeline.stage_1 = StageCallRecorder(
+        pipeline.stage_1,
+        capture,
+        "stage_1",
+        deep_block_indices=deep_block_indices,
+        stop_after_first_call=arguments.diagnostic_first_call_only,
+    )
     pipeline.stage_2 = StageCallRecorder(pipeline.stage_2, capture, "stage_2")
     pipeline.upsampler = CallRecorder(
         pipeline.upsampler, lambda args, kwargs, output: _record_upsampler(capture, args, kwargs, output)
@@ -293,48 +496,53 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     hdr = resolve_hdr_color_space(images=arguments.images, hdr=arguments.hdr)
     vae_dtype = vae_dtype_for_hdr(hdr, torch.bfloat16)
-    video, audio, num_frames, tiling_config = pipeline(
-        prompt=arguments.prompt,
-        negative_prompt=arguments.negative_prompt,
-        seed=arguments.seed,
-        height=arguments.height,
-        width=arguments.width,
-        num_frames=arguments.num_frames,
-        frame_rate=arguments.frame_rate,
-        num_inference_steps=arguments.num_inference_steps,
-        video_guider_params=MultiModalGuiderParams(
-            cfg_scale=arguments.video_cfg_guidance_scale,
-            stg_scale=arguments.video_stg_guidance_scale,
-            rescale_scale=arguments.video_rescale_scale,
-            modality_scale=arguments.a2v_guidance_scale,
-            skip_step=arguments.video_skip_step,
-            stg_blocks=arguments.video_stg_blocks,
-        ),
-        audio_guider_params=MultiModalGuiderParams(
-            cfg_scale=arguments.audio_cfg_guidance_scale,
-            stg_scale=arguments.audio_stg_guidance_scale,
-            rescale_scale=arguments.audio_rescale_scale,
-            modality_scale=arguments.v2a_guidance_scale,
-            skip_step=arguments.audio_skip_step,
-            stg_blocks=arguments.audio_stg_blocks,
-        ),
-        images=arguments.images,
-        vae_dtype=vae_dtype,
-        color_space=hdr,
-        enhance_prompt=arguments.enhance_prompt,
-        enhance_static_cache=arguments.enhance_static_cache,
-        max_batch_size=arguments.max_batch_size,
-        tiling_config=AUTO_TILING,
-        generated_keyframes=arguments.num_generated_keyframes,
-    )
-    encode_video(
-        video=video,
-        fps=arguments.frame_rate,
-        audio=audio,
-        output_path=arguments.output_path,
-        video_chunks_number=get_video_chunks_number(num_frames, tiling_config),
-        color_space=hdr,
-    )
+    diagnostic_complete = False
+    try:
+        video, audio, num_frames, tiling_config = pipeline(
+            prompt=arguments.prompt,
+            negative_prompt=arguments.negative_prompt,
+            seed=arguments.seed,
+            height=arguments.height,
+            width=arguments.width,
+            num_frames=arguments.num_frames,
+            frame_rate=arguments.frame_rate,
+            num_inference_steps=arguments.num_inference_steps,
+            video_guider_params=MultiModalGuiderParams(
+                cfg_scale=arguments.video_cfg_guidance_scale,
+                stg_scale=arguments.video_stg_guidance_scale,
+                rescale_scale=arguments.video_rescale_scale,
+                modality_scale=arguments.a2v_guidance_scale,
+                skip_step=arguments.video_skip_step,
+                stg_blocks=arguments.video_stg_blocks,
+            ),
+            audio_guider_params=MultiModalGuiderParams(
+                cfg_scale=arguments.audio_cfg_guidance_scale,
+                stg_scale=arguments.audio_stg_guidance_scale,
+                rescale_scale=arguments.audio_rescale_scale,
+                modality_scale=arguments.v2a_guidance_scale,
+                skip_step=arguments.audio_skip_step,
+                stg_blocks=arguments.audio_stg_blocks,
+            ),
+            images=arguments.images,
+            vae_dtype=vae_dtype,
+            color_space=hdr,
+            enhance_prompt=arguments.enhance_prompt,
+            enhance_static_cache=arguments.enhance_static_cache,
+            max_batch_size=arguments.max_batch_size,
+            tiling_config=AUTO_TILING,
+            generated_keyframes=arguments.num_generated_keyframes,
+        )
+    except DiagnosticCaptureCompleteError:
+        diagnostic_complete = True
+    if not diagnostic_complete:
+        encode_video(
+            video=video,
+            fps=arguments.frame_rate,
+            audio=audio,
+            output_path=arguments.output_path,
+            video_chunks_number=get_video_chunks_number(num_frames, tiling_config),
+            color_space=hdr,
+        )
     arguments.artifact.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(arguments.artifact, **capture.arrays)
     report = {
@@ -343,6 +551,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "artifact": str(arguments.artifact),
         "tensor_boundaries": capture.metadata,
         "output_path": str(arguments.output_path),
+        "capture_mode": "diagnostic_first_call" if diagnostic_complete else "complete_pipeline",
+        "deep_block_indices": list(deep_block_indices),
     }
     arguments.trace_report.parent.mkdir(parents=True, exist_ok=True)
     temporary = arguments.trace_report.with_suffix(f"{arguments.trace_report.suffix}.tmp")

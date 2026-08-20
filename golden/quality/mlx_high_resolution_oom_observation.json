@@ -1,0 +1,25 @@
+{
+  "component": "mlx_quality_corpus_resource_observation",
+  "device": {
+    "chip": "Apple M5 Max",
+    "unified_memory_bytes": 137438953472
+  },
+  "observations": {
+    "elapsed_seconds_lower_bound": 4200,
+    "maximum_observed_swap_used_mebibytes": 73486.56,
+    "operating_system_exit_code": 137,
+    "termination": "SIGKILL"
+  },
+  "result": "unsupported_resource_exhaustion",
+  "schema_version": 1,
+  "scope": "single_run_operational_observation_not_a_memory_profiler_peak",
+  "workload": {
+    "case_id": "fox_forest_square",
+    "frame_rate": 24.0,
+    "height": 512,
+    "num_frames": 33,
+    "num_inference_steps": 15,
+    "seed": 25081902,
+    "width": 512
+  }
+}

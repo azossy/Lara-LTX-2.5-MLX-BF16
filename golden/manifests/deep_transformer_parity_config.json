@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "stage": "stage_1",
+  "block_count": 48,
+  "selected_block_indices": [0, 7, 15, 23, 31, 39, 47],
+  "lora_strength": 0.25,
+  "passes": [
+    {
+      "index": 0,
+      "name": "conditional",
+      "cuda_component": "cond",
+      "input_source_pass_index": 0,
+      "perturbations": []
+    },
+    {
+      "index": 1,
+      "name": "unconditional",
+      "cuda_component": "uncond",
+      "input_source_pass_index": 0,
+      "input_field_sources": {
+        "context": 1,
+        "prompt_timestep": 1
+      },
+      "perturbations": []
+    },
+    {
+      "index": 2,
+      "name": "modality_isolated",
+      "cuda_component": "mod",
+      "input_source_pass_index": 0,
+      "perturbations": ["skip_a2v_cross_attention", "skip_v2a_cross_attention"]
+    }
+  ],
+  "first_call": {
+    "sigma_key": "stage_1_denoiser_call_00_sigma",
+    "video_input_key": "stage_1_denoiser_call_00_video_input",
+    "audio_input_key": "stage_1_denoiser_call_00_audio_input"
+  },
+  "acceptance": {
+    "maximum_normalized_rmse": 0.02,
+    "minimum_cosine_similarity": 0.9999
+  }
+}

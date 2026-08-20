@@ -26,3 +26,11 @@ def test_tanh_gelu_matches_pytorch_formula() -> None:
     coefficient = math.sqrt(2.0 / math.pi)
     expected = 0.5 * values * (1.0 + np.tanh(coefficient * (values + 0.044715 * values**3)))
     np.testing.assert_allclose(np.asarray(result), expected, rtol=1e-6, atol=1e-6)
+
+
+def test_tanh_gelu_preserves_bfloat16_runtime_dtype() -> None:
+    result = gelu_approx(mx.linspace(-3.0, 3.0, 25).astype(mx.bfloat16))
+    mx.eval(result)
+
+    assert result.dtype == mx.bfloat16
+    assert np.isfinite(np.asarray(result.astype(mx.float32))).all()

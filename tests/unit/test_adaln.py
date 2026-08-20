@@ -26,6 +26,16 @@ def test_get_ada_values_rejects_wrong_timestep_width() -> None:
     assert raised.value.code == "LARA-TENSOR-006"
 
 
+def test_get_ada_values_casts_fp32_checkpoint_table_to_runtime_dtype() -> None:
+    values = get_ada_values(
+        mx.zeros((3, 4), dtype=mx.float32),
+        mx.zeros((1, 2, 12), dtype=mx.bfloat16),
+        slice(0, 3),
+    )
+
+    assert all(value.dtype == mx.bfloat16 for value in values)
+
+
 def test_ada_zero_and_post_attention_match_reference_equations() -> None:
     x = np.array([[[1.0, -2.0, 3.0, -4.0]]], dtype=np.float32)
     scale = np.full_like(x, 0.25)

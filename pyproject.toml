@@ -7,6 +7,8 @@ name = "lara-ltx"
 version = "0.0.1"
 description = "Full-precision LTX-2.5 runtime for Apple Silicon using MLX"
 readme = "README.md"
+license = "LicenseRef-LTX-2.x-Community"
+license-files = ["LICENSE.md"]
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "huggingface-hub>=1.8,<2",
@@ -29,6 +31,15 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["packages/lara_ltx_core/src/lara_ltx"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "packages/lara_ltx_core/src/lara_ltx",
+  "README.md",
+  "LICENSE.md",
+  "NOTICE.md",
+  "pyproject.toml",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,0 +1,17 @@
+[manifest]
+schema_version = 1
+runtime_package = "lara-ltx"
+
+[release]
+version = "0.0.1"
+source_repository = "azossy/Lara-LTX-2.5-MLX-BF16"
+source_tag = "v0.0.1"
+
+[source]
+repository_id = "Lightricks/LTX-2.5"
+revision = "6c7e5e573ac1667efc83407806fe9b0b93730e60"
+
+[compatibility]
+python = ">=3.12,<3.13"
+mlx = "0.32.0"
+platform = "Apple Silicon"

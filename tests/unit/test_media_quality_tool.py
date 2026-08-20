@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+import numpy as np
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 TOOL_PATH = PROJECT_ROOT / "tools" / "parity" / "compare_media_quality.py"
 
@@ -55,3 +57,18 @@ def test_media_comparison_uses_versioned_threshold_file(tmp_path: Path) -> None:
     assert passed is True
     assert acceptance is not None
     assert all(acceptance["checks"].values())
+
+
+def test_media_characteristics_report_motion_detail_and_audio_level() -> None:
+    frames = np.zeros((2, 2, 3, 3), dtype=np.float32)
+    frames[1, :, 1:, :] = 1.0
+    audio = np.array([[0.5, -0.5], [1.0, -1.0]], dtype=np.float32)
+
+    video = _tool()._video_characteristics(frames)
+    waveform = _tool()._audio_characteristics(audio)
+
+    assert video["temporal_motion_mean_abs"] > 0
+    assert video["horizontal_gradient_mean_abs"] > 0
+    assert waveform["rms"] > 0
+    assert waveform["peak_abs"] == 1.0
+    assert len(waveform["channel_rms"]) == 2

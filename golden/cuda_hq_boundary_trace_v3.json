@@ -1,0 +1,2731 @@
+{
+  "artifact": "/root/autodl-tmp/golden/cuda_hq_boundary_trace_v3.npz",
+  "captured_at_utc": "2026-08-20T06:54:34.317665+00:00",
+  "output_path": "/root/autodl-tmp/golden/cuda_hq_trace_v3.mp4",
+  "schema_version": 2,
+  "tensor_boundaries": {
+    "audio_decoder_input_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8596d443f1ef42b303ef4bc70d0df4b833e5beaf27f0e20bb1cdb5606127eb6c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_audio": {
+      "original_dtype": "torch.float32",
+      "sha256": "a0103d4459a4f0a11bdeab853714d4d683e879ab21f5c1df4f028784056d097c",
+      "shape": [
+        2,
+        33120
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_video_chunk_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f513c960a1f9a8646787179fc7bdeccee759f5b5ce6f28da85a6d44c1ee96da7",
+      "shape": [
+        17,
+        320,
+        512,
+        3
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_video_frame_count": {
+      "original_dtype": "int64",
+      "sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+      "shape": [],
+      "stored_dtype": "int64"
+    },
+    "prompt_audio_negative": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d8e60f225306e07091d039379baac82777aca2847c3c6dec0e98bcfefffa97de",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_audio_positive": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbd1cbb760f3d30d023756d877124c379ef03a8f8e0dba914be7bde462c7954e",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_video_negative": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8a84ec2a38d0b58035fa12f724767756d7b9e13c47f7ddb872168a19da5ac797",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_video_positive": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed149d1cf5a7c46ce9bf25ce3dd059c1d62ad4abcaecee5f330084118037b203",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_audio_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8596d443f1ef42b303ef4bc70d0df4b833e5beaf27f0e20bb1cdb5606127eb6c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_00_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28f23880c5977c0fdc136fdaa35d3bdb6436263c4f5fd28139034f0f2c55fc98",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_00_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c4cfa267541b8ef279991f26ac8d5cfad3eb0ec256a90038dcdb49e5045e3497",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_00_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_00_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "816aa8affce6bc85822e0f49cc92d794e0bd9766f794fbf4c38e1b6e91f53d60",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_00_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "646643f7e2bb5e8030c823df268501cd73d4be61bde171434ba06d2f0f7e94f7",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_01_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "214d4e1318c7da595ff5cabf8d02aa99fa9079426f082a70682efd616d2244a8",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_01_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28dcd40045b54903c203d91b8984d5d5a1f2f261c5994f3a368ed45960b4491c",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_01_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "ce5d8f985a740ab7aab81493184f30d08b830a766433e7c5727ce7e499aa8c85",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_01_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1059e41ae23ad3942fdc88bd1eb317533afc5f28004859e898aa9d2eeeda457d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_01_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "19aeaabef9329b517f867acba6d42342c6e96bfa7392a8670b4ff2c869b2118b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_02_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c6d9419fefafe4dcb9bf311ba6989c89d4ff63f2678c325c395d2a6b3f588b4c",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_02_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "039b1cb819bd002fb9a8240f1d3f5807d81a57da63bb5682121d9407a2b630d2",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_02_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "74e7b2085daf0ba2b5b265dd63e77f01f50f8001958ff295a9ebf06ecd3e24ec",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_02_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4cece59f7665994342f447e9529a9798292a94a4eb7ca120411991768af3399d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_02_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "34f74741ee00c7ee5043738dfa877a8219a9deb4d31705916bf4425ccb0da8e4",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_03_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "787b992142b99c37e6d36ac9ae9816c3c22586617045031112e3e1075fa1e264",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_03_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "da665cfc14b15a6bd561e7a73fbba547c86e4cea1a0bbbd65ccb9a87f68ad0af",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_03_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "368815d9460c167bdb9091dbe62b285e8de702c130a07ea654a7e6c53a12c5a0",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_03_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2d24f19299fac614076375ff7676e674d820fc6840f5c4dbd679593101f9b1a9",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_03_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a52fec5ae103a02e0d9bca137ce68d993906a04a53ee637c1be3ad83099e0feb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_04_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "45749f8b8e2a05ce085f24f6a190b6c9b085b1d2b5ead28f9eba680a587edeec",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_04_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "880b73bf6de5fd83efb7b7fc351e8bdfbeb18037c2c526f4fe477aab59a96b1c",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_04_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "edd801e7a51b9a8ca2b5363134a52d44fcb91100c80f9de03128d3128044d601",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_04_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "296a1394d96186032e37275317324d644426a09cb9b2c8776b115aba27bd9c2b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_04_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8a663bfa41a2e05ac1b01008e18f733c9b33b19dd9fd003461c75932d2cc9046",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_05_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8375b5360b5d8ddb6759a2d5a858c3b7a038b24d83df44fa6f26371472c0658f",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_05_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bf85abd8cacb3f22a37c6c31d2310192e500e8fa554fd8c22fad23e0d493fdc7",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_05_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "d84d23fb727c5110082420e1c1b15dd45f6d41bd4e800f5485f9e6fd86ac1c05",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_05_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2193ddc3dd3429bfe00e74db991a3d1045ce57f5dae485deb69bb286b2cce790",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_05_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6a0e3076776e5037ecd3fd675e4def0bd47238336fc6dc200615ef0c75e51343",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_06_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "346f1c2256652d3b5234ac94e1a79bcb8f65a39f50697becb65dfbb6e0f3d169",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_06_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "249b49471685593904dfb5ed3151d8f0f0ae68ff59f5eb882a36f62720f387ac",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_06_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "8f6aad7dffcecdacbef3d58547c541fc8b19042c03d9f12e6029fb93920ed131",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_06_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b3bd075eb2e820d2f643b641a9b00eeb7a3940bf1a3b4db624fd916abbcd2248",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_06_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "47a5325ff10a8f5b49d198bfb771e6b9284d3783d23a85f541f0f433ae25a820",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_07_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7ad02b9ec067dcd9aa159c1a188aab21bd2a9eff0ccfcae8ca8d0c8f75a0ca31",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_07_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2c37d64ffa5eb6b0ced4b7c38270586a0f0f6e40a62f49f6057e02e386d3b6e3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_07_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "1f4b49950a133a32db9d4bb6e14b940435484a5a337f09ac75ee3dcf77fdbebe",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_07_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "68cf60bee50e1e8eb57507243407834c32550d63c2b9eb6d5a1438da31646672",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_07_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a88377b97a9cb1bd4a68110a75a052f7909af6d04974f77f330869bf14115ee6",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_08_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "397a6b188bc8149f9db99bc2801e579dd36a59d85ddda708376588c8f30c7f5b",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_08_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1140b63a7fb08472d608002c1e2d8f06169f49ca7bc1f85ea6c5aa87a846719b",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_08_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "fadc956a1bc820fb35f41bca097e16fd818c43a2338ec09e727652bd50227b71",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_08_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f36903ad002853ead972ccea3a42c7bd5ec7f74c87ce6a5c308fdfcbb0ab4ff8",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_08_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b85eba1ad7a986478168dab486dae2c2a635ef406b18a471673137af2f26a2fa",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_09_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bf1116c83c9b742786b85731266f0fee7487a4f98601640b20ec191478d41369",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_09_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "5840456b8f2a4b2e54a925a8f0b8f9b7282d1e9ebb0ad100a4859f05278a8da0",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_09_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "b752190c45638ce2bab0fece4bba8344902633be47cd7cedee3acce9da51c307",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_09_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "248a05c3856828820f9654ada6b5bbab32bae8014cbbb462c2836f8303a6b4bb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_09_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "647c93911be9375b879f4bb952fd522403c1e8786ac275c39ce300a0ab11a74b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_10_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "5d55204cd48f2968e38452bda76a9650ef05f4506e96bc3c57357416f28b3fc4",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_10_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a939946a0c201c3cbada106865016837b75303439f3ef32352056ca20fe27cbc",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_10_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "778471206f718784e66c468f5834332676bcc991ce2b45a844e1f0e329d6be85",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_10_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8538c92369becf3db47fbc642c1614bcf957cd1399581a14b5bde17fdf02c984",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_10_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e04021044ddfe1e128cd5ac149fc34457bcddaaa009f0df5df0d63b4eb64ddcd",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_11_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "43092f5d893b8157adf62d0781938e2cfef1cf4aa1c4c8962337dda923fd3d71",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_11_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1fb34bfb9022f4abd31fd1fafe9f7f5d71a3ff16f75b55043aa3e8f687e63d3c",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_11_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "dc7f463dcb08e3817ae410a69ff6525c69483ba3c9e7fda6c31b1217eaf6ca4e",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_11_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ea23521c4e41da6e0c3fe10da30eee119c9d1d2ed8787d22873aaf82a5accccc",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_11_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6b1ee60aeb1263151ed4382454a28cda304d31cb11a8d7659085e37d5267ef7b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_12_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9ea66080bc3a36c6e219831871479ec0ff849944fd4833afd92ccb83de0fa124",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_12_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "aca4546d0e7bed61bd81707205dca5cfbc5a6eac23a783af05b3f77548b1cfa4",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_12_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "4d6d1e86dada1537acc01ad8dcd23daf08d727ca58f6948a4cb69d1c6f6702de",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_12_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e1e75d5391a5f4bfa1c5b34bfd83a5b3928e6c821b1d52e9a2554e12e3a247cb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_12_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bffcb6f3f698b78c23fd12c601341fd288d56f3a84e20be3797410251b2136e0",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_13_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7a2eebddcac3aa73a22254de5014feafb2909978457eb34d254801596090a2b7",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_13_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "32f2d4fbb0839cb60ec2910f87ef6ddc60b43d2bdd4b3fa09b6fc2beba20b118",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_13_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "32b0d8e411055d7603f5c63861c3d61e2f46d9fa7e13d5166aef866bfb198241",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_13_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0fa0d06f32ceca63bbc94783d20da18bbad154e065af05ea522516837daf1907",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_13_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "31d2af45f0adbbda6a106553e46e6865a56706b4623af56d64ff8c3a363ad43f",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_14_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "71db7cb86595beb4daa5183b802815d3eb34d6baabcf0986ae713a5a04986da4",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_14_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "564317c8625dc326eac2a2ad19b614117a6e52cdbd48c32dad86c9a75576f09a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_14_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "55099797fd48ac108ce02ce2e2c4f5b9d5d01660680edd91470d148cd7056387",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_14_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4d927251ae3f97907992099db6231b74ba51ac20780d397415dee82c0d9106a3",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_14_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "07fc4c086c0a5bf909a5ada36368b2c7a12f7d04e778a67be438b86f2d4b9c1d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_15_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f5ba90f959e8cdc13752735ee6e87f46ec6db67817921cb0615b4e94778cd537",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_15_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c8942ed7c1fe337f071ac77c08947475a46f320c2fd2007169f1f42729f69542",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_15_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "0b2c893150694fadab366270f01090e6e5aa0109453e64b9a1e1ca8eb3cc0f93",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_15_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "159d64d239b710690c371a9a3eba8ca81e5023c97747d475409e24c1c309eff3",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_15_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9415b9a2142418c0aaf2edf7d6590697e968a8041725290132f7b0670ed879ad",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_16_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8309b07d82db8d8da04e0c2b0aed087214bcdda479e00b1846ddd8ee347a6e5d",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_16_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fb764b2f310c6f827ae050e43c04e1d3b71d0bb440424dee597e02866dbff47a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_16_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "0411ed619b83465b9a6c8a20b6338d04e800d476269249133fd09bd226527cae",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_16_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "57fb9b1ae653c1b7be3b2004d0f7eedea5b7210545c862587e25f8e263c306cb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_16_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "93dc8607ca29d2c181ef42d1e7dcd05df2246cd5288514238ea07b3357aa780e",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_17_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "86651ed5fdc651eca2b374ae932114443464c48177ea5eed2fd43b7288b2ab67",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_17_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "9b6fd58c7bfcf895d4e634965e45b1a49d52a4fdc0c1cc116763deddd18a52e6",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_17_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "96c412431171eb68804ebd0d64ed852821703653ebd18cf618c952ba46236bfe",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_17_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52329c715184aad1be77719afd8cd0ce1f06bd6dc404a60ac5e17dd4c87b0a96",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_17_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a8fc86735142b30ada5d5a42f504f8813be5441d2b5f0aeafee105da143bdef8",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_18_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3a84065074d443bca0f48fecca91327e2c55b468bb5705c4a8d491c8d1e2deb3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_18_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "32c7e42a28d86634617b21347a6c30eeb942207fd5ad8312c07c8fc6b21f7c19",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_18_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "a5c0bd5a1c189581807cd484c78659b035ff04d5f25becb925781dde148bcfe0",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_18_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "48f8eddda644918f7f8dd9231d409b12bdedfa3e1ce478d43927d32de108daa5",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_18_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "03ed6d621e57d6e53ba1107d2828146b859a46924e3964c2fbe4540d620faa5d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_19_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "095a228c8bfb8fd3d3e084109ec99309ce51aaf6b55211327c743832e82f8f68",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_19_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1178d77c523d4f00197b0b2e1d3488e5deef21c819e411dfb8830d6643e8bedd",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_19_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "ad58cbf7c7c6d07f6847372c23a0879fa38f4ee7711852e9946fd4aaa813ea8c",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_19_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d132da366f7cb2349250923320ec390399f1ab3b5d054f146e8a4be37ac09a9d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_19_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d1d4815637ede0363b2a750f96362f0b3876e4d8450bc6525be2447f38d11bdd",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_20_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7a44dc958e4ae5ee8fb803880f33e084b5e51547064cbcb5a274432c1de50a7f",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_20_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "86b9a1cfd7dad63d868d5d5c5ed10493f67ee17fc735c6066942b2ff36019f15",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_20_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "3ecb7fb1b0e390278fc5ea0fa535bd6377eb9796599f8427f4fa5342ea99011d",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_20_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "90a0bbe9c5444269137f22ed9b4e4a0391ebf56eaf63fdb995f44b0866084045",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_20_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "52523e10b3c42838e61becf6dce662e24b8fea8ad020c7e04d6d248e8c04588b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_21_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fcb003efae134e9a61aab33321b9b5e8bcafb41ba17c80f99c21adcd08ac2d55",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_21_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ef3e9e5da70993c0c1a458bbec7ce3cb2cc2af9043684b2fe2dffc050b8fa1e1",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_21_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "85bcef17578138da78c91981a3d7f76dc6f7e458a59b4f3917fc1ede106bb02a",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_21_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "099e89585fdc1bc7429dd9bd2b3c79081181b24b757cc9a1459320798b4fc189",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_21_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "fd0b6898f4597bef656d141c88f205e92c8fc192b80aa919f8727df88dfb2d4a",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_22_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e54537c21b43f9b4562edd4ffde5ab979ef9747a76017efc6d50e3ed24c9f691",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_22_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b7acab42ae63dc87b16bdad818b11c0aa20d7cccd1a5cbdd5991f7d035534268",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_22_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "74f70b890bef45b1ec1bdf3a75be656638cc73b9af1cba513a1b75de6965043c",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_22_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "826d0a36f47f682529771cbd5fec9012007633dc5785cd440db22124a91cf42b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_22_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "600723d3b73d26b56f393ad5c1ac23eea00e5ee5a1dec1316f4b0388ad377648",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_23_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2a94989b865924ac9e8c4ae3c20472d5f93216315a1ce5b9d431205dc412fcf6",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_23_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a77bcc2c24008c42842f55da00dec44b29e5438d44bf297cde8ed57461535b05",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_23_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "f24b1361d23534f7172e87ef5767513dba8a42bf35d841a224b483a5a43799e2",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_23_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "40ca73760484e0bfa429965108d7cf2843c5681051fb6fb6e1016842a62f7845",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_23_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2f3c92400bc7fc9282df3541d9f5d03a260795022e8c051cdffc7e8c9dd91be4",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_24_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "da1a9b2537ded14b2b58794915147c73dc8daaa1ab6692bd8e36b33462dd42c0",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_24_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "508d17dbc6a6d9bd85f4c862d7362603cee4fcf0c5b23577d6cb6dc5facc7716",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_24_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "a41b602e60aaa0248ab4bcfe425b862af47f2fba40337dc1b4961d7be8a3435a",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_24_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "16a328e2baac8b938653655dca6bbb857614a5c751357a36b73b4a596a3ff774",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_24_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "14e97294c2bbc0abe0a8b1a23b83fbecf2b5bee1e7fe78dc58cc47bbab54ac94",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_25_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b0a94010e3ca7c0741abf9621e1a4bd947b531bd830ebbf5bc7df385176ffd15",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_25_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7d2b4782bd241875e0d7fa2a5c1ade46545119ee0509ff456b32f6b73ad24a32",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_25_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "079893d3d0f93b9d2a4b6e41e9d78e62515a4442b42b6510bfd7e4cc56c0f174",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_25_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "852d2236df1b2365bc6a2fbf8f28c09e4dd549794af314531e9ea712c55996cf",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_25_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0c7e2462ff4910a32c2a17f73ae76719b245eae4568b6e7a976292e3b86ba8b9",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_26_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c80e7788802336884b0c0878c5413fc35d7281102adb02ad8dc66f36041c3098",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_26_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "da960178636bbb24fb73d6fb94e0b8d2b3d3882873f79e6d129163cdefabf572",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_26_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "d0a6eb9b1d6c2980d64211f7ee903484963d6e4efadf30cb1ae8e5ae76271702",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_26_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b8ac7f87d5ede6beef62813b6658bb37372a81cb8458e1e3535ba1971f8dc4d2",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_26_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e162379057b9283d35b350bd6197d951ea3c344d2b92c866d2453bc48a5b4468",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_27_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b53f4d570ff795b85ac315090456ee0783b8419cbb8a219631c52b5814c132c2",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_27_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c0d7f8ae1bfbf7921e9a8f00bb5acb3c0f7f59ea1accd1e2a43d60b1791e699b",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_27_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "c118918b31c0d010180c6aa0323888d693c66918648479536d66e61aeafe7be8",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_27_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "3647f8659eeb0f91faaf893a759e54c5abb54704f56b9369063581245be2c150",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_27_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "264a22f99866d0cec92accb00ac9509cb18e60fd022aa395443c3a59c70606f8",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_28_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1ee58ae01ac73934fd29f7b4b15174fe6da1aad23a6b245d370795a3dace68c3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_28_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "073c2b4b2bf1103988fce39ae9bf22aca9b28f7fbda0a794b45d6dbb847d1961",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_28_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "c9de26a5a3a5b3a45c1800195c9ae621f532bcf226d9b36851f804f0b70ce536",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_28_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b86a40747d4ce478d809e5f44ee0936d1cd560aed1f4e1ece77fa3e7dcad75d1",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_28_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1e151a2121a3200e53fe261a2c8030c54af5b198eb206a275cd85a51ee6a4dae",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_29_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4b799580bcd43c71992485e5a25a574c70a2bb504326619f40e477c3a4c48fa5",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_29_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "5b08ac490aecb34b0eb012017a970c3cad9a203dff69fb4c2be9c9b03e802127",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_29_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "97f72db2f4338b7d37c38ffb4c0822b9905ba1a0d4b6eaa9491fd4ad0f142873",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_29_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4bcbc8c5ce5e55b2bd911fc70f4b9dbcbb74d8be8183aa6a37c18a2651a6fd0f",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_29_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "cd7dbdb813f00c2cc29fc43f31e3fa713eaf6736446ffe634a0fdb16b98ead8e",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_30_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c398ab73264396a598ebf5adc7030fb213377734b5aa0bac9a7998740508c7de",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_30_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "09f63efe75f07ea15f32865c8436888ac55f509358081fd912bff0890c5d2fc3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_30_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "97a6f59de26ff9977de390d5bc79050a30509849bdbc5608a0bbf737bf6ad7e9",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_30_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d45a8298faaa5b6ffc176e2eebf355ffc5ff515dda8561ade039880bf230ad10",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_denoiser_call_30_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "df0ea3ab17591c69e1ac7f986e76bb40208ccba262b8d012d1669f384531cf0d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_input_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0693f6bfa2117a9b14f9ceca13d3a5611de5dca226bf999f20a7f615fbd08dff",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_input_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2d07a41ae992770085117e9815300bfd0730745883e60b24aaad5e69dfc087ae",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_output_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "816aa8affce6bc85822e0f49cc92d794e0bd9766f794fbf4c38e1b6e91f53d60",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_output_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28f23880c5977c0fdc136fdaa35d3bdb6436263c4f5fd28139034f0f2c55fc98",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_00_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "c1b015ae1158bf15767662023401f1d2354353c9875c82c04c444cbe5a63fe44",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_00_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "f2e2d72af9d6e143d2bda09de1915f1e7e25e6bb0ac2da48fbd0d176c9426b6d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_01_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "c37dfec6a315f0a3e7cbecdfc533394ee2f4d59a6413b99d1ac44513c74c526e",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_01_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "1b705770e7ddb9b1596413579a2a837543bcf58df623b5c73b73760cb766d3c0",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_02_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "b8343fde8f13a730a6b5dc16a38035135c8a2a34d62fd118effb9e5486b19d88",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_02_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "1a9548124e388bee77f8e9837117669cc0097e284934a2c37e8893eb76fa24cc",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_03_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "dd4172ef21a1bcf148916bee2616918bac370251a5a80179ab7933c04d704b37",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_03_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "8708ba6b101dbc234944a0688b71236ae4ba416017edd051b452dfc5d349bf2d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_04_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "43541535085f048e1085f2f80f9cde591f020cbd3f67d4a08aa994118bc7cec9",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_04_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "f946bb553a78061e4308dbd31ec7ce7b5c5708faff5f298cbcabddb6efdba20c",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_05_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "2261dc39d9f114ea155bcc54c5174804f170336bc12e70eeffa7af5fd3d4441d",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_05_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "c4d6cee5cd90a175e1de542f2f6f03b01f24e27b7291fd6f57c2077aef79ca59",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_06_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "089a9ae954ddbf3e17dcf2e5a1e45c739acdbfa3f5c398edea02d407536525ef",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_06_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "8f0a585f4def185cee2700fdd7ce329f901277f4366eba56f4679c401bd15dae",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_07_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "3afbcd571a188c7b7ce51d6032f5bdbb35dc92db616b636318d72669a6ad41e6",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_07_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "bc2a68a71ada24b061d1495cf4f9ab99ac1f686112803e5675b0f636eba4e1a7",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_08_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "ee0341122361869e51b102cc7d80d5ea1a2590b5b08f8b2dbe1d2f1b087f7b36",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_08_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "1fbed7b466a5e5d3a640ea3e7ff7d062b71e4e308e80253a6f6c079c0171d6cd",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_09_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "3e1fe6fca4e8d285a5c24226d01f1e4b114011be61ad0332afd9afcf6d0e1cab",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_09_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "0529c0a878b6ef98e4a01dfa3b45132d92adec9cb11a103875598e964d7eb700",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_10_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "a0b3cd427cf0a0e4282372213236619af5b0c157051d17689f2ab3da2838e2c0",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_10_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "377d188f403554d64d65d4d8879a6e1dd2cbca3fd9e34640b79d0be8f21005d3",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_11_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "f73e0d24aa7a76111df8329a2219d0296f34da9b365528a11d4d89d29f8c68f8",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_11_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "2b3860f15fcccdaed1bed24c683a49d6ba8c3f8d0e80e1ba5cd229d3fc31f892",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_12_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "2387675febef45bb5eeb6bed11179cc85abbab957549656b5b603377914e0b3d",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_12_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "f942749c624ebc5e70a70d4f011b912cb1ea56864ab081bb60d5e060fb2c5c81",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_13_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "ee93e0cb40e31566d70464a6b4b1c6a1f11d4a6b3425b58cba89cdab13abe312",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_13_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "759bdade5d913d9658c8e5fc451306fb8e9ecb82d9540814a836c19ffa89137d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_14_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "86b7b707e2c3b3c1e28e0a2b7844ae8ae598e16f688d75ae64dc85a8216baab9",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_step_14_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "50fdfba1743d9077f426ae2500a2c07a6344def4a067e0ba7f3026b44bd579bb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_00_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "6e5407db6bc2b02d5a04a0e43a34d5db304242d1e8a4156385ea3e2269da6750",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_00_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "3cd36d1644a0bf318b8617b53dbdf6871f8d5b6c1d772e9d01ed27b7300f822e",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_01_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "a0898ca66e2ef68d3cc567b4d596724939de95c57bf29a4147af7e589f79b84a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_01_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "6b927f2db4c52cff5aba8fdebbdcb894575025f86c5cfaad5a86dd077d445ca9",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_02_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "ca1a97ee885d1d0272d349c3d5d00734d3380dc15e8160307c4cfe311b01792f",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_02_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "17518f286783c84ca20b862f327c4ab39aee0628963c825ef6e51f7fad4e13aa",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_03_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "ac8f540f9d85ca6845570ec66f5bda56d0db21e2c7e4ee6d0b7c02b61cfd8c92",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_03_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "6063cfca0ceef0a67a29f30debe0e9e3059e241a790b5c6c42153f5d8479313b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_04_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "6845fba775d80c95b4d05d4a00d42702c45bcf75971a8c2e145290d2cbbe014a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_04_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "0069ab74b0ed9d6e5b020645c422bd601fb9ca457a171cdf3d0cec9693a3b67a",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_05_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "d7265d7f1160ec0946935ab8fe3264a0c0a1be0f7888d3f2677213862f7252f2",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_05_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "c52f30d2d39e5ddaccd5b29047b400e1439279eaa5b358cd9378573093b996a1",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_06_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "1155822309c4c302060ced8123d64601ec986ed055e4abb2159c68100de6dbb6",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_06_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "c8192d795f35a7b826fdca7c9930f0f30d2782537ba2aba6119009bea3a270d3",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_07_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "dc7b835486aeafed684dd923365d51925ca73765080a51e6f65499fb7a9861f7",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_07_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "c34b1a31699aa63dbe8164ae0ea6d446a94945b71141bf176402ce0dc71a11cb",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_08_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "30bfa3218eb344a291689901894ae58f2f7e6c795062523f2f06bb9d65fd08f8",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_08_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "879dbf14646582977c79539948b1472aaa1c79a08a62f93bbb83cbf3ef41b01d",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_09_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "58f2e6172991e0c5f37ac918c05937f4e4a11fffcafdb4258618f40a2b86bc30",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_09_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "7d8713042665efccc9f0446f15fac70050f98436561a742f2b137cfe035efde6",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_10_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "0c9d949ceeed0698aeee4e5d519b6868c6c5b92d9688684ef37c71d93c2a9467",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_10_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "29aea783b352bab7474641e77193ffe9aa1f21581f6be217618542e8c66e940a",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_11_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "1e41d2ca87ca5654a900f7365611046e4d8b76dee5e6af6d76ad22222a84bb4a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_11_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "a11a74fd2aec628223d5a8e8a38fc01f900f82e66a49c144856a5cd2b19e7743",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_12_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "0f7a671feb5452a50711b29cd1e264bc621ee387b90da3f385d73cf3e4c79524",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_12_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "23dc8a0ef932e09546bd0274cf923f8e7db1f1735f0bba4bd25301eb1f61ed5b",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_13_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "f3d23fa32e02a4b7f739cda3fe2ee4246ac3f55894ad0bd3c3a76e55174c3e01",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_13_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "54b6151ce35c65de9c1bad65be8e3b9556ba9e91109615ca59bf1f55f86d0664",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_14_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "42e9f67303ae504f2f9a12c519d077da367547f3e841138e1862424b712471d9",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sde_substep_14_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "d70cc99c9dc3e2a5b9bd503ab8497cb68fb5859d159754ca372065a3f1b6add9",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sigmas": {
+      "original_dtype": "torch.float32",
+      "sha256": "07e9bc5b9a8b3104180f8f3ae05bd114d397bd4c64deeed5e6cfd569ed2e2106",
+      "shape": [
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ce65a45cd8bcb57717355b36917da3746c28c0ad289eeb1a4c3e092ff9ee8e63",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_audio_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1290c58a3eae3b52a7baa517400f87c3218d8ebd0121e19d3550558cf39da76c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_00_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_00_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0e24f4331a2ce1f1d824cd1a11d938da9e302d75ac0b86ee10c62f651e266443",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_00_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "c596ae12483b44a6ff91f6435ca0869212a9f46dbc686348a5f6ef80aad6ef81",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_00_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_00_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "26d32add0f8b76efb72edd99878d9f83e34cbec3198df5977862ab3a393ca3e6",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_01_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bb2e8f64e5632eccd44ac4c8188c90f0ed6fea8a42bf16a58999028827447f97",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_01_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "bc615ebc095fbb8e05145b072cbc1399bbf7f0aa6c20ae4e2321951a6e190818",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_01_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "c3f8da173427c39c3cb94bd64c59c2125c0241a901a414b1ad5363662447fa26",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_01_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "203298ca4a13bc37583d2e9dc8cc717e9f82f3fce9a487319b84166c04081f84",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_01_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8581fd6101952833bb61a2241bdc8492421b819c1bc14d4ccdebbe0477b93f33",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_02_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "7e38dcd1a68ce051aa83e389a39310814c8779156070306b40ab2fc5122aebac",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_02_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "aed8ee40fe2eafe6299edad9f89e0cedc761cf680e0667b8f5665f021ecb3e7d",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_02_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "fd80b0b8c960d6122c1933294c601a2860b6e73a3dfe7944d9df8f06335360cb",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_02_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "4cdc64389068f60fe230c493330fdbd0d795ea00bed44bc2b3c599ce05886546",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_02_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "02fea1ffd6257adb50020cacff264afea746ffa74960770e314767efc95b1550",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_03_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "b20d2fc6ad2da08458c71bf87b8d48a943bcf8099dcbf3806dc61a7831e8c0d8",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_03_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "6f46be09b61db0fb2e8bebc29da04dd3d5420504cdb0bc1fe207dd01f6b21fe8",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_03_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "da01765c197113f8d3d805ba8fd254d22509b6175f8c53a8a3b9567814314212",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_03_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "34885868cbccccdcaf7618cd76b71c2e0f7f2a52a120c0843bab3a5cb7578788",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_03_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "21850b8f2c8b1e5f54dfa05d696d146d48eda5c67d28f47d2cfcb8e6b764da35",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_04_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1eab56e125eb047717f1b0d24e6c277d150321a8f72f90159455eb38e002aa27",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_04_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c6d02fb75f81c32f7f31d4f6e07207de7dac77247e747f83084e6f6dce08f834",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_04_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "aa7819a5f81d968ee7ddd2dfd845c3777fd570e3efe09a2538317f3bcb868cae",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_04_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "12b2edb29748bd9ee76f10121cef65628cbcb1796c710ee309b23c9bac5e66d0",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_04_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "776d2c3a2cc731c82fb1a9085e4bb13613adf1a94479c6a78104989cd3ec05e3",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_05_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1ab4bbd843ab774e1baf8a2180048c450352d87dffbaf3fafb6c71dad1bdfbbf",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_05_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "e6bf561a073b26b5b3b467c03dfd31732f95b093a6248b8a5f56bc5fa4a9c75b",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_05_sigma": {
+      "original_dtype": "torch.float64",
+      "sha256": "db68953c967d3775919479225d626c712fde4971a15d0d30462014a225c71948",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_05_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ac18bf97c7f751260b7d88767366ea3b308ba3a534f41f3f380c5bf98270ae19",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_05_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "898799ad3d13f0f89dafd00affc16beea7b3efc73a873ddb43afd2b6ef5efbef",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_06_audio_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "158d56efdfd1f680630ebf8b48b24affc5f1a571965f9f1512cbd8ca53dc0082",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_06_audio_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "179a582d3f922114e06186745f83beec624d3ddab81c0ec4496b952c42ea2e3b",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_06_sigma": {
+      "original_dtype": "torch.float32",
+      "sha256": "97a6f59de26ff9977de390d5bc79050a30509849bdbc5608a0bbf737bf6ad7e9",
+      "shape": [],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_06_video_input": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ce031454a200f4c405c2f216b6b4375a49d6e8eba755610405205ad4482abe75",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_denoiser_call_06_video_output": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "96e242fc599abd3e74350d91bc8c188c62ddc2b90d21d950b7e66093e7e41b4a",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_input_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "62993697e93e9b051c9f53829de9a51d6edc6a03ba9d25f6a829f0a85cc04c5e",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_input_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "09f63efe75f07ea15f32865c8436888ac55f509358081fd912bff0890c5d2fc3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_output_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_output_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_00_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "c1b015ae1158bf15767662023401f1d2354353c9875c82c04c444cbe5a63fe44",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_00_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "4744c7e26b8780e91c37f3c4e66b30014e17c3f12ca39bcfbcd097727853de1c",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_01_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "c37dfec6a315f0a3e7cbecdfc533394ee2f4d59a6413b99d1ac44513c74c526e",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_01_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "a475032b15b9c9f8c3d3cd535af16df97edb54b5a7cf5d947c389e3cf85936dd",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_02_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "b8343fde8f13a730a6b5dc16a38035135c8a2a34d62fd118effb9e5486b19d88",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_step_02_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "d2dbc3f67291247fb4909e74b2fa5808cb1df704b113813080ba87d0b3f22915",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_00_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "6e5407db6bc2b02d5a04a0e43a34d5db304242d1e8a4156385ea3e2269da6750",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_00_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "b32bd659f8dc01c0438166ee77f743daf9a7d2e15155b0772a914efa2a0ed802",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_01_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "a0898ca66e2ef68d3cc567b4d596724939de95c57bf29a4147af7e589f79b84a",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_01_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "aa6572a252a7a93f903dd51eb451199962cbf485e655ece688039e16651b312f",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_02_audio": {
+      "original_dtype": "torch.float64",
+      "sha256": "ca1a97ee885d1d0272d349c3d5d00734d3380dc15e8160307c4cfe311b01792f",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sde_substep_02_video": {
+      "original_dtype": "torch.float64",
+      "sha256": "f83123c5e6e3f060abd6e26a98a2fea4c041b9b194fc3b84e24ba224766dd1f0",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sigmas": {
+      "original_dtype": "torch.float32",
+      "sha256": "1703669e7d66775e40fb2520f307d0e48041de8910da1aee71171f5995698dd7",
+      "shape": [
+        4
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2f8c7020ff1f87eaf909ff0c45b1242c5542b536c7ba8050d272f66d40d1b230",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "upsampler_input_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ce65a45cd8bcb57717355b36917da3746c28c0ad289eeb1a4c3e092ff9ee8e63",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ],
+      "stored_dtype": "float32"
+    },
+    "upscaled_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28239352fa08122bc5e1a62ea508e959000aadd6c38d9cd477f46229a5d8d402",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "video_decoder_input_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2f8c7020ff1f87eaf909ff0c45b1242c5542b536c7ba8050d272f66d40d1b230",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    }
+  }
+}

@@ -1,4 +1,8 @@
 {
+  "architecture": {
+    "av_ca_timestep_scale_multiplier": 1000.0,
+    "timestep_scale_multiplier": 1000.0
+  },
   "component": "transformer_input",
   "rules": [
     {

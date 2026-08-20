@@ -39,7 +39,8 @@ def get_ada_values(
         )
     batch, tokens = timestep.shape[:2]
     modulation = timestep.reshape(batch, tokens, parameter_count, feature_dim)
-    modulation = modulation[:, :, indices, :] + scale_shift_table[indices][None, None, :, :]
+    table = scale_shift_table[indices].astype(timestep.dtype)
+    modulation = modulation[:, :, indices, :] + table[None, None, :, :]
     return tuple(modulation[:, :, index, :] for index in range(modulation.shape[2]))
 
 

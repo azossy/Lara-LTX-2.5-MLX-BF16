@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "node_category": "Lara/LTX-2.5 MLX",
-  "model": "LaraAI/Lara-LTX-2.5-MLX-BF16",
+  "model": "challychoi/Lara-LTX-2.5-MLX-BF16",
   "profile": "",
   "cache_dir": "",
   "local_files_only": false,

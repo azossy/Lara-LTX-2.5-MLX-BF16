@@ -39,8 +39,10 @@ def main() -> int:
         raise LaraError("LARA-PARITY-004", details={"reason": "invalid_evidence_index"})
     results: list[dict[str, object]] = []
     for component in components:
-        if not isinstance(component, dict) or not isinstance(component.get("name"), str) or not isinstance(
-            component.get("report"), str
+        if (
+            not isinstance(component, dict)
+            or not isinstance(component.get("name"), str)
+            or not isinstance(component.get("report"), str)
         ):
             raise LaraError("LARA-PARITY-004", details={"reason": "invalid_evidence_entry"})
         report_path = arguments.root / component["report"]

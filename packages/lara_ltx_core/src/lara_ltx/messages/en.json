@@ -89,6 +89,8 @@
   "LARA-PIPELINE-001": "The local pipeline profile is invalid ({reason}). Restore the shipped TOML profile or correct the selected profile.",
   "LARA-PIPELINE-002": "The model snapshot or required BF16 file at {path} is unavailable. Verify the local directory or Hugging Face access and retry.",
   "LARA-PIPELINE-003": "The generation request is invalid ({reason}). Provide a prompt, dimensions divisible by 64, frames matching 8*k+1, and at least two HQ steps.",
+  "LARA-PIPELINE-004": "The release model manifest is invalid ({reason}). Restore lara_ltx_model.toml from the matching tagged release and retry.",
+  "LARA-RELEASE-001": "The release bundle is inconsistent ({reason}). Align package version, repository identities, upstream revision, links, license and notice before publishing.",
   "LARA-CLI-001": "The CLI request is invalid ({reason}). Check the command and options, then retry.",
   "cli.description": "Generate LTX-2.5 BF16 video locally with MLX/Metal.",
   "cli.generate.help": "Generate one synchronized video and audio MP4.",

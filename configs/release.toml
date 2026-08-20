@@ -1,0 +1,24 @@
+[release]
+schema_version = 1
+project = "Lara-LTX-2.5-MLX-BF16"
+version = "0.0.1"
+
+[release.github]
+owner = "azossy"
+repository = "Lara-LTX-2.5-MLX-BF16"
+
+[release.hugging_face]
+owner = "challychoi"
+repository = "Lara-LTX-2.5-MLX-BF16"
+manifest_filename = "lara_ltx_model.toml"
+
+[release.upstream]
+repository = "Lightricks/LTX-2.5"
+revision = "6c7e5e573ac1667efc83407806fe9b0b93730e60"
+
+[release.license]
+file = "LICENSE.md"
+notice = "NOTICE.md"
+identifier = "LicenseRef-LTX-2.x-Community"
+upstream_url = "https://raw.githubusercontent.com/Lightricks/LTX-2/main/LICENSE.md"
+sha256 = "4e7dd26d9c9294e1e0549587505dcf4ba40c7c82c50850559f846f92245f6120"

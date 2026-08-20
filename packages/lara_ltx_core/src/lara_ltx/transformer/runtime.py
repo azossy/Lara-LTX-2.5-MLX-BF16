@@ -27,6 +27,7 @@ from lara_ltx.models.transformer_block import (
 )
 from lara_ltx.models.transformer_input import (
     transformer_input_target_shapes,
+    validate_transformer_input_architecture,
     validate_transformer_input_mapping,
 )
 from lara_ltx.models.transformer_output import (
@@ -92,7 +93,11 @@ def production_transformer_block() -> AVTransformerBlock:
     )
 
 
-def production_transformer_input() -> AVTransformerInputPreprocessor:
+def production_transformer_input(
+    *,
+    timestep_scale_multiplier: float = 1_000.0,
+    av_cross_timestep_scale_multiplier: float = 1_000.0,
+) -> AVTransformerInputPreprocessor:
     def config(hidden_dimension: int, max_positions: tuple[int, ...], *, keyframes: bool) -> TransformerInputConfig:
         return TransformerInputConfig(
             input_channels=PRODUCTION_INPUT_CHANNELS,
@@ -101,6 +106,7 @@ def production_transformer_input() -> AVTransformerInputPreprocessor:
             prompt_adaln_coefficient=PROMPT_ADALN_COEFFICIENT,
             attention_heads=VIDEO_HEAD_COUNT,
             max_positions=max_positions,
+            timestep_scale_multiplier=timestep_scale_multiplier,
             use_keyframes_absolute_embedding=keyframes,
         )
 
@@ -108,6 +114,7 @@ def production_transformer_input() -> AVTransformerInputPreprocessor:
         video=config(VIDEO_DIMENSION, VIDEO_POSITION_MAXIMUMS, keyframes=True),
         audio=config(AUDIO_DIMENSION, AUDIO_POSITION_MAXIMUMS, keyframes=False),
         cross_attention_dimension=AUDIO_DIMENSION,
+        av_cross_timestep_scale_multiplier=av_cross_timestep_scale_multiplier,
     )
 
 
@@ -168,10 +175,14 @@ def load_production_transformer_input(
 ) -> tuple[AVTransformerInputPreprocessor, int]:
     _validate_component_lora_request(lora_checkpoint, lora_strength)
     rules = validate_transformer_input_mapping(mapping)
+    architecture = validate_transformer_input_architecture(mapping)
     pairs = lora_pairs or (
         build_lora_pairs(lora_checkpoint, checkpoint) if lora_checkpoint is not None and lora_strength > 0 else ()
     )
-    module = production_transformer_input()
+    module = production_transformer_input(
+        timestep_scale_multiplier=architecture.timestep_scale_multiplier,
+        av_cross_timestep_scale_multiplier=architecture.av_cross_timestep_scale_multiplier,
+    )
     count = _load_and_fuse_component(
         module,
         checkpoint=checkpoint,

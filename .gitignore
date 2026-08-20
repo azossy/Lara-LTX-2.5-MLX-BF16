@@ -10,5 +10,11 @@ build/
 outputs/
 golden/tensors/
 golden/videos/
+# Full diagnostic captures remain local; the versioned replay reducers emit
+# self-contained artifacts below GitHub's per-file size limit.
+golden/cuda_hq_boundary_trace_v3.npz
+golden/cuda_hq_deep_first_call.npz
+golden/cuda_hq_deep_first_call_v4.npz
+golden/cuda_hq_block0_internal_reduced_v5.npz
 benchmarks/reports/*.json
 upstream/

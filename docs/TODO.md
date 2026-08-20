@@ -240,13 +240,26 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Add first-divergent-layer bisect tooling.
 - [x] Freeze evidence-based tolerances and deterministic inputs in versioned
       manifests; the bisect runtime never infers a tolerance from its inputs.
-- [ ] Capture the official per-step Res2S SDE noise and denoiser boundaries on
-      CUDA, replay all 15+3 steps on MLX, and pass the frozen final-latent gate.
+- [x] Capture the official per-step Res2S SDE noise, first denoiser boundaries,
+      seven selected transformer blocks across all three guidance passes, and
+      block-0 internal module boundaries on CUDA. Transfer every artifact and
+      verify its SHA-256 on the target Mac.
+- [x] Replay all 15+3 steps on MLX with the exact captured SDE tensors. The
+      replay exposed and fixed the incorrect AV cross-timestep multiplier by
+      sourcing both 1000x architecture multipliers from checkpoint metadata.
+- [ ] Close the frozen final-latent gate. Exact input preprocessing now passes
+      every field and the exact-input final block/output heads remain within
+      component tolerance, but CUDA/Metal BF16 error is amplified by guidance
+      and accumulates across the stochastic trajectory; the current full replay
+      report remains a documented failing diagnostic rather than a parity claim.
 
 ## P5 — BF16 quality parity
 
-- [ ] Build the multi-prompt/seed/duration/resolution acceptance corpus.
-- [ ] Measure frame, temporal, perceptual and audio-sync quality.
+- [x] Build and schema-validate the four-case, four-seed, four-resolution,
+      three-frame-count audiovisual corpus, and generate all CUDA BF16 references.
+- [ ] Measure frame, temporal, perceptual and audio-sync quality. Two MLX cases
+      have paired frame/temporal/audio diagnostics; the 512x512/33-frame case
+      reached OS OOM after about 70 minutes on the M5 Max 128 GB target.
 - [ ] Complete blind review and document known differences.
 
 ## P6 — Apple Silicon optimization
@@ -254,6 +267,9 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Measure M5 Max 128 GB reduced-smoke peak unified memory and repeated-run
       growth. Two same-process runs peak near 40.75 GB, produce byte-identical
       MP4 files, and return to 18 active bytes/0 cache bytes with zero growth.
+- [x] Identify the current high-resolution memory cliff: the versioned
+      512x512/33-frame quality case grew swap beyond 70 GB and was terminated
+      by the operating system after about 70 minutes on M5 Max 128 GB.
 - [ ] Measure load time, generation time and Metal utilization.
 - [ ] Apply safe MLX evaluation, lifetime, fused-op and compile optimizations.
 - [ ] Add custom Metal kernels only for measured unresolved bottlenecks.
