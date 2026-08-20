@@ -85,3 +85,4 @@
 | LARA-TENSOR-027 | `LARA-TENSOR-027` | BWE residual and sinc-resampled skip lengths differ | Restore pinned sample rates, hop length and checkpoint config | `lara_ltx.audio_vae.vocoder` |
 | LARA-TENSOR-028 | `LARA-TENSOR-028` | A transformer block received no active modality | Enable a valid video and/or audio stream before denoising | `lara_ltx.transformer.runtime` |
 | LARA-TENSOR-029 | `LARA-TENSOR-029` | Integrated transformer denoiser input or block count is invalid | Verify modality conditioning, patchified latents, token masks, finite sigma, and configured block count | `lara_ltx.transformer.denoiser` |
+| LARA-TENSOR-030 | `LARA-TENSOR-030` | Diffusion latent layout, Gaussian noising, or HQ stage transition is invalid | Verify latent dimensions, patch/timing configuration, noise scale, and x2 stage shape | `lara_ltx.sampling.latent` |

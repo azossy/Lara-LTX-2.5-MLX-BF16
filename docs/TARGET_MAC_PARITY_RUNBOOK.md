@@ -183,6 +183,23 @@ stages, retain full 1,660-pair coverage, and return the original batch shape
 after guidance calculation. The checked-in target-Mac peak is
 39,296,740,696 bytes.
 
+Validate the complete Stage-1 latent to Stage-2 noiser handoff:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_stage_transition.py \
+  --upscaler-checkpoint "$LARA_MODEL_ROOT/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors" \
+  --video-vae-checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-video-vae-bf16.safetensors" \
+  --mapping golden/manifests/spatial_upscaler_mapping.json \
+  --cuda-reference golden/cuda_hq_boundary_trace_v2.npz \
+  --frame-rate 24.0 \
+  --report "$LARA_REPORT_DIR/stage_transition.json"
+```
+
+The report must preserve `[1,120,128]` to `[1,480,128]` video token ordering,
+reuse the `[1,18,128]` Stage-1 audio, execute the checkpoint-backed normalized
+x2 upscaler, and apply Stage-2 sigma noising in the official float32 lerp
+order. The checked-in peak is 1,733,445,048 bytes.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

@@ -1,0 +1,124 @@
+{
+  "acceptance_criteria": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999
+  },
+  "boundaries": {
+    "stage_2_noiser_input_0": {
+      "candidate_checksum": "5ca4d09039e7fedde591e3d3ebb41a450243899ca6fe1af1ef580d12a504ff98",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999190856070977,
+      "finite_count": 61440,
+      "inf_count": 0,
+      "max_abs_error": 0.140625,
+      "max_relative_error": 1.8899960565066773e+36,
+      "mean_abs_error": 0.011948845155226687,
+      "name": "stage_2_noiser_input_0",
+      "nan_count": 0,
+      "normalized_rmse": 0.012721504529242202,
+      "reference_checksum": "62993697e93e9b051c9f53829de9a51d6edc6a03ba9d25f6a829f0a85cc04c5e",
+      "reference_dtype": "float32",
+      "reference_rms": 1.3616598473755557,
+      "rmse": 0.017322361915675377,
+      "shape": [
+        1,
+        480,
+        128
+      ]
+    },
+    "stage_2_noiser_input_1": {
+      "candidate_checksum": "09f63efe75f07ea15f32865c8436888ac55f509358081fd912bff0890c5d2fc3",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999999999999999,
+      "finite_count": 2304,
+      "inf_count": 0,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "mean_abs_error": 0.0,
+      "name": "stage_2_noiser_input_1",
+      "nan_count": 0,
+      "normalized_rmse": 0.0,
+      "reference_checksum": "09f63efe75f07ea15f32865c8436888ac55f509358081fd912bff0890c5d2fc3",
+      "reference_dtype": "float32",
+      "reference_rms": 1.1364886305014106,
+      "rmse": 0.0,
+      "shape": [
+        1,
+        18,
+        128
+      ]
+    },
+    "stage_2_noiser_output_0": {
+      "candidate_checksum": "b5d1e544377399c78e73f270112ccfaa51b05c7a0e7ea27119e30e9ab15276e8",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999985877332727,
+      "finite_count": 61440,
+      "inf_count": 0,
+      "max_abs_error": 0.015625,
+      "max_relative_error": 36.111111111111114,
+      "mean_abs_error": 0.0007023550647621353,
+      "name": "stage_2_noiser_output_0",
+      "nan_count": 0,
+      "normalized_rmse": 0.0016806379897181887,
+      "reference_checksum": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+      "reference_dtype": "float32",
+      "reference_rms": 0.9180276717328743,
+      "rmse": 0.001542872180726807,
+      "shape": [
+        1,
+        480,
+        128
+      ]
+    },
+    "stage_2_noiser_output_1": {
+      "candidate_checksum": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 1.0000000000000002,
+      "finite_count": 2304,
+      "inf_count": 0,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "mean_abs_error": 0.0,
+      "name": "stage_2_noiser_output_1",
+      "nan_count": 0,
+      "normalized_rmse": 0.0,
+      "reference_checksum": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+      "reference_dtype": "float32",
+      "reference_rms": 0.9221879170587706,
+      "rmse": 0.0,
+      "shape": [
+        1,
+        18,
+        128
+      ]
+    }
+  },
+  "component": "hq_stage_latent_transition",
+  "configuration": {
+    "audio_shape": [
+      1,
+      8,
+      18,
+      16
+    ],
+    "frame_rate": 24.0,
+    "noise_scale": 0.909375011920929,
+    "stage_one_video_shape": [
+      1,
+      128,
+      3,
+      5,
+      8
+    ],
+    "stage_two_video_shape": [
+      1,
+      128,
+      3,
+      10,
+      16
+    ]
+  },
+  "passed": true,
+  "peak_bytes": 1733445048,
+  "schema_version": 1
+}

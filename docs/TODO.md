@@ -174,7 +174,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       denormalization/renormalization and source-order pixel shuffle. All three
       CUDA boundaries pass; the normalized output has NRMSE `0.01272` and
       cosine similarity `0.999919` at a 995,736,328-byte load peak.
-- [ ] Wire the validated upscaler into stage-2 transformer refinement.
+- [x] Wire the validated upscaler into the stage-2 latent handoff. Video/audio
+      patchification and CUDA-compatible Gaussian lerp are covered by the fixed
+      HQ trace; the checkpoint-backed video noiser input reaches NRMSE
+      `0.01272`/cosine `0.999919`, its noised output reaches NRMSE `0.001681`/
+      cosine `0.999999`, and both audio boundaries are bit-exact.
 - [ ] Complete diffusion video VAE: non-attention Conv decoder subset and
       CUDA-BF16 assembly parity, per-frame attention, and timestep-conditioned
       ResNet/mid-block parity are complete. Production Diffusion VAE shared
@@ -202,8 +206,8 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       reset, so configured guidance skipping and cached reuse are exact;
       the 48-block two-stage checkpoint smoke executes all four passes at a
       39,296,740,696-byte peak.
-- [ ] Complete the two-stage latent lifecycle and component residency
-      transitions around sampling, spatial upscaling and decoding.
+- [ ] Complete the stage sampler/LoRA component residency transitions around
+      the validated Stage-1-to-2 latent handoff and decoding.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.

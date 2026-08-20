@@ -199,6 +199,20 @@ notifies this denoiser with the official schedule index: the first evaluation
 uses the outer index, while the midpoint's one-sigma schedule resets to index
 zero. Skipped modalities reuse their last denoised result.
 
+## HQ Stage-1 to Stage-2 latent handoff
+
+Artifact: `golden/mlx_stage_transition_report.json`
+
+The layout module recreates the official video NCTHW and audio BCTF token
+ordering, pixel/time position bounds, causal first-frame marker and Gaussian
+noiser without embedding generation dimensions in runtime code. Stage-1 video
+tokens unpatch to `[1,128,3,5,8]`, the checkpoint-backed normalized x2 network
+produces the Stage-2 `[1,128,3,10,16]` grid, and repatching yields 480 tokens.
+The noiser uses the official two float32 lerps before BF16 storage. Against the
+fixed CUDA trace, video clean/noised NRMSE is `0.0127215`/`0.00168064` with
+cosines `0.9999191`/`0.9999986`; both Stage-1-audio reuse boundaries are
+bit-exact. Peak memory is 1,733,445,048 bytes.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.
