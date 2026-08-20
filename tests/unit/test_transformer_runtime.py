@@ -4,6 +4,12 @@ import mlx.core as mx
 import numpy as np
 import pytest
 from lara_ltx.errors import LaraError
+from lara_ltx.sampling import (
+    BatchedPerturbationConfig,
+    Perturbation,
+    PerturbationConfig,
+    PerturbationType,
+)
 from lara_ltx.transformer import (
     AVTransformerBlock,
     TransformerStream,
@@ -50,3 +56,25 @@ def test_sequence_rejects_a_block_with_no_active_modality() -> None:
         run_transformer_block_sequence(None, None, ((7, _small_block()),))
 
     assert error.value.code == "LARA-TENSOR-028"
+
+
+def test_sequence_attaches_configured_perturbations_before_the_target_block() -> None:
+    perturbations = BatchedPerturbationConfig(
+        (
+            PerturbationConfig(
+                (Perturbation(PerturbationType.SKIP_VIDEO_SELF_ATTN, blocks=(0,)),),
+            ),
+        ),
+        num_blocks=1,
+        dtype=mx.float32,
+    )
+
+    result = run_transformer_block_sequence(
+        _stream(),
+        None,
+        ((0, _small_block()),),
+        perturbations=perturbations,
+    )
+
+    assert result.video is not None
+    assert result.video.self_attn_all_perturbed is True

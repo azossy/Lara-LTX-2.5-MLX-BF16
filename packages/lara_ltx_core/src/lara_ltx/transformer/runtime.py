@@ -6,6 +6,7 @@ import math
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass, replace
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import mlx.core as mx
 from mlx.utils import tree_flatten
@@ -36,6 +37,9 @@ from lara_ltx.models.transformer_output import (
 from .blocks import AVTransformerBlock, TransformerStream, VideoTransformerConfig
 from .input import AVTransformerInputPreprocessor, TransformerInputConfig
 from .output import AVTransformerOutput, TransformerOutputConfig
+
+if TYPE_CHECKING:
+    from lara_ltx.sampling.perturbations import BatchedPerturbationConfig
 
 VIDEO_HEAD_DIMENSION = VIDEO_DIMENSION // VIDEO_HEAD_COUNT
 AUDIO_HEAD_DIMENSION = AUDIO_DIMENSION // AUDIO_HEAD_COUNT
@@ -217,11 +221,17 @@ def run_transformer_block_sequence(
     video: TransformerStream | None,
     audio: TransformerStream | None,
     blocks: Iterable[tuple[int, AVTransformerBlock]],
+    *,
+    perturbations: BatchedPerturbationConfig | None = None,
 ) -> TransformerSequenceResult:
     """Execute and materialize one block at a time to cut the MLX lazy graph."""
 
     completed = 0
     for block_index, block in blocks:
+        if perturbations is not None:
+            from lara_ltx.sampling.perturbations import attach_block_perturbations
+
+            video, audio = attach_block_perturbations(video, audio, perturbations, block=block_index)
         video_output, audio_output = block(video, audio)
         materialized = tuple(value for value in (video_output, audio_output) if value is not None)
         if not materialized:

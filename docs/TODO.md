@@ -165,6 +165,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       preprocessor (26) and video/audio output projections (2). Both `0.25`
       and `0.5` stage strengths produce finite `[1, 2, 128]` modality outputs
       at a measured 1,724,801,034-byte isolated component peak.
+- [x] Wire patchified latent conditioning, token-wise masked timesteps,
+      resident transformer blocks, output velocity heads and the
+      velocity-to-denoised conversion into one reusable denoiser. The
+      checkpoint-backed two-stage smoke covers all 1,660 LoRA pairs, produces
+      finite video/audio outputs and peaks at 39,283,670,554 bytes.
 - [x] Port the complete 72-weight spatial latent upscaler, VAE statistic
       denormalization/renormalization and source-order pixel shuffle. All three
       CUDA boundaries pass; the normalized output has NRMSE `0.01272` and
@@ -191,6 +196,8 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       cosine similarity `0.999993` at a 1,753,922,396-byte peak.
 - [ ] Wire decoded 48 kHz stereo waveforms into the end-to-end media mux and
       validate synchronization against the fixed CUDA clip.
+- [ ] Connect batched CFG/STG guidance, the two-stage latent lifecycle and
+      component residency transitions around the integrated denoiser.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.

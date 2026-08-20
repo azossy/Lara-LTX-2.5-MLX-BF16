@@ -1,0 +1,76 @@
+{
+  "all_lora_pairs_covered": true,
+  "available_lora_pairs": 1660,
+  "component": "integrated_resident_av_denoiser",
+  "configuration": {
+    "block_count": 48,
+    "context_token_count": 3,
+    "require_all_lora_pairs": true,
+    "seed": 25081900,
+    "sigma": 0.5,
+    "token_count": 2
+  },
+  "covered_lora_pairs": 1660,
+  "fused_block_pairs": 1632,
+  "passed": true,
+  "resident_bytes": 37131058284,
+  "schema_version": 1,
+  "stages": [
+    {
+      "execution_peak_bytes": 39283711504,
+      "fused_input_pairs": 26,
+      "fused_output_pairs": 2,
+      "index": 0,
+      "lora_strength": 0.25,
+      "outputs": {
+        "audio": {
+          "finite": true,
+          "sha256": "59b90baf27c2b7d81508438762053b69e80e4da473d3fa7ccc726ea1e0e2aa4d",
+          "shape": [
+            1,
+            2,
+            128
+          ]
+        },
+        "video": {
+          "finite": true,
+          "sha256": "d0dff3e71c75e9e383625f8af6e8c93f962a3387d7bc78d531da5feb0f6b4035",
+          "shape": [
+            1,
+            2,
+            128
+          ]
+        }
+      },
+      "transition_peak_bytes": 0
+    },
+    {
+      "execution_peak_bytes": 39283670558,
+      "fused_input_pairs": 26,
+      "fused_output_pairs": 2,
+      "index": 1,
+      "lora_strength": 0.5,
+      "outputs": {
+        "audio": {
+          "finite": true,
+          "sha256": "5cc5e16d91ed8cd5c25e5bdbb1b5bf5248e4d844415a761b27ae1e281f229acf",
+          "shape": [
+            1,
+            2,
+            128
+          ]
+        },
+        "video": {
+          "finite": true,
+          "sha256": "1e4aadce1f67a688ec22891704b1d58f5c0ecf89b8b1366d66b46e48f0eabb74",
+          "shape": [
+            1,
+            2,
+            128
+          ]
+        }
+      },
+      "transition_peak_bytes": 38235024542
+    }
+  ]
+}

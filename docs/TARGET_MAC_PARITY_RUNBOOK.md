@@ -144,6 +144,31 @@ Validate the remaining input/output LoRA pairs for each stage:
 Repeat with strength `0.5`. Each report must fuse 26 input and two output pairs
 and produce finite video/audio outputs.
 
+Validate the complete input-to-denoised resident path across both stages:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_integrated_denoiser.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --input-mapping golden/manifests/transformer_input_mapping.json \
+  --output-mapping golden/manifests/transformer_output_mapping.json \
+  --block-count 48 \
+  --token-count 2 \
+  --context-token-count 3 \
+  --sigma 0.5 \
+  --seed 25081900 \
+  --stage-lora-strength 0.25 \
+  --stage-lora-strength 0.5 \
+  --require-all-lora-pairs \
+  --report "$LARA_REPORT_DIR/integrated_denoiser_two_stage.json"
+```
+
+The report must cover all 1,660 LoRA pairs, execute the configured number of
+resident blocks on every stage, produce finite `[1, 2, 128]` denoised video
+and audio tokens, and remain within the target Mac memory budget. All runtime
+controls are explicit arguments so the same gate can use smaller diagnostic
+shapes without changing source code.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

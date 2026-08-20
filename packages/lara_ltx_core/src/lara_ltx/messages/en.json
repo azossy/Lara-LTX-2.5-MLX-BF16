@@ -78,5 +78,6 @@
   "LARA-TENSOR-025": "The audio vocoder mel input is invalid ({shape}). Provide a rank-4 stereo tensor shaped [batch, 2, frames, 64].",
   "LARA-TENSOR-026": "The BWE waveform input is invalid ({shape}). Provide a rank-3 stereo waveform shaped [batch, 2, samples].",
   "LARA-TENSOR-027": "The BWE residual shape {residual_shape} does not match the resampled skip shape {skip_shape}. Verify the pinned sample rates, hop length and checkpoint configuration.",
-  "LARA-TENSOR-028": "Transformer block {block_index} has no active video or audio stream. Enable at least one valid modality before denoising."
+  "LARA-TENSOR-028": "Transformer block {block_index} has no active video or audio stream. Enable at least one valid modality before denoising.",
+  "LARA-TENSOR-029": "The integrated transformer denoiser input is invalid ({reason}). Verify the enabled modality states, static conditioning, patchified latents, token masks, finite sigma, and configured block count."
 }
