@@ -1,0 +1,28 @@
+{
+  "audio_shape": [
+    1,
+    1024,
+    2048
+  ],
+  "checkpoint": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+  "component": "gemma4_ltx_text_conditioner",
+  "feature_tensor_count": 4,
+  "hidden_state_count": 49,
+  "passed": true,
+  "requires_finite_output": true,
+  "schema_version": 1,
+  "sequence_length": 1024,
+  "text_tensor_count": 666,
+  "tokenizer_asset_count": 5,
+  "valid_token_count": 14,
+  "video_shape": [
+    1,
+    1024,
+    4096
+  ],
+  "weight_load_memory": {
+    "active_after_bytes": 26126823144,
+    "active_before_bytes": 6820,
+    "peak_bytes": 26126823208
+  }
+}

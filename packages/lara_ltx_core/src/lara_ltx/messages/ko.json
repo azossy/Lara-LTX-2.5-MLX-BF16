@@ -36,12 +36,15 @@
   "LARA-MODEL-032": "Audio vocoder/BWE 항목 {key}이(가) 없거나 검토된 BF16 waveform 레이아웃과 호환되지 않습니다. 고정된 공식 Audio VAE/vocoder 체크포인트를 사용하세요.",
   "LARA-MODEL-033": "Transformer 출력 항목 {key}이(가) 없거나 검토된 video/audio projection 레이아웃과 호환되지 않습니다. 고정된 22B BF16 transformer 체크포인트를 사용하세요.",
   "LARA-MODEL-034": "Transformer 입력 항목 {key}이(가) 없거나 검토된 video/audio conditioning 레이아웃과 호환되지 않습니다. 고정된 22B BF16 transformer 체크포인트를 사용하세요.",
+  "LARA-MODEL-035": "Gemma 4 텍스트 코어 설정 또는 매핑이 호환되지 않습니다({reason}). 고정된 공식 BF16 패키지 인코더를 사용해 검토 매니페스트를 다시 생성하세요.",
+  "LARA-MODEL-036": "패키지 Gemma tokenizer 자산 {asset}이(가) 없거나 올바르지 않습니다. 고정된 공식 BF16 인코더를 복원하고 체크섬을 검증하세요.",
   "LARA-RUNTIME-001": "BF16 메모리 요구량을 초과했습니다. 해상도를 낮추거나 더 큰 메모리 장비를 사용하세요. 자동 양자화는 적용하지 않았습니다.",
   "LARA-RUNTIME-002": "CUDA를 사용할 수 없습니다. GPU 인스턴스를 시작한 뒤 다시 시도하세요.",
   "LARA-RUNTIME-003": "Metal을 사용할 수 없습니다. 고정된 MLX 환경이 설치된 지원 Apple Silicon Mac에서 이 프로브를 실행하세요.",
   "LARA-RUNTIME-004": "예상 BF16 할당량은 {estimated_bytes}바이트로, 설정된 한도 {budget_bytes}바이트를 초과합니다. 형상을 줄이거나 다른 앱을 종료한 뒤 다시 시도하세요.",
   "LARA-RUNTIME-005": "공식 CUDA golden 파이프라인이 입력, 시간 그리드 또는 출력을 검증하지 못했습니다. 캡처된 로그를 확인하고 고정 BF16 모델 팩과 지원 해상도를 검증한 뒤 다시 시도하세요.",
   "LARA-RUNTIME-006": "CUDA 기준 미디어 아티팩트가 없거나 올바르지 않거나 필요한 영상·오디오 스트림을 포함하지 않습니다. 파이프라인 로그를 확인하고 아티팩트를 다시 생성하세요.",
+  "LARA-RUNTIME-007": "네이티브 MLX-LM 텍스트 런타임을 사용할 수 없습니다. 지원되는 Apple Silicon Mac에 잠금된 프로젝트 의존성을 설치하세요.",
   "LARA-PARITY-001": "텐서 shape이 다릅니다: reference={reference_shape}, candidate={candidate_shape}. 값을 비교하기 전에 layout mapping을 확인하세요.",
   "LARA-PARITY-002": "고정 CUDA audio-boundary 입력 또는 capture key {key}을(를) 사용할 수 없거나 올바르지 않습니다. 승인된 boundary artifact를 복원한 뒤 다시 시도하세요.",
   "LARA-PARITY-003": "고정 CUDA LoRA fusion 입력 또는 capture key {key}을(를) 사용할 수 없거나 올바르지 않습니다. 승인된 LoRA boundary artifact를 복원한 뒤 다시 시도하세요.",
@@ -65,5 +68,6 @@
   "LARA-TENSOR-018": "DurationHead 입력이 올바르지 않습니다({reason}). 설정된 특성 폭과 일치하는 배치 크기의 rank-3 connector 토큰 텐서를 하나 이상 제공하세요.",
   "LARA-TENSOR-019": "Gemma feature 입력이 올바르지 않습니다(hidden={hidden_shape}, mask={mask_shape}). [batch, tokens, 3840, 49] hidden state와 일치하는 rank-2 mask를 사용하세요.",
   "LARA-TENSOR-020": "Transformer 출력 입력이 올바르지 않습니다(hidden={hidden_shape}, timestep={timestep_shape}). 설정된 hidden 폭과 일치하는 rank-3 텐서를 사용하세요.",
-  "LARA-TENSOR-021": "Transformer conditioning 입력이 올바르지 않습니다({reason}). patchify된 latent token, token별 timestep, position 범위, projection된 context와 일치하는 mask를 제공하세요."
+  "LARA-TENSOR-021": "Transformer conditioning 입력이 올바르지 않습니다({reason}). patchify된 latent token, token별 timestep, position 범위, projection된 context와 일치하는 mask를 제공하세요.",
+  "LARA-TENSOR-022": "Gemma token 입력이 올바르지 않습니다({reason}). 비어 있지 않은 prompt 배치와 일치하는 rank-2 token ID 및 연속된 왼쪽 padding mask를 제공하세요."
 }

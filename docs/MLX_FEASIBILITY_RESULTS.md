@@ -87,6 +87,20 @@ head tensors. Their component-load peaks are approximately 0.77 GB, 2.31 GB and
 1.62 MB respectively. All outputs are finite, normalized RMSE stays below
 0.0086, and cosine similarity exceeds 0.99996.
 
+## Native Gemma 4 text conditioning
+
+Artifact: `golden/mlx_gemma_text_full_report.json`
+
+The pinned MLX-LM 0.31.3 text core exactly exposes the packed checkpoint's 666
+`model.*` BF16 parameters. Lara separately loads the four LTX feature
+projections and all five embedded tokenizer/config assets, collects the
+Hugging Face-compatible 49 hidden states at controlled layer evaluation
+boundaries, and never constructs the tied 262,144-token logits projection.
+The full 1,024-token left-padded path produces finite `(1, 1024, 4096)` video
+and `(1, 1024, 2048)` audio conditioning with a measured 26,126,823,208-byte
+weight-load peak. This is a checkpoint-backed Metal execution result; full
+CUDA-versus-MLX text-core tensor parity remains a P4 evidence task.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.
@@ -101,5 +115,6 @@ head tensors. Their component-load peaks are approximately 0.77 GB, 2.31 GB and
   peak must be re-measured with mapped checkpoint weights and stage-specific
   LoRA handling.
 - The remaining high-risk technical paths are the full 48-block/high-token
-  orchestration, DiffVAE tile-performance measurement, and full Gemma 4
-  conditioning rather than its already-verified LTX projections.
+  orchestration, scheduler/guidance integration, DiffVAE tile performance, and
+  audio decode/synchronization. Full Gemma 4 conditioning is now executable;
+  its CUDA-versus-MLX hidden-state report remains evidence work.

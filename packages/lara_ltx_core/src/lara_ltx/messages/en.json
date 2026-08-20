@@ -36,12 +36,15 @@
   "LARA-MODEL-032": "Audio vocoder/BWE entry {key} is missing or incompatible with the reviewed BF16 waveform layout. Use the pinned official Audio VAE/vocoder checkpoint.",
   "LARA-MODEL-033": "Transformer output entry {key} is missing or incompatible with the reviewed video/audio projection layout. Use the pinned 22B BF16 transformer checkpoint.",
   "LARA-MODEL-034": "Transformer input entry {key} is missing or incompatible with the reviewed video/audio conditioning layout. Use the pinned 22B BF16 transformer checkpoint.",
+  "LARA-MODEL-035": "Gemma 4 text-core configuration or mapping is incompatible ({reason}). Use the pinned official packed BF16 encoder and regenerate its reviewed mapping.",
+  "LARA-MODEL-036": "Packed Gemma tokenizer asset {asset} is missing or invalid. Restore the pinned official BF16 encoder and verify its checksum.",
   "LARA-RUNTIME-001": "BF16 memory capacity was exceeded. Reduce dimensions or use a supported larger-memory machine; automatic quantization was not applied.",
   "LARA-RUNTIME-002": "CUDA is unavailable. Start a GPU instance and retry.",
   "LARA-RUNTIME-003": "Metal is unavailable. Run this probe on a supported Apple Silicon Mac with the pinned MLX environment.",
   "LARA-RUNTIME-004": "The estimated BF16 allocation is {estimated_bytes} bytes, above the configured budget of {budget_bytes} bytes. Reduce the shape or close other applications before retrying.",
   "LARA-RUNTIME-005": "The official CUDA golden pipeline could not validate its inputs, temporal grid, or output. Inspect the captured log, verify the pinned BF16 model pack and supported dimensions, then retry.",
   "LARA-RUNTIME-006": "The CUDA reference media artifact is missing, invalid, or lacks the required video and audio streams. Inspect the pipeline log and regenerate the artifact.",
+  "LARA-RUNTIME-007": "The native MLX-LM text runtime is unavailable. Install the locked project dependencies on a supported Apple Silicon Mac.",
   "LARA-PARITY-001": "Tensor shapes differ: reference={reference_shape}, candidate={candidate_shape}. Verify layout mapping before comparing values.",
   "LARA-PARITY-002": "The fixed CUDA audio-boundary input or capture key {key} is unavailable or invalid. Restore the approved boundary artifact and retry.",
   "LARA-PARITY-003": "The fixed CUDA LoRA fusion input or capture key {key} is unavailable or invalid. Restore the approved LoRA boundary artifact and retry.",
@@ -65,5 +68,6 @@
   "LARA-TENSOR-018": "Duration-head inputs are invalid ({reason}). Provide one or both rank-3 connector token tensors with the configured feature widths and matching batch sizes.",
   "LARA-TENSOR-019": "Gemma feature inputs are invalid (hidden={hidden_shape}, mask={mask_shape}). Use hidden states shaped [batch, tokens, 3840, 49] and a matching rank-2 mask.",
   "LARA-TENSOR-020": "Transformer output inputs are invalid (hidden={hidden_shape}, timestep={timestep_shape}). Use matching rank-3 tensors with the configured hidden width.",
-  "LARA-TENSOR-021": "Transformer conditioning input is invalid ({reason}). Provide patchified latent tokens, per-token timesteps, position bounds, projected context and matching masks."
+  "LARA-TENSOR-021": "Transformer conditioning input is invalid ({reason}). Provide patchified latent tokens, per-token timesteps, position bounds, projected context and matching masks.",
+  "LARA-TENSOR-022": "Gemma token input is invalid ({reason}). Provide a non-empty prompt batch with matching rank-2 token IDs and contiguous left-padding masks."
 }

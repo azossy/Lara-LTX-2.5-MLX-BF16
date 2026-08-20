@@ -141,9 +141,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P3 — End-to-end video generation
 
-- [ ] Adapt the native MLX-LM Gemma 4 architecture to exact LTX hidden-state,
-      tokenizer and projection semantics; do not compute LM logits in the
-      normal conditioning path.
+- [x] Adapt the pinned native MLX-LM Gemma 4 text core to the packed LTX
+      tokenizer, contiguous left-padding masks, 49 hidden states and dual
+      projections without constructing LM logits. All 666 text weights plus
+      four feature weights strict-map from the official shard; the full
+      1,024-token Metal execution passes with a 26,126,823,208-byte load peak.
 - [ ] Port scheduler, CFG/STG and res_2s sampling.
 - [ ] Port spatial latent upscaling and two-stage refinement.
 - [ ] Complete diffusion video VAE: non-attention Conv decoder subset and

@@ -41,6 +41,8 @@
 | LARA-MODEL-032 | `LARA-MODEL-032` | Audio vocoder/BWE entry is missing or incompatible with the reviewed BF16 waveform layout | Use the pinned Audio VAE/vocoder checkpoint | `lara_ltx.models.vocoder` |
 | LARA-MODEL-033 | `LARA-MODEL-033` | Transformer output entry is missing or incompatible with the reviewed video/audio projection layout | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.transformer_output` |
 | LARA-MODEL-034 | `LARA-MODEL-034` | Transformer input entry is missing or incompatible with the reviewed video/audio conditioning layout | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.transformer_input` |
+| LARA-MODEL-035 | `LARA-MODEL-035` | Packed Gemma 4 text configuration or one of its 666 text-core mappings is incompatible | Use the pinned official BF16 encoder and regenerate the reviewed text-core manifest | `lara_ltx.models.gemma_text` |
+| LARA-MODEL-036 | `LARA-MODEL-036` | A packed Gemma tokenizer or processor byte asset is missing, truncated or invalid | Restore the pinned encoder, verify its checksum and retry | `lara_ltx.models.gemma_assets` |
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |
@@ -49,6 +51,7 @@
 | LARA-RUNTIME-004 | `LARA-RUNTIME-004` | Estimated probe allocation exceeds configured budget | Reduce shape or free memory | Metal feasibility probes |
 | LARA-RUNTIME-005 | `LARA-RUNTIME-005` | Official CUDA golden-pipeline inputs, grid or output are invalid, or the reference run failed | Inspect the captured log, verify the pinned BF16 pack and supported dimensions, then retry | `tools/parity/run_cuda_hq_golden.py` |
 | LARA-RUNTIME-006 | `LARA-RUNTIME-006` | CUDA reference media is missing, invalid, or lacks video/audio streams | Inspect the pipeline log, regenerate the artifact and validate it again | `tools/parity/validate_cuda_media.py` |
+| LARA-RUNTIME-007 | `LARA-RUNTIME-007` | The pinned native MLX-LM text runtime is not installed | Install locked dependencies on supported Apple Silicon | `lara_ltx.text_encoder.gemma4` |
 | LARA-PARITY-001 | `LARA-PARITY-001` | Compared tensor shapes differ | Verify layout mapping | `lara_ltx.parity` |
 | LARA-TENSOR-001 | `LARA-TENSOR-001` | RoPE cosine/sine shapes differ | Rebuild both tensors from one grid | `lara_ltx.transformer.rope` |
 | LARA-TENSOR-002 | `LARA-TENSOR-002` | RoPE batch cannot broadcast | Rebuild frequencies for the input batch | `lara_ltx.transformer.rope` |
@@ -71,3 +74,4 @@
 | LARA-TENSOR-019 | `LARA-TENSOR-019` | Gemma feature hidden states or attention mask have an invalid shape | Use [batch, tokens, 3840, 49] hidden states and matching rank-2 mask | `lara_ltx.models.gemma_feature_runtime` |
 | LARA-TENSOR-020 | `LARA-TENSOR-020` | Transformer output hidden state or embedded timestep has an invalid shape | Use matching rank-3 tensors with the configured hidden width | `lara_ltx.transformer.output` |
 | LARA-TENSOR-021 | `LARA-TENSOR-021` | Transformer conditioning layout, sigma or keyframe mask is invalid | Recreate patchified latents, per-token timesteps, position bounds, projected context and masks | `lara_ltx.transformer.input` |
+| LARA-TENSOR-022 | `LARA-TENSOR-022` | Gemma prompt, token layout or left-padding mask is invalid | Provide non-empty prompts and matching rank-2 IDs with contiguous left padding | `lara_ltx.models.gemma_assets`, `lara_ltx.text_encoder.gemma4` |

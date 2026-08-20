@@ -62,6 +62,26 @@ the block gate. Preserve the report and compare its
 set. A failed criterion or over-budget result leaves P1/P2 open; do not weaken
 the criteria or substitute quantized weights.
 
+## P3 native Gemma 4 conditioning gate
+
+This command loads all 666 text-core tensors and four LTX projections, builds
+the tokenizer from the five embedded byte assets, skips LM logits and executes
+the production 1,024-token hidden-state path.
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_gemma_text.py \
+  --gemma-checkpoint "$LARA_MODEL_ROOT/text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors" \
+  --text-mapping golden/manifests/gemma_text_mapping.json \
+  --feature-mapping golden/manifests/gemma_feature_mapping.json \
+  --prompt "A cinematic ocean at sunrise with synchronized waves and distant seabirds." \
+  --sequence-length 1024 \
+  --report "$LARA_REPORT_DIR/gemma_text.json"
+```
+
+The checked-in report produces 49 hidden states and finite video/audio
+features at a 26,126,823,208-byte load peak. This gate proves native execution,
+not cross-backend numerical parity; that comparison remains in P4.
+
 ## P2 transformer output-head gate
 
 This command loads the six reviewed video/audio output modulation and
@@ -111,8 +131,9 @@ absolute error, stage 2 has `3.814697265625e-06`, and peak fusion memory is
 
 ## Evidence handling
 
-- Preserve the checkpoint-block, Gemma-feature, transformer-input, transformer-output and LoRA JSON reports with the
-  commit and MLX environment record.
+- Preserve the checkpoint-block, Gemma-feature, full Gemma-text,
+  transformer-input, transformer-output and LoRA JSON reports with the commit
+  and MLX environment record.
 - On a failure, retain the JSON report and re-run only after checking the
   mapping manifest, checkpoint hash, and Python/MLX versions.
 - Do not publish a release or claim end-to-end parity merely because these

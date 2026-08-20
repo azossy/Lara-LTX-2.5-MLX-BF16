@@ -10,6 +10,7 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "huggingface-hub>=1.8,<2",
+  "mlx-lm==0.31.3; sys_platform == 'darwin' and platform_machine == 'arm64'",
   "numpy>=2,<3",
   "safetensors>=0.6,<1",
   "mlx==0.32.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
