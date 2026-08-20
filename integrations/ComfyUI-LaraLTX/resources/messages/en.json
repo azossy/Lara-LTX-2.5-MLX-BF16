@@ -1,0 +1,11 @@
+{
+  "node.loader": "Lara LTX Model Loader",
+  "node.generate": "Lara LTX Text to Video",
+  "node.save": "Lara LTX Save Video",
+  "error": "{reason} Check the Lara LTX installation, selected model, workflow values, and ComfyUI output directory.",
+  "reason.empty_model": "The model path or repository ID is empty.",
+  "reason.model_load_failed": "The MLX model pipeline could not be loaded.",
+  "reason.generation_failed": "MLX video generation failed.",
+  "reason.invalid_output_name": "The output filename is invalid or escapes the ComfyUI output directory.",
+  "reason.save_failed": "The generated MP4 could not be saved."
+}

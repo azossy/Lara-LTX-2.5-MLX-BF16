@@ -1,0 +1,32 @@
+{
+  "1": {
+    "class_type": "LaraLTXModelLoader",
+    "inputs": {
+      "model": "LaraAI/Lara-LTX-2.5-MLX-BF16",
+      "local_files_only": false,
+      "profile": "",
+      "cache_dir": ""
+    }
+  },
+  "2": {
+    "class_type": "LaraLTXTextToVideo",
+    "inputs": {
+      "pipeline": ["1", 0],
+      "prompt": "A cinematic shot of ocean waves at sunrise.",
+      "negative_prompt": "",
+      "seed": 10,
+      "width": 1920,
+      "height": 1088,
+      "num_frames": 121,
+      "frame_rate": 24.0,
+      "steps": 15
+    }
+  },
+  "3": {
+    "class_type": "LaraLTXSaveVideo",
+    "inputs": {
+      "video": ["2", 0],
+      "filename_prefix": "lara_ltx/output"
+    }
+  }
+}

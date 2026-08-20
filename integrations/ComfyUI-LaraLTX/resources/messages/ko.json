@@ -1,0 +1,11 @@
+{
+  "node.loader": "Lara LTX 모델 로더",
+  "node.generate": "Lara LTX 텍스트 영상 생성",
+  "node.save": "Lara LTX 영상 저장",
+  "error": "{reason} Lara LTX 설치, 선택한 모델, workflow 값과 ComfyUI 출력 폴더를 확인하세요.",
+  "reason.empty_model": "모델 경로 또는 저장소 ID가 비어 있습니다.",
+  "reason.model_load_failed": "MLX 모델 파이프라인을 불러오지 못했습니다.",
+  "reason.generation_failed": "MLX 영상 생성에 실패했습니다.",
+  "reason.invalid_output_name": "출력 파일명이 올바르지 않거나 ComfyUI 출력 폴더를 벗어납니다.",
+  "reason.save_failed": "생성된 MP4를 저장하지 못했습니다."
+}
