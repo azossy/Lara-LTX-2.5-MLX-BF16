@@ -107,5 +107,8 @@
   "cli.output.help": "출력 .mp4 경로.",
   "cli.generate.saved": "생성한 미디어를 {path}에 저장했습니다.",
   "cli.interrupted": "생성이 중단되었습니다. 미완료 출력물은 게시되되이지 않았습니다."
-  ,"LARA-PARITY-004": "순서화된 parity bisect 요청이 올바르지 않습니다({reason}). 두 NPZ archive, 경계 순서와 고정 tolerance 퍼로필을 확인하세요."
+  ,"LARA-PARITY-004": "순서화된 parity bisect 요청이 올바르지 않습니다({reason}). 두 NPZ archive, 경계 순서와 고정 tolerance 퍼로필을 확인하세요.",
+  "LARA-PARITY-005": "디코딩된 미디어 품질 비교가 올바르지 않습니다({reason}). 두 미디어 파일, 디코더 실행 파일, 스트림 레이아웃과 고정 품질 기준을 확인하세요.",
+  "LARA-MODEL-038": "프롬프트 connector 항목 또는 설정 {key}이(가) 없거나 호환되지 않습니다. 고정된 공식 22B BF16 transformer 체크포인트를 사용하세요.",
+  "LARA-TENSOR-031": "프롬프트 connector 입력이 올바르지 않습니다({reason}). projection된 프롬프트 feature, token mask, sequence 길이와 connector 차원을 확인하세요."
 }

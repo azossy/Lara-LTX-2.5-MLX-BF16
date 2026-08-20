@@ -18,6 +18,7 @@ from lara_ltx.models import (
     build_gemma_feature_mapping,
     build_gemma_text_mapping,
     build_packed_gemma_tokenizer,
+    build_prompt_connector_mapping,
     build_spatial_upscaler_mapping,
     build_transformer_input_mapping,
     build_transformer_output_mapping,
@@ -27,6 +28,7 @@ from lara_ltx.models import (
     iter_component_weight_batches,
     load_packed_gemma_assets,
     load_packed_gemma_config,
+    load_prompt_connector_config,
     tokenize_prompts,
     validate_gemma_feature_mapping,
     validate_gemma_text_mapping,
@@ -41,7 +43,7 @@ from lara_ltx.sampling import (
     create_audio_state,
     create_video_state,
 )
-from lara_ltx.text_encoder import LTXGemma4TextEncoder, build_gemma4_text_args
+from lara_ltx.text_encoder import LTXGemma4TextEncoder, build_gemma4_text_args, load_prompt_connector_processor
 from lara_ltx.transformer import ResidentCheckpointTransformerBlocks
 from lara_ltx.video_vae import (
     load_diffusion_video_decoder,
@@ -80,35 +82,47 @@ class LTXVideo:
 
 
 def _load_text_contexts(
-    checkpoint: Path,
+    text_checkpoint: Path,
+    connector_checkpoint: Path,
     *,
     prompt: str,
     negative_prompt: str,
     max_length: int,
 ) -> TwoStageContexts:
-    packed_config = load_packed_gemma_config(checkpoint)
-    text_rules = validate_gemma_text_mapping(build_gemma_text_mapping(checkpoint), packed_config)
-    feature_rules = validate_gemma_feature_mapping(build_gemma_feature_mapping(checkpoint))
+    packed_config = load_packed_gemma_config(text_checkpoint)
+    text_rules = validate_gemma_text_mapping(build_gemma_text_mapping(text_checkpoint), packed_config)
+    feature_rules = validate_gemma_feature_mapping(build_gemma_feature_mapping(text_checkpoint))
     encoder = LTXGemma4TextEncoder(build_gemma4_text_args(packed_config))
     for rules, shapes in (
         (text_rules, gemma_text_target_shapes(packed_config)),
         (feature_rules, gemma_feature_target_shapes()),
     ):
-        for batch in iter_component_weight_batches((checkpoint,), rules, expected_target_shapes=shapes):
+        for batch in iter_component_weight_batches((text_checkpoint,), rules, expected_target_shapes=shapes):
             encoder.load_weights(batch, strict=False)
             mx.eval(*[value for _, value in batch])
-    assets = load_packed_gemma_assets(checkpoint)
+    assets = load_packed_gemma_assets(text_checkpoint)
     tokenizer = build_packed_gemma_tokenizer(assets, max_length=max_length)
     token_ids, attention_mask = tokenize_prompts(
         tokenizer,
         [prompt, negative_prompt],
         max_length=max_length,
     )
-    video, audio = encoder.encode_features(
+    attention = mx.array(attention_mask, dtype=mx.int32)
+    video_features, audio_features = encoder.encode_features(
         mx.array(token_ids, dtype=mx.int32),
-        mx.array(attention_mask, dtype=mx.int32),
+        attention,
     )
-    mx.eval(video, audio)
+    mx.eval(video_features, audio_features)
+    del encoder, tokenizer, assets
+    mx.clear_cache()
+
+    connector_config = load_prompt_connector_config(connector_checkpoint)
+    connector = load_prompt_connector_processor(
+        checkpoint=connector_checkpoint,
+        mapping=build_prompt_connector_mapping(connector_checkpoint),
+        config=connector_config,
+    )
+    video, audio, _ = connector(video_features, audio_features, attention)
     contexts = TwoStageContexts(
         video_positive=video[0:1],
         video_negative=video[1:2],
@@ -121,7 +135,7 @@ def _load_text_contexts(
         contexts.audio_positive,
         contexts.audio_negative,
     )
-    del encoder, video, audio, tokenizer, assets
+    del connector, video_features, audio_features, attention, video, audio
     mx.clear_cache()
     return contexts
 
@@ -323,6 +337,7 @@ class LTXPipeline:
         )
         contexts = _load_text_contexts(
             self.checkpoints.text_encoder,
+            self.checkpoints.transformer,
             prompt=prompt.strip(),
             negative_prompt=generation.negative_prompt,
             max_length=generation.text_max_length,

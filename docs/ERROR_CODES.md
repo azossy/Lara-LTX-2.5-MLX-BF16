@@ -44,10 +44,12 @@
 | LARA-MODEL-035 | `LARA-MODEL-035` | Packed Gemma 4 text configuration or one of its 666 text-core mappings is incompatible | Use the pinned official BF16 encoder and regenerate the reviewed text-core manifest | `lara_ltx.models.gemma_text` |
 | LARA-MODEL-036 | `LARA-MODEL-036` | A packed Gemma tokenizer or processor byte asset is missing, truncated or invalid | Restore the pinned encoder, verify its checksum and retry | `lara_ltx.models.gemma_assets` |
 | LARA-MODEL-037 | `LARA-MODEL-037` | Diffusion Video VAE decoder entry or manifest metadata is incompatible with the reviewed 407-target BF16 layout | Use the pinned Video VAE checkpoint and matching reviewed mapping | `lara_ltx.video_vae.diffusion_decoder` |
+| LARA-MODEL-038 | `LARA-MODEL-038` | Prompt connector entry or transformer metadata is missing or incompatible | Use the pinned official 22B BF16 transformer checkpoint | `lara_ltx.models.gemma_connector` |
 | LARA-MEDIA-001 | `LARA-MEDIA-001` | Decoded video/audio shape, values, rate, encoding option or output path is invalid | Supply finite NCTHW RGB video, stereo audio, valid encoding settings and an MP4 path | `lara_ltx.media.result` |
 | LARA-MEDIA-002 | `LARA-MEDIA-002` | Local ffmpeg discovery, execution or encoding failed | Install/configure ffmpeg, verify output permissions and retry | `lara_ltx.media.result` |
 | LARA-PARITY-002 | `LARA-PARITY-002` | Fixed CUDA audio-boundary input/capture key is unavailable or invalid | Restore the approved boundary artifact and retry | `tools/parity/capture_cuda_audio_decode.py` |
 | LARA-PARITY-003 | `LARA-PARITY-003` | Fixed CUDA LoRA fusion input/capture key is unavailable or invalid | Restore the approved LoRA boundary artifact and retry | `tools/parity/compare_mlx_lora_fusion.py` |
+| LARA-PARITY-005 | `LARA-PARITY-005` | Decoded media comparison, stream layout, or frozen quality thresholds are invalid | Verify both MP4 files, FFmpeg/FFprobe paths, stream layouts and the quality profile | `tools/parity/compare_media_quality.py` |
 | LARA-RUNTIME-001 | `LARA-RUNTIME-001` | BF16 workload exceeds memory | Reduce dimensions or use a larger-memory target | Runtime |
 | LARA-RUNTIME-002 | `LARA-RUNTIME-002` | CUDA is unavailable | Start a GPU instance and retry | Golden generator |
 | LARA-RUNTIME-003 | `LARA-RUNTIME-003` | Metal is unavailable | Use a supported Apple Silicon Mac and pinned MLX environment | Metal feasibility probes |
@@ -91,6 +93,7 @@
 | LARA-TENSOR-028 | `LARA-TENSOR-028` | A transformer block received no active modality | Enable a valid video and/or audio stream before denoising | `lara_ltx.transformer.runtime` |
 | LARA-TENSOR-029 | `LARA-TENSOR-029` | Integrated transformer denoiser input or block count is invalid | Verify modality conditioning, patchified latents, token masks, finite sigma, and configured block count | `lara_ltx.transformer.denoiser` |
 | LARA-TENSOR-030 | `LARA-TENSOR-030` | Diffusion latent layout, Gaussian noising, or HQ stage transition is invalid | Verify latent dimensions, patch/timing configuration, noise scale, and x2 stage shape | `lara_ltx.sampling.latent` |
+| LARA-TENSOR-031 | `LARA-TENSOR-031` | Prompt connector features, token mask, sequence length, or dimensions are invalid | Verify packed-Gemma projections and the transformer connector configuration | `lara_ltx.text_encoder.connector` |
 | LARA-PIPELINE-001 | `LARA-PIPELINE-001` | Packaged or selected pipeline TOML profile is invalid | Restore the packaged profile or correct every required typed setting | `lara_ltx.pipeline.configuration` |
 | LARA-PIPELINE-002 | `LARA-PIPELINE-002` | Model snapshot resolution/download failed or a required BF16 file is absent | Verify the local model root or Hugging Face gate/token/revision | `lara_ltx.pipeline.api` |
 | LARA-PIPELINE-003 | `LARA-PIPELINE-003` | Prompt or generation grid is unsupported | Provide a prompt, 64-aligned dimensions, an `8*k+1` frame count and at least two HQ steps | `lara_ltx.pipeline.api` |

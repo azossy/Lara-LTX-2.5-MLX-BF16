@@ -13,6 +13,13 @@ from .gemma_assets import (
     load_packed_gemma_assets,
     tokenize_prompts,
 )
+from .gemma_connector import (
+    PromptConnectorConfig,
+    build_prompt_connector_mapping,
+    load_prompt_connector_config,
+    prompt_connector_target_shapes,
+    validate_prompt_connector_mapping,
+)
 from .gemma_feature import (
     build_gemma_feature_mapping,
     gemma_feature_target_shapes,
@@ -78,6 +85,7 @@ __all__ = [
     "LoadedShard",
     "LoraPair",
     "PackedGemmaAssets",
+    "PromptConnectorConfig",
     "SafeTensorFile",
     "TensorDescriptor",
     "audio_vae_target_shapes",
@@ -90,6 +98,7 @@ __all__ = [
     "build_lora_pairs",
     "build_mapping_template",
     "build_packed_gemma_tokenizer",
+    "build_prompt_connector_mapping",
     "build_spatial_upscaler_mapping",
     "build_transformer_block_mapping",
     "build_transformer_block_mappings",
@@ -103,8 +112,10 @@ __all__ = [
     "load_and_validate_mapping",
     "load_packed_gemma_assets",
     "load_packed_gemma_config",
+    "load_prompt_connector_config",
     "load_safetensors_shard",
     "map_loaded_shard",
+    "prompt_connector_target_shapes",
     "spatial_upscaler_target_shapes",
     "tokenize_prompts",
     "transformer_block_target_dtypes",
@@ -117,6 +128,7 @@ __all__ = [
     "validate_gemma_feature_mapping",
     "validate_gemma_text_mapping",
     "validate_mapping",
+    "validate_prompt_connector_mapping",
     "validate_spatial_upscaler_mapping",
     "validate_transformer_block_mapping",
     "validate_transformer_input_mapping",
