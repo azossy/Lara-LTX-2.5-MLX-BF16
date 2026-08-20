@@ -133,9 +133,9 @@ def _quality_metrics(reference: np.ndarray, candidate: np.ndarray, name: str) ->
     return metrics
 
 
-def _threshold_result(report: dict[str, Any], path: Path | None) -> tuple[dict[str, Any] | None, bool]:
+def _threshold_result(report: dict[str, Any], path: Path | None) -> tuple[dict[str, Any] | None, bool | None]:
     if path is None:
-        return None, True
+        return None, None
     try:
         thresholds = json.loads(path.read_text(encoding="utf-8"))
         minimum_frame_cosine = float(thresholds["minimum_frame_cosine"])
@@ -220,7 +220,7 @@ def main() -> int:
     temporary = arguments.report.with_suffix(f"{arguments.report.suffix}.tmp")
     temporary.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temporary.replace(arguments.report)
-    return 0 if passed else 1
+    return 0 if passed is not False else 1
 
 
 if __name__ == "__main__":

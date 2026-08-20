@@ -97,11 +97,13 @@ testing.
 | Workload | Steps | Result | MLX peak | Total time |
 |---|---:|---|---:|---:|
 | Public API smoke, 320x512, 17 frames, synchronized audio | Stage 1: 2; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,191,990 B | 73.4 s |
+| HQ fixed prompt, 320x512, 17 frames, synchronized audio | Stage 1: 15; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,319,162 B | 154.7 s |
 | Same-process repeat (second run), same grid | Stage 1: 2; Stage 2: 3 | Byte-identical MP4; 0 B released-memory growth | 40,749,188,278 B | 69.1 s |
 
-Artifacts: `golden/mlx_public_pipeline_smoke_report.json` and
-`golden/mlx_repeated_pipeline_report.json`. These reduced workloads validate
-the lifecycle and are not estimates for the canonical HQ workload.
+Artifacts: `golden/mlx_public_pipeline_smoke_report.json`,
+`golden/mlx_hq_fixed_seed_report.json` and
+`golden/mlx_repeated_pipeline_report.json`. These 320x512 workloads validate
+the lifecycle and are not estimates for the canonical 1920x1088 workload.
 
 ## CUDA vs MLX quality comparison
 

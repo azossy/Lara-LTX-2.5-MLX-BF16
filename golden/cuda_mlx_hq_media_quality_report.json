@@ -1,0 +1,93 @@
+{
+  "acceptance": null,
+  "audio": {
+    "alignment": {
+      "aligned_cosine_similarity": -0.12905644148778322,
+      "lag_ms": -82.97916666666667,
+      "lag_samples": -3983
+    },
+    "channels": 2,
+    "metrics": {
+      "candidate_checksum": "b7575004a1eac7de55baa4add0e0bd3b1367fe9f2d4234588b6bfd2daf7ebb31",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.050269147260515595,
+      "finite_count": 67584,
+      "inf_count": 0,
+      "max_abs_error": 0.7674806956201792,
+      "max_relative_error": 215432.50110390643,
+      "mean_abs_error": 0.13832515762299558,
+      "name": "decoded_audio",
+      "nan_count": 0,
+      "normalized_rmse": 5.081900921639689,
+      "psnr_db": 14.683919206657075,
+      "reference_checksum": "a27b089210198d53b810b28bc5ae6639c5bfbd808b34d7d36ebd4ef024676412",
+      "reference_dtype": "float32",
+      "reference_rms": 0.03628923775067314,
+      "rmse": 0.1844183107707476,
+      "shape": [
+        33792,
+        2
+      ]
+    },
+    "sample_count": 33792,
+    "sample_rate": 48000
+  },
+  "candidate": "golden/mlx_hq_fixed_seed.mp4",
+  "component": "cuda_mlx_media_quality",
+  "passed": null,
+  "reference": "golden/cuda_hq_fixed_seed.mp4",
+  "schema_version": 1,
+  "video": {
+    "frame_count": 17,
+    "frame_metrics": {
+      "candidate_checksum": "cb5d5faa344710a2d55fb7c10a15078b7e9863051814e8c84f6e2462c6b8602d",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.5071378887802768,
+      "finite_count": 8355840,
+      "inf_count": 0,
+      "max_abs_error": 1.0,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.3304198875214129,
+      "name": "decoded_rgb_frames",
+      "nan_count": 0,
+      "normalized_rmse": 2.0593686256650994,
+      "psnr_db": 7.308538449182503,
+      "reference_checksum": "1fb4838dd566cb76e96aa6069c7a2f5c3054ca9193edb533c4d88e5cb7abc35c",
+      "reference_dtype": "float32",
+      "reference_rms": 0.20933362085735682,
+      "rmse": 0.4310950910905139,
+      "shape": [
+        17,
+        320,
+        512,
+        3
+      ]
+    },
+    "height": 320,
+    "temporal_delta_metrics": {
+      "candidate_checksum": "928c6590f5c345aed6f8b959083cfce9f2d89cd3313453008bbb0825220f6ecc",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.0008386907841884739,
+      "finite_count": 7864320,
+      "inf_count": 0,
+      "max_abs_error": 0.8509804010391235,
+      "max_relative_error": 6.738925411078165e+37,
+      "mean_abs_error": 0.01622178855485217,
+      "name": "decoded_rgb_temporal_delta",
+      "nan_count": 0,
+      "normalized_rmse": 1.0267784655953958,
+      "psnr_db": 27.312168454683118,
+      "reference_checksum": "4c9e5f7a017a725447bff4f5805c1e50d5d327855b1edea107a96ccc332b0be2",
+      "reference_dtype": "float32",
+      "reference_rms": 0.0419676668322126,
+      "rmse": 0.043091496554598034,
+      "shape": [
+        16,
+        320,
+        512,
+        3
+      ]
+    },
+    "width": 512
+  }
+}
