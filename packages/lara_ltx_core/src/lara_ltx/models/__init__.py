@@ -47,6 +47,7 @@ from .spatial_upscaler import (
 )
 from .transformer_block import (
     build_transformer_block_mapping,
+    build_transformer_block_mappings,
     transformer_block_target_dtypes,
     transformer_block_target_shapes,
     validate_transformer_block_mapping,
@@ -91,6 +92,7 @@ __all__ = [
     "build_packed_gemma_tokenizer",
     "build_spatial_upscaler_mapping",
     "build_transformer_block_mapping",
+    "build_transformer_block_mappings",
     "build_transformer_input_mapping",
     "build_transformer_output_mapping",
     "build_vocoder_mapping",

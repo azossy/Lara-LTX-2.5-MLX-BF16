@@ -151,6 +151,21 @@ upsamples the 16 kHz skip signal to 48 kHz. The fixed CUDA spectrogram produces
 a finite stereo waveform with NRMSE `0.004552`, cosine `0.999993`, and a
 1,753,922,396-byte execution peak.
 
+## Sequential 48-block transformer runtime
+
+Artifacts: `golden/mlx_transformer_sequence_block0_report.json`,
+`golden/mlx_transformer_sequence_48block_stage1_smoke.json`, and
+`golden/mlx_transformer_sequence_48block_stage2_smoke.json`
+
+The checkpoint-backed provider parses the 42 GB checkpoint header once, then
+strict-loads, optionally fuses LoRA into, executes and releases exactly one
+84-tensor AV block at a time. Block 0 retains the frozen CUDA parity result
+(video NRMSE `0.008269`, audio NRMSE `0.005531`). The full 48-block stage-1
+and stage-2 smoke runs each load 4,032 tensors and fuse all 1,632 block-local
+LoRA pairs at strengths `0.25` and `0.5`; both streams remain finite, active
+block residency stays below 773,816,712 bytes, and the maximum execution peak
+is 2,153,945,408 bytes.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.

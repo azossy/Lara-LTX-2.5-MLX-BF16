@@ -94,6 +94,28 @@ The scheduler must match the captured HQ stage-1 sigmas within `2e-7`, the
 combined CFG/STG/AV-isolation arithmetic must be exact, and the res_2s
 coefficients must remain finite.
 
+## P3 bounded 48-block transformer gate
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_transformer_sequence.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --cuda-reference golden/cuda_checkpoint_block_0.npz \
+  --block-count 48 \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --lora-strength 0.25 \
+  --report "$LARA_REPORT_DIR/transformer_sequence_stage1.json"
+```
+
+The gate must execute 48 records, load 84 tensors per block, fuse 34 LoRA pairs
+per block, produce finite video/audio outputs, and keep active block residency
+bounded rather than accumulating prior blocks. CUDA numerical comparison is
+also required in the one-block form without `--lora-checkpoint`; later blocks
+use this command as a lifecycle smoke gate until denoiser-integrated P4
+boundaries are captured.
+
+Repeat the same command with `--lora-strength 0.5` and a distinct report path
+for the official stage-2 lifecycle gate.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

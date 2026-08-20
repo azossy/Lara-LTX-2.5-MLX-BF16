@@ -1,0 +1,89 @@
+{
+  "block_count": 1,
+  "block_records": [
+    {
+      "active_after_load_bytes": 773804424,
+      "block_index": 0,
+      "fused_lora_pair_count": 0,
+      "loaded_tensor_count": 84,
+      "peak_after_execution_bytes": 2153945408
+    }
+  ],
+  "component": "sequential_av_transformer_blocks",
+  "lora": {
+    "enabled": false,
+    "strength": 0.0
+  },
+  "outputs": {
+    "audio": {
+      "dtype": "float32",
+      "finite": true,
+      "name": "audio_output",
+      "sha256": "52fd425ee0812bcae5027ffaa33b34631aef87992c06a44cff0432903eb03775",
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "video": {
+      "dtype": "float32",
+      "finite": true,
+      "name": "video_output",
+      "sha256": "069bc0ce383076f08920d71a8419bdd0bf58961c2e31b28deeb1d7373e083731",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    }
+  },
+  "parity": {
+    "audio": {
+      "candidate_checksum": "52fd425ee0812bcae5027ffaa33b34631aef87992c06a44cff0432903eb03775",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999848249902948,
+      "finite_count": 2048,
+      "inf_count": 0,
+      "max_abs_error": 2.41351318359375,
+      "max_relative_error": 5.367861396064036e+36,
+      "mean_abs_error": 0.10235604304034496,
+      "name": "audio_output",
+      "nan_count": 0,
+      "normalized_rmse": 0.005530713899623725,
+      "reference_checksum": "2ae164ff1f85fb1ba7ec162fcc812d27144dcdfff541dada1f1600223ded5622",
+      "reference_dtype": "float32",
+      "reference_rms": 34.02473916706302,
+      "rmse": 0.18818109784234718,
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "video": {
+      "candidate_checksum": "069bc0ce383076f08920d71a8419bdd0bf58961c2e31b28deeb1d7373e083731",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999658888326322,
+      "finite_count": 4096,
+      "inf_count": 0,
+      "max_abs_error": 5.645782470703125,
+      "max_relative_error": 1.7110565260194208e+37,
+      "mean_abs_error": 0.14350206900144258,
+      "name": "video_output",
+      "nan_count": 0,
+      "normalized_rmse": 0.008268845969529879,
+      "reference_checksum": "7d32ee75dc4190b674035d858b4d47a1ae4dce06a6ac58722e33d5562811d510",
+      "reference_dtype": "float32",
+      "reference_rms": 30.021898365617123,
+      "rmse": 0.24824645329816877,
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    }
+  },
+  "passed": true,
+  "schema_version": 1
+}

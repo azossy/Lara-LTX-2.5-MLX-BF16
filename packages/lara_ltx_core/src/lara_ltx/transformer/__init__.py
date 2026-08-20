@@ -14,6 +14,13 @@ from .input import (
 from .layers import FeedForward, GELUApprox, gelu_approx, rms_norm
 from .output import AVTransformerOutput, TransformerOutputConfig, TransformerOutputHead
 from .rope import LTXRopeType, apply_rotary_emb, precompute_freqs_cis
+from .runtime import (
+    CheckpointTransformerBlocks,
+    TransformerBlockLoadRecord,
+    TransformerSequenceResult,
+    production_transformer_block,
+    run_transformer_block_sequence,
+)
 from .timestep import PixArtAlphaCombinedTimestepSizeEmbeddings, TimestepEmbedding, get_timestep_embedding
 
 __all__ = [
@@ -22,6 +29,7 @@ __all__ = [
     "AVTransformerOutput",
     "AdaLayerNormSingle",
     "Attention",
+    "CheckpointTransformerBlocks",
     "FeedForward",
     "GELUApprox",
     "LTXRopeType",
@@ -29,11 +37,13 @@ __all__ = [
     "PreparedTransformerInput",
     "RMSNorm",
     "TimestepEmbedding",
+    "TransformerBlockLoadRecord",
     "TransformerInputConfig",
     "TransformerInputPreprocessor",
     "TransformerModalityInput",
     "TransformerOutputConfig",
     "TransformerOutputHead",
+    "TransformerSequenceResult",
     "TransformerStream",
     "VideoTransformerBlock",
     "VideoTransformerConfig",
@@ -45,6 +55,8 @@ __all__ = [
     "get_timestep_embedding",
     "post_self_attention",
     "precompute_freqs_cis",
+    "production_transformer_block",
     "rms_norm",
+    "run_transformer_block_sequence",
     "scaled_dot_product_attention",
 ]

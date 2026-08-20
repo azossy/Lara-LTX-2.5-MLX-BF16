@@ -77,5 +77,6 @@
   "LARA-TENSOR-024": "Audio VAE decoder 입력 또는 설정이 올바르지 않습니다({shape}). 8채널 rank-4 잠재와 고정된 causal decoder 설정을 사용하세요.",
   "LARA-TENSOR-025": "Audio vocoder mel 입력이 올바르지 않습니다({shape}). [batch, 2, frames, 64] 형태의 rank-4 스테레오 텐서를 제공하세요.",
   "LARA-TENSOR-026": "BWE 파형 입력이 올바르지 않습니다({shape}). [batch, 2, samples] 형태의 rank-3 스테레오 파형을 제공하세요.",
-  "LARA-TENSOR-027": "BWE residual 형태 {residual_shape}이(가) resample된 skip 형태 {skip_shape}과 다릅니다. 고정된 sample rate, hop length와 체크포인트 설정을 확인하세요."
+  "LARA-TENSOR-027": "BWE residual 형태 {residual_shape}이(가) resample된 skip 형태 {skip_shape}과 다릅니다. 고정된 sample rate, hop length와 체크포인트 설정을 확인하세요.",
+  "LARA-TENSOR-028": "Transformer block {block_index}에 활성화된 video/audio stream이 없습니다. Denoising 전에 올바른 modality를 하나 이상 활성화하세요."
 }

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from lara_ltx.errors import LaraError
 
-from .checkpoint import BF16_DTYPE, inspect_safetensors
+from .checkpoint import BF16_DTYPE, SafeTensorFile, inspect_safetensors
 from .mapping import IDENTITY_TRANSFORM, MAPPING_SCHEMA_VERSION, validate_mapping
 
 VIDEO_DIMENSION = 4096
@@ -17,6 +17,7 @@ AUDIO_HEAD_COUNT = 32
 VIDEO_FEED_FORWARD_DIMENSION = 16384
 AUDIO_FEED_FORWARD_DIMENSION = 8192
 TRANSFORMER_BLOCK_SOURCE_PREFIX = "model.diffusion_model.transformer_blocks."
+PRODUCTION_TRANSFORMER_BLOCK_COUNT = 48
 TRANSFORMER_BLOCK_F32_TARGETS = frozenset(
     {
         "scale_shift_table",
@@ -124,6 +125,25 @@ def build_transformer_block_mapping(shard_path: Path, block_index: int) -> dict[
     if block_index < 0:
         raise LaraError("LARA-MODEL-028", details={"key": f"block_index={block_index}"})
     source = inspect_safetensors(shard_path)
+    return _build_transformer_block_mapping_from_source(source, block_index)
+
+
+def build_transformer_block_mappings(
+    shard_path: Path,
+    *,
+    block_count: int = PRODUCTION_TRANSFORMER_BLOCK_COUNT,
+) -> tuple[dict[str, object], ...]:
+    """Build every block mapping after parsing the large checkpoint header once."""
+
+    if block_count <= 0:
+        raise LaraError("LARA-MODEL-028", details={"key": f"block_count={block_count}"})
+    source = inspect_safetensors(shard_path)
+    return tuple(_build_transformer_block_mapping_from_source(source, index) for index in range(block_count))
+
+
+def _build_transformer_block_mapping_from_source(source: SafeTensorFile, block_index: int) -> dict[str, object]:
+    if block_index < 0:
+        raise LaraError("LARA-MODEL-028", details={"key": f"block_index={block_index}"})
     prefix = f"{TRANSFORMER_BLOCK_SOURCE_PREFIX}{block_index}."
     rules: list[dict[str, object]] = []
     for descriptor in source.tensors:
@@ -132,7 +152,7 @@ def build_transformer_block_mapping(shard_path: Path, block_index: int) -> dict[
         target_key = descriptor.name.removeprefix(prefix)
         rules.append(
             {
-                "source_file": shard_path.name,
+                "source_file": source.path.name,
                 "source_key": descriptor.name,
                 "target_key": target_key,
                 "transform": IDENTITY_TRANSFORM,
@@ -146,7 +166,7 @@ def build_transformer_block_mapping(shard_path: Path, block_index: int) -> dict[
         "schema_version": MAPPING_SCHEMA_VERSION,
         "component": "transformer_block",
         "block_index": block_index,
-        "shards": [{"file": shard_path.name, "tensor_count": len(rules)}],
+        "shards": [{"file": source.path.name, "tensor_count": len(rules)}],
         "rules": sorted(rules, key=lambda rule: str(rule["target_key"])),
     }
     validate_transformer_block_mapping(mapping)

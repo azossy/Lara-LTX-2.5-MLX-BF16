@@ -150,6 +150,12 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       block perturbation masks and full two-evaluation res_2s/SDE loop. The
       15-step schedule matches the P0 CUDA HQ artifact within `1.2e-7` and the
       deterministic Metal contract suite passes.
+- [x] Implement sequential checkpoint-backed execution for all 48 production
+      AV transformer blocks with per-block graph materialization and immediate
+      release. The full stage-1 and stage-2 smoke runs each strict-load 4,032
+      tensors, fuse all 1,632 block-local LoRA pairs at strengths `0.25` and
+      `0.5`, hold active block memory below 773,816,712 bytes, and produce
+      finite video/audio outputs at a 2,153,945,408-byte peak.
 - [x] Port the complete 72-weight spatial latent upscaler, VAE statistic
       denormalization/renormalization and source-order pixel shuffle. All three
       CUDA boundaries pass; the normalized output has NRMSE `0.01272` and

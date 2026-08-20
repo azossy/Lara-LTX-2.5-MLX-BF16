@@ -83,3 +83,4 @@
 | LARA-TENSOR-025 | `LARA-TENSOR-025` | Vocoder mel input is not rank-4 stereo with 64 mel bins | Supply `[batch, 2, frames, 64]` | `lara_ltx.audio_vae.vocoder` |
 | LARA-TENSOR-026 | `LARA-TENSOR-026` | BWE input is not a rank-3 stereo waveform | Supply `[batch, 2, samples]` | `lara_ltx.audio_vae.vocoder` |
 | LARA-TENSOR-027 | `LARA-TENSOR-027` | BWE residual and sinc-resampled skip lengths differ | Restore pinned sample rates, hop length and checkpoint config | `lara_ltx.audio_vae.vocoder` |
+| LARA-TENSOR-028 | `LARA-TENSOR-028` | A transformer block received no active modality | Enable a valid video and/or audio stream before denoising | `lara_ltx.transformer.runtime` |
