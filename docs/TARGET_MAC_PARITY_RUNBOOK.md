@@ -113,6 +113,21 @@ Every boundary must be finite, have normalized RMSE at most `2e-2`, and have
 cosine similarity at least `0.9999`. The checked-in target-Mac report passes
 with 74 loaded tensors and a 995,736,328-byte weight-load peak.
 
+## P3 Audio VAE decoder gate
+
+```sh
+.venv/bin/python tools/parity/compare_mlx_audio_vae_decoder.py \
+  --checkpoint "$LARA_MODEL_ROOT/vae/ltx-2.5-audio-vae-bf16.safetensors" \
+  --mapping golden/manifests/audio_vae_mapping.json \
+  --cuda-reference golden/cuda_audio_decode_reference.npz \
+  --report "$LARA_REPORT_DIR/audio_vae_decoder.json"
+```
+
+The decoder must strict-load 56 model tensors and two latent-statistic tensors.
+Its decoded spectrogram must be finite, have normalized RMSE at most `2e-2`,
+and cosine similarity at least `0.9999`. The checked-in Metal report passes at
+NRMSE `0.003531` and cosine `0.999994`.
+
 ## P2 transformer output-head gate
 
 This command loads the six reviewed video/audio output modulation and
@@ -163,8 +178,8 @@ absolute error, stage 2 has `3.814697265625e-06`, and peak fusion memory is
 ## Evidence handling
 
 - Preserve the checkpoint-block, Gemma-feature, full Gemma-text, sampling,
-  spatial-upscaler, transformer-input, transformer-output and LoRA JSON reports
-  with the commit and MLX environment record.
+  spatial-upscaler, Audio VAE decoder, transformer-input, transformer-output
+  and LoRA JSON reports with the commit and MLX environment record.
 - On a failure, retain the JSON report and re-run only after checking the
   mapping manifest, checkpoint hash, and Python/MLX versions.
 - Do not publish a release or claim end-to-end parity merely because these

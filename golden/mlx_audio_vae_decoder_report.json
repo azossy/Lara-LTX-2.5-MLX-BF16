@@ -1,0 +1,39 @@
+{
+  "acceptance_criteria": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999,
+    "requires_finite_output": true
+  },
+  "component": "audio_vae_decoder",
+  "decoded_spectrogram": {
+    "candidate_checksum": "fa009e0edb7168a5f18819dde9d0065958c16f4b5e71c41753bf4d3eb301a187",
+    "candidate_dtype": "float32",
+    "cosine_similarity": 0.9999938161522329,
+    "finite_count": 8832,
+    "inf_count": 0,
+    "max_abs_error": 0.0625,
+    "max_relative_error": 0.029787234042553193,
+    "mean_abs_error": 0.009998266247735508,
+    "name": "audio_vae_decoded_spectrogram",
+    "nan_count": 0,
+    "normalized_rmse": 0.0035313075798032224,
+    "reference_checksum": "2c7ca6fd522561acdc3a821fe5cbb00d03b2e49abde64cb6a62ce002602a1140",
+    "reference_dtype": "float32",
+    "reference_rms": 4.8056522021628645,
+    "rmse": 0.01697023604739577,
+    "shape": [
+      1,
+      2,
+      69,
+      64
+    ]
+  },
+  "loaded_tensor_count": 58,
+  "passed": true,
+  "schema_version": 1,
+  "weight_load_memory": {
+    "active_after_bytes": 63838980,
+    "active_before_bytes": 0,
+    "peak_bytes": 63839212
+  }
+}

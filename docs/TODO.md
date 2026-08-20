@@ -166,7 +166,12 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       conservative activation-budget selector now chooses both high-resolution
       tile sizes without quantization or weight swapping; live Metal free-memory
       discovery remains pipeline integration work.
-- [ ] Port audio VAE, vocoder and synchronization.
+- [x] Port and checkpoint-back the causal pixel-normalized Audio VAE decoder.
+      All 56 decoder weights plus two normalization statistics load from the
+      official shard; the CUDA spectrogram boundary passes with NRMSE
+      `0.003531` and cosine `0.999994` at a 63,839,212-byte load peak.
+- [ ] Port the primary vocoder, BWE generator, waveform reconstruction and
+      synchronization.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.

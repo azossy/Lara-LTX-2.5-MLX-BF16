@@ -127,6 +127,18 @@ denormalized input is bit-exact. The unnormalized x2 output reaches NRMSE
 `0.012722` and cosine `0.999919`. All three frozen criteria pass with a measured
 995,736,328-byte component-load peak.
 
+## Audio VAE decoder
+
+Artifact: `golden/mlx_audio_vae_decoder_report.json`
+
+The native MLX decoder loads the 56 official decoder weights plus both
+patchified latent-statistic tensors. It reproduces height-causal Conv2d,
+pixel normalization, FP32 SiLU evaluation, nearest-neighbor causal upsampling,
+the upstream first-frame removal and exact variable-length crop. The fixed
+CUDA `(1, 8, 18, 16)` latent produces a finite `(1, 2, 69, 64)` spectrogram
+with NRMSE `0.003531`, cosine `0.999994`, and a 63,839,212-byte weight-load
+peak.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.

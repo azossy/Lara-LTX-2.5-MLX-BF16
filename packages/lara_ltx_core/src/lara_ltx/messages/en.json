@@ -73,5 +73,6 @@
   "LARA-TENSOR-020": "Transformer output inputs are invalid (hidden={hidden_shape}, timestep={timestep_shape}). Use matching rank-3 tensors with the configured hidden width.",
   "LARA-TENSOR-021": "Transformer conditioning input is invalid ({reason}). Provide patchified latent tokens, per-token timesteps, position bounds, projected context and matching masks.",
   "LARA-TENSOR-022": "Gemma token input is invalid ({reason}). Provide a non-empty prompt batch with matching rank-2 token IDs and contiguous left-padding masks.",
-  "LARA-TENSOR-023": "The latent spatial-upscaler input or configuration is invalid ({shape}). Provide a rank-5 NCTHW latent with 128 channels and the reviewed x2 configuration."
+  "LARA-TENSOR-023": "The latent spatial-upscaler input or configuration is invalid ({shape}). Provide a rank-5 NCTHW latent with 128 channels and the reviewed x2 configuration.",
+  "LARA-TENSOR-024": "The Audio VAE decoder input or configuration is invalid ({shape}). Provide a rank-4 latent with 8 channels and the pinned causal decoder configuration."
 }
