@@ -3,9 +3,9 @@ schema_version = 1
 runtime_package = "lara-ltx"
 
 [release]
-version = "0.0.2"
+version = "0.0.3"
 source_repository = "azossy/Lara-LTX-2.5-MLX-BF16"
-source_tag = "v0.0.2"
+source_tag = "v0.0.3"
 
 [source]
 repository_id = "Lightricks/LTX-2.5"

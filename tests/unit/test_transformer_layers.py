@@ -22,7 +22,7 @@ def test_rms_norm_uses_float32_calculation_and_restores_bfloat16() -> None:
     values = mx.array([[[0.03125, -9.75, 0.5, 4.125]]], dtype=mx.bfloat16)
     weights = mx.array([0.75, 1.25, 0.875, 1.5], dtype=mx.bfloat16)
 
-    result = rms_norm(values, weights, calculation_dtype=mx.float32)
+    result = rms_norm(values, weights)
     values_fp32 = values.astype(mx.float32)
     weights_fp32 = weights.astype(mx.float32)
     expected = values_fp32 * mx.rsqrt(mx.mean(mx.square(values_fp32), axis=-1, keepdims=True) + 1e-6)

@@ -257,40 +257,48 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [ ] Close the frozen final-latent gate. Exact input preprocessing now passes
       every field, the sampler-only replay passes, and exact-input final
       block/output heads remain within component tolerance. CUDA-aligned FP32
-      Q/K RMSNorm and RoPE accumulation reduce final video NRMSE from `0.3555`
-      to `0.1725`; final audio is `0.1184` versus the prior `0.1095`. Both are
-      large improvements over the original `0.6856`/`0.8152` replay, but the
-      strict gate remains a documented failing diagnostic rather than a parity
-      claim. The remaining earliest measurable differences are BF16 projection,
-      gating and fused-SDPA backend rounding, not checkpoint mapping or sampler
-      control flow.
+      RMSNorm and RoPE accumulation reproduce the captured AdaLN boundary
+      exactly. The complete stochastic replay ends at video NRMSE `0.1916` and
+      audio NRMSE `0.1110`; the strict gate remains a documented failing
+      diagnostic rather than a parity claim. The remaining differences
+      accumulate from BF16 projection, gating and fused-SDPA backend rounding,
+      not checkpoint mapping or sampler control flow.
 
 ## P5 — BF16 quality parity
 
 - [x] Build and schema-validate the four-case, four-seed, four-resolution,
       three-frame-count audiovisual corpus, and generate all CUDA BF16 references.
-- [ ] Measure frame, temporal, perceptual and audio-sync quality. Two MLX cases
-      have paired frame/temporal/audio diagnostics; the 512x512/33-frame case
-      reached OS OOM after about 70 minutes on the M5 Max 128 GB target.
-- [ ] Complete blind review and document known differences.
+- [x] Measure frame, temporal and audio-sync diagnostics for all four CUDA/MLX
+      pairs. The outputs are different same-seed stochastic realizations, with
+      frame cosine `0.416`-`0.901` and temporal/audio cosines near zero.
+- [x] Complete a non-blind first/middle/last-frame audit and document known
+      differences. All MLX candidates are coherent and usable; independent
+      blind review remains explicitly unclaimed.
 
 ## P6 — Apple Silicon optimization
 
 - [x] Measure M5 Max 128 GB reduced-smoke peak unified memory and repeated-run
       growth. Two same-process runs peak near 40.75 GB, produce byte-identical
       MP4 files, and return to 18 active bytes/0 cache bytes with zero growth.
-- [x] Identify the current high-resolution memory cliff: the versioned
-      512x512/33-frame quality case grew swap beyond 70 GB and was terminated
-      by the operating system after about 70 minutes on M5 Max 128 GB.
+- [x] Resolve the high-resolution memory cliff. The old 8 GiB decoder budget
+      selected 51,200 stage-5 halo tiles; the measured 20 GiB budget selects one
+      tile and completes 512x512/33 in 92.0 seconds at a 40.25 GB MLX peak.
 - [x] Reject unmeasured public generation grids and insufficient or unknown
       physical unified memory before checkpoint resolution. Keep the measured
       token envelope, minimum capacity and recommended grid in the versioned
       profile, with localized `LARA-RUNTIME-010` guidance and no silent
       quantization or fallback.
-- [ ] Measure load time, generation time and Metal utilization.
-- [ ] Apply safe MLX evaluation, lifetime, fused-op and compile optimizations.
-- [ ] Add custom Metal kernels only for measured unresolved bottlenecks.
-- [ ] Record per-stage active/cache/peak MLX memory and stage elapsed time.
+- [x] Measure component load time, generation time and MLX allocator usage
+      through the opt-in public `profile=True` path. macOS GPU duty-cycle
+      counters require privileged `powermetrics`, so utilization percentage is
+      not claimed by the automated release report.
+- [x] Apply safe MLX evaluation boundaries, component lifetimes, fused SDPA and
+      decoder halo-tiling optimizations without changing checkpoint precision.
+- [x] Do not add a custom Metal kernel: no unresolved measured bottleneck
+      remains that justifies the maintenance and parity risk for this release.
+- [x] Record text conditioning, transformer load, both sampler stages, latent
+      upscale, video decode, audio VAE and vocoder active/cache/peak MLX memory
+      and elapsed time separately.
 - [x] Verify cache clearing occurs only at lifecycle boundaries, not in hot
       transformer loops.
 

@@ -26,6 +26,6 @@ def test_release_bundle_has_one_cross_service_identity() -> None:
     )
 
     assert report["passed"] is True
-    assert report["version"] == "0.0.2"
+    assert report["version"] == "0.0.3"
     assert report["github_repository"] == "azossy/Lara-LTX-2.5-MLX-BF16"
     assert report["hugging_face_repository"] == "challychoi/Lara-LTX-2.5-MLX-BF16"

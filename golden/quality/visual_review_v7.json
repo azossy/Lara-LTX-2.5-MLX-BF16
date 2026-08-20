@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "component": "mlx_quality_corpus_visual_audit",
+  "review_mode": "non_blind_agent_frame_sequence_audit",
+  "reviewed_frames_per_backend": [
+    "first",
+    "middle",
+    "last"
+  ],
+  "results": [
+    {
+      "case_id": "seoul_night_landscape",
+      "mlx_candidate_usable": true,
+      "temporal_identity_stable": true,
+      "cuda_same_composition": false,
+      "notes": "Both backends produce a coherent night aerial; MLX selects a wider highway view while CUDA selects a denser city-center view."
+    },
+    {
+      "case_id": "barista_dialogue_portrait",
+      "mlx_candidate_usable": true,
+      "temporal_identity_stable": true,
+      "cuda_same_composition": false,
+      "notes": "MLX preserves one face and cafe setting across the sampled frames, but the person and camera distance differ materially from CUDA."
+    },
+    {
+      "case_id": "fox_forest_square",
+      "mlx_candidate_usable": true,
+      "temporal_identity_stable": true,
+      "cuda_same_composition": false,
+      "notes": "Both sequences contain a coherent running red fox; MLX uses stronger backlight and a closer, lower tracking composition."
+    },
+    {
+      "case_id": "ocean_sunrise_wide",
+      "mlx_candidate_usable": true,
+      "temporal_identity_stable": true,
+      "cuda_same_composition": false,
+      "notes": "Both sequences preserve a stable sunrise horizon and rolling surf, with different shoreline and wave realization."
+    }
+  ],
+  "candidate_quality_passed": true,
+  "same_seed_cuda_reproduction_passed": false,
+  "independent_blind_review_completed": false,
+  "release_interpretation": "The four MLX outputs are usable quality examples, but this audit is not an independent blind review and does not establish same-seed CUDA perceptual parity."
+}

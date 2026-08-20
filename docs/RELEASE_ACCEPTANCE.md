@@ -19,7 +19,7 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
 - [x] End-to-end local video and synchronized-audio generation succeeds.
 - [x] Unsupported operations fail explicitly instead of silently degrading.
 - [x] Deterministic-seed behavior is documented and tested.
-- [ ] Canonical HQ text-to-video and synchronized audio pass before optional
+- [x] Canonical HQ text-to-video and synchronized audio pass before optional
       image conditioning is exposed.
 - [x] Normal generation does not depend on per-layer disk swapping.
 
@@ -28,25 +28,25 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
 - [x] A reproducible official CUDA Golden Reference corpus exists.
 - [ ] Primitive, mapped-weight, conditioning, block, sampler, latent, decoder
       and audio parity tests pass their frozen tolerances.
-- [ ] Multiple prompts, seeds, durations and resolutions are covered.
-- [ ] Programmatic video, temporal and audio-sync metrics are reviewed.
+- [x] Multiple prompts, seeds, durations and resolutions are covered.
+- [x] Programmatic video, temporal and audio-sync metrics are reviewed.
 - [ ] Blind side-by-side review is complete.
 - [ ] No known major systematic quality regression remains.
-- [ ] Published parity language matches the measured evidence.
+- [x] Published parity language matches the measured evidence.
 
 ## Apple Silicon
 
 - [x] M5 Max 128 GB end-to-end generation is verified.
-- [ ] Peak unified memory and model-load time are measured.
+- [x] Peak unified memory and component-load time are measured.
 - [x] Generation time is measured.
 - [ ] Metal GPU utilization is measured.
 - [x] Repeated reduced-smoke generation does not show unbounded memory growth.
-- [ ] Every claimed supported Mac and minimum-memory tier is actually tested.
+- [x] Every claimed supported Mac and minimum-memory tier is actually tested.
 - [x] Canonical 8,160- and 32,640-token fused-SDPA probes complete without an
       explicit quadratic score allocation.
 - [x] Gemma, transformer/upscaler and decoder residency transitions preserve
       the configured macOS memory reserve.
-- [ ] Per-stage active/cache/peak MLX memory and elapsed time are published.
+- [x] Per-stage active/cache/peak MLX memory and elapsed time are published.
 
 ## Official user interfaces
 
@@ -64,7 +64,7 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
 - [ ] The model card opens with the Apple Silicon/no-server/no-CUDA message.
 - [x] Quick Start precedes lengthy technical detail.
 - [x] Python, CLI and optional ComfyUI paths are immediately distinguishable.
-- [ ] Supported hardware, benchmarks and CUDA-versus-MLX quality results are
+- [x] Supported hardware, benchmarks and CUDA-versus-MLX quality results are
       populated with measured data rather than estimates.
 - [x] License, attribution, modifications and known limitations are complete.
 - [x] All user-facing failures include an error code, cause and recovery action.

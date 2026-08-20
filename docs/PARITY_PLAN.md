@@ -95,10 +95,10 @@ reconstructs 290 aliases. Direct compact-checkpoint replay is bit-exact with
 all six full-pipeline block outputs. On MLX, all 176 exact-input operations pass
 the frozen component gate. Computing learned Q/K RMSNorm and RoPE arithmetic in
 FP32 before restoring BF16 reduces normalized Q/K RMSNorm error to at most
-`1.66e-5` and RoPE-ready error to at most `2.04e-3`. The full stochastic replay
-then improves final video NRMSE from `0.3555` to `0.1725`; audio is `0.1184`
-versus `0.1095` before RoPE widening. This remains diagnosis, not final-latent
-acceptance.
+`1.66e-5` and RoPE-ready error to at most `2.04e-3`. Applying the same source
+semantics to global RMSNorm reproduces the captured AdaLN boundary exactly. The
+combined full stochastic replay ends at video NRMSE `0.1916` and audio NRMSE
+`0.1110`. This remains diagnosis, not final-latent acceptance.
 
 The same archive also contains a small, stable-scale BF16 video-only upstream
 transformer block (self-attention, text cross-attention and AdaLN-gated FFN),

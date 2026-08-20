@@ -8,6 +8,7 @@ import gc
 import hashlib
 import json
 import time
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
@@ -75,7 +76,9 @@ def main() -> int:
     if runs < 2 or maximum_growth < 0:
         raise LaraError("LARA-PERF-001", details={"reason": "invalid_run_limits"})
     arguments.output_directory.mkdir(parents=True, exist_ok=True)
+    load_started = time.monotonic()
     pipeline = LTXPipeline.from_pretrained(str(config["model"]))
+    pipeline_resolution_seconds = time.monotonic() - load_started
     records: list[dict[str, object]] = []
     for run_index in range(runs):
         mx.reset_peak_memory()
@@ -88,6 +91,7 @@ def main() -> int:
             num_frames=int(config["num_frames"]),
             frame_rate=float(config["frame_rate"]),
             num_inference_steps=int(config["steps"]),
+            profile=True,
         )
         output = generated.save(arguments.output_directory / f"run_{run_index + 1:02d}.mp4")
         elapsed = time.monotonic() - started
@@ -95,6 +99,8 @@ def main() -> int:
         video_shape = list(generated.video.shape)
         audio_shape = list(generated.audio.shape)
         finite = bool(np.isfinite(generated.video).all() and np.isfinite(generated.audio).all())
+        phase_metrics = [asdict(metric) for metric in generated.metrics]
+        generation_peak_bytes = max(int(metric["peak_bytes"]) for metric in phase_metrics)
         del generated
         gc.collect()
         mx.clear_cache()
@@ -108,6 +114,8 @@ def main() -> int:
                 "video_shape": video_shape,
                 "audio_shape": audio_shape,
                 "finite": finite,
+                "phase_metrics": phase_metrics,
+                "generation_peak_bytes": generation_peak_bytes,
                 "evaluated_memory": evaluated_memory,
                 "released_memory": released_memory,
             }
@@ -129,6 +137,7 @@ def main() -> int:
         "schema_version": 1,
         "component": "repeated_public_pipeline",
         "configuration": config,
+        "pipeline_resolution_seconds": pipeline_resolution_seconds,
         "runs": records,
         "released_memory_growth_bytes": released_growth,
         "identical_media": identical,

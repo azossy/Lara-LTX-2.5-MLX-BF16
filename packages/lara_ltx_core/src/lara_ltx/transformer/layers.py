@@ -17,12 +17,11 @@ def rms_norm(
     weight: mx.array | None = None,
     *,
     eps: float = DEFAULT_NORM_EPSILON,
-    calculation_dtype: mx.Dtype | None = None,
+    calculation_dtype: mx.Dtype = NORM_CALCULATION_DTYPE,
 ) -> mx.array:
-    """Normalize the final dimension, optionally using a wider accumulator."""
+    """Normalize in the CUDA-compatible FP32 accumulator and restore input dtype."""
 
     output_dtype = x.dtype
-    calculation_dtype = output_dtype if calculation_dtype is None else calculation_dtype
     calculation_input = x.astype(calculation_dtype)
     normalized = calculation_input * mx.rsqrt(mx.mean(mx.square(calculation_input), axis=-1, keepdims=True) + eps)
     result = normalized if weight is None else normalized * weight.astype(calculation_dtype)
