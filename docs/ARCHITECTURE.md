@@ -51,12 +51,12 @@ operator design but cannot override measured upstream behavior.
 
 - `lara_ltx.models` and loader code: streaming checkpoint parsing, key mapping
   and BF16 parameter ownership.
-- `lara_ltx.conditioning`: tokenizer, Gemma 4 encoder and LTX projections.
+- `lara_ltx.text_encoder`: tokenizer, Gemma 4 encoder and LTX projections.
 - `lara_ltx.transformer`: transformer blocks, attention, RoPE, AdaLN and output
   projection.
 - `lara_ltx.sampling`: scheduler, CFG/STG and res_2s integration.
-- `lara_ltx.upscaler`: spatial latent upscaler.
-- `lara_ltx.vae`: diffusion video decoder, audio VAE, vocoder and tiling.
+- `lara_ltx.video_vae`: spatial upscaler, diffusion video decoder and tiling.
+- `lara_ltx.audio_vae`: causal audio decoder, vocoder, BWE and resampling.
 - `lara_ltx.ops`: reusable MLX reference and fused operations.
 - `lara_ltx.metal`: only custom kernels proven necessary by profiling.
 - `lara_ltx.pipeline`: the one orchestration path used by every interface.
@@ -108,6 +108,12 @@ DEV transformer + stage-2 LoRA
   → retain final video/audio latents, release transformer
 Diffusion video VAE → audio VAE/vocoder → streaming media writer
 ```
+
+`LocalGenerationRuntime` enforces the transformer-to-decoder boundary through
+factories: the sampling runtime is created for one request and released after
+its final video/audio latents are materialized; only then is the sequential
+checkpoint decode runtime constructed. Codec, schedule, seed, LoRA, memory and
+path settings remain injected configuration rather than orchestration literals.
 
 The stage-specific LoRA strengths mean the correct low-memory baseline may
 reload and fuse the transformer shard-by-shard between stages. Keeping an

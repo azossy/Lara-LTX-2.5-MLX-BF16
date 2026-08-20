@@ -70,6 +70,20 @@ class TwoStageLatentResult:
     stage_two_video: Res2sLatentState
 
 
+@dataclass(frozen=True)
+class TwoStageSamplingRequest:
+    stage_one_video: PatchifiedLatentState
+    stage_one_audio: PatchifiedLatentState
+    stage_one_video_layout: VideoLatentLayout
+    stage_two_video_layout: VideoLatentLayout
+    audio_layout: AudioLatentLayout
+    contexts: TwoStageContexts
+    video_guider: MultiModalGuider
+    audio_guider: MultiModalGuider
+    stage_one_sigmas: mx.array
+    stage_two_sigmas: mx.array
+
+
 class CheckpointStageModuleLoader:
     """Load stage-local transformer input/output modules from reviewed mappings."""
 
@@ -265,4 +279,20 @@ class TwoStageSamplingRuntime:
             stage_one_video=sampled_video,
             stage_one_audio=sampled_audio,
             stage_two_video=refined_video,
+        )
+
+    def run_request(self, request: TwoStageSamplingRequest) -> TwoStageLatentResult:
+        """Run a reusable typed request for top-level lifecycle composition."""
+
+        return self.run(
+            stage_one_video=request.stage_one_video,
+            stage_one_audio=request.stage_one_audio,
+            stage_one_video_layout=request.stage_one_video_layout,
+            stage_two_video_layout=request.stage_two_video_layout,
+            audio_layout=request.audio_layout,
+            contexts=request.contexts,
+            video_guider=request.video_guider,
+            audio_guider=request.audio_guider,
+            stage_one_sigmas=request.stage_one_sigmas,
+            stage_two_sigmas=request.stage_two_sigmas,
         )
