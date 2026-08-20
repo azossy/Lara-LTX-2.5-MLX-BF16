@@ -169,6 +169,20 @@ and audio tokens, and remain within the target Mac memory budget. All runtime
 controls are explicit arguments so the same gate can use smaller diagnostic
 shapes without changing source code.
 
+Repeat the command with the guidance argument below and replace its report
+path to execute all branches from a reviewed data file rather than source
+constants:
+
+```sh
+  --guidance-config golden/manifests/guided_denoiser_smoke_config.json \
+  --report "$LARA_REPORT_DIR/guided_denoiser_two_stage.json"
+```
+
+The guided report must list `cond`, `uncond`, `ptb`, and `mod` for both LoRA
+stages, retain full 1,660-pair coverage, and return the original batch shape
+after guidance calculation. The checked-in target-Mac peak is
+39,296,740,696 bytes.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

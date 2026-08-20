@@ -92,6 +92,12 @@ Denoiser = Callable[
 NoiseFunction = Callable[[mx.array, str], mx.array]
 
 
+def _set_denoiser_step(denoiser: Denoiser, step_index: int) -> None:
+    callback = getattr(denoiser, "set_step_index", None)
+    if callable(callback):
+        callback(step_index)
+
+
 class _NoiseGenerator:
     def __init__(self, step_seed: int, substep_seed: int) -> None:
         self.keys = {
@@ -176,6 +182,7 @@ class Res2sSampler:
             schedule = np.concatenate((schedule[:-1], np.array([TERMINAL_EPSILON_SIGMA, 0.0], dtype=np.float32)))
 
         for step_index in range(full_step_count):
+            _set_denoiser_step(denoiser, step_index)
             sigma = float(schedule[step_index])
             sigma_next = float(schedule[step_index + 1])
             step = -math.log(sigma_next / sigma)
@@ -229,6 +236,7 @@ class Res2sSampler:
                 if audio is not None and midpoint_values["audio"] is not None
                 else None
             )
+            _set_denoiser_step(denoiser, 0)
             second_video, second_audio = denoiser(mid_video, mid_audio, sub_sigma)
             second = {
                 "video": self._prepare_prediction(second_video, video),
@@ -259,6 +267,7 @@ class Res2sSampler:
             video, audio = updated["video"], updated["audio"]
 
         if terminal:
+            _set_denoiser_step(denoiser, full_step_count)
             final_video, final_audio = denoiser(video, audio, float(schedule[full_step_count]))
             if video is not None and final_video is not None:
                 video = replace(video, latent=post_process_latent(final_video, video).astype(video.latent.dtype))

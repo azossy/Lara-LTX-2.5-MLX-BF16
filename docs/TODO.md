@@ -196,8 +196,14 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       cosine similarity `0.999993` at a 1,753,922,396-byte peak.
 - [ ] Wire decoded 48 kHz stereo waveforms into the end-to-end media mux and
       validate synchronization against the fixed CUDA clip.
-- [ ] Connect batched CFG/STG guidance, the two-stage latent lifecycle and
-      component residency transitions around the integrated denoiser.
+- [x] Connect conditioned/unconditioned CFG, per-block STG and AV-isolation
+      passes around the resident denoiser in one batch. The res_2s sampler now
+      supplies the official schedule index, including the midpoint index-0
+      reset, so configured guidance skipping and cached reuse are exact;
+      the 48-block two-stage checkpoint smoke executes all four passes at a
+      39,296,740,696-byte peak.
+- [ ] Complete the two-stage latent lifecycle and component residency
+      transitions around sampling, spatial upscaling and decoding.
 - [ ] Produce a playable fixed-prompt MP4 through one in-process MLX pipeline.
 - [ ] Pass HQ text-to-video plus synchronized audio before enabling optional
       image conditioning through that same pipeline.

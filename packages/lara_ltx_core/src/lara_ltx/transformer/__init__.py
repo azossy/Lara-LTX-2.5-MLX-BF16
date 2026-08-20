@@ -3,7 +3,12 @@
 from .adaln import ada_zero, adaln_embedding_coefficient, get_ada_values, post_self_attention
 from .attention import Attention, RMSNorm, scaled_dot_product_attention
 from .blocks import AVTransformerBlock, TransformerStream, VideoTransformerBlock, VideoTransformerConfig
-from .denoiser import DenoiserModalityConditioning, ResidentAVDenoiser
+from .denoiser import (
+    DenoiserModalityConditioning,
+    GuidedDenoiserConditioning,
+    GuidedResidentAVDenoiser,
+    ResidentAVDenoiser,
+)
 from .input import (
     AdaLayerNormSingle,
     AVTransformerInputPreprocessor,
@@ -39,6 +44,8 @@ __all__ = [
     "DenoiserModalityConditioning",
     "FeedForward",
     "GELUApprox",
+    "GuidedDenoiserConditioning",
+    "GuidedResidentAVDenoiser",
     "LTXRopeType",
     "PixArtAlphaCombinedTimestepSizeEmbeddings",
     "PreparedTransformerInput",

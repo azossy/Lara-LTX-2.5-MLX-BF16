@@ -11,11 +11,19 @@ from pathlib import Path
 
 import mlx.core as mx
 import numpy as np
+from lara_ltx.errors import LaraError
 from lara_ltx.models import build_lora_pairs
 from lara_ltx.models.transformer_block import AUDIO_DIMENSION, VIDEO_DIMENSION
-from lara_ltx.sampling import Res2sLatentState
+from lara_ltx.sampling import (
+    MultiModalGuider,
+    MultiModalGuiderParams,
+    Res2sLatentState,
+    build_guidance_batch_plan,
+)
 from lara_ltx.transformer import (
     DenoiserModalityConditioning,
+    GuidedDenoiserConditioning,
+    GuidedResidentAVDenoiser,
     ResidentAVDenoiser,
     ResidentCheckpointTransformerBlocks,
     load_production_transformer_input,
@@ -47,6 +55,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--sigma", required=True, type=float)
     parser.add_argument("--seed", required=True, type=int)
     parser.add_argument("--stage-lora-strength", required=True, action="append", type=float)
+    parser.add_argument("--guidance-config", type=Path)
     parser.add_argument("--require-all-lora-pairs", action="store_true")
     parser.add_argument("--report", required=True, type=Path)
     return parser.parse_args()
@@ -114,11 +123,42 @@ def _output_report(value: mx.array) -> dict[str, object]:
     }
 
 
+def _load_guidance(
+    path: Path | None,
+) -> tuple[MultiModalGuider, MultiModalGuider, int, dict[str, object]] | None:
+    if path is None:
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise LaraError("LARA-SAMPLING-002", details={"reason": "unreadable_guidance_config"}) from error
+    video_payload = payload.get("video")
+    audio_payload = payload.get("audio")
+    step_index = payload.get("step_index")
+    if not isinstance(video_payload, dict) or not isinstance(audio_payload, dict) or not isinstance(step_index, int):
+        raise LaraError("LARA-SAMPLING-002", details={"reason": "invalid_guidance_config_structure"})
+
+    def guider(values: dict[str, object]) -> MultiModalGuider:
+        normalized = dict(values)
+        blocks = normalized.get("stg_blocks")
+        if isinstance(blocks, list):
+            normalized["stg_blocks"] = tuple(blocks)
+        try:
+            return MultiModalGuider(MultiModalGuiderParams(**normalized))
+        except TypeError as error:
+            raise LaraError("LARA-SAMPLING-002", details={"reason": "invalid_guidance_config_fields"}) from error
+
+    video = guider(video_payload)
+    audio = guider(audio_payload)
+    return video, audio, step_index, payload
+
+
 def main() -> int:
     arguments = parse_arguments()
     input_mapping = json.loads(arguments.input_mapping.read_text(encoding="utf-8"))
     output_mapping = json.loads(arguments.output_mapping.read_text(encoding="utf-8"))
     lora_pairs = build_lora_pairs(arguments.lora_checkpoint, arguments.transformer_checkpoint)
+    guidance = _load_guidance(arguments.guidance_config)
     mx.random.seed(arguments.seed)
     inputs = _inputs(arguments.token_count, arguments.context_token_count)
 
@@ -151,14 +191,46 @@ def main() -> int:
             lora_strength=strength,
             lora_pairs=lora_pairs,
         )
-        denoiser = ResidentAVDenoiser(
-            input_processor=input_processor,
-            blocks=blocks,
-            expected_block_count=arguments.block_count,
-            output_heads=output_heads,
-            video_conditioning=inputs.video_conditioning,
-            audio_conditioning=inputs.audio_conditioning,
-        )
+        if guidance is None:
+            denoiser = ResidentAVDenoiser(
+                input_processor=input_processor,
+                blocks=blocks,
+                expected_block_count=arguments.block_count,
+                output_heads=output_heads,
+                video_conditioning=inputs.video_conditioning,
+                audio_conditioning=inputs.audio_conditioning,
+            )
+            guidance_passes = None
+        else:
+            video_guider, audio_guider, step_index, _ = guidance
+            denoiser = GuidedResidentAVDenoiser(
+                input_processor=input_processor,
+                blocks=blocks,
+                expected_block_count=arguments.block_count,
+                output_heads=output_heads,
+                video_conditioning=GuidedDenoiserConditioning(
+                    conditioned=inputs.video_conditioning,
+                    unconditioned=_conditioning(
+                        arguments.token_count,
+                        arguments.context_token_count,
+                        VIDEO_POSITION_AXIS_COUNT,
+                        VIDEO_DIMENSION,
+                    ),
+                ),
+                audio_conditioning=GuidedDenoiserConditioning(
+                    conditioned=inputs.audio_conditioning,
+                    unconditioned=_conditioning(
+                        arguments.token_count,
+                        arguments.context_token_count,
+                        AUDIO_POSITION_AXIS_COUNT,
+                        AUDIO_DIMENSION,
+                    ),
+                ),
+                video_guider=video_guider,
+                audio_guider=audio_guider,
+            )
+            denoiser.set_step_index(step_index)
+            guidance_passes = list(build_guidance_batch_plan(video_guider, audio_guider).pass_names)
         video, audio = denoiser(inputs.video, inputs.audio, arguments.sigma)
         assert video is not None and audio is not None
         stage = {
@@ -168,6 +240,7 @@ def main() -> int:
             "execution_peak_bytes": int(mx.get_peak_memory()),
             "fused_input_pairs": fused_input_pairs,
             "fused_output_pairs": fused_output_pairs,
+            "guidance_passes": guidance_passes,
             "outputs": {
                 "video": _output_report(video),
                 "audio": _output_report(audio),
@@ -201,6 +274,7 @@ def main() -> int:
             "sigma": arguments.sigma,
             "seed": arguments.seed,
             "require_all_lora_pairs": arguments.require_all_lora_pairs,
+            "guidance_config": guidance[3] if guidance is not None else None,
         },
         "resident_bytes": resident_bytes,
         "fused_block_pairs": fused_block_pairs,

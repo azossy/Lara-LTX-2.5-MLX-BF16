@@ -1,0 +1,19 @@
+{
+  "audio": {
+    "cfg_scale": 7.0,
+    "modality_scale": 2.0,
+    "rescale_scale": 0.0,
+    "skip_step": 0,
+    "stg_blocks": [0],
+    "stg_scale": 0.5
+  },
+  "step_index": 0,
+  "video": {
+    "cfg_scale": 3.0,
+    "modality_scale": 2.0,
+    "rescale_scale": 0.0,
+    "skip_step": 0,
+    "stg_blocks": [0],
+    "stg_scale": 0.5
+  }
+}

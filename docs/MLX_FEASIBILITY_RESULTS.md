@@ -103,7 +103,8 @@ CUDA-versus-MLX text-core tensor parity remains a P4 evidence task.
 
 ## Scheduler, guidance and res_2s
 
-Artifact: `golden/mlx_sampling_report.json`
+Artifacts: `golden/mlx_sampling_report.json` and
+`golden/mlx_guided_denoiser_two_stage_report.json`
 
 The MLX scheduler reproduces all 16 stage-1 sigma entries in the P0 CUDA HQ
 boundary artifact with a maximum absolute error of `1.1920928955078125e-07`.
@@ -112,7 +113,11 @@ conditioned, unconditioned, STG-perturbed and AV-isolated passes, then attaches
 per-block keep masks to the existing MLX transformer streams. The full res_2s
 loop includes midpoint evaluation, optional anchor refinement, independent SDE
 noise streams, clean-latent masking and terminal denoising. Synthetic loop
-tests pass on Metal; denoiser-integrated stage parity remains a P4 task.
+tests pass on Metal. The checkpoint-backed integration executes all four
+guidance passes through 48 resident blocks at both LoRA strengths, covers all
+1,660 adapter pairs, returns finite `[1, 2, 128]` video/audio outputs and peaks
+at 39,296,740,696 bytes. CUDA-versus-MLX guided output parity remains a P4
+evidence task.
 
 ## Spatial latent upscaler
 
@@ -185,19 +190,27 @@ strengths `0.25` and `0.5` each produce finite `[1, 2, 128]` outputs at a
 `golden/mlx_transformer_io_lora_stage2_report.json`; together with the 1,632
 block-local pairs, all 1,660 official adapter pairs now have an execution path.
 
+The reusable denoiser now connects patchified latent conditioning, token-wise
+masked timesteps, resident blocks, output velocity heads and the per-token
+velocity-to-denoised conversion. CFG, STG and AV isolation share one combined
+batch; perturbations attach immediately before each configured block, and the
+result is split and guided back to the original batch. The res_2s sampler
+notifies this denoiser with the official schedule index: the first evaluation
+uses the outer index, while the midpoint's one-sigma schedule resets to index
+zero. Skipped modalities reuse their last denoised result.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.
 - A full 48-block runtime must still evaluate/release at controlled boundaries;
   building one giant lazy graph remains unnecessary risk.
-- The synthetic block does not contain real 42 GB transformer weights, text
-  cross-attention, audio blocks, audio/video cross-attention, AdaLN, guidance
-  multiplicity or sampler overhead. Its timing is a feasibility measurement,
-  not an end-to-end generation estimate or release benchmark.
-- With component-level residency, the transformer checkpoint plus the measured
-  working space has substantial headroom under the 115.45 GB budget. The exact
-  peak must be re-measured with mapped checkpoint weights and stage-specific
-  LoRA handling.
+- The small-token checkpoint smoke uses the real 42 GB transformer weights,
+  text and AV cross-attention, AdaLN, all guidance passes and stage-specific
+  LoRA handling. Its 39.30 GB peak validates model residency, but its timing is
+  not a maximum-token generation benchmark.
+- With component-level residency, the measured guided transformer path has
+  substantial headroom under the 115.45 GB budget. Full production token
+  shapes still require an end-to-end peak and latency measurement.
 - The remaining high-risk technical paths are the full 48-block/high-token
   orchestration, two-stage component lifecycle, DiffVAE tile performance, and
   audiovisual mux synchronization. Full Gemma 4 conditioning, spatial x2

@@ -151,3 +151,38 @@ def test_res2s_sampler_runs_two_stage_and_terminal_denoise() -> None:
 
     assert len(calls) == 5
     assert np.all(np.isfinite(np.asarray(video.latent.astype(mx.float32))))
+
+
+def test_res2s_sampler_notifies_step_aware_denoiser() -> None:
+    class StepAwareDenoiser:
+        def __init__(self) -> None:
+            self.step_indices: list[int] = []
+
+        def set_step_index(self, step_index: int) -> None:
+            self.step_indices.append(step_index)
+
+        def __call__(
+            self,
+            video: Res2sLatentState | None,
+            audio: Res2sLatentState | None,
+            sigma: float,
+        ) -> tuple[mx.array | None, mx.array | None]:
+            del sigma
+            return (
+                video.latent if video is not None else None,
+                audio.latent if audio is not None else None,
+            )
+
+    state = Res2sLatentState(
+        latent=mx.ones((1, 2, 3), dtype=mx.bfloat16),
+        denoise_mask=mx.ones((1, 2, 1), dtype=mx.float32),
+        clean_latent=mx.zeros((1, 2, 3), dtype=mx.bfloat16),
+    )
+    denoiser = StepAwareDenoiser()
+
+    Res2sSampler(
+        bongmath=False,
+        noise_fn=lambda value, stream: mx.zeros(value.shape, dtype=mx.float32),
+    ).sample(mx.array([1.0, 0.5, 0.0]), state, None, denoiser)
+
+    assert denoiser.step_indices == [0, 0, 1, 0, 2]
