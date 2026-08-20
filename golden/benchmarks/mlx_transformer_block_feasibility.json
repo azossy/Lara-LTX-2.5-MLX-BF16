@@ -1,0 +1,30 @@
+{
+  "active_memory_after_bytes": 937427000,
+  "active_memory_before_bytes": 670040120,
+  "attention_seconds": 0.5767778330482543,
+  "block_seconds": 0.8207875830121338,
+  "cache_memory_after_bytes": 4813029390,
+  "device": {
+    "architecture": "applegpu_g17s",
+    "device_name": "Apple M5 Max",
+    "max_buffer_length": 86586540032,
+    "max_recommended_working_set_size": 115448725504,
+    "memory_size": 137438953472,
+    "resource_limit": 499000
+  },
+  "estimated_score_free_bytes": 3343908864,
+  "feed_forward_seconds": 0.2439997917972505,
+  "memory_budget_bytes": 115448725504,
+  "mlx_version": "0.32.0",
+  "output_probe": 1.3515625,
+  "peak_evaluation_memory_bytes": 4680908870,
+  "schema_version": 1,
+  "shape": {
+    "dtype": "bfloat16",
+    "feed_forward_size": 16384,
+    "head_dim": 128,
+    "heads": 32,
+    "hidden_size": 4096,
+    "tokens": 32640
+  }
+}

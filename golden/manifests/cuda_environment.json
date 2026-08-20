@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-19T08:34:01.584811+00:00",
+  "platform": {
+    "system": "Linux",
+    "release": "5.15.0-78-generic",
+    "machine": "x86_64",
+    "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]"
+  },
+  "packages": {
+    "huggingface-hub": "1.28.0",
+    "mlx": null,
+    "numpy": "2.5.2",
+    "safetensors": "0.8.0",
+    "torch": "2.13.0+cu132"
+  },
+  "commands": {
+    "git": {
+      "available": true,
+      "return_code": 0,
+      "stdout": "git version 2.34.1",
+      "stderr": ""
+    },
+    "nvidia_smi": {
+      "available": true,
+      "return_code": 0,
+      "stdout": "0, NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05\n1, NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05",
+      "stderr": ""
+    },
+    "system_profiler": {
+      "available": false,
+      "error_type": "FileNotFoundError"
+    },
+    "sw_vers": {
+      "available": false,
+      "error_type": "FileNotFoundError"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "arrays": {
+    "normalized_input_latent": {
+      "dtype": "float32",
+      "sha256": "ce65a45cd8bcb57717355b36917da3746c28c0ad289eeb1a4c3e092ff9ee8e63",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ]
+    },
+    "unnormalized_input_latent": {
+      "dtype": "float32",
+      "sha256": "c2ba2acedc90a7a3baeb080876935b577901b5556a67b7181c0e70f7463280d4",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ]
+    },
+    "upscaled_normalized_latent": {
+      "dtype": "float32",
+      "sha256": "28239352fa08122bc5e1a62ea508e959000aadd6c38d9cd477f46229a5d8d402",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ]
+    },
+    "upscaled_unnormalized_latent": {
+      "dtype": "float32",
+      "sha256": "7973496d7c609e2e694aa0ebd10c29f14134c39ff492373d4fa971ef55a297cf",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ]
+    }
+  },
+  "captured_at_utc": "2026-08-20T00:34:37.530186+00:00",
+  "dtype": "BF16",
+  "latent_artifact": "cuda_hq_boundary_trace.npz",
+  "latent_key": "upsampler_input_video_latent",
+  "schema_version": 1,
+  "upscaler_checkpoint": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+  "video_vae_checkpoint": "ltx-2.5-video-vae-bf16.safetensors"
+}

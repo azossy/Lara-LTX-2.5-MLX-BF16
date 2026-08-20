@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lara-ltx"
+version = "0.0.1"
+description = "Full-precision LTX-2.5 runtime for Apple Silicon using MLX"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "huggingface-hub>=1.8,<2",
+  "numpy>=2,<3",
+  "safetensors>=0.6,<1",
+  "mlx==0.32.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9,<10",
+  "ruff>=0.14,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["packages/lara_ltx_core/src/lara_ltx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["packages/lara_ltx_core/src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "B", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["E402"]

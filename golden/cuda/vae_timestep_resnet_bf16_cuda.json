@@ -1,0 +1,22 @@
+{
+  "artifact": "vae_timestep_resnet_bf16_cuda.npz",
+  "device": "cuda:0",
+  "dtype": "torch.bfloat16",
+  "input_shape": [
+    1,
+    4,
+    2,
+    3,
+    4
+  ],
+  "seed": 25081906,
+  "timestep_shape": [
+    1,
+    16,
+    1,
+    1,
+    1
+  ],
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

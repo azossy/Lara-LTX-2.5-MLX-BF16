@@ -1,0 +1,22 @@
+{
+  "artifact": "vae_space_to_depth_bf16_cuda.npz",
+  "causal": true,
+  "device": "cuda:0",
+  "dtype": "torch.bfloat16",
+  "input_shape": [
+    1,
+    4,
+    3,
+    4,
+    6
+  ],
+  "output_channels": 8,
+  "seed": 25081903,
+  "stride": [
+    2,
+    2,
+    2
+  ],
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

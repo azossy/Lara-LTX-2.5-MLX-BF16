@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-19T06:17:20.309331+00:00",
+  "platform": {
+    "system": "Darwin",
+    "release": "25.5.0",
+    "machine": "arm64",
+    "python": "3.12.13 (main, Aug  7 2026, 02:15:23) [Clang 22.1.3 ]"
+  },
+  "packages": {
+    "huggingface-hub": null,
+    "mlx": null,
+    "numpy": "2.3.5",
+    "safetensors": null,
+    "torch": null
+  },
+  "commands": {
+    "git": {
+      "available": true,
+      "return_code": 0,
+      "stdout": "git version 2.50.1 (Apple Git-155)",
+      "stderr": ""
+    },
+    "nvidia_smi": {
+      "available": false,
+      "error_type": "FileNotFoundError"
+    },
+    "system_profiler": {
+      "available": true,
+      "return_code": 0,
+      "stdout": "Model Name: MacBook Pro\nModel Identifier: Mac17,6\nChip: Apple M5 Max\nTotal Number of Cores: 18 (6 Super and 12 Performance)\nMemory: 128 GB",
+      "stderr": "2026-08-19 14:17:20.374 system_profiler[90010:54481289] Error fetching hw.cpufamily: -1"
+    },
+    "sw_vers": {
+      "available": true,
+      "return_code": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.5.2\nBuildVersion:\t\t25F84",
+      "stderr": ""
+    }
+  }
+}

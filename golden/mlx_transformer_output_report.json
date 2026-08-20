@@ -1,0 +1,60 @@
+{
+  "acceptance_criteria": {
+    "max_normalized_rmse": 0.02,
+    "min_cosine_similarity": 0.9999,
+    "requires_finite_output": true
+  },
+  "passed": true,
+  "schema_version": 1,
+  "streams": {
+    "audio": {
+      "candidate_checksum": "4f85e51e4941b2312c027055a7725e2ce1b2611a38bc421c67fe244e66a25c32",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999928489778405,
+      "finite_count": 256,
+      "inf_count": 0,
+      "max_abs_error": 0.03125,
+      "max_relative_error": 1.6994535519125684,
+      "mean_abs_error": 0.006556272506713867,
+      "name": "audio_output",
+      "nan_count": 0,
+      "normalized_rmse": 0.003906340797955211,
+      "reference_checksum": "93a042980c360282d1cfd22e0ee07fae223381e1cb6ea41ebf609d87bde9b4f3",
+      "reference_dtype": "float32",
+      "reference_rms": 2.4702374847073756,
+      "rmse": 0.009649589467150683,
+      "shape": [
+        1,
+        2,
+        128
+      ]
+    },
+    "video": {
+      "candidate_checksum": "dd1fb25ea287b4b7a7e76a1902e824a2adc07c9b7a6bf2c6f17fd4f3e5de8e98",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999876879118029,
+      "finite_count": 256,
+      "inf_count": 0,
+      "max_abs_error": 0.0625,
+      "max_relative_error": 1.5454545454545454,
+      "mean_abs_error": 0.01497650146484375,
+      "name": "video_output",
+      "nan_count": 0,
+      "normalized_rmse": 0.00500995536073816,
+      "reference_checksum": "ce2509b9ab3aedff27853df7c80157f6917a12d0745e7388d1ef112f02078f47",
+      "reference_dtype": "float32",
+      "reference_rms": 4.40795946411726,
+      "rmse": 0.022083680147170773,
+      "shape": [
+        1,
+        2,
+        128
+      ]
+    }
+  },
+  "weight_load_memory": {
+    "active_after_bytes": 1622536,
+    "active_before_bytes": 80,
+    "peak_bytes": 1622608
+  }
+}

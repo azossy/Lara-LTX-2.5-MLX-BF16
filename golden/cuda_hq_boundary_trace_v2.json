@@ -1,0 +1,263 @@
+{
+  "artifact": "/root/autodl-tmp/golden/cuda_hq_boundary_trace_v2.npz",
+  "captured_at_utc": "2026-08-19T22:44:13.422599+00:00",
+  "output_path": "/root/autodl-tmp/golden/cuda_hq_boundary_trace_v2.mp4",
+  "schema_version": 1,
+  "tensor_boundaries": {
+    "audio_decoder_input_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8596d443f1ef42b303ef4bc70d0df4b833e5beaf27f0e20bb1cdb5606127eb6c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_audio": {
+      "original_dtype": "torch.float32",
+      "sha256": "e76061230bcd7b3ac73e1ff9e1dfad51e321f9279915c3f2b264181dcf156b21",
+      "shape": [
+        2,
+        33120
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_video_chunk_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "f513c960a1f9a8646787179fc7bdeccee759f5b5ce6f28da85a6d44c1ee96da7",
+      "shape": [
+        17,
+        320,
+        512,
+        3
+      ],
+      "stored_dtype": "float32"
+    },
+    "decoded_video_frame_count": {
+      "original_dtype": "int64",
+      "sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+      "shape": [],
+      "stored_dtype": "int64"
+    },
+    "prompt_audio_negative": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "d8e60f225306e07091d039379baac82777aca2847c3c6dec0e98bcfefffa97de",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_audio_positive": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "dbd1cbb760f3d30d023756d877124c379ef03a8f8e0dba914be7bde462c7954e",
+      "shape": [
+        1,
+        1024,
+        2048
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_video_negative": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8a84ec2a38d0b58035fa12f724767756d7b9e13c47f7ddb872168a19da5ac797",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "prompt_video_positive": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ed149d1cf5a7c46ce9bf25ce3dd059c1d62ad4abcaecee5f330084118037b203",
+      "shape": [
+        1,
+        1024,
+        4096
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_audio_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "8596d443f1ef42b303ef4bc70d0df4b833e5beaf27f0e20bb1cdb5606127eb6c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_input_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "0693f6bfa2117a9b14f9ceca13d3a5611de5dca226bf999f20a7f615fbd08dff",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_input_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2d07a41ae992770085117e9815300bfd0730745883e60b24aaad5e69dfc087ae",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_output_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "816aa8affce6bc85822e0f49cc92d794e0bd9766f794fbf4c38e1b6e91f53d60",
+      "shape": [
+        1,
+        120,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_noiser_output_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28f23880c5977c0fdc136fdaa35d3bdb6436263c4f5fd28139034f0f2c55fc98",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_sigmas": {
+      "original_dtype": "torch.float32",
+      "sha256": "07e9bc5b9a8b3104180f8f3ae05bd114d397bd4c64deeed5e6cfd569ed2e2106",
+      "shape": [
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_1_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ce65a45cd8bcb57717355b36917da3746c28c0ad289eeb1a4c3e092ff9ee8e63",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_audio_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "1290c58a3eae3b52a7baa517400f87c3218d8ebd0121e19d3550558cf39da76c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_input_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "62993697e93e9b051c9f53829de9a51d6edc6a03ba9d25f6a829f0a85cc04c5e",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_input_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "09f63efe75f07ea15f32865c8436888ac55f509358081fd912bff0890c5d2fc3",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_output_0": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+      "shape": [
+        1,
+        480,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_noiser_output_1": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+      "shape": [
+        1,
+        18,
+        128
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_sigmas": {
+      "original_dtype": "torch.float32",
+      "sha256": "1703669e7d66775e40fb2520f307d0e48041de8910da1aee71171f5995698dd7",
+      "shape": [
+        4
+      ],
+      "stored_dtype": "float32"
+    },
+    "stage_2_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2f8c7020ff1f87eaf909ff0c45b1242c5542b536c7ba8050d272f66d40d1b230",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "upsampler_input_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "ce65a45cd8bcb57717355b36917da3746c28c0ad289eeb1a4c3e092ff9ee8e63",
+      "shape": [
+        1,
+        128,
+        3,
+        5,
+        8
+      ],
+      "stored_dtype": "float32"
+    },
+    "upscaled_video_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "28239352fa08122bc5e1a62ea508e959000aadd6c38d9cd477f46229a5d8d402",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    },
+    "video_decoder_input_latent": {
+      "original_dtype": "torch.bfloat16",
+      "sha256": "2f8c7020ff1f87eaf909ff0c45b1242c5542b536c7ba8050d272f66d40d1b230",
+      "shape": [
+        1,
+        128,
+        3,
+        10,
+        16
+      ],
+      "stored_dtype": "float32"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "algorithm": "(B * strength) @ A + base, BF16 accumulation/output",
+  "arrays": {
+    "a_bf16_bits": {
+      "dtype": "uint16",
+      "sha256": "14b32e8435f7a00272ada7d95ffd5a4b0411d15b9787aad84e057080d979a6d7",
+      "shape": [
+        32,
+        2048
+      ]
+    },
+    "b_bf16_bits": {
+      "dtype": "uint16",
+      "sha256": "ec9927c085f003e0b23dbedf4590e66a6445c7a666612c688b9134517545a5d8",
+      "shape": [
+        32,
+        32
+      ]
+    },
+    "base_bf16_bits": {
+      "dtype": "uint16",
+      "sha256": "5fc80a4d4e4c6e348eeb76e06294708b1dbf3bce501da9cf465727c47d5b50bf",
+      "shape": [
+        32,
+        2048
+      ]
+    },
+    "fused_stage_1_bf16_bits": {
+      "dtype": "uint16",
+      "sha256": "69f8bf0060f975ed23ec55e8311cd8cdf64fa8c0a0efc7aa76a20102d86701bd",
+      "shape": [
+        32,
+        2048
+      ]
+    },
+    "fused_stage_2_bf16_bits": {
+      "dtype": "uint16",
+      "sha256": "c5871c4581ae9e7bb7b4950c4b4b1ab4c73458883a1f519aa52c3d3497a43aea",
+      "shape": [
+        32,
+        2048
+      ]
+    }
+  },
+  "captured_at_utc": "2026-08-19T23:28:40.837312+00:00",
+  "pair": {
+    "a_key": "diffusion_model.transformer_blocks.0.audio_attn1.to_gate_logits.lora_A.weight",
+    "b_key": "diffusion_model.transformer_blocks.0.audio_attn1.to_gate_logits.lora_B.weight",
+    "base_shape": [
+      32,
+      2048
+    ],
+    "rank": 32,
+    "target_key": "model.diffusion_model.transformer_blocks.0.audio_attn1.to_gate_logits.weight"
+  },
+  "schema_version": 1,
+  "stage_strengths": {
+    "stage_1": 0.25,
+    "stage_2": 0.5
+  }
+}

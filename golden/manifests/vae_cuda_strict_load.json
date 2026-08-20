@@ -1,0 +1,12 @@
+{
+  "checkpoint": "ltx-2.5-video-vae-bf16.safetensors",
+  "device": "cuda:0",
+  "dtype": "bfloat16",
+  "loaded_target_tensors": 407,
+  "ignored_source_artifact": "type_emb",
+  "ignored_shape": [
+    128
+  ],
+  "missing_keys": [],
+  "unexpected_keys": []
+}

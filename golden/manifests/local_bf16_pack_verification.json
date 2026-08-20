@@ -1,0 +1,82 @@
+{
+  "captured_at_utc": "2026-08-20T01:51:18.273512+00:00",
+  "components": [
+    {
+      "dtype_counts": {
+        "BF16": 4059,
+        "F32": 290
+      },
+      "official_f32_auxiliary_tensor_count": 290,
+      "path": "diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "sha256": "792a2bad501ca03262c0bc2ce7a2949e85b142ce18e30894aad5bc849c8e7584",
+      "size_bytes": 42018190584,
+      "tensor_count": 4349
+    },
+    {
+      "dtype_counts": {
+        "BF16": 681,
+        "U8": 5
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "sha256": "ef7243612fdae7a75cb4d5cee9433e81380675fb6c213bd98ae74a9cd16561d1",
+      "size_bytes": 26263858182,
+      "tensor_count": 686
+    },
+    {
+      "dtype_counts": {
+        "BF16": 396
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "vae/ltx-2.5-video-vae-bf16.safetensors",
+      "sha256": "847e14ca7f3355debca0cea4eaa24ac0fbcdf0061da054ac89ca638a869ddba3",
+      "size_bytes": 1472223346,
+      "tensor_count": 396
+    },
+    {
+      "dtype_counts": {
+        "BF16": 1329
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "sha256": "c52733d37f6a7fb7949c3dc0fb468c6cb2169e4d836983a73babb9f0d54837a5",
+      "size_bytes": 364866540,
+      "tensor_count": 1329
+    },
+    {
+      "dtype_counts": {
+        "BF16": 72
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "sha256": "eb5a71fe4068ee87ccdb1c3aa635e547ca76bd2d30ae20ae889f2c325c0677e8",
+      "size_bytes": 995778752,
+      "tensor_count": 72
+    },
+    {
+      "dtype_counts": {
+        "BF16": 3320
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors",
+      "sha256": "86370bbf79a9eb4edaa158907e2b48a5188fe4c5dc8ce30c7eb8f2f131a9bbf5",
+      "size_bytes": 8899889568,
+      "tensor_count": 3320
+    },
+    {
+      "dtype_counts": {
+        "BF16": 15
+      },
+      "official_f32_auxiliary_tensor_count": 0,
+      "path": "model_patches/ltx-2.5-duration-head-bf16.safetensors",
+      "sha256": "2ec71e4206ed365d015f00c05a48caccfb0ee862986809d06ae376c09f5d9190",
+      "size_bytes": 3843690,
+      "tensor_count": 15
+    }
+  ],
+  "official_auxiliary_dtype": "F32",
+  "official_serialized_asset_dtype": "U8",
+  "ok": true,
+  "primary_dtype": "BF16",
+  "schema_version": 1
+}

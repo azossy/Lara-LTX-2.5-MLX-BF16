@@ -1,0 +1,9 @@
+{
+  "artifact": "diffvae_det_stage_bf16_cuda.npz",
+  "depth": 2,
+  "device": "cuda:0",
+  "dtype": "torch.bfloat16",
+  "seed": 25081911,
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

@@ -1,0 +1,54 @@
+{
+  "arrays": {
+    "attention_mask": {
+      "dtype": "bool",
+      "sha256": "85f90dfea1d8027e1463e5ca971a250110a20df0119d204a74220bc63516d15b",
+      "shape": [
+        1,
+        3
+      ]
+    },
+    "audio_features": {
+      "dtype": "float32",
+      "sha256": "bcbb61febd8cde8c03a3fef65ad30c5cf278d88c6a88757cae76ddb1d6b872e2",
+      "shape": [
+        1,
+        3,
+        2048
+      ]
+    },
+    "hidden_states": {
+      "dtype": "float32",
+      "sha256": "40c3ed0af60c4c0b9cd92cf4f23d90beed97f5582968ea27e3f5f53536d2fe52",
+      "shape": [
+        1,
+        3,
+        3840,
+        49
+      ]
+    },
+    "rms_flattened": {
+      "dtype": "float32",
+      "sha256": "ccd48d58c41f5f91d02db8a25472760cb490342ad92d0e8bac929ac5ec9ec417",
+      "shape": [
+        1,
+        3,
+        188160
+      ]
+    },
+    "video_features": {
+      "dtype": "float32",
+      "sha256": "3ad39a4699fa06b08e0e242ccce279811d972a177e4f65219011ba59fa4cca78",
+      "shape": [
+        1,
+        3,
+        4096
+      ]
+    }
+  },
+  "captured_at_utc": "2026-08-20T00:36:40.154518+00:00",
+  "checkpoint": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+  "dtype": "BF16",
+  "schema_version": 1,
+  "seed": 25081900
+}

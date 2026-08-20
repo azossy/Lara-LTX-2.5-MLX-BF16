@@ -1,0 +1,9 @@
+{
+  "artifact": "timestep_embedding_bf16_cuda.npz",
+  "device": "cuda:0",
+  "dtype": "torch.bfloat16",
+  "embedding_dim": 16,
+  "seed": 25081907,
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

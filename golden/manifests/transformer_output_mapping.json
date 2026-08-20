@@ -1,0 +1,76 @@
+{
+  "component": "transformer_output",
+  "rules": [
+    {
+      "dtype": "BF16",
+      "shape": [
+        128
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_proj_out.bias",
+      "target_key": "audio.proj_out.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        128,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_proj_out.weight",
+      "target_key": "audio.proj_out.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "F32",
+      "shape": [
+        2,
+        2048
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.audio_scale_shift_table",
+      "target_key": "audio.scale_shift_table",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        128
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.proj_out.bias",
+      "target_key": "video.proj_out.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        128,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.proj_out.weight",
+      "target_key": "video.proj_out.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "F32",
+      "shape": [
+        2,
+        4096
+      ],
+      "source_file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "source_key": "model.diffusion_model.scale_shift_table",
+      "target_key": "video.scale_shift_table",
+      "transform": "identity"
+    }
+  ],
+  "schema_version": 2,
+  "shards": [
+    {
+      "file": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+      "tensor_count": 6
+    }
+  ]
+}

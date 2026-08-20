@@ -1,0 +1,33 @@
+{
+  "captured_at_utc": "2026-08-19T08:34:03.346465+00:00",
+  "cudnn_version": 92101,
+  "devices": [
+    {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "index": 0,
+      "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "output_checksum_float32": -85.69816589355469,
+      "peak_memory_bytes": 426496,
+      "total_memory_bytes": 101975851008
+    },
+    {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "index": 1,
+      "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "output_checksum_float32": 238.55551147460938,
+      "peak_memory_bytes": 426496,
+      "total_memory_bytes": 101975851008
+    }
+  ],
+  "dtype": "torch.bfloat16",
+  "schema_version": 1,
+  "seed": 25081900,
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

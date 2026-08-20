@@ -1,0 +1,78 @@
+{
+  "arrays": {
+    "audio_vae_decoded_spectrogram": {
+      "dtype": "float32",
+      "sha256": "2c7ca6fd522561acdc3a821fe5cbb00d03b2e49abde64cb6a62ce002602a1140",
+      "shape": [
+        1,
+        2,
+        69,
+        64
+      ]
+    },
+    "audio_vae_input_latent": {
+      "dtype": "float32",
+      "sha256": "8596d443f1ef42b303ef4bc70d0df4b833e5beaf27f0e20bb1cdb5606127eb6c",
+      "shape": [
+        1,
+        8,
+        18,
+        16
+      ]
+    },
+    "bwe_generator_input": {
+      "dtype": "float32",
+      "sha256": "50effa27f3ab0665aa2bb75bcdb4efbdafb2547b498ce8e6a1920188e424057f",
+      "shape": [
+        1,
+        2,
+        138,
+        64
+      ]
+    },
+    "bwe_residual_waveform": {
+      "dtype": "float32",
+      "sha256": "699dc9ca4e9b5dd9dd0c5edb1117e1f5a14bec5531a8df9da33134ac996abc03",
+      "shape": [
+        1,
+        2,
+        33120
+      ]
+    },
+    "primary_vocoder_input": {
+      "dtype": "float32",
+      "sha256": "2c7ca6fd522561acdc3a821fe5cbb00d03b2e49abde64cb6a62ce002602a1140",
+      "shape": [
+        1,
+        2,
+        69,
+        64
+      ]
+    },
+    "primary_vocoder_waveform": {
+      "dtype": "float32",
+      "sha256": "e5dc2504d4cd78141a3e71b77f0aad83b58a0c677fdb295dcd11e9d8b9dc74bc",
+      "shape": [
+        1,
+        2,
+        11040
+      ]
+    },
+    "vocoder_bwe_waveform": {
+      "dtype": "float32",
+      "sha256": "f8b35b3ab1f174d4fc42899e525db50f9c14d58c8a9a73517fd74b5273d20b16",
+      "shape": [
+        1,
+        2,
+        33120
+      ]
+    }
+  },
+  "captured_at_utc": "2026-08-20T00:31:57.612638+00:00",
+  "checkpoint": "ltx-2.5-audio-vae-bf16.safetensors",
+  "decoder_dtype": "BF16",
+  "latent_artifact": "cuda_hq_boundary_trace.npz",
+  "latent_key": "audio_decoder_input_latent",
+  "schema_version": 1,
+  "vocoder_execution": "upstream_fp32_accumulation"
+}

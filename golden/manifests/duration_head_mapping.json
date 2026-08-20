@@ -1,0 +1,212 @@
+{
+  "component": "duration_head",
+  "rules": [
+    {
+      "dtype": "BF16",
+      "shape": [
+        768
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_bias",
+      "target_key": "attention_pooler.cross_attn.to_q.bias",
+      "transform": "split_qkv_q"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_bias",
+      "target_key": "attention_pooler.cross_attn.to_k.bias",
+      "transform": "split_qkv_k"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_bias",
+      "target_key": "attention_pooler.cross_attn.to_v.bias",
+      "transform": "split_qkv_v"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_weight",
+      "target_key": "attention_pooler.cross_attn.to_q.weight",
+      "transform": "split_qkv_q"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_weight",
+      "target_key": "attention_pooler.cross_attn.to_k.weight",
+      "transform": "split_qkv_k"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.in_proj_weight",
+      "target_key": "attention_pooler.cross_attn.to_v.weight",
+      "transform": "split_qkv_v"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.out_proj.bias",
+      "target_key": "attention_pooler.cross_attn.out_proj.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.cross_attn.out_proj.weight",
+      "target_key": "attention_pooler.cross_attn.out_proj.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.attention_pooler.query_tokens",
+      "target_key": "attention_pooler.query_tokens",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.audio_input_proj.bias",
+      "target_key": "audio_input_proj.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        2048
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.audio_input_proj.weight",
+      "target_key": "audio_input_proj.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.audio_modality_emb",
+      "target_key": "audio_modality_emb",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.mlp_hidden.bias",
+      "target_key": "mlp_hidden.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.mlp_hidden.weight",
+      "target_key": "mlp_hidden.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.mlp_out.bias",
+      "target_key": "mlp_out.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1,
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.mlp_out.weight",
+      "target_key": "mlp_out.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.video_input_proj.bias",
+      "target_key": "video_input_proj.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        4096
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.video_input_proj.weight",
+      "target_key": "video_input_proj.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+      "source_key": "duration_head.video_modality_emb",
+      "target_key": "video_modality_emb",
+      "transform": "identity"
+    }
+  ],
+  "schema_version": 2,
+  "shards": [
+    {
+      "file": "ltx-2.5-duration-head-bf16.safetensors",
+      "tensor_bytes": 3806722,
+      "tensor_count": 15
+    }
+  ]
+}

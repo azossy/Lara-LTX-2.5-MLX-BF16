@@ -1,0 +1,54 @@
+[project]
+name = "Lara-LTX-2.5-MLX-BF16"
+quality_mode = "quality-preserve"
+dtype = "bfloat16"
+quantization = "none"
+
+[upstream.source]
+repository_url = "https://github.com/Lightricks/LTX-2.git"
+commit = "400fd31054597515f47125691032c04b1c3ee24e"
+
+[upstream.model]
+repository_id = "Lightricks/LTX-2.5"
+revision = "6c7e5e573ac1667efc83407806fe9b0b93730e60"
+minimum_free_bytes_after_download = 107374182400
+download_worker_count = 2
+
+[runtime]
+python = "3.12"
+mlx = "0.32.0"
+network_timeout_seconds = 30
+network_retry_count = 3
+network_retry_delay_seconds = 2
+hash_chunk_bytes = 8388608
+
+[runtime.memory]
+minimum_system_reserve_bytes = 17179869184
+maximum_peak_fraction = 0.86
+neighborhood_mask_element_budget = 33554432
+
+[acceptance.canonical_hq]
+output_height = 1088
+output_width = 1920
+num_frames = 121
+vae_time_scale = 8
+vae_spatial_scale = 32
+video_attention_heads = 32
+video_attention_head_dim = 128
+video_hidden_size = 4096
+feed_forward_multiplier = 4
+
+[paths]
+upstream_checkout = "upstream/LTX-2"
+manifest = "golden/manifests/upstream.json"
+message_catalog = "packages/lara_ltx_core/src/lara_ltx/messages"
+
+[cuda_reference]
+primary_gpu_index = 0
+instrumentation_gpu_index = 1
+
+[commands]
+git = "git"
+nvidia_smi = "nvidia-smi"
+system_profiler = "system_profiler"
+sw_vers = "sw_vers"

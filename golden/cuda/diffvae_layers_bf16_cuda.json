@@ -1,0 +1,8 @@
+{
+  "artifact": "diffvae_layers_bf16_cuda.npz",
+  "device": "cuda:0",
+  "dtype": "torch.bfloat16",
+  "seed": 25081909,
+  "torch_cuda": "13.2",
+  "torch_version": "2.13.0+cu132"
+}

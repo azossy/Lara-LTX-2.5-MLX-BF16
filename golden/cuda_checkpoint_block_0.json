@@ -1,0 +1,136 @@
+{
+  "arrays": {
+    "audio_context": {
+      "dtype": "float32",
+      "sha256": "e69433a009771beb335eef91e767e4a7646a91b3190ca3abec75a9662f726db0",
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "audio_cross_gate_timestep": {
+      "dtype": "float32",
+      "sha256": "56359c56b8b6f96ad12e3a9169465a9c2d1a8e65ba305f0894bcb1786eb96926",
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "audio_cross_scale_shift_timestep": {
+      "dtype": "float32",
+      "sha256": "4902f35e61b0e896eea053b203318546adc49b7df6ae4ebc0a6af8194a44b7c5",
+      "shape": [
+        1,
+        1,
+        8192
+      ]
+    },
+    "audio_input": {
+      "dtype": "float32",
+      "sha256": "61645d1225e0b0d8c381361cf6de8c6e72c4cfacc81b5daa51e452e7e3c2898b",
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "audio_output": {
+      "dtype": "float32",
+      "sha256": "2ae164ff1f85fb1ba7ec162fcc812d27144dcdfff541dada1f1600223ded5622",
+      "shape": [
+        1,
+        1,
+        2048
+      ]
+    },
+    "audio_prompt_timestep": {
+      "dtype": "float32",
+      "sha256": "434864e9f98179cd7fa7d6da2bad51eb2e4f2f1f0446ee0635c5b6c7f898487a",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    },
+    "audio_timesteps": {
+      "dtype": "float32",
+      "sha256": "8f58650e13881b66dfacf6281e9c3fa1d12e1aa11a35863dac6d530f22273e2b",
+      "shape": [
+        1,
+        1,
+        18432
+      ]
+    },
+    "video_context": {
+      "dtype": "float32",
+      "sha256": "3dbdf49e4e617f47d7e95963c4ece77639065a658a982cf1ec4ce1c62c221fe4",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    },
+    "video_cross_gate_timestep": {
+      "dtype": "float32",
+      "sha256": "c92ce66e886bbd07d0e898db9030565753d1f1fb184824027cb060ff3fb58064",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    },
+    "video_cross_scale_shift_timestep": {
+      "dtype": "float32",
+      "sha256": "b4fd4448c7e2bead8859374ab4377a1f9ef65b7c0f7c3f5470fb5d1608cbe4e0",
+      "shape": [
+        1,
+        1,
+        16384
+      ]
+    },
+    "video_input": {
+      "dtype": "float32",
+      "sha256": "44ba538fd90e6f5e10c8ebf722ba7400a1bf533f0cb8ddb525b1294963dcd038",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    },
+    "video_output": {
+      "dtype": "float32",
+      "sha256": "7d32ee75dc4190b674035d858b4d47a1ae4dce06a6ac58722e33d5562811d510",
+      "shape": [
+        1,
+        1,
+        4096
+      ]
+    },
+    "video_prompt_timestep": {
+      "dtype": "float32",
+      "sha256": "db832a4084dabfe3a66ddc8050fd52ce8140f05dbf56d049b89958745a6f1a4b",
+      "shape": [
+        1,
+        1,
+        8192
+      ]
+    },
+    "video_timesteps": {
+      "dtype": "float32",
+      "sha256": "ed2c84f493a91e5eb22ae8b5508ad3ca49c5346206e0d8e3807ddb4cf5bbff88",
+      "shape": [
+        1,
+        1,
+        36864
+      ]
+    }
+  },
+  "block_index": 0,
+  "captured_at_utc": "2026-08-19T23:41:31.864363+00:00",
+  "checkpoint": "ltx-2.5-22b-dev-transformer-bf16.safetensors",
+  "dtype": "BF16",
+  "schema_version": 1,
+  "seed": 25081900
+}

@@ -1,0 +1,50 @@
+{
+  "fusion_memory": {
+    "active_after_bytes": 526336,
+    "active_before_bytes": 264192,
+    "peak_bytes": 1050624
+  },
+  "max_absolute_tolerance": 0.02,
+  "passed": true,
+  "schema_version": 1,
+  "stages": {
+    "stage_1": {
+      "candidate_checksum": "52c8a66014b2c6a6ec26173c5403da4ef5ac4afaedb4c67b6fbef4581d225cec",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 1.0,
+      "finite_count": 65536,
+      "inf_count": 0,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "mean_abs_error": 0.0,
+      "name": "fused_stage_1",
+      "nan_count": 0,
+      "reference_checksum": "52c8a66014b2c6a6ec26173c5403da4ef5ac4afaedb4c67b6fbef4581d225cec",
+      "reference_dtype": "float32",
+      "rmse": 0.0,
+      "shape": [
+        32,
+        2048
+      ]
+    },
+    "stage_2": {
+      "candidate_checksum": "0b037b5628e8bcaf843a5fd8f26fe0a9d140b7f311c79df1abcfe151c5bed35f",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.9999999999994815,
+      "finite_count": 65536,
+      "inf_count": 0,
+      "max_abs_error": 3.814697265625e-06,
+      "max_relative_error": 0.004975124378109453,
+      "mean_abs_error": 5.820766091346741e-11,
+      "name": "fused_stage_2",
+      "nan_count": 0,
+      "reference_checksum": "3de6fe77c30ef49bad31848fcd2a7218d5ead382299d0fb93a8948a41a27c955",
+      "reference_dtype": "float32",
+      "rmse": 1.4901161193847656e-08,
+      "shape": [
+        32,
+        2048
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "captured_at_utc": "2026-08-19T22:31:52.944852+00:00",
+  "ffprobe": {
+    "format": {
+      "duration": "0.709000",
+      "size": "102561"
+    },
+    "programs": [],
+    "streams": [
+      {
+        "avg_frame_rate": "24/1",
+        "codec_name": "h264",
+        "codec_type": "video",
+        "height": 320,
+        "width": 512
+      },
+      {
+        "avg_frame_rate": "0/0",
+        "channels": 2,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000"
+      }
+    ]
+  },
+  "media": {
+    "duration_seconds": 0.709,
+    "path": "/root/autodl-tmp/golden/cuda_hq_fixed_seed.mp4",
+    "sha256": "dd80ea734fc22e42ea822afd039295a9e268b66d1618acaa12df214ef9aba099",
+    "size_bytes": 102561,
+    "stream_types": [
+      "audio",
+      "video"
+    ]
+  },
+  "schema_version": 1
+}

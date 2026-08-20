@@ -1,0 +1,54 @@
+{
+  "component": "gemma_feature_extractor_v2",
+  "rules": [
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048
+      ],
+      "source_file": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "source_key": "text_embedding_projection.audio_aggregate_embed.bias",
+      "target_key": "feature_extractor.audio_aggregate_embed.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        2048,
+        188160
+      ],
+      "source_file": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "source_key": "text_embedding_projection.audio_aggregate_embed.weight",
+      "target_key": "feature_extractor.audio_aggregate_embed.weight",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096
+      ],
+      "source_file": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "source_key": "text_embedding_projection.video_aggregate_embed.bias",
+      "target_key": "feature_extractor.video_aggregate_embed.bias",
+      "transform": "identity"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        4096,
+        188160
+      ],
+      "source_file": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "source_key": "text_embedding_projection.video_aggregate_embed.weight",
+      "target_key": "feature_extractor.video_aggregate_embed.weight",
+      "transform": "identity"
+    }
+  ],
+  "schema_version": 2,
+  "shards": [
+    {
+      "file": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+      "tensor_count": 4
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "device": {
+    "architecture": "applegpu_g17s",
+    "device_name": "Apple M5 Max",
+    "max_buffer_length": 86586540032,
+    "max_recommended_working_set_size": 115448725504,
+    "memory_size": 137438953472,
+    "resource_limit": 499000
+  },
+  "memory_budget_bytes": 115448725504,
+  "mlx_version": "0.32.0",
+  "results": [
+    {
+      "active_memory_after_bytes": 267386904,
+      "active_memory_before_bytes": 200540184,
+      "cache_memory_after_bytes": 401080394,
+      "cache_memory_before_bytes": 401080394,
+      "dtype": "bfloat16",
+      "elapsed_seconds": 0.030714832711964846,
+      "estimated_qkv_output_bytes": 267386880,
+      "head_dim": 128,
+      "heads": 32,
+      "output_probe": 0.0032501220703125,
+      "peak_evaluation_memory_bytes": 267386904,
+      "stage": "stage1",
+      "tokens": 8160
+    },
+    {
+      "active_memory_after_bytes": 1069547544,
+      "active_memory_before_bytes": 802160664,
+      "cache_memory_after_bytes": 1604321354,
+      "cache_memory_before_bytes": 1604321354,
+      "dtype": "bfloat16",
+      "elapsed_seconds": 0.5513146249577403,
+      "estimated_qkv_output_bytes": 1069547520,
+      "head_dim": 128,
+      "heads": 32,
+      "output_probe": -0.00311279296875,
+      "peak_evaluation_memory_bytes": 1069547544,
+      "stage": "stage2",
+      "tokens": 32640
+    }
+  ],
+  "schema_version": 1
+}

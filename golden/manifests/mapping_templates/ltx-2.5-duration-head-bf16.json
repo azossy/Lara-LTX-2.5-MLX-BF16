@@ -1,0 +1,149 @@
+{
+  "mapping_version": 2,
+  "source_file": "ltx-2.5-duration-head-bf16.safetensors",
+  "tensor_count": 15,
+  "weights": [
+    {
+      "dtype": "BF16",
+      "shape": [
+        768
+      ],
+      "source": "duration_head.attention_pooler.cross_attn.in_proj_bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        768,
+        256
+      ],
+      "source": "duration_head.attention_pooler.cross_attn.in_proj_weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.attention_pooler.cross_attn.out_proj.bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        256
+      ],
+      "source": "duration_head.attention_pooler.cross_attn.out_proj.weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1,
+        256
+      ],
+      "source": "duration_head.attention_pooler.query_tokens",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.audio_input_proj.bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        2048
+      ],
+      "source": "duration_head.audio_input_proj.weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.audio_modality_emb",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.mlp_hidden.bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        256
+      ],
+      "source": "duration_head.mlp_hidden.weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1
+      ],
+      "source": "duration_head.mlp_out.bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        1,
+        256
+      ],
+      "source": "duration_head.mlp_out.weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.video_input_proj.bias",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256,
+        4096
+      ],
+      "source": "duration_head.video_input_proj.weight",
+      "target": null,
+      "transform": "unassigned"
+    },
+    {
+      "dtype": "BF16",
+      "shape": [
+        256
+      ],
+      "source": "duration_head.video_modality_emb",
+      "target": null,
+      "transform": "unassigned"
+    }
+  ]
+}

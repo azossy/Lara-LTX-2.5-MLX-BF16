@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reference_trace": "golden/cuda_hq_boundary_trace.npz",
+  "repeat_trace": "golden/cuda_hq_boundary_trace_v2.npz",
+  "fixed_input": {
+    "seed": 25081900,
+    "width": 512,
+    "height": 320,
+    "num_frames": 17,
+    "frame_rate": 24.0,
+    "num_inference_steps": 15
+  },
+  "exact_boundary_pairs": [
+    ["prompt_video_positive", "prompt_video_positive"],
+    ["prompt_video_negative", "prompt_video_negative"],
+    ["prompt_audio_positive", "prompt_audio_positive"],
+    ["prompt_audio_negative", "prompt_audio_negative"],
+    ["stage_1_sigmas", "stage_1_sigmas"],
+    ["stage_1_video_latent", "stage_1_video_latent"],
+    ["stage_1_audio_latent", "stage_1_audio_latent"],
+    ["upsampler_input_video_latent", "upsampler_input_video_latent"],
+    ["upscaled_video_latent", "upscaled_video_latent"],
+    ["stage_2_sigmas", "stage_2_sigmas"],
+    ["stage_2_video_latent", "stage_2_video_latent"],
+    ["stage_2_audio_latent", "stage_2_audio_latent"],
+    ["video_decoder_input_latent", "video_decoder_input_latent"],
+    ["decoded_video_first_frame", "decoded_video_chunk_0"]
+  ],
+  "audio_boundary": {
+    "name": "decoded_audio",
+    "max_absolute_difference": 0.0009765625,
+    "mean_absolute_difference": 0.000020351712865218625,
+    "interpretation": "Small CUDA vocoder-level BF16 variation; use tensor tolerances rather than MP4 byte equality."
+  },
+  "final_media": {
+    "reference_mp4_sha256": "dd80ea734fc22e42ea822afd039295a9e268b66d1618acaa12df214ef9aba099",
+    "repeat_mp4_sha256": "2ff523a1efa80c2b6d67b05176e28ffcc5439d3a694b563a2f866a0c92e6f994",
+    "interpretation": "Final MP4 byte equality is not a deterministic acceptance criterion because audio/vocoder and encoding output can vary."
+  }
+}
