@@ -50,6 +50,7 @@
   "LARA-RUNTIME-007": "네이티브 MLX-LM 텍스트 런타임을 사용할 수 없습니다. 지원되는 Apple Silicon Mac에 잠금된 프로젝트 의존성을 설치하세요.",
   "LARA-RUNTIME-008": "2단계 sampling runtime이 올바르지 않습니다({reason}). 두 sigma schedule, LoRA 강도, 상주 block 수, latent layout, context와 stage 출력을 확인하세요.",
   "LARA-RUNTIME-009": "순차적 decode runtime이 올바르지 않습니다({reason}). video/audio latent, decoder schedule, noise seed, activation budget, 체크포인트 loader와 유한한 출력을 확인하세요.",
+  "LARA-RUNTIME-010": "생성 리소스 사전검사가 {width}x{height}/{num_frames}프레임 요청을 거부했습니다({reason}). 요청한 Stage-2 영상 토큰은 {requested_tokens}개이고 설정 한도는 {maximum_tokens}개이며, 감지된 통합 메모리는 {detected_memory_gib}GiB이고 최소 {minimum_memory_gib}GiB가 필요합니다. {recommended_width}x{recommended_height}/{recommended_num_frames}프레임으로 다시 시도하거나 별도로 검증한 사용자 프로필을 사용하세요. 자동 양자화는 적용하지 않습니다.",
   "LARA-SAMPLING-001": "LTX sigma 일정이 올바르지 않습니다({reason}). 양수 step/token 수, 유한한 shift와 0과 1 사이의 terminal 값을 사용하세요.",
   "LARA-SAMPLING-002": "CFG/STG guidance 요청이 올바르지 않습니다({reason}). scale, pass prediction과 Transformer block 번호를 확인하세요.",
   "LARA-SAMPLING-003": "res_2s sampling 요청이 올바르지 않습니다({reason}). 감소하는 sigma 일정, modality, eta와 sampler 설정을 확인하세요.",

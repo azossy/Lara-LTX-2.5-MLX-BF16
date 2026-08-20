@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+import os
 from dataclasses import dataclass
 
 from lara_ltx.errors import LaraError
@@ -11,6 +13,33 @@ ATTENTION_IO_TENSOR_COUNT = 4
 SELF_ATTENTION_PROJECTION_COUNT = 4
 FEED_FORWARD_PROJECTION_COUNT = 2
 BLOCK_LIVE_HIDDEN_STATE_COUNT = 7
+BYTES_PER_GIBIBYTE = 1024**3
+SYSTEM_PAGE_SIZE_KEY = "SC_PAGE_SIZE"
+SYSTEM_PHYSICAL_PAGE_COUNT_KEY = "SC_PHYS_PAGES"
+
+
+@dataclass(frozen=True)
+class GenerationResourcePolicy:
+    """Versioned, evidence-based limits for one public generation profile."""
+
+    enforce: bool
+    minimum_unified_memory_bytes: int
+    maximum_stage_two_video_tokens: int
+    video_time_scale: int
+    stage_two_spatial_scale: int
+    recommended_height: int
+    recommended_width: int
+    recommended_num_frames: int
+
+
+@dataclass(frozen=True)
+class GenerationResourceAssessment:
+    """Calculated resource envelope for one requested output grid."""
+
+    requested_stage_two_video_tokens: int
+    detected_unified_memory_bytes: int | None
+    token_limit_satisfied: bool
+    memory_requirement_satisfied: bool
 
 
 @dataclass(frozen=True)
@@ -48,6 +77,77 @@ def stage_video_tokens(*, frames: int, height: int, width: int, time_scale: int,
         )
     latent_frames = (frames - 1) // time_scale + 1
     return latent_frames * (height // spatial_scale) * (width // spatial_scale)
+
+
+def physical_memory_bytes() -> int | None:
+    """Return physical unified-memory capacity without launching a subprocess."""
+
+    try:
+        page_size = int(os.sysconf(SYSTEM_PAGE_SIZE_KEY))
+        page_count = int(os.sysconf(SYSTEM_PHYSICAL_PAGE_COUNT_KEY))
+    except (AttributeError, OSError, TypeError, ValueError):
+        return None
+    if page_size <= 0 or page_count <= 0:
+        return None
+    return page_size * page_count
+
+
+def validate_generation_resources(
+    *,
+    height: int,
+    width: int,
+    num_frames: int,
+    policy: GenerationResourcePolicy,
+    detected_unified_memory_bytes: int | None,
+) -> GenerationResourceAssessment:
+    """Reject unmeasured grids before model loading can trigger swap or OOM."""
+
+    requested_tokens = stage_video_tokens(
+        frames=num_frames,
+        height=height,
+        width=width,
+        time_scale=policy.video_time_scale,
+        spatial_scale=policy.stage_two_spatial_scale,
+    )
+    token_limit_satisfied = requested_tokens <= policy.maximum_stage_two_video_tokens
+    memory_requirement_satisfied = (
+        detected_unified_memory_bytes is not None
+        and detected_unified_memory_bytes >= policy.minimum_unified_memory_bytes
+    )
+    assessment = GenerationResourceAssessment(
+        requested_stage_two_video_tokens=requested_tokens,
+        detected_unified_memory_bytes=detected_unified_memory_bytes,
+        token_limit_satisfied=token_limit_satisfied,
+        memory_requirement_satisfied=memory_requirement_satisfied,
+    )
+    if not policy.enforce or (token_limit_satisfied and memory_requirement_satisfied):
+        return assessment
+
+    if detected_unified_memory_bytes is None:
+        reason = "unavailable_unified_memory_capacity"
+        detected_memory_gib: str | float = "unknown"
+    elif not memory_requirement_satisfied:
+        reason = "insufficient_unified_memory"
+        detected_memory_gib = round(detected_unified_memory_bytes / BYTES_PER_GIBIBYTE, 1)
+    else:
+        reason = "stage_two_video_token_limit"
+        detected_memory_gib = round(detected_unified_memory_bytes / BYTES_PER_GIBIBYTE, 1)
+    raise LaraError(
+        "LARA-RUNTIME-010",
+        details={
+            "reason": reason,
+            "height": height,
+            "width": width,
+            "num_frames": num_frames,
+            "requested_tokens": requested_tokens,
+            "maximum_tokens": policy.maximum_stage_two_video_tokens,
+            "detected_memory_gib": detected_memory_gib,
+            "minimum_memory_gib": math.ceil(policy.minimum_unified_memory_bytes / BYTES_PER_GIBIBYTE),
+            "recommended_height": policy.recommended_height,
+            "recommended_width": policy.recommended_width,
+            "recommended_num_frames": policy.recommended_num_frames,
+        },
+    )
 
 
 def bf16_attention_io_bytes(shape: AttentionShape) -> int:

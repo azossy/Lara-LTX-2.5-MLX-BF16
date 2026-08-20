@@ -34,6 +34,7 @@ def test_adapter_exposes_only_thin_public_pipeline_nodes() -> None:
 
 def test_example_api_workflow_links_all_three_nodes() -> None:
     workflow = json.loads((ADAPTER_ROOT / "examples" / "text_to_video_api.json").read_text(encoding="utf-8"))
+    defaults = json.loads((ADAPTER_ROOT / "resources" / "defaults.json").read_text(encoding="utf-8"))
 
     assert [workflow[str(index)]["class_type"] for index in range(1, 4)] == [
         "LaraLTXModelLoader",
@@ -42,6 +43,9 @@ def test_example_api_workflow_links_all_three_nodes() -> None:
     ]
     assert workflow["2"]["inputs"]["pipeline"] == ["1", 0]
     assert workflow["3"]["inputs"]["video"] == ["2", 0]
+    expected_grid = {"width": 512, "height": 320, "num_frames": 17}
+    assert {key: defaults["generation"][key]["default"] for key in expected_grid} == expected_grid
+    assert {key: workflow["2"]["inputs"][key] for key in expected_grid} == expected_grid
 
 
 def test_loader_caches_public_pipeline(monkeypatch: pytest.MonkeyPatch) -> None:

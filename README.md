@@ -44,9 +44,10 @@ PyTorch/MPS ComfyUI port are explicitly out of scope.
 
 ## Quick Start
 
-Requirements: Apple Silicon, macOS, Python 3.12, enough unified memory for the
-BF16 workload, `ffmpeg`, and accepted access to `Lightricks/LTX-2.5` on Hugging
-Face. The primary tested machine is M5 Max 128 GB.
+Requirements: Apple Silicon, macOS, Python 3.12, 128 GB unified memory,
+`ffmpeg`, and accepted access to `Lightricks/LTX-2.5` on Hugging Face. The
+primary tested machine is M5 Max 128 GB. The packaged profile defaults to the
+measured 512x320/17-frame workload.
 
 ```bash
 git clone https://github.com/azossy/Lara-LTX-2.5-MLX-BF16.git
@@ -83,7 +84,10 @@ lara-ltx generate \
 Generation dimensions, seed, frame rate, frame count, steps, cache directory
 and a custom TOML profile are optional CLI overrides. Run `lara-ltx generate
 --help` for the complete interface. Dimensions must be divisible by 64 and the
-frame count must follow `8*k+1`.
+frame count must follow `8*k+1`. Before resolving or loading the checkpoint,
+the runtime checks physical unified memory and the profile's measured Stage-2
+token envelope. Unsupported grids fail with `LARA-RUNTIME-010` instead of
+silently swapping until macOS terminates the process.
 
 ### ComfyUI
 
@@ -99,7 +103,10 @@ The primary acceptance target is M5 Max with 128 GB unified memory. Additional
 supported devices and minimum memory will be published only after measured P6
 testing. The current engineering preview is validated at 320x512/17 frames;
 512x512/33 frames is not supported yet because that quality-corpus case caused
-heavy swap growth and OOM even on the 128 GB target.
+heavy swap growth and OOM even on the 128 GB target. The packaged resource
+policy is part of `hq.toml`, not hard-coded in the API. A separately reviewed
+custom profile may change or explicitly disable enforcement; doing so is not a
+supported-hardware claim and never enables implicit quantization or fallback.
 
 ## Benchmarks
 

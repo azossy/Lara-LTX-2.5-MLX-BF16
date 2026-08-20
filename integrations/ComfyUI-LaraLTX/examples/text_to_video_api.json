@@ -15,9 +15,9 @@
       "prompt": "A cinematic shot of ocean waves at sunrise.",
       "negative_prompt": "",
       "seed": 10,
-      "width": 1920,
-      "height": 1088,
-      "num_frames": 121,
+      "width": 512,
+      "height": 320,
+      "num_frames": 17,
       "frame_rate": 24.0,
       "steps": 15
     }

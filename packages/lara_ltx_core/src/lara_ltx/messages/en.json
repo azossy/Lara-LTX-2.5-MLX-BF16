@@ -50,6 +50,7 @@
   "LARA-RUNTIME-007": "The native MLX-LM text runtime is unavailable. Install the locked project dependencies on a supported Apple Silicon Mac.",
   "LARA-RUNTIME-008": "The two-stage sampling runtime is invalid ({reason}). Verify both sigma schedules, LoRA strengths, resident block count, latent layouts, contexts, and stage outputs.",
   "LARA-RUNTIME-009": "The sequential decode runtime is invalid ({reason}). Verify video/audio latents, decoder schedule, noise seed, activation budget, checkpoint loaders, and finite outputs.",
+  "LARA-RUNTIME-010": "Generation resource preflight rejected {width}x{height}/{num_frames} frames ({reason}): {requested_tokens} Stage-2 video tokens were requested with a configured maximum of {maximum_tokens}, and detected unified memory is {detected_memory_gib} GiB with at least {minimum_memory_gib} GiB required. Retry at {recommended_width}x{recommended_height}/{recommended_num_frames} frames or use a separately reviewed custom profile; automatic quantization is not applied.",
   "LARA-SAMPLING-001": "The LTX sigma schedule is invalid ({reason}). Use positive steps/token count, finite shifts and a terminal strictly between zero and one.",
   "LARA-SAMPLING-002": "The CFG/STG guidance request is invalid ({reason}). Check scales, pass predictions and transformer block indices.",
   "LARA-SAMPLING-003": "The res_2s sampling request is invalid ({reason}). Check the decreasing sigma schedule, modalities, eta and sampler settings.",

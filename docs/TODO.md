@@ -270,6 +270,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Identify the current high-resolution memory cliff: the versioned
       512x512/33-frame quality case grew swap beyond 70 GB and was terminated
       by the operating system after about 70 minutes on M5 Max 128 GB.
+- [x] Reject unmeasured public generation grids and insufficient or unknown
+      physical unified memory before checkpoint resolution. Keep the measured
+      token envelope, minimum capacity and recommended grid in the versioned
+      profile, with localized `LARA-RUNTIME-010` guidance and no silent
+      quantization or fallback.
 - [ ] Measure load time, generation time and Metal utilization.
 - [ ] Apply safe MLX evaluation, lifetime, fused-op and compile optimizations.
 - [ ] Add custom Metal kernels only for measured unresolved bottlenecks.
