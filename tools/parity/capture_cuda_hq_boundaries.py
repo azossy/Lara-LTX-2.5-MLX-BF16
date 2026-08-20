@@ -19,8 +19,9 @@ from ltx_pipelines.ti2vid_two_stages_hq import TI2VidTwoStagesHQPipeline
 from ltx_pipelines.utils.args import add_generated_keyframes_arg, hq_2_stage_arg_parser
 from ltx_pipelines.utils.constants import LTX_2_3_HQ_PARAMS
 from ltx_pipelines.utils.media_io import encode_video, resolve_hdr_color_space, vae_dtype_for_hdr
+from ltx_pipelines.utils.samplers import _get_new_noise
 
-ARTIFACT_SCHEMA_VERSION = 1
+ARTIFACT_SCHEMA_VERSION = 2
 HASH_BLOCK_BYTES = 1024 * 1024
 MAX_RECORDED_NOISER_CALLS_PER_STAGE = 2
 
@@ -85,6 +86,98 @@ class NoiserRecorder:
         return result
 
 
+class DenoiserRecorder:
+    """Capture every Res2S denoiser input and output without changing execution."""
+
+    def __init__(self, denoiser: Any, capture: TensorCapture, stage_name: str) -> None:
+        self._denoiser = denoiser
+        self._capture = capture
+        self._stage_name = stage_name
+        self._call_count = 0
+
+    def __call__(
+        self,
+        transformer: Any,
+        video_state: Any,
+        audio_state: Any,
+        sigmas: torch.Tensor,
+        step_index: int,
+    ) -> Any:
+        call_index = self._call_count
+        self._call_count += 1
+        prefix = f"{self._stage_name}_denoiser_call_{call_index:02d}"
+        self._capture.add(f"{prefix}_sigma", sigmas[step_index])
+        self._capture.add(f"{prefix}_video_input", video_state.latent if video_state is not None else None)
+        self._capture.add(f"{prefix}_audio_input", audio_state.latent if audio_state is not None else None)
+        video_result, audio_result = self._denoiser(
+            transformer,
+            video_state,
+            audio_state,
+            sigmas,
+            step_index,
+        )
+        self._capture.add(
+            f"{prefix}_video_output",
+            video_result.denoised if video_result is not None else None,
+        )
+        self._capture.add(
+            f"{prefix}_audio_output",
+            audio_result.denoised if audio_result is not None else None,
+        )
+        return video_result, audio_result
+
+
+class SdeNoiseRecorder:
+    """Capture the normalized random tensors consumed by both Res2S RNG streams."""
+
+    _stream_order = ("substep", "step")
+    _modality_order = ("video", "audio")
+
+    def __init__(self, capture: TensorCapture, stage_name: str) -> None:
+        self._capture = capture
+        self._stage_name = stage_name
+        self._generator_streams: dict[int, str] = {}
+        self._stream_counts = {name: 0 for name in self._stream_order}
+
+    def __call__(self, latent: torch.Tensor, generator: torch.Generator) -> torch.Tensor:
+        generator_id = id(generator)
+        if generator_id not in self._generator_streams:
+            stream_index = len(self._generator_streams)
+            if stream_index >= len(self._stream_order):
+                raise RuntimeError("Unexpected additional Res2S noise generator")
+            self._generator_streams[generator_id] = self._stream_order[stream_index]
+        stream = self._generator_streams[generator_id]
+        call_index = self._stream_counts[stream]
+        self._stream_counts[stream] += 1
+        modality = self._modality_order[call_index % len(self._modality_order)]
+        step_index = call_index // len(self._modality_order)
+        noise = _get_new_noise(latent, generator)
+        self._capture.add(
+            f"{self._stage_name}_sde_{stream}_{step_index:02d}_{modality}",
+            noise,
+        )
+        return noise
+
+
+class SdeTraceLoop:
+    """Delegate the official loop with deterministic SDE and denoiser recorders."""
+
+    def __init__(self, loop: Any, capture: TensorCapture, stage_name: str) -> None:
+        self._loop = loop
+        self._capture = capture
+        self._stage_name = stage_name
+
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        recorded_kwargs = dict(kwargs)
+        recorded_kwargs["denoiser"] = DenoiserRecorder(
+            kwargs["denoiser"],
+            self._capture,
+            self._stage_name,
+        )
+        recorded_kwargs["new_noise_fn"] = SdeNoiseRecorder(self._capture, self._stage_name)
+        return self._loop(*args, **recorded_kwargs)
+
+
 class StageCallRecorder:
     """Delegate a diffusion stage while replacing its noiser with a recorder."""
 
@@ -96,6 +189,7 @@ class StageCallRecorder:
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         recorded_kwargs = dict(kwargs)
         recorded_kwargs["noiser"] = NoiserRecorder(kwargs["noiser"], self._capture, self._stage_name)
+        recorded_kwargs["loop"] = SdeTraceLoop(kwargs["loop"], self._capture, self._stage_name)
         output = self._component(*args, **recorded_kwargs)
         _record_stage(self._capture, self._stage_name)(args, recorded_kwargs, output)
         return output

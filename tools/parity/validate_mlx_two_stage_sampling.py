@@ -14,6 +14,7 @@ from typing import Any
 import mlx.core as mx
 import numpy as np
 from lara_ltx.errors import LaraError
+from lara_ltx.parity import compare_tensors
 from lara_ltx.pipeline import (
     CheckpointStageModuleLoader,
     TwoStageContexts,
@@ -67,6 +68,36 @@ class CapturedNoiseSequence:
     def assert_exhausted(self) -> None:
         if self.index != len(self.entries):
             raise LaraError("LARA-RUNTIME-008", details={"reason": "captured_noise_not_consumed"})
+
+
+class CapturedSdeNoiseSequence:
+    """Replay the normalized CUDA SDE tensors in official stream/modality order."""
+
+    _modalities = ("video", "audio")
+
+    def __init__(self, reference: dict[str, np.ndarray], *, stage: str, step_count: int) -> None:
+        self._reference = reference
+        self._stage = stage
+        self._step_count = step_count
+        self._stream_counts = {"substep": 0, "step": 0}
+
+    def __call__(self, value: mx.array, stream: str) -> mx.array:
+        if stream not in self._stream_counts:
+            raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_sde_noise_stream"})
+        call_index = self._stream_counts[stream]
+        self._stream_counts[stream] += 1
+        modality = self._modalities[call_index % len(self._modalities)]
+        step_index = call_index // len(self._modalities)
+        key = f"{self._stage}_sde_{stream}_{step_index:02d}_{modality}"
+        noise = self._reference.get(key)
+        if noise is None or tuple(noise.shape) != tuple(value.shape):
+            raise LaraError("LARA-RUNTIME-008", details={"reason": f"missing_{key}"})
+        return mx.array(noise, dtype=mx.float32)
+
+    def assert_exhausted(self) -> None:
+        expected = self._step_count * len(self._modalities)
+        if any(count != expected for count in self._stream_counts.values()):
+            raise LaraError("LARA-RUNTIME-008", details={"reason": "captured_sde_noise_not_consumed"})
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -144,8 +175,9 @@ def _guider(config: dict[str, Any], key: str) -> MultiModalGuider:
         raise LaraError("LARA-RUNTIME-008", details={"reason": f"invalid_{key}"}) from error
 
 
-def _sampler(config: dict[str, Any], key: str) -> Res2sSampler:
-    values = _required(config, key, dict)
+def _sampler(config: dict[str, Any], key: str, *, noise_fn: CapturedSdeNoiseSequence) -> Res2sSampler:
+    values = dict(_required(config, key, dict))
+    values["noise_fn"] = noise_fn
     try:
         return Res2sSampler(**values)
     except TypeError as error:
@@ -177,10 +209,9 @@ def main() -> int:
     if not all(isinstance(key, str) and isinstance(value, str) for key, value in keys.items()):
         raise LaraError("LARA-RUNTIME-008", details={"reason": "invalid_reference_keys"})
     with np.load(arguments.cuda_reference) as archive:
-        try:
-            reference = {name: archive[name] for name in set(keys.values())}
-        except KeyError as error:
-            raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_reference_tensor"}) from error
+        reference = {name: archive[name] for name in archive.files}
+    if not set(keys.values()).issubset(reference):
+        raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_reference_tensor"})
 
     frame_rate = float(_required(config, "frame_rate", (int, float)))
     block_count = int(_required(config, "block_count", int))
@@ -188,6 +219,16 @@ def main() -> int:
     stage_two_strength = float(_required(config, "stage_two_lora_strength", (int, float)))
     stage_one_sigmas = _schedule(reference, keys, config, "stage_one")
     stage_two_sigmas = _schedule(reference, keys, config, "stage_two")
+    stage_one_sde_noise = CapturedSdeNoiseSequence(
+        reference,
+        stage="stage_1",
+        step_count=stage_one_sigmas.shape[0] - 1,
+    )
+    stage_two_sde_noise = CapturedSdeNoiseSequence(
+        reference,
+        stage="stage_2",
+        step_count=stage_two_sigmas.shape[0] - 1,
+    )
     stage_one_scale = float(stage_one_sigmas[0].item())
     stage_two_scale = float(stage_two_sigmas[0].item())
     stage_one_video_layout = _video_layout(reference[keys["stage_one_video_layout"]], frame_rate)
@@ -250,8 +291,8 @@ def main() -> int:
         set_lora_strength=blocks.set_lora_strength,
         upscaler=upscaler,
         initial_noiser=noiser,
-        stage_one_sampler=_sampler(config, "stage_one_sampler"),
-        stage_two_sampler=_sampler(config, "stage_two_sampler"),
+        stage_one_sampler=_sampler(config, "stage_one_sampler", noise_fn=stage_one_sde_noise),
+        stage_two_sampler=_sampler(config, "stage_two_sampler", noise_fn=stage_two_sde_noise),
         config=TwoStageSamplingConfig(stage_one_strength, stage_two_strength),
     )
     mx.reset_peak_memory()
@@ -273,8 +314,30 @@ def main() -> int:
         stage_two_sigmas=stage_two_sigmas,
     )
     noiser.assert_exhausted()
+    stage_one_sde_noise.assert_exhausted()
+    stage_two_sde_noise.assert_exhausted()
     outputs = {"video": _output_report(result.video), "audio": _output_report(result.audio)}
-    passed = all(bool(output["finite"]) for output in outputs.values())
+    comparisons = {
+        "video": compare_tensors(
+            "stage_two_video_latent",
+            reference[keys["final_video"]].astype(np.float32),
+            np.asarray(result.video.astype(mx.float32)),
+        ).to_dict(),
+        "audio": compare_tensors(
+            "stage_one_audio_latent",
+            reference[keys["final_audio"]].astype(np.float32),
+            np.asarray(result.audio.astype(mx.float32)),
+        ).to_dict(),
+    }
+    acceptance = _required(config, "acceptance", dict)
+    maximum_nrmse = float(_required(acceptance, "maximum_normalized_rmse", (int, float)))
+    minimum_cosine = float(_required(acceptance, "minimum_cosine_similarity", (int, float)))
+    acceptance_checks = {
+        modality: metrics["normalized_rmse"] <= maximum_nrmse
+        and metrics["cosine_similarity"] >= minimum_cosine
+        for modality, metrics in comparisons.items()
+    }
+    passed = all(bool(output["finite"]) for output in outputs.values()) and all(acceptance_checks.values())
     report = {
         "schema_version": 1,
         "component": "checkpoint_two_stage_sampling_smoke",
@@ -284,6 +347,11 @@ def main() -> int:
         "resident_block_count": len(blocks.blocks),
         "final_lora_strength": blocks.lora_strength,
         "outputs": outputs,
+        "comparisons": comparisons,
+        "acceptance": {
+            "thresholds": acceptance,
+            "checks": acceptance_checks,
+        },
         "passed": passed,
     }
     arguments.report.parent.mkdir(parents=True, exist_ok=True)

@@ -4,8 +4,8 @@
   "frame_rate": 24.0,
   "stage_one_lora_strength": 0.25,
   "stage_two_lora_strength": 0.5,
-  "stage_one_schedule_indices": [0, -1],
-  "stage_two_schedule_indices": [0, -1],
+  "stage_one_schedule_indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  "stage_two_schedule_indices": [0, 1, 2, 3],
   "reference_keys": {
     "video_positive": "prompt_video_positive",
     "video_negative": "prompt_video_negative",
@@ -23,7 +23,9 @@
     "stage_two_audio_input": "stage_2_noiser_input_1",
     "stage_two_audio_output": "stage_2_noiser_output_1",
     "stage_two_video_layout": "stage_2_video_latent",
-    "stage_two_sigmas": "stage_2_sigmas"
+    "stage_two_sigmas": "stage_2_sigmas",
+    "final_video": "stage_2_video_latent",
+    "final_audio": "stage_1_audio_latent"
   },
   "stage_one_sampler": {
     "eta": 0.5,
@@ -54,5 +56,9 @@
     "rescale_scale": 1.0,
     "modality_scale": 3.0,
     "skip_step": 0
+  },
+  "acceptance": {
+    "maximum_normalized_rmse": 0.05,
+    "minimum_cosine_similarity": 0.999
   }
 }
