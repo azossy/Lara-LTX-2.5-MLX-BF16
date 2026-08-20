@@ -9,7 +9,7 @@ import json
 from collections.abc import Callable, Iterator, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 import numpy as np
 import torch
@@ -21,7 +21,7 @@ from ltx_pipelines.utils.constants import LTX_2_3_HQ_PARAMS
 from ltx_pipelines.utils.media_io import encode_video, resolve_hdr_color_space, vae_dtype_for_hdr
 from ltx_pipelines.utils.samplers import _get_new_noise
 
-ARTIFACT_SCHEMA_VERSION = 5
+ARTIFACT_SCHEMA_VERSION = 6
 HASH_BLOCK_BYTES = 1024 * 1024
 MAX_RECORDED_NOISER_CALLS_PER_STAGE = 2
 
@@ -80,6 +80,136 @@ class CallRecorder:
         return getattr(self._component, name)
 
 
+class AttentionInternalsRecorder:
+    """Capture projection, normalization, RoPE, SDPA, gate and output boundaries."""
+
+    _CHILD_BOUNDARIES: ClassVar[dict[str, str]] = {
+        "to_q": "query_projection",
+        "to_k": "key_projection",
+        "to_v": "value_projection",
+        "q_norm": "query_normalized",
+        "k_norm": "key_normalized",
+        "to_gate_logits": "gate_logits",
+    }
+
+    def __init__(
+        self,
+        capture: TensorCapture,
+        stage_name: str,
+        block_index: int,
+        module_name: str,
+        module: Any,
+    ) -> None:
+        self._capture = capture
+        self._stage_name = stage_name
+        self._block_index = block_index
+        self._module_name = module_name
+        self._module = module
+        self._call_index = 0
+        self._handles: list[Any] = []
+        self._original_callables: dict[str, Any] = {}
+
+    def _prefix(self) -> str:
+        return (
+            f"{self._stage_name}_deep_block_{self._block_index:02d}_pass_{self._call_index:02d}"
+            f"_internal_{self._module_name}"
+        )
+
+    def _add(self, boundary: str, value: Any) -> None:
+        self._capture.add(
+            f"{self._prefix()}_{boundary}",
+            value if isinstance(value, torch.Tensor) else None,
+        )
+
+    def _child_hook(self, boundary: str, *, finish_call: bool = False) -> Callable[..., None]:
+        def hook(_module: Any, args: tuple[Any, ...], kwargs: dict[str, Any], output: Any) -> None:
+            self._add(f"{boundary}_input", args[0] if args else kwargs.get("input"))
+            self._add(boundary, output)
+            if finish_call:
+                self._call_index += 1
+
+        return hook
+
+    def _wrap_preattention(self, original: Any) -> Callable[..., Any]:
+        def wrapped(*args: Any, **kwargs: Any) -> Any:
+            query, key = original(*args, **kwargs)
+            self._add("query_ready", query)
+            self._add("key_ready", key)
+            positional = args[4] if len(args) > 4 else kwargs.get("pe")
+            key_positional = args[5] if len(args) > 5 else kwargs.get("k_pe")
+            if positional is not None:
+                self._add("query_rope_cos", positional[0])
+                self._add("query_rope_sin", positional[1])
+                effective_key = positional if key_positional is None else key_positional
+                self._add("key_rope_cos", effective_key[0])
+                self._add("key_rope_sin", effective_key[1])
+            return query, key
+
+        return wrapped
+
+    def _wrap_attention(self, original: Any) -> Callable[..., Any]:
+        def wrapped(*args: Any, **kwargs: Any) -> Any:
+            self._add("sdpa_query", args[0] if args else kwargs.get("q"))
+            self._add("sdpa_key", args[1] if len(args) > 1 else kwargs.get("k"))
+            self._add("sdpa_value", args[2] if len(args) > 2 else kwargs.get("v"))
+            mask = args[4] if len(args) > 4 else kwargs.get("mask")
+            self._add("sdpa_mask", mask)
+            output = original(*args, **kwargs)
+            self._add("sdpa_output", output)
+            return output
+
+        return wrapped
+
+    def _wrap_gated_attention(self, original: Any) -> Callable[..., Any]:
+        def wrapped(*args: Any, **kwargs: Any) -> Any:
+            self._add("gated_x", args[0] if args else kwargs.get("x"))
+            self._add("gated_attention_input", args[1] if len(args) > 1 else kwargs.get("attn_out"))
+            output = original(*args, **kwargs)
+            self._add("gated_output", output)
+            return output
+
+        return wrapped
+
+    def install(self) -> None:
+        for child_name, boundary in self._CHILD_BOUNDARIES.items():
+            child = getattr(self._module, child_name, None)
+            if child is not None:
+                self._handles.append(child.register_forward_hook(self._child_hook(boundary), with_kwargs=True))
+
+        output_projection = self._module.to_out[0]
+        self._handles.append(
+            output_projection.register_forward_pre_hook(
+                lambda _module, args, _kwargs: self._add("output_projection_input", args[0] if args else None),
+                with_kwargs=True,
+            )
+        )
+        self._handles.append(
+            output_projection.register_forward_hook(
+                self._child_hook("output_projection", finish_call=True),
+                with_kwargs=True,
+            )
+        )
+
+        wrappers = {
+            "preattention_function": self._wrap_preattention,
+            "attention_function": self._wrap_attention,
+            "masked_attention_function": self._wrap_attention,
+            "gated_attention_function": self._wrap_gated_attention,
+        }
+        for attribute, wrapper in wrappers.items():
+            original = getattr(self._module, attribute)
+            self._original_callables[attribute] = original
+            setattr(self._module, attribute, wrapper(original))
+
+    def remove(self) -> None:
+        for handle in self._handles:
+            handle.remove()
+        self._handles.clear()
+        for attribute, original in self._original_callables.items():
+            setattr(self._module, attribute, original)
+        self._original_callables.clear()
+
+
 class NoiserRecorder:
     """Capture the initial noise transition for each video/audio diffusion stage."""
 
@@ -108,6 +238,7 @@ class DeepTransformerRecorder:
         self._stage_name = stage_name
         self._block_indices = block_indices
         self._handles: list[Any] = []
+        self._attention_recorders: list[AttentionInternalsRecorder] = []
         self._block_call_counts = {index: 0 for index in block_indices}
         self._internal_call_counts: dict[str, int] = {}
 
@@ -182,6 +313,16 @@ class DeepTransformerRecorder:
                 self._capture.add(f"{prefix}_output", output if isinstance(output, torch.Tensor) else None)
 
             self._handles.append(module.register_forward_hook(internal_hook, with_kwargs=True))
+            if hasattr(module, "attention_function"):
+                recorder = AttentionInternalsRecorder(
+                    self._capture,
+                    self._stage_name,
+                    first_index,
+                    module_name,
+                    module,
+                )
+                recorder.install()
+                self._attention_recorders.append(recorder)
 
         for block_index in self._block_indices:
             prefix = f"{self._stage_name}_deep_block_{block_index:02d}"
@@ -216,6 +357,9 @@ class DeepTransformerRecorder:
             self._handles.append(blocks[block_index].register_forward_hook(hook, with_kwargs=True))
 
     def remove(self) -> None:
+        for recorder in self._attention_recorders:
+            recorder.remove()
+        self._attention_recorders.clear()
         for handle in self._handles:
             handle.remove()
         self._handles.clear()
