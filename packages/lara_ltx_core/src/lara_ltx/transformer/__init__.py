@@ -16,6 +16,7 @@ from .output import AVTransformerOutput, TransformerOutputConfig, TransformerOut
 from .rope import LTXRopeType, apply_rotary_emb, precompute_freqs_cis
 from .runtime import (
     CheckpointTransformerBlocks,
+    ResidentCheckpointTransformerBlocks,
     TransformerBlockLoadRecord,
     TransformerSequenceResult,
     production_transformer_block,
@@ -36,6 +37,7 @@ __all__ = [
     "PixArtAlphaCombinedTimestepSizeEmbeddings",
     "PreparedTransformerInput",
     "RMSNorm",
+    "ResidentCheckpointTransformerBlocks",
     "TimestepEmbedding",
     "TransformerBlockLoadRecord",
     "TransformerInputConfig",

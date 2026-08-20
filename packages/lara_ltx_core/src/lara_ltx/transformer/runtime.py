@@ -98,7 +98,7 @@ def run_transformer_block_sequence(
 
 
 class CheckpointTransformerBlocks:
-    """Yield one strict-loaded production block and release it before the next."""
+    """Low-memory validation provider that reloads blocks for each iteration."""
 
     def __init__(
         self,
@@ -130,17 +130,18 @@ class CheckpointTransformerBlocks:
         if self.lora_checkpoint is None:
             return 0
         prefix = f"{TRANSFORMER_BLOCK_SOURCE_PREFIX}{block_index}."
+        pairs = self._pairs_for_block(block_index)
+        if not pairs:
+            return 0
+        required_names = tuple(name for pair in pairs for name in (pair.a_key, pair.b_key))
+        loaded = load_safetensors_shard(self.lora_checkpoint, required_names=required_names)
+        parameters = dict(tree_flatten(block.parameters()))
         fused_count = 0
-        for pair in self._pairs_for_block(block_index):
+        for pair in pairs:
             runtime_key = pair.target_key.removeprefix(prefix)
-            parameters = dict(tree_flatten(block.parameters()))
             base = parameters.get(runtime_key)
             if base is None or tuple(base.shape) != pair.base_shape:
                 raise LaraError("LARA-MODEL-026", details={"key": pair.target_key})
-            loaded = load_safetensors_shard(
-                self.lora_checkpoint,
-                required_names=(pair.a_key, pair.b_key),
-            )
             fused = fuse_lora_weight(
                 base,
                 loaded.tensors[pair.a_key],
@@ -183,3 +184,68 @@ class CheckpointTransformerBlocks:
                 )
             )
             del block
+
+
+class ResidentCheckpointTransformerBlocks:
+    """Production provider that loads all BF16 blocks once and reuses them."""
+
+    def __init__(
+        self,
+        *,
+        checkpoint: Path,
+        lora_checkpoint: Path,
+        lora_strength: float,
+        block_count: int = PRODUCTION_TRANSFORMER_BLOCK_COUNT,
+    ) -> None:
+        provider = CheckpointTransformerBlocks(
+            checkpoint=checkpoint,
+            block_count=block_count,
+            lora_checkpoint=lora_checkpoint,
+            lora_strength=lora_strength,
+        )
+        self.checkpoint = checkpoint
+        self.lora_checkpoint = lora_checkpoint
+        self.lora_pairs = provider.lora_pairs
+        self.blocks: list[AVTransformerBlock] = []
+        for _, block in provider:
+            self.blocks.append(block)
+        self.load_records = tuple(provider.records)
+        self.lora_strength = lora_strength
+
+    def __iter__(self) -> Iterator[tuple[int, AVTransformerBlock]]:
+        return iter(enumerate(self.blocks))
+
+    def _pairs_for_block(self, block_index: int) -> tuple[LoraPair, ...]:
+        prefix = f"{TRANSFORMER_BLOCK_SOURCE_PREFIX}{block_index}."
+        return tuple(pair for pair in self.lora_pairs if pair.target_key.startswith(prefix))
+
+    def set_lora_strength(self, strength: float) -> None:
+        """Replace block-local weights from base+LoRA without a second model state."""
+
+        if not math.isfinite(strength) or strength < 0:
+            raise LaraError("LARA-MODEL-027", details={"value": strength})
+        if strength == self.lora_strength:
+            return
+        for block_index, block in enumerate(self.blocks):
+            prefix = f"{TRANSFORMER_BLOCK_SOURCE_PREFIX}{block_index}."
+            pairs = self._pairs_for_block(block_index)
+            base_weights = load_safetensors_shard(
+                self.checkpoint,
+                required_names=tuple(pair.target_key for pair in pairs),
+            )
+            lora_weights = load_safetensors_shard(
+                self.lora_checkpoint,
+                required_names=tuple(name for pair in pairs for name in (pair.a_key, pair.b_key)),
+            )
+            for pair in pairs:
+                runtime_key = pair.target_key.removeprefix(prefix)
+                fused = fuse_lora_weight(
+                    base_weights.tensors[pair.target_key],
+                    lora_weights.tensors[pair.a_key],
+                    lora_weights.tensors[pair.b_key],
+                    strength,
+                )
+                mx.eval(fused)
+                block.load_weights(((runtime_key, fused),), strict=False)
+            del fused, base_weights, lora_weights
+        self.lora_strength = strength

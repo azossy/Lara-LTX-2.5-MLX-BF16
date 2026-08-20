@@ -116,6 +116,19 @@ boundaries are captured.
 Repeat the same command with `--lora-strength 0.5` and a distinct report path
 for the official stage-2 lifecycle gate.
 
+For the production one-load path, run both stages in one process:
+
+```sh
+.venv/bin/python tools/parity/validate_mlx_resident_transformer.py \
+  --transformer-checkpoint "$LARA_MODEL_ROOT/diffusion_models/ltx-2.5-22b-dev-transformer-bf16.safetensors" \
+  --lora-checkpoint "$LARA_MODEL_ROOT/loras/ltx-2.5-22b-distilled-lora-450-bf16.safetensors" \
+  --reference golden/cuda_checkpoint_block_0.npz \
+  --report "$LARA_REPORT_DIR/resident_transformer_two_stage.json"
+```
+
+The resident report must contain 48 blocks, finite outputs for both strengths,
+no second transformer state, and a measured peak within the target Mac budget.
+
 ## P3 spatial latent-upscaler gate
 
 This command strict-loads all 72 official upscaler tensors and both VAE

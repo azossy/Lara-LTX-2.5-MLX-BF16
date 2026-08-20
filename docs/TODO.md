@@ -156,6 +156,11 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       tensors, fuse all 1,632 block-local LoRA pairs at strengths `0.25` and
       `0.5`, hold active block memory below 773,816,712 bytes, and produce
       finite video/audio outputs at a 2,153,945,408-byte peak.
+- [x] Add the production resident-weight mode so denoiser steps do not reread
+      the 42 GB checkpoint. All 48 blocks occupy 37,131,012,104 bytes; stage-1
+      and stage-2 execution peak at 38,511,394,752 bytes. Rebuilding only the
+      LoRA-targeted weights from the base checkpoint switches `0.25` to `0.5`
+      in place at a 38,234,978,314-byte peak without a second model state.
 - [x] Port the complete 72-weight spatial latent upscaler, VAE statistic
       denormalization/renormalization and source-order pixel shuffle. All three
       CUDA boundaries pass; the normalized output has NRMSE `0.01272` and

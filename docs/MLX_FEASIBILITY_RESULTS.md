@@ -166,6 +166,16 @@ LoRA pairs at strengths `0.25` and `0.5`; both streams remain finite, active
 block residency stays below 773,816,712 bytes, and the maximum execution peak
 is 2,153,945,408 bytes.
 
+The low-memory provider above is a validation and reduced-memory fallback, not
+the production default: reloading 42 GB for every denoiser evaluation would be
+an unacceptable I/O bottleneck. The production resident provider instead
+loads the 48 blocks once into 37,131,012,104 bytes and evaluates only the lazy
+activation graph block by block. Its stage executions peak at 38,511,394,752
+bytes. Between HQ stages it rereads and replaces only LoRA-targeted base
+weights one block at a time, switching strength from `0.25` to `0.5` at a
+38,234,978,314-byte peak without a duplicate transformer state. Evidence is in
+`golden/mlx_resident_transformer_two_stage_report.json`.
+
 ## Interpretation
 
 - Maximum-shape fused attention is not the current memory blocker.

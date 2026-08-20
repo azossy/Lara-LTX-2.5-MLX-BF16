@@ -1,0 +1,56 @@
+{
+  "block_count": 48,
+  "component": "resident_av_transformer",
+  "passed": true,
+  "resident_bytes": 37131012104,
+  "schema_version": 1,
+  "stage_one": {
+    "execution_peak_bytes": 38511394752,
+    "lora_strength": 0.25,
+    "outputs": {
+      "audio": {
+        "finite": true,
+        "sha256": "bdad1cacbe934ddc2a8eb9986ed1fc4e5caad18ec5d86788114774b61b276ad4",
+        "shape": [
+          1,
+          1,
+          2048
+        ]
+      },
+      "video": {
+        "finite": true,
+        "sha256": "5c1898c767a9d890543c952527815deebdf112bf25bc0878ec41d46ea26f62ae",
+        "shape": [
+          1,
+          1,
+          4096
+        ]
+      }
+    }
+  },
+  "stage_transition_peak_bytes": 38234978314,
+  "stage_two": {
+    "execution_peak_bytes": 38511394752,
+    "lora_strength": 0.5,
+    "outputs": {
+      "audio": {
+        "finite": true,
+        "sha256": "767d1fd0b8fe77ca3c8b584318bb25670ca520d6a25867f62c4049f96aba14bb",
+        "shape": [
+          1,
+          1,
+          2048
+        ]
+      },
+      "video": {
+        "finite": true,
+        "sha256": "163e2df354e277b21eddc36a78cebdc645c760368563e615011793b55e7c1ce5",
+        "shape": [
+          1,
+          1,
+          4096
+        ]
+      }
+    }
+  }
+}
