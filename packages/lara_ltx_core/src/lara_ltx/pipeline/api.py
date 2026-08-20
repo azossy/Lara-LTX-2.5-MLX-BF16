@@ -62,6 +62,7 @@ from .configuration import (
 )
 from .decode import CheckpointDecodeRuntime, DecodeRuntimeConfig
 from .generation import LocalGenerationRuntime
+from .profiling import RuntimePhase, RuntimePhaseMetric, RuntimeProfiler
 from .two_stage import (
     CheckpointStageModuleLoader,
     TwoStageContexts,
@@ -77,6 +78,7 @@ class LTXVideo:
 
     media: DecodedMediaResult
     encoding: MediaEncodingConfig
+    metrics: tuple[RuntimePhaseMetric, ...] = ()
 
     @property
     def video(self):  # type intentionally follows the NumPy payload
@@ -293,7 +295,12 @@ class LTXPipeline:
                 raise LaraError("LARA-PIPELINE-002", details={"path": source.repository_id}) from error
         return cls(checkpoints=profile.model.resolve(root), profile=profile, model_root=root)
 
-    def _sampling_runtime(self, generation: GenerationProfile) -> TwoStageSamplingRuntime:
+    def _sampling_runtime(
+        self,
+        generation: GenerationProfile,
+        *,
+        profiler: RuntimeProfiler | None = None,
+    ) -> TwoStageSamplingRuntime:
         paths = self.checkpoints
         blocks = ResidentCheckpointTransformerBlocks(
             checkpoint=paths.transformer,
@@ -334,9 +341,15 @@ class LTXPipeline:
                 stage_one_lora_strength=generation.stage_one_lora_strength,
                 stage_two_lora_strength=generation.stage_two_lora_strength,
             ),
+            profiler=profiler,
         )
 
-    def _decode_runtime(self, generation: GenerationProfile) -> CheckpointDecodeRuntime:
+    def _decode_runtime(
+        self,
+        generation: GenerationProfile,
+        *,
+        profiler: RuntimeProfiler | None = None,
+    ) -> CheckpointDecodeRuntime:
         paths = self.checkpoints
         decode = self.profile.decode
         return CheckpointDecodeRuntime(
@@ -360,6 +373,7 @@ class LTXPipeline:
                 video_timesteps=decode.video_timesteps,
                 video_activation_budget_bytes=decode.video_activation_budget_bytes,
             ),
+            profiler=profiler,
         )
 
     def __call__(
@@ -373,6 +387,7 @@ class LTXPipeline:
         num_frames: int | None = None,
         frame_rate: float | None = None,
         num_inference_steps: int | None = None,
+        profile: bool = False,
     ) -> LTXVideo:
         if not isinstance(prompt, str) or not prompt.strip():
             raise LaraError("LARA-PIPELINE-003", details={"reason": "empty_prompt"})
@@ -392,18 +407,21 @@ class LTXPipeline:
             policy=self.profile.resource_policy,
             detected_unified_memory_bytes=physical_memory_bytes(),
         )
-        contexts = _load_text_contexts(
-            self.checkpoints.text_encoder,
-            self.checkpoints.transformer,
-            prompt=prompt.strip(),
-            negative_prompt=generation.negative_prompt,
-            max_length=generation.text_max_length,
-        )
+        profiler = RuntimeProfiler(enabled=profile)
+        with profiler.measure(RuntimePhase.TEXT_CONDITIONING):
+            contexts = _load_text_contexts(
+                self.checkpoints.text_encoder,
+                self.checkpoints.transformer,
+                prompt=prompt.strip(),
+                negative_prompt=generation.negative_prompt,
+                max_length=generation.text_max_length,
+            )
         request = _build_request(generation, contexts)
         runtime = LocalGenerationRuntime(
-            sampling_runtime_factory=partial(self._sampling_runtime, generation),
-            decode_runtime_factory=partial(self._decode_runtime, generation),
+            sampling_runtime_factory=partial(self._sampling_runtime, generation, profiler=profiler),
+            decode_runtime_factory=partial(self._decode_runtime, generation, profiler=profiler),
+            profiler=profiler,
         )
         media = runtime.generate(request)
         encoding = replace(self.profile.media, frame_rate=generation.frame_rate)
-        return LTXVideo(media=media, encoding=encoding)
+        return LTXVideo(media=media, encoding=encoding, metrics=profiler.metrics)

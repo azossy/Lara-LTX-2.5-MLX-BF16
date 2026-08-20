@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 from lara_ltx.errors import LaraError
 from lara_ltx.pipeline import CheckpointDecodeRuntime, DecodeRuntimeConfig
+from lara_ltx.pipeline.profiling import RuntimePhase, RuntimeProfiler
 from lara_ltx.video_vae import DiffusionVideoDecoder, DiffusionVideoDecoderConfig
 
 
@@ -48,6 +49,7 @@ def _recorded_loader(record: list[str], name: str, value: object) -> Callable[[]
 
 def test_checkpoint_decode_runtime_runs_video_audio_and_vocoder_in_order() -> None:
     loads: list[str] = []
+    profiler = RuntimeProfiler(enabled=True)
     runtime = CheckpointDecodeRuntime(
         video_decoder_loader=_recorded_loader(loads, "video", _video_decoder()),
         audio_decoder_loader=_recorded_loader(loads, "audio", _AudioDecoder()),
@@ -57,6 +59,7 @@ def test_checkpoint_decode_runtime_runs_video_audio_and_vocoder_in_order() -> No
             video_timesteps=(1.0,),
             video_activation_budget_bytes=3_000_000,
         ),
+        profiler=profiler,
     )
 
     result = runtime.decode(
@@ -69,6 +72,12 @@ def test_checkpoint_decode_runtime_runs_video_audio_and_vocoder_in_order() -> No
     assert result.audio.shape == (1, 2, 64)
     assert np.isfinite(result.video).all()
     assert np.isfinite(result.audio).all()
+    assert [metric.phase for metric in profiler.metrics] == [
+        RuntimePhase.VIDEO_DECODE,
+        RuntimePhase.AUDIO_VAE_DECODE,
+        RuntimePhase.VOCODER_DECODE,
+    ]
+    assert all(metric.elapsed_seconds >= 0.0 and metric.peak_bytes >= 0 for metric in profiler.metrics)
 
 
 @pytest.mark.parametrize(

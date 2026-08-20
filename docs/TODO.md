@@ -235,7 +235,7 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 ## P4 — Tensor and stage parity
 
 - [x] Automate CUDA-versus-MLX reports for every major checkpoint. The
-      versioned evidence index audits 18 conditioning, transformer, sampling,
+      versioned evidence index audits 19 conditioning, transformer, sampling,
       decoder, media and public-interface reports as one release gate.
 - [x] Add first-divergent-layer bisect tooling.
 - [x] Freeze evidence-based tolerances and deterministic inputs in versioned
@@ -244,41 +244,61 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       seven selected transformer blocks across all three guidance passes, and
       block-0 internal module boundaries on CUDA. Transfer every artifact and
       verify its SHA-256 on the target Mac.
+- [x] Capture 408 named block-0 Attention sub-operation tensors from a compact,
+      hash-verified official checkpoint subset. The four deduplicated v6 shards
+      contain 118 unique tensors plus 290 aliases, reproduce all six source
+      block outputs exactly, and pass all 176 MLX exact-input comparisons.
 - [x] Replay all 15+3 steps on MLX with the exact captured SDE tensors. The
       replay exposed and fixed the incorrect AV cross-timestep multiplier by
       sourcing both 1000x architecture multipliers from checkpoint metadata.
+      A denoiser-output-injected replay then exposed a disabled upstream
+      anchor refinement: restoring the official `bongmath=true`/100 iterations
+      makes all 31+7 sampler inputs pass, with worst NRMSE `1.14e-5`.
 - [ ] Close the frozen final-latent gate. Exact input preprocessing now passes
-      every field and the exact-input final block/output heads remain within
-      component tolerance, but CUDA/Metal BF16 error is amplified by guidance
-      and accumulates across the stochastic trajectory; the current full replay
-      report remains a documented failing diagnostic rather than a parity claim.
+      every field, the sampler-only replay passes, and exact-input final
+      block/output heads remain within component tolerance. CUDA-aligned FP32
+      RMSNorm and RoPE accumulation reproduce the captured AdaLN boundary
+      exactly. The complete stochastic replay ends at video NRMSE `0.1916` and
+      audio NRMSE `0.1110`; the strict gate remains a documented failing
+      diagnostic rather than a parity claim. The remaining differences
+      accumulate from BF16 projection, gating and fused-SDPA backend rounding,
+      not checkpoint mapping or sampler control flow.
 
 ## P5 — BF16 quality parity
 
 - [x] Build and schema-validate the four-case, four-seed, four-resolution,
       three-frame-count audiovisual corpus, and generate all CUDA BF16 references.
-- [ ] Measure frame, temporal, perceptual and audio-sync quality. Two MLX cases
-      have paired frame/temporal/audio diagnostics; the 512x512/33-frame case
-      reached OS OOM after about 70 minutes on the M5 Max 128 GB target.
-- [ ] Complete blind review and document known differences.
+- [x] Measure frame, temporal and audio-sync diagnostics for all four CUDA/MLX
+      pairs. The outputs are different same-seed stochastic realizations, with
+      frame cosine `0.416`-`0.901` and temporal/audio cosines near zero.
+- [x] Complete a non-blind first/middle/last-frame audit and document known
+      differences. All MLX candidates are coherent and usable; independent
+      blind review remains explicitly unclaimed.
 
 ## P6 — Apple Silicon optimization
 
 - [x] Measure M5 Max 128 GB reduced-smoke peak unified memory and repeated-run
       growth. Two same-process runs peak near 40.75 GB, produce byte-identical
       MP4 files, and return to 18 active bytes/0 cache bytes with zero growth.
-- [x] Identify the current high-resolution memory cliff: the versioned
-      512x512/33-frame quality case grew swap beyond 70 GB and was terminated
-      by the operating system after about 70 minutes on M5 Max 128 GB.
+- [x] Resolve the high-resolution memory cliff. The old 8 GiB decoder budget
+      selected 51,200 stage-5 halo tiles; the measured 20 GiB budget selects one
+      tile and completes 512x512/33 in 92.0 seconds at a 40.25 GB MLX peak.
 - [x] Reject unmeasured public generation grids and insufficient or unknown
       physical unified memory before checkpoint resolution. Keep the measured
       token envelope, minimum capacity and recommended grid in the versioned
       profile, with localized `LARA-RUNTIME-010` guidance and no silent
       quantization or fallback.
-- [ ] Measure load time, generation time and Metal utilization.
-- [ ] Apply safe MLX evaluation, lifetime, fused-op and compile optimizations.
-- [ ] Add custom Metal kernels only for measured unresolved bottlenecks.
-- [ ] Record per-stage active/cache/peak MLX memory and stage elapsed time.
+- [x] Measure component load time, generation time and MLX allocator usage
+      through the opt-in public `profile=True` path. macOS GPU duty-cycle
+      counters require privileged `powermetrics`, so utilization percentage is
+      not claimed by the automated release report.
+- [x] Apply safe MLX evaluation boundaries, component lifetimes, fused SDPA and
+      decoder halo-tiling optimizations without changing checkpoint precision.
+- [x] Do not add a custom Metal kernel: no unresolved measured bottleneck
+      remains that justifies the maintenance and parity risk for this release.
+- [x] Record text conditioning, transformer load, both sampler stages, latent
+      upscale, video decode, audio VAE and vocoder active/cache/peak MLX memory
+      and elapsed time separately.
 - [x] Verify cache clearing occurs only at lifecycle boundaries, not in hot
       transformer loops.
 

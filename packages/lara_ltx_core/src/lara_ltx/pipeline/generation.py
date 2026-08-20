@@ -9,6 +9,7 @@ import mlx.core as mx
 
 from lara_ltx.media import DecodedMediaResult
 
+from .profiling import RuntimePhase, RuntimeProfiler
 from .two_stage import TwoStageLatentResult, TwoStageSamplingRequest
 
 
@@ -32,12 +33,15 @@ class LocalGenerationRuntime:
         *,
         sampling_runtime_factory: SamplingRuntimeFactory,
         decode_runtime_factory: DecodeRuntimeFactory,
+        profiler: RuntimeProfiler | None = None,
     ) -> None:
         self.sampling_runtime_factory = sampling_runtime_factory
         self.decode_runtime_factory = decode_runtime_factory
+        self.profiler = profiler or RuntimeProfiler()
 
     def generate(self, request: TwoStageSamplingRequest) -> DecodedMediaResult:
-        sampling_runtime = self.sampling_runtime_factory()
+        with self.profiler.measure(RuntimePhase.TRANSFORMER_LOAD):
+            sampling_runtime = self.sampling_runtime_factory()
         latents = sampling_runtime.run_request(request)
         video_latent = latents.video
         audio_latent = latents.audio

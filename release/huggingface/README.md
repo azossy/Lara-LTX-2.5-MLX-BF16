@@ -17,7 +17,7 @@ tags:
 Native MLX/Metal BF16 runtime for local LTX-2.5 video and synchronized-audio
 generation on Apple Silicon. No CUDA or server process is required on Mac.
 
-Release `0.0.2` matches the GitHub source tag `v0.0.2`.
+Release `0.0.3` matches the GitHub source tag `v0.0.3`.
 
 > This repository is a release descriptor. The exact official gated BF16 files
 > remain in `Lightricks/LTX-2.5`; accepting upstream access is required. The
@@ -54,14 +54,22 @@ configuration, known limitations and verified parity evidence.
 
 This is an engineering preview, not a final CUDA-quality-parity claim. Exact
 CUDA inputs verify the checkpoint-metadata-driven transformer input path and
-final transformer/output-head component boundaries. Cross-backend BF16
-differences still accumulate through the complete stochastic trajectory, so
-the frozen final-latent gate remains open and is documented without weakening
-its thresholds. Two MLX quality-corpus cases have paired CUDA diagnostics; the
-512x512/33-frame case reached OOM after about 70 minutes on the M5 Max 128 GB
-target and is not supported in this preview. See the matching GitHub release
-notes and quality reports. Resource-policy failures use the localized
-`LARA-RUNTIME-010` code and do not silently quantize or select a fallback.
+final transformer/output-head component boundaries. The v6 CUDA trace contains
+408 named Attention boundaries across all six modules and three guidance
+passes; payload deduplication stores 118 unique tensors plus 290 aliases. All
+176 MLX exact-input sub-operation comparisons pass the frozen component gate.
+
+CUDA-aligned FP32 RMSNorm and RoPE accumulation reproduce the captured AdaLN
+boundary exactly. The complete stochastic replay ends at video/audio latent
+NRMSE `0.1916`/`0.1110`; cross-backend BF16 differences still accumulate and
+the frozen final-latent gate remains open without weakening its thresholds.
+All four MLX quality-corpus cases and paired CUDA diagnostics are complete. A
+non-blind frame-sequence audit accepts candidate usability but confirms that
+same-seed composition differs materially, so independent blind parity is not
+claimed. The reviewed decoder profile completes 512x512/33 frames in 92.0
+seconds at a 40.25 GB MLX peak instead of selecting the old pathological
+51,200-tile plan. Resource-policy failures use localized `LARA-RUNTIME-010`
+guidance and never silently quantize or select a fallback.
 
 ## License
 

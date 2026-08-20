@@ -9,13 +9,23 @@ import mlx.nn as nn
 
 DEFAULT_NORM_EPSILON = 1e-6
 GELU_TANH_COEFFICIENT = 0.044715
+NORM_CALCULATION_DTYPE = mx.float32
 
 
-def rms_norm(x: mx.array, weight: mx.array | None = None, *, eps: float = DEFAULT_NORM_EPSILON) -> mx.array:
-    """Normalize the final dimension with PyTorch RMSNorm semantics."""
+def rms_norm(
+    x: mx.array,
+    weight: mx.array | None = None,
+    *,
+    eps: float = DEFAULT_NORM_EPSILON,
+    calculation_dtype: mx.Dtype = NORM_CALCULATION_DTYPE,
+) -> mx.array:
+    """Normalize in the CUDA-compatible FP32 accumulator and restore input dtype."""
 
-    normalized = x * mx.rsqrt(mx.mean(mx.square(x), axis=-1, keepdims=True) + eps)
-    return normalized if weight is None else normalized * weight
+    output_dtype = x.dtype
+    calculation_input = x.astype(calculation_dtype)
+    normalized = calculation_input * mx.rsqrt(mx.mean(mx.square(calculation_input), axis=-1, keepdims=True) + eps)
+    result = normalized if weight is None else normalized * weight.astype(calculation_dtype)
+    return result.astype(output_dtype)
 
 
 def gelu_approx(x: mx.array) -> mx.array:

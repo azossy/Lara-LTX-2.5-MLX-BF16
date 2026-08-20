@@ -1,0 +1,127 @@
+{
+  "acceptance": null,
+  "audio": {
+    "alignment": {
+      "aligned_cosine_similarity": 0.04340938472508016,
+      "lag_ms": 10.020833333333334,
+      "lag_samples": 481
+    },
+    "channels": 2,
+    "characteristics": {
+      "candidate": {
+        "channel_rms": [
+          0.01914018233224429,
+          0.017277778456455332
+        ],
+        "peak_abs": 0.11354970186948776,
+        "rms": 0.018232775544358412
+      },
+      "reference": {
+        "channel_rms": [
+          0.007408648261505642,
+          0.0074317285747396026
+        ],
+        "peak_abs": 0.0574190653860569,
+        "rms": 0.007420197391960395
+      }
+    },
+    "metrics": {
+      "candidate_checksum": "aa66dc2fe40373ecc4edb9c6e76f6b78cd676a3793467ce52cb70f1dd42319c9",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.01847539402002889,
+      "finite_count": 129024,
+      "inf_count": 0,
+      "max_abs_error": 0.12358980719000101,
+      "max_relative_error": 105988.30755945828,
+      "mean_abs_error": 0.013765098507607149,
+      "name": "decoded_audio",
+      "nan_count": 0,
+      "normalized_rmse": 2.6357064745673284,
+      "psnr_db": 34.173749961202816,
+      "reference_checksum": "c2286ab9122667d9c74e82c67278e2283f93d18aee6cad40f2901a99c526beb0",
+      "reference_dtype": "float32",
+      "reference_rms": 0.007420197391960395,
+      "rmse": 0.019557462308557618,
+      "shape": [
+        64512,
+        2
+      ]
+    },
+    "sample_count": 64512,
+    "sample_rate": 48000
+  },
+  "candidate": "golden/quality/mlx_v7/fox_forest_square.mp4",
+  "component": "cuda_mlx_media_quality",
+  "passed": null,
+  "reference": "golden/quality/cuda/fox_forest_square.mp4",
+  "schema_version": 1,
+  "video": {
+    "characteristics": {
+      "candidate": {
+        "horizontal_gradient_mean_abs": 0.02173985168337822,
+        "luma_mean": 0.4342642400620303,
+        "luma_standard_deviation": 0.2787380414310955,
+        "temporal_motion_mean_abs": 0.08981520682573318,
+        "vertical_gradient_mean_abs": 0.023246614262461662
+      },
+      "reference": {
+        "horizontal_gradient_mean_abs": 0.010337812826037407,
+        "luma_mean": 0.38408884196232523,
+        "luma_standard_deviation": 0.23860266689629822,
+        "temporal_motion_mean_abs": 0.13208405673503876,
+        "vertical_gradient_mean_abs": 0.02065829560160637
+      }
+    },
+    "frame_count": 33,
+    "frame_metrics": {
+      "candidate_checksum": "7b58f8bdddce1383eced0638a212298fd9829dcfe9fb443a4dfc360a7e52773c",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.6942336981055273,
+      "finite_count": 25952256,
+      "inf_count": 0,
+      "max_abs_error": 1.0,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.3137647528485983,
+      "name": "decoded_rgb_frames",
+      "nan_count": 0,
+      "normalized_rmse": 0.8535220292272889,
+      "psnr_db": 8.014542064935746,
+      "reference_checksum": "0b4739d17204a0fc499b131cd105d2517f79a7c4582aa5ad342fea37507f8ffa",
+      "reference_dtype": "float32",
+      "reference_rms": 0.46564845047808745,
+      "rmse": 0.3974412103586,
+      "shape": [
+        33,
+        512,
+        512,
+        3
+      ]
+    },
+    "height": 512,
+    "temporal_delta_metrics": {
+      "candidate_checksum": "88ec16ea34172de3a7cbc56073c50949ff3f5c87185466d47640b99a91d27501",
+      "candidate_dtype": "float32",
+      "cosine_similarity": -0.0010686871500586212,
+      "finite_count": 25165824,
+      "inf_count": 0,
+      "max_abs_error": 1.8274509906768799,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.1891977103874898,
+      "name": "decoded_rgb_temporal_delta",
+      "nan_count": 0,
+      "normalized_rmse": 1.32643839476992,
+      "psnr_db": 11.381316278745409,
+      "reference_checksum": "cb316c86f19a45191d41fee2263f49a884114330b1851b511abe9bc6d19ec45f",
+      "reference_dtype": "float32",
+      "reference_rms": 0.2033513695556195,
+      "rmse": 0.2697330642076207,
+      "shape": [
+        32,
+        512,
+        512,
+        3
+      ]
+    },
+    "width": 512
+  }
+}

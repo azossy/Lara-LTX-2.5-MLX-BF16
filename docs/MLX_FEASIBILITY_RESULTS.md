@@ -199,6 +199,16 @@ notifies this denoiser with the official schedule index: the first evaluation
 uses the outer index, while the midpoint's one-sigma schedule resets to index
 zero. Skipped modalities reuse their last denoised result.
 
+The sampler arithmetic now has its own denoiser-output-injected CUDA replay.
+That isolation exposed an incorrect port profile rather than a transformer
+failure: the official HQ loop leaves `bongmath=true` with 100 anchor-refinement
+iterations, while the old profile disabled it. Restoring those versioned
+settings and evaluating the small RK/SDE latent math in host float64 makes all
+31 Stage-1 and 7 Stage-2 sampler inputs pass; worst NRMSE is `1.14e-5`.
+The full resident replay improves final video/audio NRMSE from
+`0.6856`/`0.8152` to `0.3555`/`0.1095`, though the final-latent acceptance gate
+remains open.
+
 ## HQ Stage-1 to Stage-2 latent handoff
 
 Artifact: `golden/mlx_stage_transition_report.json`
@@ -259,3 +269,25 @@ The installed `lara-ltx generate` entry point repeated the same request in
 MP4 SHA-256 is byte-identical to the Python API result, providing a complete
 fixed-seed determinism check across both public interfaces. Evidence is in
 `golden/mlx_cli_determinism_report.json`.
+
+## Phase-level profiling and maximum measured grid
+
+Artifacts: `golden/mlx_repeated_pipeline_report.json` and
+`golden/quality/mlx_high_resolution_profile_v7.json`
+
+The opt-in public `profile=True` path records elapsed time plus active, cached
+and peak MLX bytes for text conditioning, transformer loading, Stage 1, latent
+upscale, Stage 2, video decode, Audio VAE and vocoder/BWE. Two current-code
+320x512/17-frame runs complete in 46.85 and 46.94 seconds, peak at
+39,877,127,464 bytes, produce byte-identical MP4 files and return to 18 active
+bytes/zero cached bytes with zero inter-run growth. The second run spends 13.11
+seconds in text conditioning, 13.19 seconds loading the resident transformer,
+4.00 seconds in Stage 1 and 14.15 seconds in Stage 2.
+
+The earlier 512x512/33-frame failure was a decoder-plan cliff, not an inherent
+model-residency limit: an 8 GiB activation budget selected 51,200 stage-5 halo
+tiles. The reviewed 20 GiB budget selects one stage-5 tile and completes that
+case in 91.98 seconds at a 40,247,895,618-byte MLX peak. The 640x384/25 case
+completes in 77.97 seconds at 40,121,296,374 bytes. macOS GPU duty-cycle
+percentage is not reported because the supported counter requires privileged
+`powermetrics`; the release does not fabricate a proxy value.

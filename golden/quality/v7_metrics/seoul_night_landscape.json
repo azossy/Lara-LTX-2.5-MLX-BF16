@@ -1,0 +1,127 @@
+{
+  "acceptance": null,
+  "audio": {
+    "alignment": {
+      "aligned_cosine_similarity": -0.11014681770756905,
+      "lag_ms": -18.125,
+      "lag_samples": -870
+    },
+    "channels": 2,
+    "characteristics": {
+      "candidate": {
+        "channel_rms": [
+          0.24991378526735225,
+          0.2355354218104019
+        ],
+        "peak_abs": 0.8698092103004456,
+        "rms": 0.2428310472263176
+      },
+      "reference": {
+        "channel_rms": [
+          0.04118842766838637,
+          0.03986734783412598
+        ],
+        "peak_abs": 0.14863485097885132,
+        "rms": 0.04053327026728219
+      }
+    },
+    "metrics": {
+      "candidate_checksum": "8c1760703211329c1b70b54582e621eda1463f1fa394c6186c4f20894b6ce7a8",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.04972641672964171,
+      "finite_count": 67584,
+      "inf_count": 0,
+      "max_abs_error": 0.9292113855481148,
+      "max_relative_error": 134532.97986767165,
+      "mean_abs_error": 0.1936889148566389,
+      "name": "decoded_audio",
+      "nan_count": 0,
+      "normalized_rmse": 6.024545828351402,
+      "psnr_db": 12.245280862503856,
+      "reference_checksum": "2d9669928fdbb075bab36166142d2a1da52c95f7555a34d87162c83084c04b48",
+      "reference_dtype": "float32",
+      "reference_rms": 0.04053327026728219,
+      "rmse": 0.24419454429819487,
+      "shape": [
+        33792,
+        2
+      ]
+    },
+    "sample_count": 33792,
+    "sample_rate": 48000
+  },
+  "candidate": "golden/quality/mlx_v7/seoul_night_landscape.mp4",
+  "component": "cuda_mlx_media_quality",
+  "passed": null,
+  "reference": "golden/quality/cuda/seoul_night_landscape.mp4",
+  "schema_version": 1,
+  "video": {
+    "characteristics": {
+      "candidate": {
+        "horizontal_gradient_mean_abs": 0.02040354534983635,
+        "luma_mean": 0.16892323331453793,
+        "luma_standard_deviation": 0.15223426927832273,
+        "temporal_motion_mean_abs": 0.007709193043410778,
+        "vertical_gradient_mean_abs": 0.02624349296092987
+      },
+      "reference": {
+        "horizontal_gradient_mean_abs": 0.026434745639562607,
+        "luma_mean": 0.1626336283034982,
+        "luma_standard_deviation": 0.1916255346621559,
+        "temporal_motion_mean_abs": 0.03055850975215435,
+        "vertical_gradient_mean_abs": 0.03898207098245621
+      }
+    },
+    "frame_count": 17,
+    "frame_metrics": {
+      "candidate_checksum": "c80698b194699c08352168225a21a088553753d77b97c6671fca500521bde847",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.41557552467549475,
+      "finite_count": 8355840,
+      "inf_count": 0,
+      "max_abs_error": 1.0,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.17441637196293347,
+      "name": "decoded_rgb_frames",
+      "nan_count": 0,
+      "normalized_rmse": 1.0651162015277253,
+      "psnr_db": 11.167976378140827,
+      "reference_checksum": "899aa5e8b9abd9b9329e6b6a9b01606b12bea1a9a4145b22f65c00990245289c",
+      "reference_dtype": "float32",
+      "reference_rms": 0.25953993425518446,
+      "rmse": 0.27644018891863764,
+      "shape": [
+        17,
+        320,
+        512,
+        3
+      ]
+    },
+    "height": 320,
+    "temporal_delta_metrics": {
+      "candidate_checksum": "616a917d5c6f4a3d97d7912f68ebab3e7531644d5555fe9396bff277b0f407a3",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.0019089922587530713,
+      "finite_count": 7864320,
+      "inf_count": 0,
+      "max_abs_error": 1.1686275005340576,
+      "max_relative_error": 5.938260558986092e+37,
+      "mean_abs_error": 0.034538038849978275,
+      "name": "decoded_rgb_temporal_delta",
+      "nan_count": 0,
+      "normalized_rmse": 1.0383604898000134,
+      "psnr_db": 21.785912867832362,
+      "reference_checksum": "1804f2d0c756aaba50b2ac79bfcf62a64bc9459de98a9a85dc41227f2a2967f6",
+      "reference_dtype": "float32",
+      "reference_rms": 0.07840724638893766,
+      "rmse": 0.08141498676428764,
+      "shape": [
+        16,
+        320,
+        512,
+        3
+      ]
+    },
+    "width": 512
+  }
+}

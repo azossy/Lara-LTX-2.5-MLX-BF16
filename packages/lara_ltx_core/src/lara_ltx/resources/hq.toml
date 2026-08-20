@@ -40,8 +40,8 @@ terminal = 0.1
 
 [generation.sampler]
 eta = 0.5
-bongmath = false
-bongmath_max_iterations = 0
+bongmath = true
+bongmath_max_iterations = 100
 substep_seed_offset = 10000
 
 [generation.video_guidance]
@@ -63,7 +63,7 @@ skip_step = 0
 [decode]
 video_noise_seed_offset = 0
 video_timesteps = [1.0]
-video_activation_budget_bytes = 8589934592
+video_activation_budget_bytes = 21474836480
 
 [media]
 audio_sample_rate = 48000
@@ -82,7 +82,7 @@ token_environment_variable = "HF_TOKEN"
 [resource_policy]
 enforce = true
 minimum_unified_memory_bytes = 137438953472
-maximum_stage_two_video_tokens = 640
+maximum_stage_two_video_tokens = 1280
 video_time_scale = 8
 stage_two_spatial_scale = 32
 recommended_height = 320

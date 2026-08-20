@@ -1,0 +1,53 @@
+{
+  "case_count": 4,
+  "component": "cuda_mlx_quality_corpus_diagnostics",
+  "corpus": {
+    "name": "lara-ltx-bf16-quality-v1",
+    "sha256": "320bb55f485d98ce9e4d1de975207c02401353fde72b63fe492c3875cdfdfbe5"
+  },
+  "passed": true,
+  "results": [
+    {
+      "aligned_audio_cosine": -0.11014681770756905,
+      "audio_cosine": 0.04972641672964171,
+      "audio_lag_ms": -18.125,
+      "case_id": "seoul_night_landscape",
+      "frame_cosine": 0.41557552467549475,
+      "frame_psnr_db": 11.167976378140827,
+      "report": "golden/quality/v7_metrics/seoul_night_landscape.json",
+      "temporal_cosine": 0.0019089922587530713
+    },
+    {
+      "aligned_audio_cosine": -0.06921940260396615,
+      "audio_cosine": 0.014988389808994413,
+      "audio_lag_ms": -62.270833333333336,
+      "case_id": "barista_dialogue_portrait",
+      "frame_cosine": 0.7664208042563112,
+      "frame_psnr_db": 7.261916096098245,
+      "report": "golden/quality/v7_metrics/barista_dialogue_portrait.json",
+      "temporal_cosine": 0.0018142648996695933
+    },
+    {
+      "aligned_audio_cosine": 0.04340938472508016,
+      "audio_cosine": 0.01847539402002889,
+      "audio_lag_ms": 10.020833333333334,
+      "case_id": "fox_forest_square",
+      "frame_cosine": 0.6942336981055273,
+      "frame_psnr_db": 8.014542064935746,
+      "report": "golden/quality/v7_metrics/fox_forest_square.json",
+      "temporal_cosine": -0.0010686871500586212
+    },
+    {
+      "aligned_audio_cosine": -0.06262937258885262,
+      "audio_cosine": -0.009855922735095016,
+      "audio_lag_ms": -173.29166666666666,
+      "case_id": "ocean_sunrise_wide",
+      "frame_cosine": 0.9011142719226554,
+      "frame_psnr_db": 10.766255889678074,
+      "report": "golden/quality/v7_metrics/ocean_sunrise_wide.json",
+      "temporal_cosine": -0.007582927607692555
+    }
+  ],
+  "schema_version": 1,
+  "scope": "paired_diagnostics_not_perceptual_or_blind_acceptance"
+}

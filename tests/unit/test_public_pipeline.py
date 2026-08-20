@@ -8,6 +8,7 @@ from lara_ltx.errors import LaraError
 from lara_ltx.pipeline import TwoStageContexts, load_pipeline_profile
 from lara_ltx.pipeline.api import LTXPipeline, _build_request
 from lara_ltx.pipeline.configuration import load_distribution_source
+from lara_ltx.runtime.memory import validate_generation_resources
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODEL_ROOT = PROJECT_ROOT / "models" / "LTX-2.5"
@@ -32,7 +33,8 @@ def test_packaged_hq_profile_resolves_verified_local_pack() -> None:
     assert profile.generation.num_frames == 17
     assert profile.generation.num_inference_steps == 15
     assert profile.resource_policy.enforce is True
-    assert profile.resource_policy.maximum_stage_two_video_tokens == 640
+    assert profile.resource_policy.maximum_stage_two_video_tokens == 1280
+    assert profile.decode.video_activation_budget_bytes == 20 * 1024**3
     assert paths.transformer.name.endswith("transformer-bf16.safetensors")
     assert len(profile.model.allow_patterns) == 6
 
@@ -66,15 +68,16 @@ def test_public_generation_rejects_unsupported_grid(field: str, value: int) -> N
         profile.with_overrides(**{field: value})
 
 
-def test_public_pipeline_rejects_oom_grid_before_checkpoint_access() -> None:
-    pipeline = LTXPipeline.__new__(LTXPipeline)
-    pipeline.profile = load_pipeline_profile()
+def test_public_pipeline_accepts_measured_maximum_grid() -> None:
+    profile = load_pipeline_profile()
 
-    with pytest.raises(LaraError) as raised:
-        pipeline(prompt="A fox in a forest", height=512, width=512, num_frames=33)
-
-    assert raised.value.code == "LARA-RUNTIME-010"
-    assert raised.value.details["requested_tokens"] == 1_280
+    validate_generation_resources(
+        height=512,
+        width=512,
+        num_frames=33,
+        policy=profile.resource_policy,
+        detected_unified_memory_bytes=profile.resource_policy.minimum_unified_memory_bytes,
+    )
 
 
 def test_from_pretrained_rejects_unverified_memory_before_model_download(monkeypatch: pytest.MonkeyPatch) -> None:

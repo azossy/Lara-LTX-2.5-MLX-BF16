@@ -1,0 +1,82 @@
+{
+  "completed_case_count": 4,
+  "component": "mlx_quality_corpus_generation",
+  "corpus": {
+    "name": "lara-ltx-bf16-quality-v1",
+    "sha256": "320bb55f485d98ce9e4d1de975207c02401353fde72b63fe492c3875cdfdfbe5"
+  },
+  "model": "models/LTX-2.5",
+  "passed": true,
+  "requested_case_count": 4,
+  "results": [
+    {
+      "case_id": "seoul_night_landscape",
+      "elapsed_seconds": 64.22934124991298,
+      "output": "golden/quality/mlx_v7/seoul_night_landscape.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 320,
+        "num_frames": 17,
+        "num_inference_steps": 15,
+        "seed": 25081900,
+        "width": 512
+      },
+      "reused": false,
+      "sha256": "ed8c1474a4cceb20aeef80dd2667b10ffc8734949706122f7684273ca0ce4052",
+      "size_bytes": 81837
+    },
+    {
+      "case_id": "barista_dialogue_portrait",
+      "elapsed_seconds": 72.41274916706607,
+      "output": "golden/quality/mlx_v7/barista_dialogue_portrait.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 512,
+        "num_frames": 25,
+        "num_inference_steps": 15,
+        "seed": 25081901,
+        "width": 320
+      },
+      "reused": false,
+      "sha256": "3de63df525e4c783786d108d2c3e0bada103f9429d4ad5272eaf68928638a077",
+      "size_bytes": 119580
+    },
+    {
+      "case_id": "fox_forest_square",
+      "elapsed_seconds": 2.0207837224006653e-05,
+      "output": "golden/quality/mlx_v7/fox_forest_square.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 512,
+        "num_frames": 33,
+        "num_inference_steps": 15,
+        "seed": 25081902,
+        "width": 512
+      },
+      "reused": true,
+      "sha256": "f863791c53d73b96127f4150b21a768491f5b06b7dfb82a22d836aed6e05f284",
+      "size_bytes": 498705
+    },
+    {
+      "case_id": "ocean_sunrise_wide",
+      "elapsed_seconds": 1.6500242054462433e-05,
+      "output": "golden/quality/mlx_v7/ocean_sunrise_wide.mp4",
+      "parameters": {
+        "frame_rate": 24.0,
+        "height": 384,
+        "num_frames": 25,
+        "num_inference_steps": 15,
+        "seed": 25081903,
+        "width": 640
+      },
+      "reused": true,
+      "sha256": "b8cf2b53d5cbeecd41b75b49df2d256c1d85fbe69a72129948f6301a05f6c5d0",
+      "size_bytes": 175405
+    }
+  ],
+  "schema_version": 1,
+  "scope": "generation_only_not_quality_acceptance",
+  "status": "complete",
+  "total_case_count": 4,
+  "updated_at_utc": "2026-08-20T15:42:51.517636+00:00"
+}

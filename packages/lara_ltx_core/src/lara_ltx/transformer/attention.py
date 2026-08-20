@@ -7,7 +7,7 @@ import math
 import mlx.core as mx
 import mlx.nn as nn
 
-from .layers import DEFAULT_NORM_EPSILON, rms_norm
+from .layers import DEFAULT_NORM_EPSILON, NORM_CALCULATION_DTYPE, rms_norm
 from .rope import LTXRopeType, apply_rotary_emb
 
 
@@ -20,7 +20,12 @@ class RMSNorm(nn.Module):
         self.eps = eps
 
     def __call__(self, x: mx.array) -> mx.array:
-        return rms_norm(x, self.weight, eps=self.eps)
+        return rms_norm(
+            x,
+            self.weight,
+            eps=self.eps,
+            calculation_dtype=NORM_CALCULATION_DTYPE,
+        )
 
 
 def scaled_dot_product_attention(

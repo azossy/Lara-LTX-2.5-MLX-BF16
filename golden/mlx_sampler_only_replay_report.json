@@ -1,0 +1,2120 @@
+{
+  "acceptance": {
+    "maximum_normalized_rmse": 0.05,
+    "minimum_cosine_similarity": 0.999
+  },
+  "component": "cuda_output_injected_sampler_replay",
+  "first_failure": null,
+  "passed": true,
+  "schema_version": 1,
+  "stages": [
+    {
+      "comparisons": [
+        {
+          "call_index": 0,
+          "metrics": {
+            "candidate_checksum": "816aa8affce6bc85822e0f49cc92d794e0bd9766f794fbf4c38e1b6e91f53d60",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_00_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "816aa8affce6bc85822e0f49cc92d794e0bd9766f794fbf4c38e1b6e91f53d60",
+            "reference_dtype": "float32",
+            "reference_rms": 1.0010798741036306,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 0,
+          "metrics": {
+            "candidate_checksum": "28f23880c5977c0fdc136fdaa35d3bdb6436263c4f5fd28139034f0f2c55fc98",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_00_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "28f23880c5977c0fdc136fdaa35d3bdb6436263c4f5fd28139034f0f2c55fc98",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9985642464575305,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 1,
+          "metrics": {
+            "candidate_checksum": "1059e41ae23ad3942fdc88bd1eb317533afc5f28004859e898aa9d2eeeda457d",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_01_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "1059e41ae23ad3942fdc88bd1eb317533afc5f28004859e898aa9d2eeeda457d",
+            "reference_dtype": "float32",
+            "reference_rms": 0.978016699295974,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 1,
+          "metrics": {
+            "candidate_checksum": "214d4e1318c7da595ff5cabf8d02aa99fa9079426f082a70682efd616d2244a8",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_01_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "214d4e1318c7da595ff5cabf8d02aa99fa9079426f082a70682efd616d2244a8",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9511905822151209,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 2,
+          "metrics": {
+            "candidate_checksum": "86d8b1e562f71f29c741538e64dca617df0ef281671e0583fc3f268444730da1",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 5.960464477539063e-08,
+            "max_relative_error": 0.0045662100456621,
+            "mean_abs_error": 3.880510727564494e-12,
+            "name": "stage_1_denoiser_call_02_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 4.986683154001774e-10,
+            "reference_checksum": "4cece59f7665994342f447e9529a9798292a94a4eb7ca120411991768af3399d",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9644344640954848,
+            "rmse": 4.809329095243683e-10,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 2,
+          "metrics": {
+            "candidate_checksum": "c6d9419fefafe4dcb9bf311ba6989c89d4ff63f2678c325c395d2a6b3f588b4c",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_02_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "c6d9419fefafe4dcb9bf311ba6989c89d4ff63f2678c325c395d2a6b3f588b4c",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9406913950623079,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 3,
+          "metrics": {
+            "candidate_checksum": "2d24f19299fac614076375ff7676e674d820fc6840f5c4dbd679593101f9b1a9",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_03_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "2d24f19299fac614076375ff7676e674d820fc6840f5c4dbd679593101f9b1a9",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9430006570742506,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 3,
+          "metrics": {
+            "candidate_checksum": "787b992142b99c37e6d36ac9ae9816c3c22586617045031112e3e1075fa1e264",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_03_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "787b992142b99c37e6d36ac9ae9816c3c22586617045031112e3e1075fa1e264",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9185755647455894,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 4,
+          "metrics": {
+            "candidate_checksum": "814aa97914ba3714926094143bfddf6c967bf9cb2e02641e5739dd13dd683afa",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999994,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 3.814697265625e-06,
+            "max_relative_error": 0.006711409395973154,
+            "mean_abs_error": 2.483526865641276e-10,
+            "name": "stage_1_denoiser_call_04_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 3.3130464913405015e-08,
+            "reference_checksum": "296a1394d96186032e37275317324d644426a09cb9b2c8776b115aba27bd9c2b",
+            "reference_dtype": "float32",
+            "reference_rms": 0.929045405490392,
+            "rmse": 3.077970620955957e-08,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 4,
+          "metrics": {
+            "candidate_checksum": "45749f8b8e2a05ce085f24f6a190b6c9b085b1d2b5ead28f9eba680a587edeec",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_04_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "45749f8b8e2a05ce085f24f6a190b6c9b085b1d2b5ead28f9eba680a587edeec",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9124923465065733,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 5,
+          "metrics": {
+            "candidate_checksum": "a628e065eeee3b5676d17fbb09118363d83efad7929e3d569949b757b6432336",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 1.1920928955078125e-07,
+            "max_relative_error": 0.006097560975609756,
+            "mean_abs_error": 7.761021455128988e-12,
+            "name": "stage_1_denoiser_call_05_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 1.0499058544615689e-09,
+            "reference_checksum": "2193ddc3dd3429bfe00e74db991a3d1045ce57f5dae485deb69bb286b2cce790",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9161448285684791,
+            "rmse": 9.618658190487366e-10,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 5,
+          "metrics": {
+            "candidate_checksum": "8375b5360b5d8ddb6759a2d5a858c3b7a038b24d83df44fa6f26371472c0658f",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_05_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "8375b5360b5d8ddb6759a2d5a858c3b7a038b24d83df44fa6f26371472c0658f",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8884545765587984,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 6,
+          "metrics": {
+            "candidate_checksum": "7006d9bbb01fbae56810e586fedfaee3fe9f936069cfc53ec2716681a9c183d9",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 3.725290298461914e-08,
+            "max_relative_error": 0.04149377593360996,
+            "mean_abs_error": 2.4253192047278085e-12,
+            "name": "stage_1_denoiser_call_06_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 3.33812641930361e-10,
+            "reference_checksum": "b3bd075eb2e820d2f643b641a9b00eeb7a3940bf1a3b4db624fd916abbcd2248",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9004544187258102,
+            "rmse": 3.005830684527302e-10,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 6,
+          "metrics": {
+            "candidate_checksum": "a7a7e10f1484b5a9e7a26150ca718e012ce3c2fc6d902a63402debd85c61388c",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999956668,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0001220703125,
+            "max_relative_error": 0.005434782608695652,
+            "mean_abs_error": 5.2981906467013886e-08,
+            "name": "stage_1_denoiser_call_06_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 2.9438631268691534e-06,
+            "reference_checksum": "346f1c2256652d3b5234ac94e1a79bcb8f65a39f50697becb65dfbb6e0f3d169",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8638755950319363,
+            "rmse": 2.5431315104166665e-06,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 7,
+          "metrics": {
+            "candidate_checksum": "524621396d3593d1901f68efd29bf7e3bd48c5d5a86299374823d4d6fa677621",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999993,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 3.814697265625e-06,
+            "max_relative_error": 0.007692307692307693,
+            "mean_abs_error": 2.483526865641276e-10,
+            "name": "stage_1_denoiser_call_07_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 3.514200100609351e-08,
+            "reference_checksum": "68cf60bee50e1e8eb57507243407834c32550d63c2b9eb6d5a1438da31646672",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8758666361719831,
+            "rmse": 3.077970620955957e-08,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 7,
+          "metrics": {
+            "candidate_checksum": "85e69ce1e67856dc1a940906af51c06e64c89d5f4edacfadeee4048b31a68f79",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999955567,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0001220703125,
+            "max_relative_error": 0.00546448087431694,
+            "mean_abs_error": 5.2981906467013886e-08,
+            "name": "stage_1_denoiser_call_07_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 2.981067820006583e-06,
+            "reference_checksum": "7ad02b9ec067dcd9aa159c1a188aab21bd2a9eff0ccfcae8ca8d0c8f75a0ca31",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8530941474558773,
+            "rmse": 2.5431315104166665e-06,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 8,
+          "metrics": {
+            "candidate_checksum": "f36903ad002853ead972ccea3a42c7bd5ec7f74c87ce6a5c308fdfcbb0ab4ff8",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_08_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "f36903ad002853ead972ccea3a42c7bd5ec7f74c87ce6a5c308fdfcbb0ab4ff8",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8577698821859603,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 8,
+          "metrics": {
+            "candidate_checksum": "397a6b188bc8149f9db99bc2801e579dd36a59d85ddda708376588c8f30c7f5b",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_08_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "397a6b188bc8149f9db99bc2801e579dd36a59d85ddda708376588c8f30c7f5b",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8275224422785943,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 9,
+          "metrics": {
+            "candidate_checksum": "248a05c3856828820f9654ada6b5bbab32bae8014cbbb462c2836f8303a6b4bb",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_09_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "248a05c3856828820f9654ada6b5bbab32bae8014cbbb462c2836f8303a6b4bb",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8380851579440172,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 9,
+          "metrics": {
+            "candidate_checksum": "bf1116c83c9b742786b85731266f0fee7487a4f98601640b20ec191478d41369",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_09_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "bf1116c83c9b742786b85731266f0fee7487a4f98601640b20ec191478d41369",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8319418256998139,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 10,
+          "metrics": {
+            "candidate_checksum": "8538c92369becf3db47fbc642c1614bcf957cd1399581a14b5bde17fdf02c984",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_10_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "8538c92369becf3db47fbc642c1614bcf957cd1399581a14b5bde17fdf02c984",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8228688341809947,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 10,
+          "metrics": {
+            "candidate_checksum": "5d55204cd48f2968e38452bda76a9650ef05f4506e96bc3c57357416f28b3fc4",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_10_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "5d55204cd48f2968e38452bda76a9650ef05f4506e96bc3c57357416f28b3fc4",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8111884187680576,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 11,
+          "metrics": {
+            "candidate_checksum": "ea23521c4e41da6e0c3fe10da30eee119c9d1d2ed8787d22873aaf82a5accccc",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_11_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "ea23521c4e41da6e0c3fe10da30eee119c9d1d2ed8787d22873aaf82a5accccc",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8119075911327984,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 11,
+          "metrics": {
+            "candidate_checksum": "43092f5d893b8157adf62d0781938e2cfef1cf4aa1c4c8962337dda923fd3d71",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_11_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "43092f5d893b8157adf62d0781938e2cfef1cf4aa1c4c8962337dda923fd3d71",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7952410145005947,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 12,
+          "metrics": {
+            "candidate_checksum": "e1e75d5391a5f4bfa1c5b34bfd83a5b3928e6c821b1d52e9a2554e12e3a247cb",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_12_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "e1e75d5391a5f4bfa1c5b34bfd83a5b3928e6c821b1d52e9a2554e12e3a247cb",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8072391447803274,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 12,
+          "metrics": {
+            "candidate_checksum": "9ea66080bc3a36c6e219831871479ec0ff849944fd4833afd92ccb83de0fa124",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_12_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "9ea66080bc3a36c6e219831871479ec0ff849944fd4833afd92ccb83de0fa124",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7949143745325012,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 13,
+          "metrics": {
+            "candidate_checksum": "7be597e091773558dd927ab302605afddc9d923cfef8ee3332c7cc948d515714",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 2.9802322387695312e-08,
+            "max_relative_error": 0.004807692307692308,
+            "mean_abs_error": 1.940255363782247e-12,
+            "name": "stage_1_denoiser_call_13_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 3.0161263791800814e-10,
+            "reference_checksum": "0fa0d06f32ceca63bbc94783d20da18bbad154e065af05ea522516837daf1907",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7972691609413056,
+            "rmse": 2.4046645476218415e-10,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 13,
+          "metrics": {
+            "candidate_checksum": "7a2eebddcac3aa73a22254de5014feafb2909978457eb34d254801596090a2b7",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_13_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "7a2eebddcac3aa73a22254de5014feafb2909978457eb34d254801596090a2b7",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7661776019186408,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 14,
+          "metrics": {
+            "candidate_checksum": "697bcb68783d62787a07bdab56917e0555bf59e149befb6b614becfe33a6eb26",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999879,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 1.52587890625e-05,
+            "max_relative_error": 0.005952380952380952,
+            "mean_abs_error": 9.934107462565104e-10,
+            "name": "stage_1_denoiser_call_14_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 1.5558576474272398e-07,
+            "reference_checksum": "4d927251ae3f97907992099db6231b74ba51ac20780d397415dee82c0d9106a3",
+            "reference_dtype": "float32",
+            "reference_rms": 0.791324482942428,
+            "rmse": 1.2311882483823829e-07,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 14,
+          "metrics": {
+            "candidate_checksum": "71db7cb86595beb4daa5183b802815d3eb34d6baabcf0986ae713a5a04986da4",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_14_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "71db7cb86595beb4daa5183b802815d3eb34d6baabcf0986ae713a5a04986da4",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7701910231755179,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 15,
+          "metrics": {
+            "candidate_checksum": "159d64d239b710690c371a9a3eba8ca81e5023c97747d475409e24c1c309eff3",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999998,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_15_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "159d64d239b710690c371a9a3eba8ca81e5023c97747d475409e24c1c309eff3",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7844185253984032,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 15,
+          "metrics": {
+            "candidate_checksum": "f5ba90f959e8cdc13752735ee6e87f46ec6db67817921cb0615b4e94778cd537",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_15_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "f5ba90f959e8cdc13752735ee6e87f46ec6db67817921cb0615b4e94778cd537",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7600548913190593,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 16,
+          "metrics": {
+            "candidate_checksum": "57fb9b1ae653c1b7be3b2004d0f7eedea5b7210545c862587e25f8e263c306cb",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_16_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "57fb9b1ae653c1b7be3b2004d0f7eedea5b7210545c862587e25f8e263c306cb",
+            "reference_dtype": "float32",
+            "reference_rms": 0.783137237182896,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 16,
+          "metrics": {
+            "candidate_checksum": "8309b07d82db8d8da04e0c2b0aed087214bcdda479e00b1846ddd8ee347a6e5d",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_16_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "8309b07d82db8d8da04e0c2b0aed087214bcdda479e00b1846ddd8ee347a6e5d",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7631581625810543,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 17,
+          "metrics": {
+            "candidate_checksum": "52329c715184aad1be77719afd8cd0ce1f06bd6dc404a60ac5e17dd4c87b0a96",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_17_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "52329c715184aad1be77719afd8cd0ce1f06bd6dc404a60ac5e17dd4c87b0a96",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7795993844504422,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 17,
+          "metrics": {
+            "candidate_checksum": "86651ed5fdc651eca2b374ae932114443464c48177ea5eed2fd43b7288b2ab67",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_17_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "86651ed5fdc651eca2b374ae932114443464c48177ea5eed2fd43b7288b2ab67",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7560396609181854,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 18,
+          "metrics": {
+            "candidate_checksum": "48f8eddda644918f7f8dd9231d409b12bdedfa3e1ce478d43927d32de108daa5",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_18_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "48f8eddda644918f7f8dd9231d409b12bdedfa3e1ce478d43927d32de108daa5",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7832654443233126,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 18,
+          "metrics": {
+            "candidate_checksum": "3a84065074d443bca0f48fecca91327e2c55b468bb5705c4a8d491c8d1e2deb3",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999998,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_18_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "3a84065074d443bca0f48fecca91327e2c55b468bb5705c4a8d491c8d1e2deb3",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7674990401151932,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 19,
+          "metrics": {
+            "candidate_checksum": "d132da366f7cb2349250923320ec390399f1ab3b5d054f146e8a4be37ac09a9d",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999998,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_19_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "d132da366f7cb2349250923320ec390399f1ab3b5d054f146e8a4be37ac09a9d",
+            "reference_dtype": "float32",
+            "reference_rms": 0.787819312302865,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 19,
+          "metrics": {
+            "candidate_checksum": "095a228c8bfb8fd3d3e084109ec99309ce51aaf6b55211327c743832e82f8f68",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_19_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "095a228c8bfb8fd3d3e084109ec99309ce51aaf6b55211327c743832e82f8f68",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7739856280988091,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 20,
+          "metrics": {
+            "candidate_checksum": "90a0bbe9c5444269137f22ed9b4e4a0391ebf56eaf63fdb995f44b0866084045",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_20_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "90a0bbe9c5444269137f22ed9b4e4a0391ebf56eaf63fdb995f44b0866084045",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8009499257107355,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 20,
+          "metrics": {
+            "candidate_checksum": "7a44dc958e4ae5ee8fb803880f33e084b5e51547064cbcb5a274432c1de50a7f",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_20_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "7a44dc958e4ae5ee8fb803880f33e084b5e51547064cbcb5a274432c1de50a7f",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7851132224254744,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 21,
+          "metrics": {
+            "candidate_checksum": "099e89585fdc1bc7429dd9bd2b3c79081181b24b757cc9a1459320798b4fc189",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_21_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "099e89585fdc1bc7429dd9bd2b3c79081181b24b757cc9a1459320798b4fc189",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8166458692896627,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 21,
+          "metrics": {
+            "candidate_checksum": "fcb003efae134e9a61aab33321b9b5e8bcafb41ba17c80f99c21adcd08ac2d55",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_21_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "fcb003efae134e9a61aab33321b9b5e8bcafb41ba17c80f99c21adcd08ac2d55",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7957388033213582,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 22,
+          "metrics": {
+            "candidate_checksum": "826d0a36f47f682529771cbd5fec9012007633dc5785cd440db22124a91cf42b",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_22_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "826d0a36f47f682529771cbd5fec9012007633dc5785cd440db22124a91cf42b",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8386077599600664,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 22,
+          "metrics": {
+            "candidate_checksum": "e54537c21b43f9b4562edd4ffde5ab979ef9747a76017efc6d50e3ed24c9f691",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_22_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "e54537c21b43f9b4562edd4ffde5ab979ef9747a76017efc6d50e3ed24c9f691",
+            "reference_dtype": "float32",
+            "reference_rms": 0.807778406111368,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 23,
+          "metrics": {
+            "candidate_checksum": "40ca73760484e0bfa429965108d7cf2843c5681051fb6fb6e1016842a62f7845",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_23_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "40ca73760484e0bfa429965108d7cf2843c5681051fb6fb6e1016842a62f7845",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8679672238071017,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 23,
+          "metrics": {
+            "candidate_checksum": "2a94989b865924ac9e8c4ae3c20472d5f93216315a1ce5b9d431205dc412fcf6",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_23_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "2a94989b865924ac9e8c4ae3c20472d5f93216315a1ce5b9d431205dc412fcf6",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8316140469886739,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 24,
+          "metrics": {
+            "candidate_checksum": "16a328e2baac8b938653655dca6bbb857614a5c751357a36b73b4a596a3ff774",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_24_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "16a328e2baac8b938653655dca6bbb857614a5c751357a36b73b4a596a3ff774",
+            "reference_dtype": "float32",
+            "reference_rms": 0.898148885418031,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 24,
+          "metrics": {
+            "candidate_checksum": "da1a9b2537ded14b2b58794915147c73dc8daaa1ab6692bd8e36b33462dd42c0",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_24_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "da1a9b2537ded14b2b58794915147c73dc8daaa1ab6692bd8e36b33462dd42c0",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8580752091317891,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 25,
+          "metrics": {
+            "candidate_checksum": "852d2236df1b2365bc6a2fbf8f28c09e4dd549794af314531e9ea712c55996cf",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_25_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "852d2236df1b2365bc6a2fbf8f28c09e4dd549794af314531e9ea712c55996cf",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9415490323755584,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 25,
+          "metrics": {
+            "candidate_checksum": "b0a94010e3ca7c0741abf9621e1a4bd947b531bd830ebbf5bc7df385176ffd15",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_25_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "b0a94010e3ca7c0741abf9621e1a4bd947b531bd830ebbf5bc7df385176ffd15",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8951599908697998,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 26,
+          "metrics": {
+            "candidate_checksum": "b8ac7f87d5ede6beef62813b6658bb37372a81cb8458e1e3535ba1971f8dc4d2",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_26_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "b8ac7f87d5ede6beef62813b6658bb37372a81cb8458e1e3535ba1971f8dc4d2",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9811486293983132,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 26,
+          "metrics": {
+            "candidate_checksum": "c80e7788802336884b0c0878c5413fc35d7281102adb02ad8dc66f36041c3098",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_26_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "c80e7788802336884b0c0878c5413fc35d7281102adb02ad8dc66f36041c3098",
+            "reference_dtype": "float32",
+            "reference_rms": 0.930865042662557,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 27,
+          "metrics": {
+            "candidate_checksum": "3647f8659eeb0f91faaf893a759e54c5abb54704f56b9369063581245be2c150",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_27_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "3647f8659eeb0f91faaf893a759e54c5abb54704f56b9369063581245be2c150",
+            "reference_dtype": "float32",
+            "reference_rms": 1.041337687629126,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 27,
+          "metrics": {
+            "candidate_checksum": "b53f4d570ff795b85ac315090456ee0783b8419cbb8a219631c52b5814c132c2",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_27_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "b53f4d570ff795b85ac315090456ee0783b8419cbb8a219631c52b5814c132c2",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9886074476869878,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 28,
+          "metrics": {
+            "candidate_checksum": "b86a40747d4ce478d809e5f44ee0936d1cd560aed1f4e1ece77fa3e7dcad75d1",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_28_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "b86a40747d4ce478d809e5f44ee0936d1cd560aed1f4e1ece77fa3e7dcad75d1",
+            "reference_dtype": "float32",
+            "reference_rms": 1.089972741760024,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 28,
+          "metrics": {
+            "candidate_checksum": "1ee58ae01ac73934fd29f7b4b15174fe6da1aad23a6b245d370795a3dace68c3",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_28_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "1ee58ae01ac73934fd29f7b4b15174fe6da1aad23a6b245d370795a3dace68c3",
+            "reference_dtype": "float32",
+            "reference_rms": 1.0322786968214281,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 29,
+          "metrics": {
+            "candidate_checksum": "4bcbc8c5ce5e55b2bd911fc70f4b9dbcbb74d8be8183aa6a37c18a2651a6fd0f",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_29_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "4bcbc8c5ce5e55b2bd911fc70f4b9dbcbb74d8be8183aa6a37c18a2651a6fd0f",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1875314368635728,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 29,
+          "metrics": {
+            "candidate_checksum": "4b799580bcd43c71992485e5a25a574c70a2bb504326619f40e477c3a4c48fa5",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_29_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "4b799580bcd43c71992485e5a25a574c70a2bb504326619f40e477c3a4c48fa5",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1258065967915796,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 30,
+          "metrics": {
+            "candidate_checksum": "d45a8298faaa5b6ffc176e2eebf355ffc5ff515dda8561ade039880bf230ad10",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 15360,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_30_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "d45a8298faaa5b6ffc176e2eebf355ffc5ff515dda8561ade039880bf230ad10",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1986930248427827,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              120,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 30,
+          "metrics": {
+            "candidate_checksum": "c398ab73264396a598ebf5adc7030fb213377734b5aa0bac9a7998740508c7de",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_1_denoiser_call_30_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "c398ab73264396a598ebf5adc7030fb213377734b5aa0bac9a7998740508c7de",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1364886380423693,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        }
+      ],
+      "denoiser_call_count": 31,
+      "schedule_length": 16,
+      "stage": "stage_1",
+      "step_indices": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        4,
+        0,
+        5,
+        0,
+        6,
+        0,
+        7,
+        0,
+        8,
+        0,
+        9,
+        0,
+        10,
+        0,
+        11,
+        0,
+        12,
+        0,
+        13,
+        0,
+        14,
+        0,
+        15
+      ]
+    },
+    {
+      "comparisons": [
+        {
+          "call_index": 0,
+          "metrics": {
+            "candidate_checksum": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_00_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "a4a67d90c6e9176b028a159d0fca468527d96317eb26e912fd80fdc11200ff1d",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9180276717328743,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 0,
+          "metrics": {
+            "candidate_checksum": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0000000000000002,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_00_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "c23dd52dfae7029f476e5e6a5563e501c10dbbe95abecb4cc5bf88f6bb174560",
+            "reference_dtype": "float32",
+            "reference_rms": 0.9221879170587706,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 1,
+          "metrics": {
+            "candidate_checksum": "54d01a269c73760069ef60cc83f3e6fdd1d915749c00a3baa6e459ed67ae4dbe",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 5.960464477539063e-08,
+            "max_relative_error": 0.004545454545454545,
+            "mean_abs_error": 1.4551915228366853e-12,
+            "name": "stage_2_denoiser_call_01_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 3.171673994704998e-10,
+            "reference_checksum": "203298ca4a13bc37583d2e9dc8cc717e9f82f3fce9a487319b84166c04081f84",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8476585866868609,
+            "rmse": 2.688496695783109e-10,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 1,
+          "metrics": {
+            "candidate_checksum": "bb2e8f64e5632eccd44ac4c8188c90f0ed6fea8a42bf16a58999028827447f97",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_01_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "bb2e8f64e5632eccd44ac4c8188c90f0ed6fea8a42bf16a58999028827447f97",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8255694050676731,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 2,
+          "metrics": {
+            "candidate_checksum": "ec381516fb6bf8a359e88c76b20958ade562f9f070e3d90709ac24376e3c15aa",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999405511,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.001953125,
+            "max_relative_error": 0.0738255033557047,
+            "mean_abs_error": 4.8810701021769395e-08,
+            "name": "stage_2_denoiser_call_02_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 1.0904058337711988e-05,
+            "reference_checksum": "4cdc64389068f60fe230c493330fdbd0d795ea00bed44bc2b3c599ce05886546",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8082459087489902,
+            "rmse": 8.81316054021603e-06,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 2,
+          "metrics": {
+            "candidate_checksum": "7e38dcd1a68ce051aa83e389a39310814c8779156070306b40ab2fc5122aebac",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999999,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_02_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "7e38dcd1a68ce051aa83e389a39310814c8779156070306b40ab2fc5122aebac",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7994828324192286,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 3,
+          "metrics": {
+            "candidate_checksum": "3f2dcd1c05e51f38f788e1992438438f90305f7d02eec5be2e7f0122b80e1469",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999350455,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.001953125,
+            "max_relative_error": 0.006666666666666667,
+            "mean_abs_error": 4.76837158203125e-08,
+            "name": "stage_2_denoiser_call_03_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 1.1397779855927493e-05,
+            "reference_checksum": "34885868cbccccdcaf7618cd76b71c2e0f7f2a52a120c0843bab3a5cb7578788",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7729282442808864,
+            "rmse": 8.809665972742092e-06,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 3,
+          "metrics": {
+            "candidate_checksum": "b20d2fc6ad2da08458c71bf87b8d48a943bcf8099dcbf3806dc61a7831e8c0d8",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_03_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "b20d2fc6ad2da08458c71bf87b8d48a943bcf8099dcbf3806dc61a7831e8c0d8",
+            "reference_dtype": "float32",
+            "reference_rms": 0.7752954839048383,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 4,
+          "metrics": {
+            "candidate_checksum": "12b2edb29748bd9ee76f10121cef65628cbcb1796c710ee309b23c9bac5e66d0",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_04_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "12b2edb29748bd9ee76f10121cef65628cbcb1796c710ee309b23c9bac5e66d0",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8149310752348367,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 4,
+          "metrics": {
+            "candidate_checksum": "1eab56e125eb047717f1b0d24e6c277d150321a8f72f90159455eb38e002aa27",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_04_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "1eab56e125eb047717f1b0d24e6c277d150321a8f72f90159455eb38e002aa27",
+            "reference_dtype": "float32",
+            "reference_rms": 0.8293118618460967,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 5,
+          "metrics": {
+            "candidate_checksum": "ac18bf97c7f751260b7d88767366ea3b308ba3a534f41f3f380c5bf98270ae19",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 0.9999999999999998,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_05_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "ac18bf97c7f751260b7d88767366ea3b308ba3a534f41f3f380c5bf98270ae19",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1245767545885115,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 5,
+          "metrics": {
+            "candidate_checksum": "1ab4bbd843ab774e1baf8a2180048c450352d87dffbaf3fafb6c71dad1bdfbbf",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_05_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "1ab4bbd843ab774e1baf8a2180048c450352d87dffbaf3fafb6c71dad1bdfbbf",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1347634927589956,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        },
+        {
+          "call_index": 6,
+          "metrics": {
+            "candidate_checksum": "ce031454a200f4c405c2f216b6b4375a49d6e8eba755610405205ad4482abe75",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 61440,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_06_video_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "ce031454a200f4c405c2f216b6b4375a49d6e8eba755610405205ad4482abe75",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1490807275020098,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              480,
+              128
+            ]
+          },
+          "modality": "video",
+          "passed": true
+        },
+        {
+          "call_index": 6,
+          "metrics": {
+            "candidate_checksum": "158d56efdfd1f680630ebf8b48b24affc5f1a571965f9f1512cbd8ca53dc0082",
+            "candidate_dtype": "float32",
+            "cosine_similarity": 1.0,
+            "finite_count": 2304,
+            "inf_count": 0,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "mean_abs_error": 0.0,
+            "name": "stage_2_denoiser_call_06_audio_input",
+            "nan_count": 0,
+            "normalized_rmse": 0.0,
+            "reference_checksum": "158d56efdfd1f680630ebf8b48b24affc5f1a571965f9f1512cbd8ca53dc0082",
+            "reference_dtype": "float32",
+            "reference_rms": 1.1593358195883015,
+            "rmse": 0.0,
+            "shape": [
+              1,
+              18,
+              128
+            ]
+          },
+          "modality": "audio",
+          "passed": true
+        }
+      ],
+      "denoiser_call_count": 7,
+      "schedule_length": 4,
+      "stage": "stage_2",
+      "step_indices": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        3
+      ]
+    }
+  ]
+}

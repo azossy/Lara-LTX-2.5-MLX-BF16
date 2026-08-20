@@ -34,6 +34,8 @@ from lara_ltx.transformer import (
     load_production_transformer_output,
 )
 
+from .profiling import RuntimePhase, RuntimeProfiler
+
 StageModuleLoader = Callable[[float], tuple[AVTransformerInputPreprocessor, AVTransformerOutput]]
 StageStrengthSetter = Callable[[float], None]
 InitialNoiser = Callable[[Res2sLatentState, float], Res2sLatentState]
@@ -210,6 +212,7 @@ class TwoStageSamplingRuntime:
         stage_two_sampler: Res2sSampler,
         config: TwoStageSamplingConfig,
         denoiser_observer: DenoiserObserver | None = None,
+        profiler: RuntimeProfiler | None = None,
     ) -> None:
         resident_blocks = tuple(blocks)
         if expected_block_count <= 0 or len(resident_blocks) != expected_block_count:
@@ -224,6 +227,7 @@ class TwoStageSamplingRuntime:
         self.stage_two_sampler = stage_two_sampler
         self.config = config
         self.denoiser_observer = denoiser_observer
+        self.profiler = profiler or RuntimeProfiler()
 
     @staticmethod
     def _first_sigma(sigmas: mx.array, stage: str) -> float:
@@ -252,87 +256,94 @@ class TwoStageSamplingRuntime:
         stage_two_sigma = self._first_sigma(stage_two_sigmas, "stage_two")
         initial_video = replace(stage_one_video, state=self.initial_noiser(stage_one_video.state, stage_one_sigma))
         initial_audio = replace(stage_one_audio, state=self.initial_noiser(stage_one_audio.state, stage_one_sigma))
-        self.set_lora_strength(self.config.stage_one_lora_strength)
-        stage_one_input, stage_one_output = self.stage_module_loader(self.config.stage_one_lora_strength)
-        stage_one_denoiser = GuidedResidentAVDenoiser(
-            input_processor=stage_one_input,
-            blocks=self.blocks,
-            expected_block_count=self.expected_block_count,
-            output_heads=stage_one_output,
-            video_conditioning=_guided_conditioning(
-                initial_video,
-                contexts.video_positive,
-                contexts.video_negative,
-                contexts.video_context_mask,
-            ),
-            audio_conditioning=_guided_conditioning(
-                initial_audio,
-                contexts.audio_positive,
-                contexts.audio_negative,
-                contexts.audio_context_mask,
-            ),
-            video_guider=video_guider,
-            audio_guider=audio_guider,
-        )
-        if self.denoiser_observer is not None:
-            stage_one_denoiser = _ObservedDenoiser(
+        with self.profiler.measure(RuntimePhase.SAMPLING_STAGE_ONE):
+            self.set_lora_strength(self.config.stage_one_lora_strength)
+            stage_one_input, stage_one_output = self.stage_module_loader(self.config.stage_one_lora_strength)
+            stage_one_denoiser = GuidedResidentAVDenoiser(
+                input_processor=stage_one_input,
+                blocks=self.blocks,
+                expected_block_count=self.expected_block_count,
+                output_heads=stage_one_output,
+                video_conditioning=_guided_conditioning(
+                    initial_video,
+                    contexts.video_positive,
+                    contexts.video_negative,
+                    contexts.video_context_mask,
+                ),
+                audio_conditioning=_guided_conditioning(
+                    initial_audio,
+                    contexts.audio_positive,
+                    contexts.audio_negative,
+                    contexts.audio_context_mask,
+                ),
+                video_guider=video_guider,
+                audio_guider=audio_guider,
+            )
+            if self.denoiser_observer is not None:
+                stage_one_denoiser = _ObservedDenoiser(
+                    stage_one_denoiser,
+                    "stage_1",
+                    self.denoiser_observer,
+                )
+            sampled_video, sampled_audio = self.stage_one_sampler.sample(
+                stage_one_sigmas,
+                initial_video.state,
+                initial_audio.state,
                 stage_one_denoiser,
-                "stage_1",
-                self.denoiser_observer,
             )
-        sampled_video, sampled_audio = self.stage_one_sampler.sample(
-            stage_one_sigmas,
-            initial_video.state,
-            initial_audio.state,
-            stage_one_denoiser,
-        )
-        if sampled_video is None or sampled_audio is None:
-            raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_stage_one_output"})
-        del stage_one_denoiser, stage_one_input, stage_one_output
-        mx.clear_cache()
+            if sampled_video is None or sampled_audio is None:
+                raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_stage_one_output"})
+            del stage_one_denoiser, stage_one_input, stage_one_output
+            mx.clear_cache()
 
-        stage_two_video, stage_two_audio = prepare_stage_two_states(
-            sampled_video,
-            sampled_audio,
-            stage_one_video_layout=stage_one_video_layout,
-            stage_two_video_layout=stage_two_video_layout,
-            audio_layout=audio_layout,
-            upscaler=self.upscaler,
-            noiser=self.initial_noiser,
-            noise_scale=stage_two_sigma,
-        )
-        self.set_lora_strength(self.config.stage_two_lora_strength)
-        stage_two_input, stage_two_output = self.stage_module_loader(self.config.stage_two_lora_strength)
-        stage_two_denoiser = ResidentAVDenoiser(
-            input_processor=stage_two_input,
-            blocks=self.blocks,
-            expected_block_count=self.expected_block_count,
-            output_heads=stage_two_output,
-            video_conditioning=_conditioning(
-                stage_two_video,
-                contexts.video_positive,
-                contexts.video_context_mask,
-            ),
-            audio_conditioning=_conditioning(
-                stage_two_audio,
-                contexts.audio_positive,
-                contexts.audio_context_mask,
-            ),
-        )
-        if self.denoiser_observer is not None:
-            stage_two_denoiser = _ObservedDenoiser(
-                stage_two_denoiser,
-                "stage_2",
-                self.denoiser_observer,
+        with self.profiler.measure(RuntimePhase.LATENT_UPSCALE):
+            stage_two_video, stage_two_audio = prepare_stage_two_states(
+                sampled_video,
+                sampled_audio,
+                stage_one_video_layout=stage_one_video_layout,
+                stage_two_video_layout=stage_two_video_layout,
+                audio_layout=audio_layout,
+                upscaler=self.upscaler,
+                noiser=self.initial_noiser,
+                noise_scale=stage_two_sigma,
             )
-        refined_video, _ = self.stage_two_sampler.sample(
-            stage_two_sigmas,
-            stage_two_video.state,
-            stage_two_audio.state,
-            stage_two_denoiser,
-        )
-        if refined_video is None:
-            raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_stage_two_video"})
+            mx.eval(stage_two_video.state.latent, stage_two_audio.state.latent)
+
+        with self.profiler.measure(RuntimePhase.SAMPLING_STAGE_TWO):
+            self.set_lora_strength(self.config.stage_two_lora_strength)
+            stage_two_input, stage_two_output = self.stage_module_loader(self.config.stage_two_lora_strength)
+            stage_two_denoiser = ResidentAVDenoiser(
+                input_processor=stage_two_input,
+                blocks=self.blocks,
+                expected_block_count=self.expected_block_count,
+                output_heads=stage_two_output,
+                video_conditioning=_conditioning(
+                    stage_two_video,
+                    contexts.video_positive,
+                    contexts.video_context_mask,
+                ),
+                audio_conditioning=_conditioning(
+                    stage_two_audio,
+                    contexts.audio_positive,
+                    contexts.audio_context_mask,
+                ),
+            )
+            if self.denoiser_observer is not None:
+                stage_two_denoiser = _ObservedDenoiser(
+                    stage_two_denoiser,
+                    "stage_2",
+                    self.denoiser_observer,
+                )
+            refined_video, _ = self.stage_two_sampler.sample(
+                stage_two_sigmas,
+                stage_two_video.state,
+                stage_two_audio.state,
+                stage_two_denoiser,
+            )
+            if refined_video is None:
+                raise LaraError("LARA-RUNTIME-008", details={"reason": "missing_stage_two_video"})
+            del stage_two_denoiser, stage_two_input, stage_two_output
+            mx.clear_cache()
         video = unpatchify_video(refined_video.latent, stage_two_video_layout)
         audio = unpatchify_audio(sampled_audio.latent, audio_layout)
         mx.eval(video, audio)

@@ -1,0 +1,127 @@
+{
+  "acceptance": null,
+  "audio": {
+    "alignment": {
+      "aligned_cosine_similarity": -0.06921940260396615,
+      "lag_ms": -62.270833333333336,
+      "lag_samples": -2989
+    },
+    "channels": 2,
+    "characteristics": {
+      "candidate": {
+        "channel_rms": [
+          0.06754286037259867,
+          0.06752793672876947
+        ],
+        "peak_abs": 0.3809064030647278,
+        "rms": 0.06753539896290335
+      },
+      "reference": {
+        "channel_rms": [
+          0.03473001502509067,
+          0.0343671414590922
+        ],
+        "peak_abs": 0.24372108280658722,
+        "rms": 0.03454905465937003
+      }
+    },
+    "metrics": {
+      "candidate_checksum": "72fd313ab11ff7c0d0ee4d25c8db8ce75534bdf9d8b2e7c78fe5d32929db45dc",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.014988389808994413,
+      "finite_count": 98304,
+      "inf_count": 0,
+      "max_abs_error": 0.45674536377191544,
+      "max_relative_error": 114482.16429484019,
+      "mean_abs_error": 0.05268847503759556,
+      "name": "decoded_audio",
+      "nan_count": 0,
+      "normalized_rmse": 2.182320252892939,
+      "psnr_db": 22.45290696569745,
+      "reference_checksum": "0af82485e8936898e0dfb2dc366f6983d9c6f683c653e5cf6b7da291951059c3",
+      "reference_dtype": "float32",
+      "reference_rms": 0.03454905465937003,
+      "rmse": 0.07539710170144838,
+      "shape": [
+        49152,
+        2
+      ]
+    },
+    "sample_count": 49152,
+    "sample_rate": 48000
+  },
+  "candidate": "golden/quality/mlx_v7/barista_dialogue_portrait.mp4",
+  "component": "cuda_mlx_media_quality",
+  "passed": null,
+  "reference": "golden/quality/cuda/barista_dialogue_portrait.mp4",
+  "schema_version": 1,
+  "video": {
+    "characteristics": {
+      "candidate": {
+        "horizontal_gradient_mean_abs": 0.022896783426404,
+        "luma_mean": 0.4868801481902044,
+        "luma_standard_deviation": 0.2781559709180478,
+        "temporal_motion_mean_abs": 0.017269128933548927,
+        "vertical_gradient_mean_abs": 0.017631743103265762
+      },
+      "reference": {
+        "horizontal_gradient_mean_abs": 0.01239975355565548,
+        "luma_mean": 0.6068635790376891,
+        "luma_standard_deviation": 0.2549269054239225,
+        "temporal_motion_mean_abs": 0.022539393976330757,
+        "vertical_gradient_mean_abs": 0.012246730737388134
+      }
+    },
+    "frame_count": 25,
+    "frame_metrics": {
+      "candidate_checksum": "8efbaf49a2fa3707c9405c22dc66e232a63082797863b2a92f4e4c7746bf7abe",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.7664208042563112,
+      "finite_count": 12288000,
+      "inf_count": 0,
+      "max_abs_error": 1.0,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.35623938925989945,
+      "name": "decoded_rgb_frames",
+      "nan_count": 0,
+      "normalized_rmse": 0.6493252720550302,
+      "psnr_db": 7.261916096098245,
+      "reference_checksum": "eeb293f06ca9df1d5900f1a52e27dfd342344812f10e1a95399608734cfc2223",
+      "reference_dtype": "float32",
+      "reference_rms": 0.6674855817950979,
+      "rmse": 0.4334152569919121,
+      "shape": [
+        25,
+        512,
+        320,
+        3
+      ]
+    },
+    "height": 512,
+    "temporal_delta_metrics": {
+      "candidate_checksum": "511a87ddf5cc962332985e49978f3be5f76af90c76b2cee0b35193bf871d9854",
+      "candidate_dtype": "float32",
+      "cosine_similarity": 0.0018142648996695933,
+      "finite_count": 11796480,
+      "inf_count": 0,
+      "max_abs_error": 1.1176470518112183,
+      "max_relative_error": 8.507059173023462e+37,
+      "mean_abs_error": 0.035168308278734114,
+      "name": "decoded_rgb_temporal_delta",
+      "nan_count": 0,
+      "normalized_rmse": 1.476301187105943,
+      "psnr_db": 22.090415663393475,
+      "reference_checksum": "3254c8a40ea81e410e4a28f9601707c033cd75b277b79dd4400a3ed50f2de447",
+      "reference_dtype": "float32",
+      "reference_rms": 0.05324811618131656,
+      "rmse": 0.07861025712963281,
+      "shape": [
+        24,
+        512,
+        320,
+        3
+      ]
+    },
+    "width": 320
+  }
+}

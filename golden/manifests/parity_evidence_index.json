@@ -14,6 +14,7 @@
     {"name": "video_vae_strict_load", "report": "golden/mlx_diffusion_decoder_load_report.json"},
     {"name": "video_vae_decode", "report": "golden/mlx_diffusion_decoder_smoke_report.json"},
     {"name": "scheduler_sampler", "report": "golden/mlx_sampling_report.json"},
+    {"name": "sampler_only_replay", "report": "golden/mlx_sampler_only_replay_report.json"},
     {"name": "guided_denoiser", "report": "golden/mlx_guided_denoiser_two_stage_report.json"},
     {"name": "two_stage_sampling", "report": "golden/mlx_two_stage_sampling_smoke_report.json"},
     {"name": "sequential_decode", "report": "golden/mlx_decode_pipeline_smoke_report.json"},

@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from collections.abc import Callable, Iterator, Sequence
 from datetime import UTC, datetime
@@ -13,6 +12,7 @@ from typing import Any
 
 import numpy as np
 import torch
+from cuda_attention_internals import AttentionInternalsRecorder, TensorCapture, sha256_bytes
 from ltx_core.components.guiders import MultiModalGuiderParams
 from ltx_core.model.video_vae import AUTO_TILING, get_video_chunks_number
 from ltx_pipelines.ti2vid_two_stages_hq import TI2VidTwoStagesHQPipeline
@@ -21,47 +21,13 @@ from ltx_pipelines.utils.constants import LTX_2_3_HQ_PARAMS
 from ltx_pipelines.utils.media_io import encode_video, resolve_hdr_color_space, vae_dtype_for_hdr
 from ltx_pipelines.utils.samplers import _get_new_noise
 
-ARTIFACT_SCHEMA_VERSION = 5
+ARTIFACT_SCHEMA_VERSION = 6
 HASH_BLOCK_BYTES = 1024 * 1024
 MAX_RECORDED_NOISER_CALLS_PER_STAGE = 2
 
 
 class DiagnosticCaptureCompleteError(RuntimeError):
     """Stop the pipeline after the requested diagnostic boundary is durable."""
-
-
-def _sha256_bytes(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
-
-
-class TensorCapture:
-    """Persist named tensors as float32 values with original dtype metadata."""
-
-    def __init__(self) -> None:
-        self.arrays: dict[str, np.ndarray] = {}
-        self.metadata: dict[str, dict[str, object]] = {}
-
-    def add(self, name: str, tensor: torch.Tensor | None) -> None:
-        if tensor is None:
-            return
-        array = tensor.detach().float().cpu().numpy()
-        self.arrays[name] = array
-        self.metadata[name] = {
-            "original_dtype": str(tensor.dtype),
-            "shape": list(tensor.shape),
-            "stored_dtype": str(array.dtype),
-            "sha256": _sha256_bytes(array.tobytes()),
-        }
-
-    def add_scalar(self, name: str, value: bool | int | float) -> None:
-        array = np.asarray(value)
-        self.arrays[name] = array
-        self.metadata[name] = {
-            "original_dtype": type(value).__name__,
-            "shape": [],
-            "stored_dtype": str(array.dtype),
-            "sha256": _sha256_bytes(array.tobytes()),
-        }
 
 
 class CallRecorder:
@@ -108,6 +74,7 @@ class DeepTransformerRecorder:
         self._stage_name = stage_name
         self._block_indices = block_indices
         self._handles: list[Any] = []
+        self._attention_recorders: list[AttentionInternalsRecorder] = []
         self._block_call_counts = {index: 0 for index in block_indices}
         self._internal_call_counts: dict[str, int] = {}
 
@@ -182,6 +149,16 @@ class DeepTransformerRecorder:
                 self._capture.add(f"{prefix}_output", output if isinstance(output, torch.Tensor) else None)
 
             self._handles.append(module.register_forward_hook(internal_hook, with_kwargs=True))
+            if hasattr(module, "attention_function"):
+                recorder = AttentionInternalsRecorder(
+                    self._capture,
+                    self._stage_name,
+                    first_index,
+                    module_name,
+                    module,
+                )
+                recorder.install()
+                self._attention_recorders.append(recorder)
 
         for block_index in self._block_indices:
             prefix = f"{self._stage_name}_deep_block_{block_index:02d}"
@@ -216,6 +193,9 @@ class DeepTransformerRecorder:
             self._handles.append(blocks[block_index].register_forward_hook(hook, with_kwargs=True))
 
     def remove(self) -> None:
+        for recorder in self._attention_recorders:
+            recorder.remove()
+        self._attention_recorders.clear()
         for handle in self._handles:
             handle.remove()
         self._handles.clear()
@@ -433,7 +413,7 @@ def _record_video_decoder(
             "original_dtype": "int64",
             "shape": [],
             "stored_dtype": "int64",
-            "sha256": _sha256_bytes(np.asarray(frame_count, dtype=np.int64).tobytes()),
+            "sha256": sha256_bytes(np.asarray(frame_count, dtype=np.int64).tobytes()),
         }
 
     return recorded_frames()

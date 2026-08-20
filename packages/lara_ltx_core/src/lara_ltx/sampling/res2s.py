@@ -18,6 +18,8 @@ DEFAULT_ETA = 0.5
 DEFAULT_BONG_MAX_ITERATIONS = 100
 DEFAULT_BONG_STEP_THRESHOLD = 0.5
 DEFAULT_BONG_SIGMA_THRESHOLD = 0.03
+SAMPLER_HOST_DTYPE = np.float64
+MLX_TRANSFER_DTYPE = np.float32
 
 
 def phi(order: int, negative_step: float) -> float:
@@ -84,6 +86,27 @@ class Res2sDiffusionStep:
         noised = alpha_ratio * (denoised_next + sigma_down * epsilon_next) + sigma_up * noise.astype(mx.float32)
         return noised.astype(denoised_sample.dtype)
 
+    def step_host(
+        self,
+        sample: np.ndarray,
+        denoised_sample: np.ndarray,
+        *,
+        sigma: float,
+        sigma_next: float,
+        noise: np.ndarray,
+        eta: float = DEFAULT_ETA,
+    ) -> np.ndarray:
+        """Evaluate the CUDA-reference sampler math in host float64."""
+
+        if not 0.0 <= eta <= 1.0 or sigma <= sigma_next or sigma <= 0.0:
+            raise LaraError("LARA-SAMPLING-003", details={"reason": "invalid_sde_step"})
+        alpha_ratio, sigma_down, sigma_up = self.get_sde_coefficients(sigma_next, sigma_next * eta)
+        if sigma_up == 0.0 or sigma_next == 0.0:
+            return denoised_sample
+        epsilon_next = (sample - denoised_sample) / (sigma - sigma_next)
+        denoised_next = sample - sigma * epsilon_next
+        return alpha_ratio * (denoised_next + sigma_down * epsilon_next) + sigma_up * noise
+
 
 Denoiser = Callable[
     [Res2sLatentState | None, Res2sLatentState | None, float],
@@ -139,26 +162,44 @@ class Res2sSampler:
         self.noise_fn = noise_fn or _NoiseGenerator(noise_seed, substep_seed)
         self.stepper = Res2sDiffusionStep()
 
-    def _inject(
+    @staticmethod
+    def _to_host(value: mx.array) -> np.ndarray:
+        mx.eval(value)
+        return np.asarray(value.astype(mx.float32), dtype=MLX_TRANSFER_DTYPE).astype(
+            SAMPLER_HOST_DTYPE,
+            copy=False,
+        )
+
+    @staticmethod
+    def _to_model(value: np.ndarray, dtype: mx.Dtype) -> mx.array:
+        return mx.array(np.asarray(value, dtype=MLX_TRANSFER_DTYPE), dtype=dtype)
+
+    def _post_process_host(self, value: np.ndarray, state: Res2sLatentState) -> np.ndarray:
+        mask = self._to_host(state.denoise_mask)
+        clean = self._to_host(state.clean_latent)
+        return value * mask + clean * (1.0 - mask)
+
+    def _inject_host(
         self,
         state: Res2sLatentState,
-        sample: mx.array,
-        denoised: mx.array,
+        sample: np.ndarray,
+        denoised: np.ndarray,
         *,
         sigma: float,
         sigma_next: float,
         stream: str,
         eta: float,
-    ) -> mx.array:
-        updated = self.stepper.step(
+    ) -> np.ndarray:
+        noise = self._to_host(self.noise_fn(state.latent, stream))
+        updated = self.stepper.step_host(
             sample,
             denoised,
             sigma=sigma,
             sigma_next=sigma_next,
-            noise=self.noise_fn(state.latent, stream),
+            noise=noise,
             eta=eta,
         )
-        return post_process_latent(updated, state)
+        return self._post_process_host(updated, state)
 
     @staticmethod
     def _prepare_prediction(prediction: mx.array | None, state: Res2sLatentState | None) -> mx.array | None:
@@ -189,8 +230,8 @@ class Res2sSampler:
             a21, b1, b2 = get_res2s_coefficients(step)
             sub_sigma = math.sqrt(sigma * sigma_next)
             anchors = {
-                "video": video.latent.astype(mx.float32) if video is not None else None,
-                "audio": audio.latent.astype(mx.float32) if audio is not None else None,
+                "video": self._to_host(video.latent) if video is not None else None,
+                "audio": self._to_host(audio.latent) if audio is not None else None,
             }
             first_video, first_audio = denoiser(video, audio, sigma)
             first = {
@@ -198,8 +239,8 @@ class Res2sSampler:
                 "audio": self._prepare_prediction(first_audio, audio),
             }
             states = {"video": video, "audio": audio}
-            midpoint_values: dict[str, mx.array | None] = {}
-            epsilon_first: dict[str, mx.array | None] = {}
+            midpoint_values: dict[str, np.ndarray | None] = {}
+            epsilon_first: dict[str, np.ndarray | None] = {}
             for name in ("video", "audio"):
                 anchor = anchors[name]
                 prediction = first[name]
@@ -208,9 +249,10 @@ class Res2sSampler:
                     midpoint_values[name] = None
                     epsilon_first[name] = None
                     continue
-                epsilon = prediction.astype(mx.float32) - anchor
+                prediction_host = self._to_host(prediction)
+                epsilon = prediction_host - anchor
                 midpoint = anchor + step * a21 * epsilon
-                midpoint = self._inject(
+                midpoint = self._inject_host(
                     state,
                     anchor,
                     midpoint,
@@ -221,18 +263,18 @@ class Res2sSampler:
                 )
                 if self.bongmath and step < DEFAULT_BONG_STEP_THRESHOLD and sigma > DEFAULT_BONG_SIGMA_THRESHOLD:
                     for _ in range(self.bongmath_max_iterations):
-                        anchor = midpoint.astype(mx.float32) - step * a21 * epsilon
-                        epsilon = prediction.astype(mx.float32) - anchor
+                        anchor = midpoint - step * a21 * epsilon
+                        epsilon = prediction_host - anchor
                 anchors[name] = anchor
                 midpoint_values[name] = midpoint
                 epsilon_first[name] = epsilon
             mid_video = (
-                replace(video, latent=midpoint_values["video"].astype(video.latent.dtype))
+                replace(video, latent=self._to_model(midpoint_values["video"], video.latent.dtype))
                 if video is not None and midpoint_values["video"] is not None
                 else None
             )
             mid_audio = (
-                replace(audio, latent=midpoint_values["audio"].astype(audio.latent.dtype))
+                replace(audio, latent=self._to_model(midpoint_values["audio"], audio.latent.dtype))
                 if audio is not None and midpoint_values["audio"] is not None
                 else None
             )
@@ -251,9 +293,9 @@ class Res2sSampler:
                 if state is None or anchor is None or epsilon_1 is None or prediction_2 is None:
                     updated[name] = state
                     continue
-                epsilon_2 = prediction_2.astype(mx.float32) - anchor
+                epsilon_2 = self._to_host(prediction_2) - anchor
                 next_latent = anchor + step * (b1 * epsilon_1 + b2 * epsilon_2)
-                next_latent = self._inject(
+                next_latent = self._inject_host(
                     state,
                     anchor,
                     next_latent,
@@ -262,8 +304,9 @@ class Res2sSampler:
                     stream="step",
                     eta=self.eta,
                 )
-                mx.eval(next_latent)
-                updated[name] = replace(state, latent=next_latent.astype(state.latent.dtype))
+                model_latent = self._to_model(next_latent, state.latent.dtype)
+                mx.eval(model_latent)
+                updated[name] = replace(state, latent=model_latent)
             video, audio = updated["video"], updated["audio"]
 
         if terminal:

@@ -25,17 +25,15 @@ Diffusion Video VAE, Audio VAE/vocoder/BWE and H.264/AAC muxing. The fixed
 320x512/17-frame public-API smoke passes on M5 Max with a measured
 40,749,191,990-byte MLX peak and 73.4-second total runtime.
 
-This is an engineering preview, not yet a final CUDA-quality-parity release.
-The four-case CUDA quality corpus and expanded stochastic trace are complete.
-Exact CUDA inputs prove the checkpoint-metadata-driven transformer input path,
-final transformer boundary and output heads at component tolerance, but the
-strict full-trajectory final-latent gate remains open because cross-backend
-BF16 differences accumulate through guidance and stochastic sampling. Two of
-the four MLX quality cases are complete and measured; the 512x512/33-frame case
-exceeded the 128 GB target Mac after about 70 minutes and was terminated by the
-operating system. Full corpus review, blind review and the canonical
-1920x1088/121-frame performance gate remain open; published quality claims stay
-limited to measured evidence.
+This is an engineering preview, not a same-seed CUDA-reproduction claim. The
+four-case CUDA and MLX quality corpora, paired diagnostics and expanded
+stochastic trace are complete. Exact CUDA inputs prove the
+checkpoint-metadata-driven input path, AdaLN boundary, attention operations,
+final transformer boundary and output heads at component tolerance. The strict
+full-trajectory final-latent gate remains open because small cross-backend BF16
+differences accumulate through guidance and stochastic sampling. All four MLX
+outputs passed a non-blind frame-sequence usability audit, but their composition
+differs materially from CUDA and independent blind review remains open.
 
 This is not a serving-engine project. The deliverable is one direct Python MLX
 pipeline, followed only after core parity by a thin CLI and optional thin
@@ -65,6 +63,10 @@ pipe = LTXPipeline.from_pretrained("challychoi/Lara-LTX-2.5-MLX-BF16")
 video = pipe(prompt="A cinematic aerial shot of Seoul at night.", seed=42)
 video.save("output.mp4")
 ```
+
+Pass `profile=True` to collect text, both sampling stages, latent upscale,
+video decode, audio VAE and vocoder elapsed/MLX-memory metrics in
+`video.metrics`.
 
 For the already downloaded official pack, pass its directory instead:
 
@@ -101,11 +103,12 @@ the adapter's `examples` directory.
 
 The primary acceptance target is M5 Max with 128 GB unified memory. Additional
 supported devices and minimum memory will be published only after measured P6
-testing. The current engineering preview is validated at 320x512/17 frames;
-512x512/33 frames is not supported yet because that quality-corpus case caused
-heavy swap growth and OOM even on the 128 GB target. The packaged resource
-policy is part of `hq.toml`, not hard-coded in the API. A separately reviewed
-custom profile may change or explicitly disable enforcement; doing so is not a
+testing. The current engineering preview is measured through 512x512/33 frames
+and 640x384/25 frames. A previously undersized decoder budget selected 51,200
+stage-5 halo tiles and caused swap runaway; the reviewed 20 GiB activation
+budget reduces the maximum case to one stage-5 tile. The packaged resource
+policy and 1,280-token Stage-2 ceiling live in `hq.toml`, not API code. A custom
+profile may change or disable enforcement, but doing so is not a
 supported-hardware claim and never enables implicit quantization or fallback.
 
 ## Benchmarks
@@ -114,31 +117,40 @@ supported-hardware claim and never enables implicit quantization or fallback.
 |---|---:|---|---:|---:|
 | Public API smoke, 320x512, 17 frames, synchronized audio | Stage 1: 2; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,191,990 B | 73.4 s |
 | HQ fixed prompt, 320x512, 17 frames, synchronized audio | Stage 1: 15; Stage 2: 3 | 17-frame H.264 + 48 kHz stereo AAC | 40,749,319,162 B | 154.7 s |
-| Same-process repeat (second run), same grid | Stage 1: 2; Stage 2: 3 | Byte-identical MP4; 0 B released-memory growth | 40,749,188,278 B | 69.1 s |
+| Same-process repeat (second run), same grid | Stage 1: 2; Stage 2: 3 | Byte-identical MP4; 0 B released-memory growth | 39,877,127,464 B | 46.9 s |
+| Quality corpus, 512x512, 33 frames | Stage 1: 15; Stage 2: 3 | H.264 + synchronized AAC | 40,247,895,618 B | 92.0 s |
+| Quality corpus, 640x384, 25 frames | Stage 1: 15; Stage 2: 3 | H.264 + synchronized AAC | 40,121,296,374 B | 78.0 s |
 
 Artifacts: `golden/mlx_public_pipeline_smoke_report.json`,
 `golden/mlx_hq_fixed_seed_report.json` and
-`golden/mlx_repeated_pipeline_report.json`. These 320x512 workloads validate
-the lifecycle and are not estimates for the canonical 1920x1088 workload.
+`golden/mlx_repeated_pipeline_report.json` and
+`golden/quality/mlx_high_resolution_profile_v7.json`. These measured grids are
+not estimates for the canonical 1920x1088 workload.
+
+The opt-in profile's second repeated run measured 13.1 seconds for Gemma text
+conditioning, 13.2 seconds for resident-transformer loading, 4.0 seconds for
+Stage 1, 0.05 seconds for latent upscale, 14.1 seconds for Stage 2, 1.64 seconds
+for video decode, 0.08 seconds for Audio VAE and 0.36 seconds for vocoder/BWE.
+The report records active, cache and peak MLX bytes for every phase.
 
 ## CUDA vs MLX quality comparison
 
 Checkpoint-backed component, prompt-connector, decode and public MP4 results
 are recorded. The expanded CUDA trace has been replayed: the corrected exact
 input boundary passes, while the frozen final-latent threshold does not. The
-versioned four-case CUDA corpus is complete. Matching MLX generation and paired
-diagnostics are complete for Seoul 512x320/17 and barista 320x512/25. The
-barista temporal-motion mean was close to CUDA (`0.0213` versus `0.0225`), while
-the Seoul result had lower motion (`0.00657` versus `0.0306`) and higher audio
-RMS (`0.210` versus `0.0405`). The 512x512/33-frame case reached OOM after about
-70 minutes on M5 Max 128 GB, so full corpus and blind review remain P5 work.
-These paired diagnostics are not perceptual acceptance, and plausible-looking
-output alone is not reported as parity.
+versioned four-case CUDA and MLX corpora are complete at four seeds, four
+resolutions and three frame counts. Paired frame, temporal and audio diagnostics
+confirm that same-seed CUDA/MLX outputs are different stochastic realizations:
+frame cosine ranges from `0.416` to `0.901`, while temporal and raw-audio
+cosines remain near zero. A first/middle/last-frame audit found all four MLX
+candidates coherent and usable, including the 512x512 fox and 640x384 ocean
+cases, but it was not an independent blind review. Candidate usability is
+therefore reported separately from CUDA reproduction, which remains failed.
 
-Evidence: `golden/quality/mlx_generation.json`,
-`golden/quality/seoul_night_landscape_metrics.json`,
-`golden/quality/barista_dialogue_portrait_metrics.json` and
-`golden/quality/mlx_high_resolution_oom_observation.json`.
+Evidence: `golden/quality/mlx_generation_v7.json`,
+`golden/quality/cuda_mlx_quality_corpus_v7.json`,
+`golden/quality/visual_review_v7.json` and
+`golden/quality/mlx_high_resolution_profile_v7.json`.
 
 ## Canonical references
 

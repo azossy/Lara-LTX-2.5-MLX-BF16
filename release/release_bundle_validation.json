@@ -22,10 +22,10 @@
   "files": {
     "LICENSE.md": "4e7dd26d9c9294e1e0549587505dcf4ba40c7c82c50850559f846f92245f6120",
     "NOTICE.md": "7c069e443104b7a6d54258487e2208f580bbb2c2358b12aadc45ba03e0838575",
-    "README.md": "69f3515d59256c4e7bcfa092807c2350eae907b9816170e53857c4e800c5c2a0",
-    "lara_ltx_model.toml": "23a04385a78636c318ec3e2416cdd31ee18f181454b078548ceb97ad1b5da632",
-    "pyproject.toml": "5e0a5d251b7267a74ab7a330a9a7414b4629a9abbc72dc5ae847fc4a9ffdfb7f",
-    "release.toml": "945a02160fa6128d4675152bbe5baf37b8e047f23b2de4963cbfac0457d83a15"
+    "README.md": "7e0d1789b5d74cde6345db9983a14084a7be2367994e966faa0e3d81f4200ad6",
+    "lara_ltx_model.toml": "1c7e8cc0db274dd89be8fd7086620906672ab1aa60c41f0fec79856d7571a569",
+    "pyproject.toml": "6440ff1858a885babaaf2d772940b1cd89e4bb86afa1789924f9d3fb50c63510",
+    "release.toml": "eb7db30f75d88a9dc8767ab4e6e7260a78c512cf4b305d831015062b6e5e2386"
   },
   "github_repository": "azossy/Lara-LTX-2.5-MLX-BF16",
   "hugging_face_repository": "challychoi/Lara-LTX-2.5-MLX-BF16",
@@ -35,5 +35,5 @@
     "repository": "Lightricks/LTX-2.5",
     "revision": "6c7e5e573ac1667efc83407806fe9b0b93730e60"
   },
-  "version": "0.0.2"
+  "version": "0.0.3"
 }
