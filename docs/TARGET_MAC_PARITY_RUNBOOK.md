@@ -303,6 +303,22 @@ twice with `attention_internal_block31_parity_config.json` and
 `attention_internal_block39_parity_config.json`. Do not test another production
 precision change until these two reports identify an operation-level cause.
 
+The compact CUDA sequence capture does not require the complete 80 GB model
+pack. `cuda_attention_sequence_capture_config.json` restarts from the original,
+verified block-23 CUDA outputs while reusing the unchanged stream fields from
+the block-0 trace, then executes only blocks 24 through 39. Download only those
+official transformer and distilled-LoRA key prefixes into compact safetensors
+subsets. The resulting payload is approximately 11.53 GiB plus 2.71 GiB. The
+capture report must compare all six video/audio guidance outputs at both block
+31 and block 39 against the original v4 trace before its internal tensors are
+accepted. This check also detects a corrupt or wrong-range subset.
+
+Use `capture_cuda_attention_sequence.py` with the compact subsets, the reduced
+v4 replay artifact, `deep_transformer_parity_config.json`, and
+`cuda_attention_sequence_capture_config.json`. The downloader now takes an
+exclusive lock on each resumable parts directory; a second writer fails with
+`concurrent_subset_download` instead of racing on partial range files.
+
 ## P3 spatial latent-upscaler gate
 
 Before a full video decode, strict-load the complete reviewed Diffusion Video
