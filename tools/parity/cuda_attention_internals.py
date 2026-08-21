@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from collections.abc import Callable
+from pathlib import Path
 from typing import Any, ClassVar
 
 import numpy as np
@@ -42,6 +43,60 @@ class TensorCapture:
             "stored_dtype": str(array.dtype),
             "sha256": sha256_bytes(array.tobytes()),
         }
+
+
+def deduplicate_capture(capture: TensorCapture) -> tuple[dict[str, np.ndarray], dict[str, str]]:
+    """Return one canonical array per content hash plus alias-to-canonical names."""
+
+    unique: dict[str, np.ndarray] = {}
+    aliases: dict[str, str] = {}
+    canonical_by_identity: dict[tuple[str, tuple[int, ...], str], str] = {}
+    for name, array in capture.arrays.items():
+        metadata = capture.metadata[name]
+        identity = (str(metadata["sha256"]), tuple(array.shape), str(array.dtype))
+        canonical = canonical_by_identity.get(identity)
+        if canonical is None:
+            canonical_by_identity[identity] = name
+            unique[name] = array
+        else:
+            aliases[name] = canonical
+    return unique, aliases
+
+
+def write_artifact_shards(path: Path, arrays: dict[str, np.ndarray], *, maximum_bytes: int) -> list[Path]:
+    """Write size-bounded compressed NPZ parts and remove stale parts for the base path."""
+
+    if maximum_bytes <= 0:
+        raise ValueError("invalid_maximum_artifact_shard_bytes")
+    groups: list[dict[str, np.ndarray]] = []
+    current: dict[str, np.ndarray] = {}
+    current_bytes = 0
+    for name, array in arrays.items():
+        if array.nbytes > maximum_bytes:
+            raise ValueError(f"attention_tensor_exceeds_shard_limit:{name}")
+        if current and current_bytes + array.nbytes > maximum_bytes:
+            groups.append(current)
+            current = {}
+            current_bytes = 0
+        current[name] = array
+        current_bytes += array.nbytes
+    if current:
+        groups.append(current)
+
+    shards: list[Path] = []
+    for index, group in enumerate(groups):
+        shard = path.with_name(f"{path.stem}.part-{index:02d}{path.suffix}")
+        temporary = shard.with_suffix(f"{shard.suffix}.tmp")
+        with temporary.open("wb") as handle:
+            np.savez_compressed(handle, **group)
+        temporary.replace(shard)
+        shards.append(shard)
+
+    retained = set(shards)
+    for stale_shard in path.parent.glob(f"{path.stem}.part-*{path.suffix}"):
+        if stale_shard not in retained:
+            stale_shard.unlink()
+    return shards
 
 
 class AttentionInternalsRecorder:

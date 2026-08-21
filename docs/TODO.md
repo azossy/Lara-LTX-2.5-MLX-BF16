@@ -263,6 +263,16 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       diagnostic rather than a parity claim. The remaining differences
       accumulate from BF16 projection, gating and fused-SDPA backend rounding,
       not checkpoint mapping or sampler control flow.
+- [x] Capture and compare exact CUDA attention sub-operations at block 31 and
+      block 39. The compact CUDA replay uses only the 14.24 GiB blocks 24-39
+      transformer/LoRA subsets, reproduces all 12 source outputs with NRMSE
+      `0.0`, and stores 968 named boundaries as 409 unique tensors plus 559
+      aliases in 11 hash-verified shards. Both 176-operation MLX reports pass;
+      their worst NRMSE values are `0.00396` and `0.00395`. No discrete mapping
+      or attention-operation failure remains. The FP32 attention sigmoid/gate
+      candidate remains rejected because it worsened full-trajectory
+      video/audio NRMSE to `0.7320`/`0.2236`; no production precision change is
+      applied.
 
 ## P5 — BF16 quality parity
 
@@ -274,6 +284,9 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 - [x] Complete a non-blind first/middle/last-frame audit and document known
       differences. All MLX candidates are coherent and usable; independent
       blind review remains explicitly unclaimed.
+- [ ] Complete the prepared deterministic blind A/B review kit with an
+      independent reviewer. Backend identities are absent from the public kit;
+      the assignment key is stored separately in the ignored private path.
 
 ## P6 — Apple Silicon optimization
 
@@ -325,16 +338,17 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
 
 ## P10 — GitHub and Hugging Face release
 
-- [ ] Publish the verified source, tests, documentation and tagged release to
+- [x] Publish the verified source, tests, documentation and tagged release to
       GitHub.
-- [ ] Publish the verified MLX BF16 package and loading metadata.
-- [ ] Put Quick Start and the three official usage paths at the top.
-- [ ] State that no server/CUDA is required on Mac and ComfyUI is optional.
-- [ ] Publish only measured supported-hardware, benchmark and quality results.
-- [ ] Verify every README command from a clean environment.
-- [ ] Keep the GitHub tag, Hugging Face revision and compatibility metadata
+- [x] Publish the verified MLX BF16 package and loading metadata.
+- [x] Put Quick Start and the three official usage paths at the top.
+- [x] State that no server/CUDA is required on Mac and ComfyUI is optional.
+- [x] Publish only measured supported-hardware, benchmark and quality results.
+- [x] Verify the installed public API, CLI and end-to-end generation from a
+      clean Python 3.12 environment on M5 Max 128 GB.
+- [x] Keep the GitHub tag, Hugging Face revision and compatibility metadata
       mutually traceable.
-- [ ] Verify both public repository pages and downloadable artifacts after
+- [x] Verify both public repository pages and downloadable artifacts after
       publication.
 - [ ] Complete the release acceptance checklist.
 

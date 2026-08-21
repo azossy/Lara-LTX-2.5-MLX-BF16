@@ -29,9 +29,12 @@ This is an engineering preview, not a same-seed CUDA-reproduction claim. The
 four-case CUDA and MLX quality corpora, paired diagnostics and expanded
 stochastic trace are complete. Exact CUDA inputs prove the
 checkpoint-metadata-driven input path, AdaLN boundary, attention operations,
-final transformer boundary and output heads at component tolerance. The strict
-full-trajectory final-latent gate remains open because small cross-backend BF16
-differences accumulate through guidance and stochastic sampling. All four MLX
+final transformer boundary and output heads at component tolerance. Deep
+block-31 and block-39 traces add 352 passing exact-input Attention comparisons,
+with worst NRMSE below `0.00396`, ruling out a discrete deep Attention or
+mapping defect. The strict full-trajectory final-latent gate remains open
+because small cross-backend BF16 differences accumulate through guidance and
+stochastic sampling. All four MLX
 outputs passed a non-blind frame-sequence usability audit, but their composition
 differs materially from CUDA and independent blind review remains open.
 
@@ -150,7 +153,10 @@ therefore reported separately from CUDA reproduction, which remains failed.
 Evidence: `golden/quality/mlx_generation_v7.json`,
 `golden/quality/cuda_mlx_quality_corpus_v7.json`,
 `golden/quality/visual_review_v7.json` and
-`golden/quality/mlx_high_resolution_profile_v7.json`.
+`golden/quality/mlx_high_resolution_profile_v7.json`. Exact-input deep
+Attention evidence is recorded in
+`golden/mlx_attention_internal_block31_v7.json` and
+`golden/mlx_attention_internal_block39_v7.json`.
 
 ## Canonical references
 

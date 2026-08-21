@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "component": "clean_release_install",
+  "release": {
+    "version": "0.0.4",
+    "tag": "v0.0.4",
+    "wheel_sha256": "8e60efcf7d82e67e539168d06bea7ccf4244c0d70f01b07f8c475b2c10f0032e"
+  },
+  "environment": {
+    "platform": "Apple Silicon macOS",
+    "chip": "Apple M5 Max",
+    "unified_memory_bytes": 137438953472,
+    "python": "3.12.13",
+    "isolated_environment": "/private/tmp/lara-release-venv"
+  },
+  "checks": {
+    "all_declared_dependencies_installed": true,
+    "package_version": "0.0.4",
+    "public_api_imported": true,
+    "installed_cli_help_passed": true,
+    "local_bf16_pack_resolved": true,
+    "end_to_end_generation_passed": true
+  },
+  "generation": {
+    "model": "models/LTX-2.5",
+    "local_files_only": true,
+    "seed": 25081900,
+    "width": 512,
+    "height": 320,
+    "num_frames": 17,
+    "frame_rate": 24.0,
+    "stage_one_steps": 2,
+    "output_sha256": "3c00bfda0429a2d9ec6089da8ab075f042f0fa2eb0b910ccb8caacc7554c2bd4",
+    "output_size_bytes": 124327,
+    "duration_seconds": 0.708333,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "passed": true
+}

@@ -5,12 +5,14 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import fcntl
 import hashlib
 import json
 import os
 import shutil
 import struct
 import subprocess
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -28,6 +30,7 @@ DEFAULT_RANGE_RETRIES = 8
 COPY_BUFFER_BYTES = 8 * 1024 * 1024
 HEADER_LENGTH_BYTES = 8
 HEADER_ALIGNMENT_BYTES = 8
+DOWNLOAD_LOCK_FILENAME = ".download.lock"
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -213,6 +216,22 @@ def _download_ranges(
     return pieces
 
 
+@contextmanager
+def _exclusive_download(directory: Path):
+    """Prevent two resumable writers from appending to the same range pieces."""
+
+    lock_path = directory / DOWNLOAD_LOCK_FILENAME
+    with lock_path.open("a", encoding="utf-8") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise ValueError("concurrent_subset_download") from error
+        try:
+            yield
+        finally:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -253,34 +272,36 @@ def main() -> int:
         parts_directory = arguments.output.parent / f"{arguments.output.name}.parts"
         parts_directory.mkdir(parents=True, exist_ok=True)
         try:
-            curl_config = parts_directory / "curl.conf"
-            curl_config.write_text(f'header = "Authorization: Bearer {token}"\n', encoding="utf-8")
-            os.chmod(curl_config, 0o600)
-            pieces = _download_ranges(
-                parts_directory,
-                executable=arguments.curl,
-                config=curl_config,
-                url=url,
-                ranges=ranges,
-                source_payload_offset=HEADER_LENGTH_BYTES + original_header_length,
-                connection_count=arguments.connection_count,
-            )
-            temporary_output = arguments.output.with_suffix(f"{arguments.output.suffix}.tmp")
-            with temporary_output.open("wb") as destination:
-                destination.write(struct.pack("<Q", len(compact_header)))
-                destination.write(compact_header)
-                for piece, expected_size in pieces:
-                    if piece.stat().st_size != expected_size:
-                        raise ValueError(f"piece_size_mismatch:{piece.name}")
-                    with piece.open("rb") as source:
-                        shutil.copyfileobj(source, destination, length=COPY_BUFFER_BYTES)
-            _read_header(temporary_output)
-            temporary_output.replace(arguments.output)
+            with _exclusive_download(parts_directory):
+                curl_config = parts_directory / "curl.conf"
+                curl_config.write_text(f'header = "Authorization: Bearer {token}"\n', encoding="utf-8")
+                os.chmod(curl_config, 0o600)
+                pieces = _download_ranges(
+                    parts_directory,
+                    executable=arguments.curl,
+                    config=curl_config,
+                    url=url,
+                    ranges=ranges,
+                    source_payload_offset=HEADER_LENGTH_BYTES + original_header_length,
+                    connection_count=arguments.connection_count,
+                )
+                temporary_output = arguments.output.with_suffix(f"{arguments.output.suffix}.tmp")
+                with temporary_output.open("wb") as destination:
+                    destination.write(struct.pack("<Q", len(compact_header)))
+                    destination.write(compact_header)
+                    for piece, expected_size in pieces:
+                        if piece.stat().st_size != expected_size:
+                            raise ValueError(f"piece_size_mismatch:{piece.name}")
+                        with piece.open("rb") as source:
+                            shutil.copyfileobj(source, destination, length=COPY_BUFFER_BYTES)
+                _read_header(temporary_output)
+                temporary_output.replace(arguments.output)
         finally:
             if arguments.output.is_file():
                 shutil.rmtree(parts_directory)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
-        return _fail(AUTH_ERROR_CODE, type(error).__name__, "check_network_token_and_retry")
+        cause = str(error) if isinstance(error, ValueError) else type(error).__name__
+        return _fail(AUTH_ERROR_CODE, cause, "check_network_token_and_retry")
 
     payload_bytes = sum(end - start for _name, start, end in ranges)
     print(

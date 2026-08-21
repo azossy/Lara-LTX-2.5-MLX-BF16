@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cuda_artifact_schema_version": 6,
+  "stage": "stage_1",
+  "sequence_start_block_index": 24,
+  "sequence_end_block_index": 39,
+  "initial_stream_source_block_index": 0,
+  "initial_x_output_block_index": 23,
+  "capture_block_indices": [31, 39],
+  "reference_output_block_indices": [31, 39],
+  "lora_strength": 0.25,
+  "passes": [0, 1, 2],
+  "maximum_artifact_shard_bytes": 80000000,
+  "modules": [
+    "attn1",
+    "attn2",
+    "audio_attn1",
+    "audio_attn2",
+    "audio_to_video_attn",
+    "video_to_audio_attn"
+  ],
+  "acceptance": {
+    "maximum_normalized_rmse": 0.02,
+    "minimum_cosine_similarity": 0.9999
+  }
+}

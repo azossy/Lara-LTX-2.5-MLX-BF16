@@ -58,17 +58,17 @@ checklist is evidence-driven; marketing text cannot substitute for test output.
 
 ## Packaging and documentation
 
-- [ ] GitHub contains the verified source, tests, documentation, license,
+- [x] GitHub contains the verified source, tests, documentation, license,
       release notes and an immutable tagged release.
-- [ ] Hugging Face packaging loads from a clean supported Mac environment.
-- [ ] The model card opens with the Apple Silicon/no-server/no-CUDA message.
+- [x] Hugging Face packaging loads from a clean supported Mac environment.
+- [x] The model card opens with the Apple Silicon/no-server/no-CUDA message.
 - [x] Quick Start precedes lengthy technical detail.
 - [x] Python, CLI and optional ComfyUI paths are immediately distinguishable.
 - [x] Supported hardware, benchmarks and CUDA-versus-MLX quality results are
       populated with measured data rather than estimates.
 - [x] License, attribution, modifications and known limitations are complete.
 - [x] All user-facing failures include an error code, cause and recovery action.
-- [ ] GitHub and Hugging Face identify the same release version and source
+- [x] GitHub and Hugging Face identify the same release version and source
       commit, and link to each other.
-- [ ] Public downloads and installation instructions are re-tested after both
+- [x] Public downloads and installation instructions are re-tested after both
       publications complete.

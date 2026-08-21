@@ -284,10 +284,42 @@ reconstructed from the report rather than duplicating tensor payloads:
 ```
 
 The checked-in result covers 176 projection, Q/K RMSNorm, RoPE, fused-SDPA,
-gate and output-projection comparisons. FP32 is used only for the captured
-CUDA-compatible Q/K RMSNorm and RoPE arithmetic before restoring BF16; AdaLN
-keeps its original BF16 calculation. Do not generalize the precision change to
-all normalization paths or weaken the frozen `0.02`/`0.9999` gate.
+gate and output-projection comparisons. The shared RMSNorm primitive evaluates
+its reduction in FP32 and restores the input dtype, matching the captured CUDA
+AdaLN and Q/K normalization boundaries. RoPE also uses FP32 arithmetic before
+restoring BF16. The modulation table is cast to the timestep dtype before its
+addition. Do not generalize FP32 to attention sigmoid/gating: the rejected
+full-trajectory experiment is recorded in
+`golden/experiments/fp32_attention_gate_rejection.json`.
+
+The completed v7 exact-input diagnostic targets the first frozen trajectory
+failure at block 31 and the later error spike at block 39. On the official CUDA
+environment, the capture tool accepted both block indices in one
+first-denoiser-call run, recorded inputs and all attention internals, and wrote
+11 size-bounded shards. The report hashes verify all 377,930,707 transferred
+bytes. Its compact replay reproduces all 12 source block outputs exactly and
+stores 968 named boundaries as 409 unique tensors plus 559 aliases. The
+block-31 and block-39 MLX reports each pass all 176 comparisons, with worst
+NRMSE `0.00396` and `0.00395` respectively. This rules out a discrete deep
+attention implementation or mapping failure. Do not apply a broad precision
+change: the recorded FP32 variants improve only selected isolated gates and
+regress others, while the prior full-trajectory candidate regressed materially.
+
+The compact CUDA sequence capture does not require the complete 80 GB model
+pack. `cuda_attention_sequence_capture_config.json` restarts from the original,
+verified block-23 CUDA outputs while reusing the unchanged stream fields from
+the block-0 trace, then executes only blocks 24 through 39. Download only those
+official transformer and distilled-LoRA key prefixes into compact safetensors
+subsets. The resulting payload is approximately 11.53 GiB plus 2.71 GiB. The
+capture report must compare all six video/audio guidance outputs at both block
+31 and block 39 against the original v4 trace before its internal tensors are
+accepted. This check also detects a corrupt or wrong-range subset.
+
+Use `capture_cuda_attention_sequence.py` with the compact subsets, the reduced
+v4 replay artifact, `deep_transformer_parity_config.json`, and
+`cuda_attention_sequence_capture_config.json`. The downloader now takes an
+exclusive lock on each resumable parts directory; a second writer fails with
+`concurrent_subset_download` instead of racing on partial range files.
 
 ## P3 spatial latent-upscaler gate
 
