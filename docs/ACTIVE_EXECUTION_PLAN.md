@@ -36,7 +36,7 @@ datacenter GPU and `nvidia-cutlass-dsl` dependency gate have been verified.
 | P6 | Measure and optimize on the target Apple Silicon hardware | Peak memory, latency and Metal utilization reports | The 20 GiB decoder activation budget eliminates pathological 51,200-tile execution and completes the maximum measured grid in 92.0 seconds at 40.25 GB. The public opt-in profiler records component load, stage latency and MLX active/cache/peak memory; repeated generation is byte-identical with zero released-memory growth. Privileged macOS GPU duty-cycle percentage is not claimed. |
 | P7/P8 | Stabilize Python API and thin CLI | Clean local installation and localized user-facing errors | Complete: the v0.0.4 wheel was installed into an isolated Python 3.12 environment; public API, CLI help and actual 512x320/17 H.264/AAC generation passed |
 | P9 | Build separate thin ComfyUI adapter | Adapter only calls the public Python pipeline | Complete: three nodes, localized resources, output confinement and tested API workflow |
-| P10 | Publish GitHub and Hugging Face releases | Tagged, traceable, license-compliant verified public artifacts | v0.0.3 is published and cross-linked on both services; remaining numerical/blind-quality gates are tracked without overstating parity |
+| P10 | Publish GitHub and Hugging Face releases | Tagged, traceable, license-compliant verified public artifacts | v0.0.4 is published and independently re-downloaded on both services. GitHub wheel/sdist digests and Hugging Face descriptor hashes match the local release bundle; source integration is tracked by PR #3. Remaining numerical/blind-quality gates stay explicit without overstating parity. |
 
 ## Non-negotiable controls
 
