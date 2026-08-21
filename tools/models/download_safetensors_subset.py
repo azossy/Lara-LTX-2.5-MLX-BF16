@@ -300,7 +300,8 @@ def main() -> int:
             if arguments.output.is_file():
                 shutil.rmtree(parts_directory)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
-        return _fail(AUTH_ERROR_CODE, type(error).__name__, "check_network_token_and_retry")
+        cause = str(error) if isinstance(error, ValueError) else type(error).__name__
+        return _fail(AUTH_ERROR_CODE, cause, "check_network_token_and_retry")
 
     payload_bytes = sum(end - start for _name, start, end in ranges)
     print(
