@@ -116,7 +116,15 @@ def main() -> int:
     block_count = int(_required(deep_config, "block_count", int))
     capture_blocks = _integer_list(config, "capture_block_indices")
     reference_blocks = _integer_list(config, "reference_output_block_indices")
-    if start_block != 0 or end_block < start_block or end_block >= block_count:
+    initial_stream_block = int(_required(config, "initial_stream_source_block_index", int))
+    initial_x_block = int(_required(config, "initial_x_output_block_index", int))
+    if (
+        start_block < 0
+        or end_block < start_block
+        or end_block >= block_count
+        or initial_stream_block < 0
+        or initial_x_block != start_block - 1
+    ):
         raise ValueError("invalid_attention_sequence_range")
     if capture_blocks[-1] > end_block or reference_blocks[-1] > end_block:
         raise ValueError("attention_sequence_block_outside_range")
@@ -140,24 +148,34 @@ def main() -> int:
         if not isinstance(pass_config, dict):
             raise ValueError("invalid_pass_config")
         pass_index = int(_required(pass_config, "index", int))
+        video = _stream(
+            reference,
+            stage=stage,
+            block_index=initial_stream_block,
+            pass_config=pass_config,
+            modality="video",
+            device=device,
+        )
+        audio = _stream(
+            reference,
+            stage=stage,
+            block_index=initial_stream_block,
+            pass_config=pass_config,
+            modality="audio",
+            device=device,
+        )
+        if initial_x_block >= 0:
+            initial_prefix = f"{stage}_deep_block_{initial_x_block:02d}_pass_{pass_index:02d}"
+            initial_video = reference.get(f"{initial_prefix}_video_output")
+            initial_audio = reference.get(f"{initial_prefix}_audio_output")
+            if initial_video is None or initial_audio is None:
+                raise ValueError(f"missing_sequence_initial_output:{initial_prefix}")
+            video = replace(video, x=torch.from_numpy(initial_video).to(device=device, dtype=torch.bfloat16))
+            audio = replace(audio, x=torch.from_numpy(initial_audio).to(device=device, dtype=torch.bfloat16))
         states.append(
             (
-                _stream(
-                    reference,
-                    stage=stage,
-                    block_index=start_block,
-                    pass_config=pass_config,
-                    modality="video",
-                    device=device,
-                ),
-                _stream(
-                    reference,
-                    stage=stage,
-                    block_index=start_block,
-                    pass_config=pass_config,
-                    modality="audio",
-                    device=device,
-                ),
+                video,
+                audio,
                 _perturbations(pass_config, device=device, block_count=block_count),
                 pass_index,
             )
@@ -252,6 +270,8 @@ def main() -> int:
         "component": "compact_checkpoint_attention_sequence_capture",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "sequence_block_range": [start_block, end_block],
+        "initial_stream_source_block_index": initial_stream_block,
+        "initial_x_output_block_index": initial_x_block,
         "capture_block_indices": capture_blocks,
         "lora_strength": lora_strength,
         "input_reference": {"file": arguments.input_reference.name, "sha256": _sha256(arguments.input_reference)},

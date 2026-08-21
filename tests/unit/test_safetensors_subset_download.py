@@ -6,6 +6,8 @@ import struct
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 TOOL_PATH = PROJECT_ROOT / "tools" / "models" / "download_safetensors_subset.py"
 
@@ -50,3 +52,12 @@ def test_read_header_accepts_trailing_payload(tmp_path: Path) -> None:
 
     assert length == len(header)
     assert decoded["tensor"]["data_offsets"] == [0, 1]
+
+
+def test_download_directory_rejects_concurrent_writer(tmp_path: Path) -> None:
+    tool = _tool()
+
+    with tool._exclusive_download(tmp_path):
+        with pytest.raises(ValueError, match="concurrent_subset_download"):
+            with tool._exclusive_download(tmp_path):
+                raise AssertionError("unreachable")
