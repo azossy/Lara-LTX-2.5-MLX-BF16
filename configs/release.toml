@@ -1,7 +1,7 @@
 [release]
 schema_version = 1
 project = "Lara-LTX-2.5-MLX-BF16"
-version = "0.0.3"
+version = "0.0.4"
 
 [release.github]
 owner = "azossy"

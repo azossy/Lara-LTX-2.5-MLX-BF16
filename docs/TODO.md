@@ -263,14 +263,16 @@ in `docs/ACTIVE_EXECUTION_PLAN.md`.
       diagnostic rather than a parity claim. The remaining differences
       accumulate from BF16 projection, gating and fused-SDPA backend rounding,
       not checkpoint mapping or sampler control flow.
-- [ ] Capture and compare exact CUDA attention sub-operations at block 31 and
-      block 39. The capture runner now records every selected block in one
-      first-call diagnostic and writes hash-reported, size-bounded shards.
-      It restarts from the verified block-23 boundary and downloads only blocks
-      24-39 (about 14.24 GiB total) instead of reacquiring the 80 GB model pack.
-      The FP32 attention sigmoid/gate candidate was rejected after worsening
-      final video/audio NRMSE to `0.7320`/`0.2236`, despite improving several
-      isolated boundaries; no production precision change remains applied.
+- [x] Capture and compare exact CUDA attention sub-operations at block 31 and
+      block 39. The compact CUDA replay uses only the 14.24 GiB blocks 24-39
+      transformer/LoRA subsets, reproduces all 12 source outputs with NRMSE
+      `0.0`, and stores 968 named boundaries as 409 unique tensors plus 559
+      aliases in 11 hash-verified shards. Both 176-operation MLX reports pass;
+      their worst NRMSE values are `0.00396` and `0.00395`. No discrete mapping
+      or attention-operation failure remains. The FP32 attention sigmoid/gate
+      candidate remains rejected because it worsened full-trajectory
+      video/audio NRMSE to `0.7320`/`0.2236`; no production precision change is
+      applied.
 
 ## P5 — BF16 quality parity
 

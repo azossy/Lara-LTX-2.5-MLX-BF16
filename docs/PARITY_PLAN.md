@@ -100,6 +100,16 @@ semantics to global RMSNorm reproduces the captured AdaLN boundary exactly. The
 combined full stochastic replay ends at video NRMSE `0.1916` and audio NRMSE
 `0.1110`. This remains diagnosis, not final-latent acceptance.
 
+The v7 deep Attention trace restarts from the verified block-23 CUDA output and
+replays only blocks 24-39 from compact, hash-verified official BF16 subsets.
+All 12 video/audio source outputs at blocks 31 and 39 reproduce exactly. The 11
+shards contain 409 unique tensors plus 559 aliases for 968 named boundaries.
+On MLX, both block-specific reports pass all 176 exact-input operations: worst
+NRMSE is `0.0039552` at block 31 and `0.0039529` at block 39, with cosine above
+`0.9999`. The observed full-trajectory divergence is therefore not explained
+by a discrete mapping or Attention sub-operation defect at either deep probe.
+It remains consistent with accumulated cross-backend BF16 rounding.
+
 The same archive also contains a small, stable-scale BF16 video-only upstream
 transformer block (self-attention, text cross-attention and AdaLN-gated FFN),
 including every block weight, input and output. Its MLX counterpart passes the

@@ -292,16 +292,18 @@ addition. Do not generalize FP32 to attention sigmoid/gating: the rejected
 full-trajectory experiment is recorded in
 `golden/experiments/fp32_attention_gate_rejection.json`.
 
-The next exact-input diagnostic targets the first frozen failure at block 31
-and the later error spike at block 39. On the official CUDA environment, the
-capture tool accepts both block indices in one first-denoiser-call run, records
-inputs and all attention internals for each block, deduplicates repeated tensor
-payloads, and writes size-bounded shards when
-`--maximum-artifact-shard-bytes` is supplied. Preserve the generated report;
-it contains a SHA-256 and size for every shard. Compare the transferred shards
-twice with `attention_internal_block31_parity_config.json` and
-`attention_internal_block39_parity_config.json`. Do not test another production
-precision change until these two reports identify an operation-level cause.
+The completed v7 exact-input diagnostic targets the first frozen trajectory
+failure at block 31 and the later error spike at block 39. On the official CUDA
+environment, the capture tool accepted both block indices in one
+first-denoiser-call run, recorded inputs and all attention internals, and wrote
+11 size-bounded shards. The report hashes verify all 377,930,707 transferred
+bytes. Its compact replay reproduces all 12 source block outputs exactly and
+stores 968 named boundaries as 409 unique tensors plus 559 aliases. The
+block-31 and block-39 MLX reports each pass all 176 comparisons, with worst
+NRMSE `0.00396` and `0.00395` respectively. This rules out a discrete deep
+attention implementation or mapping failure. Do not apply a broad precision
+change: the recorded FP32 variants improve only selected isolated gates and
+regress others, while the prior full-trajectory candidate regressed materially.
 
 The compact CUDA sequence capture does not require the complete 80 GB model
 pack. `cuda_attention_sequence_capture_config.json` restarts from the original,

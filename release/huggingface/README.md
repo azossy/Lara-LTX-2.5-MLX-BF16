@@ -17,7 +17,7 @@ tags:
 Native MLX/Metal BF16 runtime for local LTX-2.5 video and synchronized-audio
 generation on Apple Silicon. No CUDA or server process is required on Mac.
 
-Release `0.0.3` matches the GitHub source tag `v0.0.3`.
+Release `0.0.4` matches the GitHub source tag `v0.0.4`.
 
 > This repository is a release descriptor. The exact official gated BF16 files
 > remain in `Lightricks/LTX-2.5`; accepting upstream access is required. The
@@ -55,14 +55,20 @@ configuration, known limitations and verified parity evidence.
 This is an engineering preview, not a final CUDA-quality-parity claim. Exact
 CUDA inputs verify the checkpoint-metadata-driven transformer input path and
 final transformer/output-head component boundaries. The v6 CUDA trace contains
-408 named Attention boundaries across all six modules and three guidance
-passes; payload deduplication stores 118 unique tensors plus 290 aliases. All
-176 MLX exact-input sub-operation comparisons pass the frozen component gate.
+408 named block-0 Attention boundaries across all six modules and three
+guidance passes; payload deduplication stores 118 unique tensors plus 290
+aliases. All 176 block-0 MLX exact-input sub-operation comparisons pass the
+frozen component gate. The v7 sequence trace replays blocks 24-39 from the
+verified block-23 boundary, reproduces all 12 CUDA source outputs exactly, and
+adds passing 176-operation MLX reports at both blocks 31 and 39. Their worst
+NRMSE values are `0.00396` and `0.00395`.
 
 CUDA-aligned FP32 RMSNorm and RoPE accumulation reproduce the captured AdaLN
 boundary exactly. The complete stochastic replay ends at video/audio latent
-NRMSE `0.1916`/`0.1110`; cross-backend BF16 differences still accumulate and
-the frozen final-latent gate remains open without weakening its thresholds.
+NRMSE `0.1916`/`0.1110`; the deep exact-input results rule out a discrete
+attention implementation or mapping failure, while cross-backend BF16
+rounding differences still accumulate. The frozen final-latent gate remains
+open without weakening its thresholds.
 All four MLX quality-corpus cases and paired CUDA diagnostics are complete. A
 non-blind frame-sequence audit accepts candidate usability but confirms that
 same-seed composition differs materially, so independent blind parity is not
