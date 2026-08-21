@@ -62,6 +62,13 @@ that endpoint only with all of the following controls:
    compute SHA-256 before accepting the component. The mirror is a transport
    route, not a source of authority.
 
+The verified downloader treats an aria2 control sidecar as incomplete even
+when a sparse destination already exposes the final logical file size. Its
+capacity preflight counts only unallocated ranges plus the configured reserve,
+so a resumed transfer or verification-only pass does not incorrectly demand a
+second copy of the full model pack. A completed file is accepted only after the
+control sidecar is gone and its pinned SHA-256 matches.
+
 ## Fast source and diagnostic-artifact transfers
 
 On AutoDL, apply `source /etc/network_turbo` only in the shell that performs

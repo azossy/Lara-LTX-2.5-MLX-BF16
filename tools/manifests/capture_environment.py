@@ -9,10 +9,14 @@ import json
 import platform
 import subprocess
 import sys
-import tomllib
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - remote benchmark compatibility on Python 3.10/3.11
+    import tomli as tomllib
 
 COMMAND_TIMEOUT_SECONDS = 20
 PACKAGE_NAMES = ("huggingface-hub", "mlx", "numpy", "safetensors", "torch")
@@ -27,6 +31,7 @@ SAFE_HARDWARE_LABELS = (
     "Total Number of Cores:",
     "Memory:",
 )
+UTC = timezone.utc
 
 
 def _run(command: list[str]) -> dict[str, Any]:

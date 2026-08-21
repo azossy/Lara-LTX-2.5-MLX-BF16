@@ -18,4 +18,5 @@ golden/cuda_hq_deep_first_call.npz
 golden/cuda_hq_deep_first_call_v4.npz
 golden/cuda_hq_block0_internal_reduced_v5.npz
 benchmarks/reports/*.json
+artifacts/
 upstream/

@@ -62,7 +62,7 @@ export HF_TOKEN="your_read_token"
 ```python
 from lara_ltx import LTXPipeline
 
-pipe = LTXPipeline.from_pretrained("challychoi/Lara-LTX-2.5-MLX-BF16")
+pipe = LTXPipeline.from_pretrained("LaraAI-Labs/Lara-LTX-2.5-MLX-BF16")
 video = pipe(prompt="A cinematic aerial shot of Seoul at night.", seed=42)
 video.save("output.mp4")
 ```
@@ -81,7 +81,7 @@ pipe = LTXPipeline.from_pretrained("/path/to/LTX-2.5")
 
 ```bash
 lara-ltx generate \
-  --model challychoi/Lara-LTX-2.5-MLX-BF16 \
+  --model LaraAI-Labs/Lara-LTX-2.5-MLX-BF16 \
   --prompt "A cinematic aerial shot of Seoul at night" \
   --output output.mp4
 ```
@@ -157,6 +157,25 @@ Evidence: `golden/quality/mlx_generation_v7.json`,
 Attention evidence is recorded in
 `golden/mlx_attention_internal_block31_v7.json` and
 `golden/mlx_attention_internal_block39_v7.json`.
+
+### Matched 10-second cinematic demo
+
+Release `0.0.5` also publishes a photorealistic close-up dance scene generated
+with the same prompt, negative prompt, seed `25082110`, 512×320 grid, 241
+frames, 24 fps and 15 steps on CUDA and MLX/Metal. Native outputs, separate 4K
+presentation upscales, a 4K side-by-side player and raw VBench, VideoScore2,
+Audiobox Aesthetics and LAION CLAP reports are available on the
+[LaraAI-Labs model card](https://huggingface.co/LaraAI-Labs/Lara-LTX-2.5-MLX-BF16).
+
+Observed generation time was 74.05 seconds on the CUDA run and 2,221.30 seconds
+on the MLX run, a 30.00× ratio for these deployments. The systems differ, so
+this is not presented as a controlled hardware benchmark. VideoScore2 rated
+CUDA `4/4/4` and MLX `4/5/4` for visual quality, text alignment and physical
+consistency. VBench was close on subject consistency (`0.8786`/`0.8799`) and
+motion smoothness (`0.9866`/`0.9877`). See
+`docs/QUALITY_EVALUATION.md` for the complete tables and limitations. “4K”
+means a deterministic Lanczos presentation upscale; evaluators use only the
+native 512×320 files.
 
 ## Canonical references
 

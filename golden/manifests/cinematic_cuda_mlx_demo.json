@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "name": "lara-ltx-cuda-mlx-cinematic-demo-v1",
+  "requirements": {
+    "minimum_case_count": 1,
+    "minimum_unique_seeds": 1,
+    "minimum_unique_resolutions": 1,
+    "minimum_unique_frame_counts": 1,
+    "required_review_focus": [
+      "facial_consistency",
+      "fine_detail",
+      "hair_physics",
+      "human_motion",
+      "eye_expression",
+      "temporal_motion"
+    ]
+  },
+  "cases": [
+    {
+      "id": "cinematic_dancer_closeup",
+      "prompt": "A photorealistic cinematic single-take portrait of a beautiful adult East Asian woman performing an elegant contemporary dance on a dark film set. Start in a medium close-up and slowly dolly toward a tight facial close-up as she turns gracefully. A soft controlled wind lifts and streams her long black hair and the light silk fabric of her costume with physically natural motion. Her performance includes subtle expressive eye acting: a focused gaze, a brief direct look into the lens, then a confident warm half-smile, with realistic blinking and facial micro-expressions. Natural skin texture, anatomically correct hands, graceful shoulders and arms, shallow depth of field, soft volumetric rim light, cinematic color science, 85mm lens character, realistic motion blur, continuous coherent movement, live-action feature-film realism. Ambient fabric movement, light footsteps, and subtle cinematic room tone, no dialogue, no singing, no cuts.",
+      "seed": 25082110,
+      "width": 512,
+      "height": 320,
+      "num_frames": 241,
+      "frame_rate": 24.0,
+      "num_inference_steps": 15,
+      "review_focus": [
+        "facial_consistency",
+        "fine_detail",
+        "hair_physics",
+        "human_motion",
+        "eye_expression",
+        "temporal_motion"
+      ]
+    }
+  ],
+  "presentation": {
+    "source_label": "native model output",
+    "target_width": 3840,
+    "target_height": 2160,
+    "scaler": "lanczos",
+    "presentation_label": "4K presentation upscale; not native 4K generation",
+    "video_codec": "libx264",
+    "pixel_format": "yuv420p",
+    "crf": 16,
+    "audio_codec": "aac",
+    "audio_bitrate": "320k"
+  }
+}

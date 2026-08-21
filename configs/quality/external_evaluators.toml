@@ -1,0 +1,66 @@
+schema_version = 1
+
+[vbench]
+repository = "https://github.com/Vchitect/VBench.git"
+revision = "45e79ec14e69a2187202c675d2dbce1a71843d53"
+dimensions = [
+  "subject_consistency",
+  "background_consistency",
+  "motion_smoothness",
+  "dynamic_degree",
+  "aesthetic_quality",
+  "imaging_quality",
+]
+imaging_quality_preprocessing_mode = "longer"
+
+[vbench.checkpoints.dino]
+url = "https://dl.fbaipublicfiles.com/dino/dino_vitbase16_pretrain/dino_vitbase16_pretrain.pth"
+sha256 = "bf34ad0f424b9029b593e8dc3ed553bf26e88bcba0d32bf3e62a6209cb64c85e"
+
+[vbench.checkpoints.clip_vit_b_32]
+url = "https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt"
+sha256 = "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+
+[vbench.checkpoints.clip_vit_l_14]
+url = "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt"
+sha256 = "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836"
+
+[vbench.checkpoints.amt_s]
+url = "https://huggingface.co/lalala125/AMT/resolve/main/amt-s.pth"
+sha256 = "07e7e03405c213fe4405678db9b42d05671e48c56faf6a441b99bb0047d3cf77"
+
+[vbench.checkpoints.raft_things]
+primary_url = "https://dl.dropboxusercontent.com/s/4j4z58wuv8o0mfz/models.zip"
+verified_fallback_url = "https://huggingface.co/RaphaelLiu/EvalCrafter-Models/resolve/main/RAFT/models/raft-things.pth"
+sha256 = "fcfa4125d6418f4de95d84aec20a3c5f4e205101715a79f193243c186ac9a7e1"
+
+[vbench.checkpoints.aesthetic_linear]
+url = "https://raw.githubusercontent.com/LAION-AI/aesthetic-predictor/main/sa_0_4_vit_l_14_linear.pth"
+sha256 = "2cd4e60f4f24ae3bcd57b847b13c1f3ba27edc28cc1a7f9ce74ee9f421243cba"
+
+[vbench.checkpoints.musiq_spaq]
+url = "https://github.com/chaofengc/IQA-PyTorch/releases/download/v0.1-weights/musiq_spaq_ckpt-358bb6af.pth"
+sha256 = "358bb6af275e28ea56821d44fb55c6cb83645db11f394d3ad65b2d149965ab50"
+
+[videoscore2]
+repository = "https://github.com/TIGER-AI-Lab/VideoScore2.git"
+revision = "a88168af50b1dd98f0c3d973620ac495daab2de4"
+model = "TIGER-Lab/VideoScore2"
+model_revision = "09a2732cb64fa566a1f332f978368292ce5c295c"
+video_reader = "decord"
+decord_version = "0.6.0"
+
+[audiobox_aesthetics]
+repository = "https://github.com/facebookresearch/audiobox-aesthetics.git"
+revision = "2618e9d451b456e9328b39495b5e6234678aa550"
+checkpoint_url = "https://dl.fbaipublicfiles.com/audiobox-aesthetics/checkpoint.pt"
+checkpoint_sha256 = "a4931a7a01c3e6733352e9d85371835f03bf9135f8b31e1583c23538811d4a32"
+axes = ["CE", "CU", "PC", "PQ"]
+
+[laion_clap]
+repository = "https://github.com/LAION-AI/CLAP.git"
+revision = "1fd4c37df5ffbfcfbad5415c170bc66cf94c9994"
+checkpoint_url = "https://huggingface.co/lukewys/laion_clap/resolve/main/630k-audioset-best.pt"
+checkpoint_sha256 = "8053c9775516af2f4902e1e8281e356cc1bf7a85e8b761908170767b77c3f037"
+sample_rate_hz = 48000
+text_scope = "audio-only descriptions shared by CUDA and MLX"

@@ -125,10 +125,12 @@ def main() -> int:
                     raise RuntimeError(
                         f"[{ERROR_CODE}] {message('generation_failed', case_id=case.case_id)}"
                     ) from error
+            elapsed_seconds = time.perf_counter() - started
             results.append(
                 {
                     "case_id": case.case_id,
-                    "elapsed_seconds": time.perf_counter() - started,
+                    "elapsed_seconds": elapsed_seconds,
+                    "generated_frames_per_second": case.num_frames / elapsed_seconds,
                     "output": str(output),
                     "size_bytes": output.stat().st_size,
                     "sha256": file_sha256(output),

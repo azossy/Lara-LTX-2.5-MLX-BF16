@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "component": "cuda_mlx_cinematic_comparison",
+  "case": {
+    "id": "cinematic_dancer_closeup",
+    "seed": 25082110,
+    "width": 512,
+    "height": 320,
+    "num_frames": 241,
+    "frame_rate": 24.0,
+    "num_inference_steps": 15
+  },
+  "generation": {
+    "cuda": {
+      "elapsed_seconds": 74.047817,
+      "generated_frames_per_second": 3.2546536787168217,
+      "video_sha256": "d7dd3f6135f5af73f81077566937234adec7d05d58d1e5a59781eec4442e9f59"
+    },
+    "mlx": {
+      "elapsed_seconds": 2221.303530207835,
+      "generated_frames_per_second": 0.10849485301,
+      "video_sha256": "8691b4b512e6f507e44db77cdb3e2fee09421cff628bcb7f00ff13cbd0c6b71f"
+    },
+    "observed_cuda_to_mlx_speed_ratio": 29.998231145799142,
+    "scope": "different_deployment_systems_not_a_controlled_hardware_benchmark"
+  },
+  "vbench": {
+    "cuda": {
+      "subject_consistency": 0.8786259603997072,
+      "background_consistency": 0.9313893636067708,
+      "motion_smoothness": 0.9865754895843971,
+      "dynamic_degree": 1.0,
+      "aesthetic_quality": 0.5204463005065918,
+      "imaging_quality": 0.6662551153349184
+    },
+    "mlx": {
+      "subject_consistency": 0.8798967926452558,
+      "background_consistency": 0.9150838216145833,
+      "motion_smoothness": 0.9877050160925374,
+      "dynamic_degree": 1.0,
+      "aesthetic_quality": 0.5641458034515381,
+      "imaging_quality": 0.6287614811307661
+    }
+  },
+  "videoscore2": {
+    "model": "TIGER-Lab/VideoScore2",
+    "model_revision": "09a2732cb64fa566a1f332f978368292ce5c295c",
+    "source_revision": "a88168af50b1dd98f0c3d973620ac495daab2de4",
+    "cuda": {
+      "visual_quality": 4,
+      "text_alignment": 4,
+      "physical_consistency": 4
+    },
+    "mlx": {
+      "visual_quality": 4,
+      "text_alignment": 5,
+      "physical_consistency": 4
+    }
+  },
+  "audio": {
+    "cuda": {
+      "audiobox_ce": 3.017472505569458,
+      "audiobox_cu": 5.559971332550049,
+      "audiobox_pc": 2.3644909858703613,
+      "audiobox_pq": 6.132813453674316,
+      "clap_cosine_similarity": 0.29763051041320626
+    },
+    "mlx": {
+      "audiobox_ce": 7.604846477508545,
+      "audiobox_cu": 8.321693420410156,
+      "audiobox_pc": 5.6478400230407715,
+      "audiobox_pq": 8.360164642333984,
+      "clap_cosine_similarity": -0.09365710877214728
+    }
+  },
+  "presentation_4k": {
+    "scope": "lanczos_presentation_upscale_not_native_generation",
+    "width": 3840,
+    "height": 2160,
+    "cuda_sha256": "2a720fd6fad861d5171aad5ea8093b5ded2a832e19b74101ca1a7fece1ac059a",
+    "mlx_sha256": "6bb8f2aa6a68f04cb7ac5ad16883acda3670a6023fbcd3ced6685946838386f4",
+    "side_by_side_sha256": "649eeba21aebe6bee58a878082b877b8c36613f4c649cda1cbf318eb990b2eeb"
+  },
+  "public_repository": "LaraAI-Labs/Lara-LTX-2.5-MLX-BF16",
+  "passed": true
+}
