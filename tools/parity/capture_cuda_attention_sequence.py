@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import replace
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -250,7 +250,7 @@ def main() -> int:
     report = {
         "schema_version": ARTIFACT_SCHEMA_VERSION,
         "component": "compact_checkpoint_attention_sequence_capture",
-        "captured_at_utc": datetime.now(UTC).isoformat(),
+        "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "sequence_block_range": [start_block, end_block],
         "capture_block_indices": capture_blocks,
         "lora_strength": lora_strength,
