@@ -5,5 +5,11 @@
   "comparison_failed": "Quality-corpus comparison failed ({case_id}). Verify every CUDA/MLX media pair, FFmpeg/FFprobe and the report directory, then retry.",
   "blind_review_instructions": "Review candidate A and B without inspecting file metadata or the private key. Rate every configured dimension, then record concise observable notes before moving to the next item.",
   "blind_review_failed": "Blind-review kit creation failed. Verify the configuration, corpus and both complete media directories, then retry.",
-  "blind_review_completed": "Created a backend-anonymized blind-review kit with {count} items: {output}"
+  "blind_review_completed": "Created a backend-anonymized blind-review kit with {count} items: {output}",
+  "demo_build_failed": "The cinematic CUDA/MLX presentation could not be built ({reason}). Verify both native source videos, the versioned demo manifest, FFmpeg/FFprobe and free disk space, then retry.",
+  "demo_build_completed": "Built the two individual 4K presentation files and the 4K side-by-side comparison. Report: {report}",
+  "clap_failed": "CLAP prompt/audio alignment failed ({reason}). Verify the manifest, audio files, pinned checkpoint and evaluation environment, then retry.",
+  "clap_completed": "Measured CLAP prompt/audio alignment for {count} cases. Report: {report}",
+  "videoscore_failed": "VideoScore2 evaluation failed ({reason}). Verify the manifest, pinned source/model revisions, evaluator environment, GPU memory and video files, then retry.",
+  "videoscore_completed": "Measured VideoScore2 for {count} cases. Report: {report}"
 }

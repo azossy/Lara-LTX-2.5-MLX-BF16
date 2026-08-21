@@ -1,7 +1,10 @@
+import sys
 from argparse import Namespace
 from pathlib import Path
 
-from tools.parity.run_cuda_hq_golden import build_command
+import pytest
+
+from tools.parity.run_cuda_hq_golden import _probe_runtime, build_command
 
 
 def test_build_command_uses_split_bf16_components_without_quantization() -> None:
@@ -33,3 +36,12 @@ def test_build_command_uses_split_bf16_components_without_quantization() -> None
     assert command[command.index("--transformer-path") + 1] == str(arguments.transformer_path)
     assert command[command.index("--video-vae-path") + 1] == str(arguments.video_vae_path)
     assert command[command.index("--num-frames") + 1] == "17"
+
+
+def test_runtime_probe_accepts_importable_module(tmp_path: Path) -> None:
+    _probe_runtime(sys.executable, tmp_path, module="json")
+
+
+def test_runtime_probe_rejects_missing_module_without_exposing_a_trace(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="LARA-RUNTIME-005"):
+        _probe_runtime(sys.executable, tmp_path, module="lara_missing_cuda_module")

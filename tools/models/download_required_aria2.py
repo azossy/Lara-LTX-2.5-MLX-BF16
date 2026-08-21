@@ -4,12 +4,18 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac
 import json
 import os
 import shutil
 import subprocess
 import tempfile
-import tomllib
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - AutoDL utility compatibility on Python 3.10/3.11
+    import tomli as tomllib
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -20,6 +26,7 @@ AUTH_ERROR_CODE = "LARA-MODEL-001"
 VERIFY_ERROR_CODE = "LARA-MODEL-002"
 DEFAULT_CONNECTION_COUNT = 16
 DEFAULT_MIN_SPLIT_SIZE = "1M"
+ARIA2_CONTROL_SUFFIX = ".aria2"
 
 
 def _sha256(path: Path, chunk_bytes: int) -> str:
@@ -46,6 +53,50 @@ def _download_url(endpoint: str, *, repository_id: str, revision: str, relative_
             quote(relative_path, safe="/"),
         )
     )
+
+
+def _entry_needs_download(entry: dict[str, Any], model_dir: Path) -> bool:
+    destination = model_dir / str(entry["path"])
+    control_file = Path(f"{destination}{ARIA2_CONTROL_SUFFIX}")
+    return (
+        not destination.is_file()
+        or destination.stat().st_size != int(entry["size"])
+        or control_file.exists()
+    )
+
+
+def _remaining_download_bytes(entries: list[dict[str, Any]], model_dir: Path) -> int:
+    """Return additional storage needed for missing or resumable file ranges.
+
+    aria2 range downloads can expose the final logical file size while the file
+    is still sparse.  In that case ``st_blocks`` reflects the disk space that
+    has actually been populated and avoids demanding capacity for the whole
+    model pack again on every resume or verification-only run.
+    """
+    remaining = 0
+    for entry in entries:
+        expected_size = int(entry["size"])
+        destination = model_dir / str(entry["path"])
+        control_file = Path(f"{destination}{ARIA2_CONTROL_SUFFIX}")
+        if not destination.is_file():
+            remaining += expected_size
+        elif not _entry_needs_download(entry, model_dir):
+            continue
+        elif control_file.exists():
+            allocated_bytes = min(expected_size, destination.stat().st_blocks * 512)
+            remaining += max(0, expected_size - allocated_bytes)
+        else:
+            # A wrong-sized file without aria2 resume metadata may need a full
+            # replacement, so retain the conservative capacity requirement.
+            remaining += expected_size
+    return remaining
+
+
+def _entry_sha256_matches(entry: dict[str, Any], destination: Path, chunk_bytes: int) -> bool:
+    expected_sha256 = str(entry.get("sha256", "")).lower()
+    if len(expected_sha256) != 64:
+        return False
+    return hmac.compare_digest(_sha256(destination, chunk_bytes), expected_sha256)
 
 
 def _download_with_aria2(
@@ -108,39 +159,55 @@ def main() -> int:
         config = tomllib.load(handle)
     manifest: dict[str, Any] = json.loads(arguments.manifest.read_text(encoding="utf-8"))
     model_config = config["upstream"]["model"]
-    required_bytes = int(manifest["model"]["required_bytes"])
     reserve = int(model_config["minimum_free_bytes_after_download"])
     arguments.model_dir.mkdir(parents=True, exist_ok=True)
+    entries = list(manifest["model"]["files"])
+    pending_entries = [entry for entry in entries if _entry_needs_download(entry, arguments.model_dir)]
+    remaining_download_bytes = _remaining_download_bytes(entries, arguments.model_dir)
     available = shutil.disk_usage(arguments.model_dir).free
-    if available < required_bytes + reserve:
+    required_available = remaining_download_bytes + reserve
+    if available < required_available:
         return _fail(
             VERIFY_ERROR_CODE,
             f"insufficient_space:{available}",
-            f"provide_at_least:{required_bytes + reserve}",
+            f"provide_at_least:{required_available}",
         )
 
     hash_chunk_bytes = int(config["runtime"]["hash_chunk_bytes"])
     repository_id = str(model_config["repository_id"])
     revision = str(model_config["revision"])
-    for entry in manifest["model"]["files"]:
-        relative_path = str(entry["path"])
-        destination = arguments.model_dir / relative_path
-        try:
-            if not destination.is_file() or destination.stat().st_size != int(entry["size"]):
-                _download_with_aria2(
+    worker_count = max(1, int(model_config.get("download_worker_count", 1)))
+    try:
+        with ThreadPoolExecutor(max_workers=min(worker_count, len(pending_entries) or 1)) as executor:
+            futures = {
+                executor.submit(
+                    _download_with_aria2,
                     executable=arguments.aria2,
                     endpoint=arguments.endpoint,
                     repository_id=repository_id,
                     revision=revision,
-                    relative_path=relative_path,
+                    relative_path=str(entry["path"]),
                     model_dir=arguments.model_dir,
                     connection_count=arguments.connection_count,
-                )
-        except (OSError, subprocess.CalledProcessError, RuntimeError) as error:
-            return _fail(AUTH_ERROR_CODE, type(error).__name__, "check_network_token_and_retry")
+                ): str(entry["path"])
+                for entry in pending_entries
+            }
+            for future in as_completed(futures):
+                future.result()
+    except (OSError, subprocess.CalledProcessError, RuntimeError) as error:
+        return _fail(AUTH_ERROR_CODE, type(error).__name__, "check_network_token_and_retry")
+
+    for entry in entries:
+        relative_path = str(entry["path"])
+        destination = arguments.model_dir / relative_path
         if not destination.is_file() or destination.stat().st_size != int(entry["size"]):
             return _fail(VERIFY_ERROR_CODE, f"size_mismatch:{relative_path}", "download_affected_file_again")
-        entry["sha256"] = _sha256(destination, hash_chunk_bytes)
+        if not _entry_sha256_matches(entry, destination, hash_chunk_bytes):
+            return _fail(
+                VERIFY_ERROR_CODE,
+                f"sha256_mismatch:{relative_path}",
+                "download_affected_file_again",
+            )
         entry["verification"] = "size_and_sha256_verified"
 
     temporary = arguments.manifest.with_suffix(f"{arguments.manifest.suffix}.tmp")

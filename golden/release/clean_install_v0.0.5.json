@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "component": "clean_wheel_install",
+  "release": {
+    "version": "0.0.5",
+    "tag": "v0.0.5"
+  },
+  "artifact": {
+    "filename": "lara_ltx-0.0.5-py3-none-any.whl",
+    "sha256": "f71f344575e7344c7e013ff75d27bdce957b80d58c35798b77620b4059a38ddd",
+    "installed_file_count": 85
+  },
+  "environment": {
+    "python_version": "3.12.13",
+    "isolated_virtual_environment": true,
+    "dependency_mode": "no_deps_metadata_and_layout_validation"
+  },
+  "observed_package_version": "0.0.5",
+  "passed": true
+}

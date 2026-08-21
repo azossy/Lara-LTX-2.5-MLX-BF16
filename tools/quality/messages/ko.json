@@ -5,5 +5,11 @@
   "comparison_failed": "품질 코퍼스 비교에 실패했습니다({case_id}). 모든 CUDA/MLX 미디어 쌍, FFmpeg/FFprobe와 보고서 폴더를 확인한 뒤 다시 시도하세요.",
   "blind_review_instructions": "파일 메타데이터나 비공개 정답표를 보지 말고 후보 A와 B를 평가하세요. 다음 항목으로 넘어가기 전에 설정된 모든 평가 항목과 관찰 근거를 기록하세요.",
   "blind_review_failed": "블라인드 리뷰 키트 생성에 실패했습니다. 설정, 코퍼스와 양쪽 미디어 폴더가 완전한지 확인한 뒤 다시 시도하세요.",
-  "blind_review_completed": "백엔드가 익명화된 블라인드 리뷰 항목 {count}개를 생성했습니다: {output}"
+  "blind_review_completed": "백엔드가 익명화된 블라인드 리뷰 항목 {count}개를 생성했습니다: {output}",
+  "demo_build_failed": "CUDA/MLX 시네마틱 비교 재생본을 만들지 못했습니다({reason}). 양쪽 원본 영상, 버전 관리된 데모 manifest, FFmpeg/FFprobe와 남은 디스크 공간을 확인한 뒤 다시 시도하세요.",
+  "demo_build_completed": "개별 4K 재생본 두 편과 4K 좌우 비교본을 만들었습니다. 보고서: {report}",
+  "clap_failed": "CLAP 프롬프트·오디오 정렬 평가에 실패했습니다({reason}). manifest, 오디오 파일, 고정된 체크포인트와 평가 환경을 확인한 뒤 다시 시도하세요.",
+  "clap_completed": "CLAP 프롬프트·오디오 정렬 사례 {count}개를 평가했습니다. 보고서: {report}",
+  "videoscore_failed": "VideoScore2 평가에 실패했습니다({reason}). manifest, 고정된 소스/모델 리비전, 평가 환경, GPU 메모리와 영상 파일을 확인한 뒤 다시 시도하세요.",
+  "videoscore_completed": "VideoScore2 사례 {count}개를 평가했습니다. 보고서: {report}"
 }

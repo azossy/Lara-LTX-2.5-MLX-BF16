@@ -12,7 +12,7 @@ import hashlib
 import json
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
@@ -26,6 +26,7 @@ DEFAULT_NUM_FRAMES = 17
 DEFAULT_FRAME_RATE = 24.0
 DEFAULT_NUM_INFERENCE_STEPS = 15
 DEFAULT_DIFFVAE_OPTIMIZATION = "chunked_eager"
+RUNTIME_PROBE_TIMEOUT_SECONDS = 60
 
 
 def _sha256(path: Path) -> str:
@@ -43,6 +44,29 @@ def _existing_file(path: Path, argument_name: str) -> Path:
             "Download and verify the pinned BF16 model pack, then retry."
         )
     return path
+
+
+def _probe_runtime(python_executable: str, working_directory: Path, module: str = PIPELINE_MODULE) -> None:
+    """Fail before generation when the configured Python cannot import the official pipeline."""
+    try:
+        completed = subprocess.run(
+            [python_executable, "-c", f"import importlib; importlib.import_module({module!r})"],
+            cwd=working_directory,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+            timeout=RUNTIME_PROBE_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise ValueError(
+            "[LARA-RUNTIME-005] The configured CUDA Python runtime could not be started or timed out. "
+            "Install the pinned official ltx-pipelines environment and retry."
+        ) from error
+    if completed.returncode:
+        raise ValueError(
+            f"[LARA-RUNTIME-005] The configured CUDA Python runtime cannot import {module}. "
+            "Install the pinned official ltx-pipelines package and its locked dependencies, then retry."
+        )
 
 
 def build_command(arguments: argparse.Namespace) -> list[str]:
@@ -118,6 +142,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"[LARA-RUNTIME-005] Upstream root is unavailable: {arguments.upstream_root}. "
             "Checkout the pinned official source revision and retry."
         )
+    _probe_runtime(arguments.python_executable, arguments.upstream_root)
     for attribute, name in (
         ("transformer_path", "--transformer-path"),
         ("text_encoder_path", "--text-encoder-path"),
@@ -142,7 +167,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments.report.parent.mkdir(parents=True, exist_ok=True)
     arguments.log.parent.mkdir(parents=True, exist_ok=True)
     command = build_command(arguments)
-    started_at = datetime.now(UTC)
+    started_at = datetime.now(timezone.utc)
     with arguments.log.open("w", encoding="utf-8") as log_handle:
         completed = subprocess.run(
             command,
@@ -161,10 +186,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"[LARA-RUNTIME-005] Official CUDA HQ pipeline did not produce a playable output at "
             f"{arguments.output_video}. Inspect {arguments.log} and retry."
         )
+    finished_at = datetime.now(timezone.utc)
+    elapsed_seconds = (finished_at - started_at).total_seconds()
     report = {
         "schema_version": REPORT_SCHEMA_VERSION,
-        "captured_at_utc": datetime.now(UTC).isoformat(),
+        "captured_at_utc": finished_at.isoformat(),
         "started_at_utc": started_at.isoformat(),
+        "elapsed_seconds": elapsed_seconds,
+        "generated_frames_per_second": arguments.num_frames / elapsed_seconds,
         "pipeline_module": PIPELINE_MODULE,
         "command": command,
         "parameters": {
@@ -189,5 +218,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def cli() -> int:
+    try:
+        return main()
+    except (OSError, RuntimeError, ValueError) as error:
+        print(error, file=sys.stderr)
+        return 2
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(cli())
